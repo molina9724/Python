@@ -1,0 +1,5 @@
+# Pyrefly Configuration
+# Enable type checking for this Python project
+
+[tool.pyrefly]
+disableTypeErrors = false
