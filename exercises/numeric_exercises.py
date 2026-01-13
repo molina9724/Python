@@ -99,3 +99,32 @@ total += float(input("Type in a number: "))
 total += float(input("Type in a number: "))
 total += float(input("Type in a number: "))
 print(f"Final total is: {total}")
+
+
+# ----------------------------------------------------------------------
+# Advanced Exercise: Pythagorean Theorem Calculator
+#
+# The goal is to find the length of the hypotenuse (side 'c') of a
+# right-angled triangle, given the lengths of the other two sides ('a' and 'b').
+#
+# The formula is: a² + b² = c², which means c is the square root of a² + b².
+#
+# Your task:
+# 1. Ensure the `math` module is imported at the top of your script (if not already).
+# 2. Prompt the user to enter the length of side 'a'.
+# 3. Prompt the user to enter the length of side 'b'.
+# 4. Convert both inputs into floating-point numbers.
+# 5. Calculate the sum of `a` squared and `b` squared.
+#    (Remember the `**` operator for exponents).
+# 6. Use `math.sqrt()` to find the square root of the result from the
+#    previous step. This will be the length of the hypotenuse, 'c'.
+# 7. Print the result in a user-friendly message, for example:
+#    "The length of the hypotenuse is [value of c]."
+#
+# Write your code for the Advanced Exercise below:
+
+a = float(input("Type in the value for A: "))
+b = float(input("Type in the value for B: "))
+c = a**2 + b**2
+c = math.sqrt(c)
+print(f"The length of the hypotenuse is {c}")
