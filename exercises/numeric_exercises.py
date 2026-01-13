@@ -16,6 +16,7 @@
 #
 # Write your code for Exercise 1 below:
 
+import math
 user_age = input("Type in your current age: ")
 user_age = int(user_age)
 future_age = user_age + 5
@@ -34,6 +35,10 @@ print(f"You'll be {future_age} in 5 years")
 # 4. Print the calculated area of the circle.
 #
 # Write your code for Exercise 2 below:
+radius = input("Type in the radius: ")
+radius = float(radius)
+area = math.pi * radius ** 2
+print(f"The area is: {area}")
 
 
 # ----------------------------------------------------------------------
@@ -51,7 +56,12 @@ print(f"You'll be {future_age} in 5 years")
 # 4. Notice and think about why the results are different.
 #
 # Write your code for Exercise 3 below:
-
+a = 10
+b = 20
+c = 30
+d = 40
+operation1 = a + b * c / d
+operation2 = (a + b) * c / d
 
 # ----------------------------------------------------------------------
 # Exercise 4: Temperature Converter
@@ -64,7 +74,12 @@ print(f"You'll be {future_age} in 5 years")
 #    it to show only two decimal places.
 #
 # Write your code for Exercise 4 below:
-
+fahrenheit_temperature = float(
+    input("Type in the temperature in Fahrenheit: "))
+celsius_temperature = (fahrenheit_temperature - 32) * 5/9
+print(round(celsius_temperature, 2))
+print(f"The temperature in Celsius is: {round(celsius_temperature, 2)}")
+print(f"The temperature in Celsius is: {celsius_temperature:.2f}")
 
 # ----------------------------------------------------------------------
 # Exercise 5: Running Total
@@ -78,3 +93,9 @@ print(f"You'll be {future_age} in 5 years")
 # 5. Finally, print the final `total`.
 #
 # Write your code for Exercise 5 below:
+
+total = 0
+total += float(input("Type in a number: "))
+total += float(input("Type in a number: "))
+total += float(input("Type in a number: "))
+print(f"Final total is: {total}")
