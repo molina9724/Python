@@ -16,7 +16,10 @@
 #
 # Write your code for Exercise 1 below:
 
-
+user_age = input("Type in your current age: ")
+user_age = int(user_age)
+future_age = user_age + 5
+print(f"You'll be {future_age} in 5 years")
 
 
 # ----------------------------------------------------------------------
@@ -31,8 +34,6 @@
 # 4. Print the calculated area of the circle.
 #
 # Write your code for Exercise 2 below:
-
-
 
 
 # ----------------------------------------------------------------------
@@ -52,8 +53,6 @@
 # Write your code for Exercise 3 below:
 
 
-
-
 # ----------------------------------------------------------------------
 # Exercise 4: Temperature Converter
 #
@@ -65,8 +64,6 @@
 #    it to show only two decimal places.
 #
 # Write your code for Exercise 4 below:
-
-
 
 
 # ----------------------------------------------------------------------
@@ -81,5 +78,3 @@
 # 5. Finally, print the final `total`.
 #
 # Write your code for Exercise 5 below:
-
-
