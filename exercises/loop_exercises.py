@@ -1,3 +1,5 @@
+import random
+
 # Python Loop Exercises
 #
 # For each exercise, write your code directly below the commented instructions.
@@ -13,8 +15,12 @@
 # 4. After the loop, print "Lift off!".
 #
 # Write your code for Exercise 1 below:
-
-
+# x = int(input("enter a positive integer to start the countdown: "))
+# x = -x if x < 0 else x
+# while x:
+#     print(x)
+#     x -= 1
+# print("Lift off!")
 
 
 # ----------------------------------------------------------------------
@@ -27,9 +33,18 @@
 #    Example: If N is 5, the sum should be 1 + 2 + 3 + 4 + 5 = 15.
 #
 # Write your code for Exercise 2 below:
+def sum():
+    expression = ""
+    total = 0
+    N = int(input("enter a positive integer: "))
+    for i in range(1, N + 1, 1):
+        expression += str(i) + " + "
+        total += i
+
+    print(f"{expression} = {total}")
 
 
-
+# sum()
 
 # ----------------------------------------------------------------------
 # Exercise 3: Guess the Number Game (while loop with break)
@@ -42,9 +57,20 @@
 #    (Hint: You'll need to convert the user's input to an integer).
 #
 # Write your code for Exercise 3 below:
+def guess():
+    x = random.randint(0, 4)
+
+    while True:
+        y = int(input("Guess the number (0-4): "))
+
+        if x == y:
+            print("Congratulations! You guessed it!")
+            break
+        else:
+            print("Try again!")
 
 
-
+# guess()
 
 # ----------------------------------------------------------------------
 # Exercise 4: Even Number Printer (for loop with continue)
@@ -56,8 +82,10 @@
 #
 # Write your code for Exercise 4 below:
 
-
-
+for i in range(1, 20, 1):
+    if i % 2 != 0:
+        continue
+    print(i)
 
 # ----------------------------------------------------------------------
 # Advanced Exercise 5: Factorial Calculator (combining loops and previous concepts)
@@ -76,3 +104,14 @@
 #      the factorial and print the result.
 #
 # Write your code for Advanced Exercise 5 below:
+
+x = int(input("Type in a non-negative integer: "))
+factorial = 1
+if x < 0:
+    print("Factorial does not exist for negative numbers.")
+elif x == 0:
+    print("The factorial of 0 is 1.")
+else:
+    for i in range(2, x + 1):
+        factorial *= i
+    print(factorial)
