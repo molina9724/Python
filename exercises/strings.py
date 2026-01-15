@@ -11,6 +11,21 @@
 #
 # Write your code for Exercise 1 below:
 
+# first_name = "Carlos"
+# last_name = "Valderrama"
+# favorite_quote = "To live is to die"
+
+# print(type(first_name))
+# print(type(last_name))
+# print(type(favorite_quote))
+
+# print(len(first_name))
+# print(len(last_name))
+# print(len(favorite_quote))
+
+# print(first_name)
+# print(last_name)
+# print(favorite_quote)
 
 # ----------------------------------------------------------------------
 # Exercise 2: String Indexing & Iteration
@@ -25,6 +40,18 @@
 #
 # Write your code for Exercise 2 below:
 
+# word = input("input a word (at least 5 characters)")
+# print(word[0])
+# print(word[-1])
+
+# middle = len(word) // 2
+# print(word[middle])
+
+# for i in word:
+#     print(f"{i} \n")
+
+# for index, char in enumerate(word):
+#     print(f"{char} : {index}")
 
 # ----------------------------------------------------------------------
 # Exercise 3: String Slicing Practice
@@ -40,6 +67,30 @@
 #
 # Write your code for Exercise 3 below:
 
+# my_string = "Python Programming"
+# first_word = my_string[slice(0, 6)]
+# print(first_word)
+
+# second_word = my_string[slice(7, len(my_string))]
+# print(second_word)
+
+# for i in my_string.split(" "):
+#     second_letter = i[slice(1, 2)]
+#     print(second_letter)
+
+# reversed_word = my_string[::-1]
+# print(reversed_word)
+
+# last_five = my_string[slice(len(my_string)-5, len(my_string))]
+# last_fives = my_string[-5:]
+# print(last_five)
+# print(last_fives)
+
+# seven_to_fourteen = my_string[7:14]
+# print(seven_to_fourteen)
+
+# seven_to_fourteen = my_string[::2]
+# print(seven_to_fourteen)
 
 # ----------------------------------------------------------------------
 # Exercise 4: String Methods Exploration
