@@ -106,6 +106,22 @@
 #
 # Write your code for Exercise 4 below:
 
+# sentence = "Hello there!. How are you today? - Doing well, my man!"
+# print(sentence.upper())
+# print(sentence.lower())
+# for i in sentence:
+#     if i[0].isupper():
+#         print(i[0])
+
+# e_amount = sentence.count("e")
+# print(e_amount)
+
+# hyphen_replace = sentence.replace(" ", "/")
+# print(hyphen_replace)
+
+# starts_with = sentence.startswith("Hello")
+# print(starts_with)
+
 
 # ----------------------------------------------------------------------
 # Exercise 5: String Splitting & Joining
@@ -118,6 +134,13 @@
 #
 # Write your code for Exercise 5 below:
 
+# sentence = "Here are your four words"
+# split_sentence = sentence.split(" ")
+# print(split_sentence)
+# for i in split_sentence:
+#     print(f"{i} - {len(i)}")
+# hyphen_sentence = "-".join(split_sentence)
+# print(hyphen_sentence)
 
 # ----------------------------------------------------------------------
 # Exercise 6: String Formatting - Three Ways
@@ -134,6 +157,13 @@
 #
 # Write your code for Exercise 6 below:
 
+# name = input("Name: ")
+# age = input("Age: ")
+# city = input("City: ")
+
+# print("My name is " + name + ", my age is " + age + " and I'm from " + city)
+# print("My name is {}, my age is {} and I'm from {}".format(name, age, city))
+# print(f"My name is {name}, my age is {age} and I'm from {city}")
 
 # ----------------------------------------------------------------------
 # Exercise 7: String Search & Validation
@@ -148,6 +178,16 @@
 # 5. If it doesn't exist, print "Word not found"
 #
 # Write your code for Exercise 7 below:
+
+# text = "If anyone tells you that a certain person speaks ill of you, do not make excuses about what is said of you but answer, He was ignorant of my other faults, else he would not have mentioned these alone."
+# word_to_search = input("What word do you want to look for? ")
+# if word_to_search in text:
+#     position = text.find(word_to_search)
+#     times = text.count(word_to_search)
+
+#     print(f"{word_to_search} was found in {position} and is repeated {times} times")
+# else:
+#     print("Word not found")
 
 
 # ----------------------------------------------------------------------
@@ -166,6 +206,32 @@
 #
 # Write your code for Exercise 8 below:
 
+# password = input("Type in a password: ")
+# uppercase = 0
+# lowercase = 0
+# digit = 0
+# flag = True
+# if len(password) >= 8:
+#     for i in password:
+#         if i.isupper():
+#             uppercase += 1
+#         if i.islower():
+#             lowercase += 1
+#         if i.isdigit():
+#             digit += 1
+#     if uppercase < 1:
+#         print("At least 1 uppercase")
+#         flag = False
+#     if lowercase < 1:
+#         print("At least 1 lowercase")
+#         flag = False
+#     if digit < 1:
+#         print("At least 1 digit")
+#         flag = False
+#     if flag:
+#         print("Strong password!")
+# else:
+#     print("At least 8 chars")
 
 # ----------------------------------------------------------------------
 # Exercise 9: Text Analyzer
@@ -182,6 +248,33 @@
 # 3. Format the output nicely using f-strings
 #
 # Write your code for Exercise 9 below:
+
+# paragraph = "Epictetus was a Greek Stoic philosopher. He was born into slavery at Hierapolis, Phrygia and lived in Rome until his banishment, after which he spent the rest of his life in Nicopolis in northwestern Greece."
+
+# total_char = len(paragraph)
+# total_char_no_spaces = len(paragraph.replace(" ", ""))
+
+# total_words = len(paragraph.split(" "))
+
+# sentence_number = 0
+# for i in paragraph:
+#     if i in ".?!":
+#         sentence_number += 1
+
+# clean_text = paragraph.lower()
+# for char in ".,!?;:":
+#     clean_text = clean_text.replace(char, "")
+# words = clean_text.split(" ")
+
+# most_common_word = words[0]
+# times = 1
+
+# for i in words:
+#     if words.count(i) > times:
+#         most_common_word = i
+#         times = words.count(i)
+# print(most_common_word)
+# print(times)
 
 
 # ----------------------------------------------------------------------
@@ -201,3 +294,40 @@
 # 5. Print the result with nice formatting
 #
 # Write your code for Advanced Exercise 10 below:
+
+# sentence = "Epictetus was a Greek Stoic philosopher"
+
+# action = input("What do you want to do, ah? ")
+# reverse_each_word = []
+# reverse_only_char = []
+# no_vowel = sentence
+# if action == "r":
+#     reverse_sentence = sentence[::-1]
+#     print(reverse_sentence)
+# elif action == "w":
+#     split = sentence.split(" ")
+#     for i in split:
+#         reverse_each_word.append(i[::-1])
+#     reverse_each_word = " ".join(reverse_each_word)
+#     print(reverse_each_word)
+# elif action == "c":
+#     split = sentence.split(" ")
+#     for i in split:
+#         reverse_only_char.append(i[::-1])
+#     reverse_only_char.reverse()
+#     reverse_only_char = " ".join(reverse_only_char)
+#     print(reverse_only_char)
+# elif action == "v":
+#     for i in "aeiou":
+#         no_vowel = no_vowel.replace(i, "")
+#     print(no_vowel)
+# elif action == "p":
+
+#     x = sentence.replace(" ", "")
+#     y = list(x)
+#     y.reverse()
+#     z = "".join(y)
+#     if x == z:
+#         print("Palindrome")
+#     else:
+#         print("No palindrome")
