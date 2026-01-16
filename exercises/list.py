@@ -12,6 +12,13 @@
 #
 # Write your code for Exercise 1 below:
 
+# my_list = [1, 2.5, True, False, "No way"]
+# print(type(my_list))
+# print(my_list[0])
+# print(my_list[-1])
+# print(my_list[len(my_list)//2])
+# my_list[1] = "I'm the new guy here"
+# print(my_list)
 
 # ----------------------------------------------------------------------
 # Exercise 2: List Methods - Adding Items
@@ -25,6 +32,19 @@
 #
 # Write your code for Exercise 2 below:
 
+# fruits = []
+
+# fruits.append("apple")
+# fruits.append("banana")
+# fruits.append("orange")
+
+# fruits.insert(1, "mango")
+
+# fruits.extend(["grape", "kiwi"])
+
+# print(fruits)
+
+# print(len(fruits))
 
 # ----------------------------------------------------------------------
 # Exercise 3: List Methods - Removing Items
@@ -39,6 +59,15 @@
 #
 # Write your code for Exercise 3 below:
 
+# numbers = [10, 20, 30, 40, 50, 60, 70]
+# numbers.remove(30)
+# print(numbers)
+# numbers.pop(0)
+# print(numbers)
+# numbers.pop()
+# print(numbers)
+# numbers.clear()
+# print(numbers)
 
 # ----------------------------------------------------------------------
 # Exercise 4: List Slicing & Iteration
@@ -51,6 +80,17 @@
 # 6. Use enumerate() to print each number with its index
 #
 # Write your code for Exercise 4 below:
+
+# numbers = list(range(21))
+# print(numbers[::2])
+# print(numbers[5:15])
+# print(numbers[::-1])
+
+# for i in numbers:
+#     print(i * 2)
+
+# for index, number in enumerate(numbers):
+#     print(f"{index} and {number}")
 
 
 # ----------------------------------------------------------------------
@@ -67,6 +107,17 @@
 #
 # Write your code for Exercise 5 below:
 
+# colors = ["red", "blue", "green", "yellow", "blue", "purple"]
+# print(colors.index("green"))
+# print(colors.count("blue"))
+
+# print("orange" in colors)  # Simple and clean!
+
+# colors.sort()
+# print(colors)
+
+# colors.reverse()
+# print(colors)
 
 # ----------------------------------------------------------------------
 # Exercise 6: Nested Lists (2D Lists)
@@ -84,6 +135,18 @@
 #
 # Write your code for Exercise 6 below:
 
+# grid = [[1, 2, 3],
+#         [4, 5, 6],
+#         [7, 8, 9]]
+# print(grid)
+# print(grid[len(grid)//2][len(grid)//2])
+# print(grid[2][2])
+# grid[0][0] = 0
+# print(grid)
+
+# for row in grid:
+#     for element in row:
+#         print(element)
 
 # ----------------------------------------------------------------------
 # Exercise 7: List Comprehension - Basics
