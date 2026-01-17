@@ -159,6 +159,15 @@
 #
 # Write your code for Exercise 7 below:
 
+# list1 = list(range(1, 11))
+# list2 = [i**2 for i in list1]
+# even = [i for i in range(1, 21) if i % 2 == 0]
+# odd = [i for i in range(1, 21) if i % 2 != 0]
+
+# print(list1)
+# print(list2)
+# print(even)
+# print(odd)
 
 # ----------------------------------------------------------------------
 # Exercise 8: List Comprehension - With Conditions
@@ -172,6 +181,17 @@
 #
 # Write your code for Exercise 8 below:
 
+# words = ["hello", "world", "python", "list", "comprehension"]
+# five_char = [i for i in words if len(i) > 5]
+# uppercase = [i.upper() for i in words]
+# length = [len(i) for i in words]
+# o = [i for i in words if "o" in i]
+
+# print(words)
+# print(five_char)
+# print(uppercase)
+# print(length)
+# print(o)
 
 # ----------------------------------------------------------------------
 # Exercise 9: List Operations & Built-in Functions
@@ -187,6 +207,15 @@
 #
 # Write your code for Exercise 9 below:
 
+# list1 = [1, 2, 3]
+# list2 = [4, 5, 6]
+# concatenate = list1 + list2
+# three_times = list1*3
+# nums = [45, 12, 78, 34, 89, 23]
+# print(max(nums))
+# print(min(nums))
+# print(sum(nums))
+# print(sum(nums)/len(nums))
 
 # ----------------------------------------------------------------------
 # Exercise 10: Shopping List Manager
@@ -205,6 +234,25 @@
 #
 # Write your code for Exercise 10 below:
 
+# shopping_list = []
+# for i in range(5):
+#     shopping_list.append(input(f"Item {i+1}: "))
+
+# for index, el in enumerate(shopping_list):
+#     print(f"{index+1}:{el}")
+
+# remove = input("What item do you want to remove? ")
+# index = shopping_list.index(remove)
+# shopping_list.pop(index)
+
+# add = input("What element do you want to add? ")
+# shopping_list.append(add)
+
+# print(shopping_list)
+# print(len(shopping_list))
+
+# shopping_list.sort()
+# print(shopping_list)
 
 # ----------------------------------------------------------------------
 # Advanced Exercise 11: Number Analyzer
