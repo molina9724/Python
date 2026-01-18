@@ -272,6 +272,25 @@
 #
 # Write your code for Advanced Exercise 11 below:
 
+# numbers = "1 2 3 4 5 6 7 8 9 10 20 50 100"
+# numbers_list = [int(i) for i in numbers.split()]
+
+# print(sum(numbers_list))
+# print(sum(numbers_list) / len(numbers_list))
+# print(max(numbers_list))
+# print(min(numbers_list))
+
+# even_numbers = [i for i in numbers_list if i % 2 == 0]
+# print(len(even_numbers))
+
+# odd_numbers = [i for i in numbers_list if i % 2 != 0]  # ← Fixed!
+# print(len(odd_numbers))
+
+# only_big = [i for i in numbers_list if i > 10]
+# print(only_big)
+
+# doubled = [i*2 for i in numbers_list]
+# print(doubled)
 
 # ----------------------------------------------------------------------
 # Advanced Exercise 12: List Manipulation Challenge
@@ -292,3 +311,27 @@
 # Hint: Use type() to check the type of each item
 #
 # Write your code for Advanced Exercise 12 below:
+
+# data = [1, "hello", 3.14, True, "world", 42, False, "python", 2.71, 100]
+
+# integers = [i for i in data if type(i) == int]
+# print(integers)
+# print(len(integers))
+
+# strings = [i for i in data if type(i) is str]
+# print(strings)
+# print(len(strings))
+
+# floats = [i for i in data if type(i) is float]
+# print(floats)
+# print(len(floats))
+
+# booleans = [i for i in data if type(i) is bool]
+# print(booleans)
+# print(len(booleans))
+
+# uppercase = [i.upper() for i in strings]
+# print(uppercase)
+
+# doubled = [i*2 for i in data if isinstance(i, (int, float))]
+# print(doubled)
