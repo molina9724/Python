@@ -216,6 +216,40 @@
 # Write your code for Exercise 9 below:
 
 
+# t1 = (1, 2, 3)
+# t2 = (1, 2, 3)
+
+# if t1 == t2:
+#     print("They are equal")
+# else:
+#     print("They are not equal")
+
+# if id(t1) == id(t2):
+#     print("{t1} is {t2}")
+# else:
+#     print("{t1} is not {t2}")
+#     print(id(t1))
+#     print(id(t2))
+
+
+# print(id(t1))
+# print(id(t2))
+
+# l1 = [1, 2, 3]
+# l2 = [1, 2, 3]
+
+# if l1 == l2:
+#     print("They are equal")
+# else:
+#     print("They are not equal")
+
+# if id(l1) == id(l2):
+#     print("{l1} is {l2}")
+# else:
+#     print("{l1} is not {l2}")
+#     print(id(l1))
+#     print(id(l2))
+
 # ----------------------------------------------------------------------
 # Exercise 10: Tuple Immutability
 #
