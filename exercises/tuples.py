@@ -11,6 +11,17 @@
 #
 # Write your code for Exercise 1 below:
 
+# colors = "black", "white", "red", "blue", "green"
+# print(type(colors))
+# print(colors[0])
+# print(colors[-1])
+# print(colors[len(colors)//2])
+
+# # tuples cannot change!
+# # colors[2] = "yellow"
+
+# print(len(colors))
+
 # ----------------------------------------------------------------------
 # Exercise 2: Different Ways to Create Tuples
 #
@@ -21,8 +32,20 @@
 # 5. Print all four tuples and their types
 # 6. Try creating a single-element tuple WITHOUT the comma and see what type it is
 #
-# Write your code for Exercise 2 below:
+# Write your code for Exercise 2 below:s
 
+# empty = ()
+# single = (True,)
+# no_parens = 1, 2, 3
+# nested_tuple = (1, (2, 3), (4, (5, 6)))
+
+# print(f"{empty} {type(empty)}")
+# print(f"{single} {type(single)}")
+# print(f"{no_parens} {type(no_parens)}")
+# print(f"{nested_tuple} {type(nested_tuple)}")
+
+# no_comma = 9
+# print(type(no_comma))
 
 # ----------------------------------------------------------------------
 # Exercise 3: Tuple Indexing & Slicing
@@ -37,6 +60,12 @@
 #
 # Write your code for Exercise 3 below:
 
+# numbers = tuple(range(10))
+# print(numbers[5])
+# print(numbers[2:7])
+# print(numbers[1::2])
+# print(numbers[::-1])
+# print(numbers[-1])
 
 # ----------------------------------------------------------------------
 # Exercise 4: Iterating Over Tuples
@@ -49,6 +78,27 @@
 #
 # Write your code for Exercise 4 below:
 
+# mixed = (42, "hello", 3.14, True, [1, 2, 3])
+# for i in mixed:
+#     print(i)
+
+# for index, value in enumerate(mixed):
+#     print(index, value)
+
+# for i in mixed:
+#     if type(i) == str:
+#         print(i)
+
+# int_float = 0
+# for i in mixed:
+#     if type(i) == int or type(i) == float:
+#         int_float += 1
+#     if type(i) == list or type(i) == tuple:
+#         for j in i:
+#             if type(j) == int or type(j) == float:
+#                 int_float += 1
+
+# print(int_float)
 
 # ----------------------------------------------------------------------
 # Exercise 5: Tuple Unpacking - Basics
@@ -62,6 +112,14 @@
 #
 # Write your code for Exercise 5 below:
 
+# coordinates = (10, 20, 30)
+# x, y, z = coordinates
+# print(x)
+# print(y)
+# print(z)
+
+# my_tuple = a, b, c, d, e = (1, 2, 3, 4, 5)
+# print(*my_tuple)
 
 # ----------------------------------------------------------------------
 # Exercise 6: Tuple Packing
@@ -75,6 +133,18 @@
 #
 # Write your code for Exercise 6 below:
 
+# name = "Alice"
+# age = 25
+# city = "NYC"
+
+# person = name, age, city
+# print(person)
+
+# my_tuple = 1, 2, 3, 4, 5
+# print(my_tuple)
+
+# print(type(person))
+# print(type(my_tuple))
 
 # ----------------------------------------------------------------------
 # Exercise 7: Swapping Values
@@ -88,6 +158,16 @@
 #
 # Write your code for Exercise 7 below:
 
+# a = 100
+# b = 200
+
+# print(f"Before: a={a}, b={b}")
+# a, b = b, a
+# print(f"After: a={a}, b={b}")
+
+# x, y, z = 1, 2, 3
+# x, y, z = y, z, x
+# print(x, y, z)
 
 # ----------------------------------------------------------------------
 # Exercise 8: Tuple Operations
@@ -102,6 +182,23 @@
 #
 # Write your code for Exercise 8 below:
 
+# tuple1 = (1, 2, 3)
+# tuple2 = (4, 5, 6)
+
+# three_times = (tuple1*3)
+
+# if 2 in tuple1:
+#     print("It is")
+# else:
+#     print("It's not")
+
+# print(tuple2.index(5))
+
+# print(tuple1.count(1))
+
+# print(min(tuple1))
+# print(max(tuple1))
+# print(sum(tuple1))
 
 # ----------------------------------------------------------------------
 # Exercise 9: == vs is Operators
