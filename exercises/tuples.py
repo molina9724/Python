@@ -264,6 +264,23 @@
 #
 # Write your code for Exercise 10 below:
 
+# my_tuple = (1, 2, 3, 4, 5)
+
+# # Tuples cannot change
+# # my_tuple[0] = 50
+
+# # Tuples cannot change
+# # my_tuple.append(0)
+
+# # Tuples cannot change
+# # my_tuple.remove(50)
+
+# new_tuple = my_tuple + (6, 7)
+# print(new_tuple)
+# sliced = my_tuple[1:4]
+# print(sliced)
+
+# print(my_tuple)
 
 # ----------------------------------------------------------------------
 # Exercise 11: Nested Tuples
@@ -282,6 +299,27 @@
 #
 # Write your code for Exercise 11 below:
 
+# board = (
+#     ("X", "O", "X"),
+#     ("O", "X", "O"),
+#     ("O", "X", "X")
+# )
+
+# print(board[1][1])
+# print(board[0][2])
+# print(board[0])
+
+# for row in board:
+#     for element in row:
+#         print(element)
+
+# x_count = 0
+# for row in board:
+#     for element in row:
+#         if element == "X":
+#             x_count += 1
+
+# print(x_count)
 
 # ----------------------------------------------------------------------
 # Exercise 12: Tuple with Mutable Elements
@@ -295,6 +333,16 @@
 #
 # Write your code for Exercise 12 below:
 
+# my_tuple = (1, 2, [3, 4, 5])
+# print(my_tuple)
+# print(id(my_tuple))
+
+# # Tuples cannot change
+# # my_tuple[0] = 0
+
+# my_tuple[2][1] = 50
+# print(my_tuple)
+# print(id(my_tuple))
 
 # ----------------------------------------------------------------------
 # Advanced Exercise 13: Multiple Assignment & Unpacking
@@ -314,6 +362,22 @@
 #
 # Write your code for Advanced Exercise 13 below:
 
+# def get_stats(numbers):
+#     return (min(numbers), max(numbers), sum(numbers))
+
+# x, y, z = get_stats([1, 2, 3, 4, 5])
+# print(x)
+# print(y)
+# print(z)
+
+# first, *middle, last = (1, 2, 3, 4, 5, 6)
+# print(first)
+# print(middle)
+# print(last)
+
+# people = (("Alice", 25), ("Bob", 30), ("Charlie", 35))
+# for name, age in people:
+#     print(f"{name} - {age}")
 
 # ----------------------------------------------------------------------
 # Advanced Exercise 14: Tuple Comparison
@@ -327,6 +391,26 @@
 # 7. Print the sorted list (sorts by first element, then second if tied)
 #
 # Write your code for Advanced Exercise 14 below:
+
+# t1 = (1, 2, 3)
+# t2 = (4, 5, 6)
+
+# if t1 >= t2:
+#     print(f"{t1} is >= than {t2}")
+# elif t1 <= t2:
+#     print(f"{t1} is <= than {t2}")
+
+# t3 = (1, 2)
+# t4 = (1, 2, 0)
+
+# if t3 >= t4:
+#     print(f"{t3} is >= than {t4}")
+# elif t3 <= t4:
+#     print(f"{t3} is <= than {t4}")
+
+# students = [("Alice", 85), ("Bob", 92), ("Charlie", 78)]
+# students.sort()
+# print(students)
 
 
 # ----------------------------------------------------------------------
