@@ -11,6 +11,26 @@
 #
 # Write your code for Exercise 1 below:
 
+# my_set1 = set((1, 2, 3, 4, 5))
+# my_set2 = {10, 20, 30, 40, 50}
+# my_set3 = {1, "hello", 3.14, True}
+
+# print(my_set1)
+# print(type(my_set1))
+
+# print(my_set2)
+# print(type(my_set2))
+
+# print(my_set3)
+# print(type(my_set3))
+
+# my_set4 = {}
+# print(type(my_set4))
+
+# my_set5 = set()
+# print(my_set5)
+# print(type(my_set5))
+
 
 # ----------------------------------------------------------------------
 # Exercise 2: Sets Remove Duplicates Automatically
@@ -25,6 +45,19 @@
 #
 # Write your code for Exercise 2 below:
 
+# numbers = [1, 2, 3, 2, 4, 1, 5, 3, 6, 4]
+# my_set = set(numbers)
+
+# print(numbers)
+# print(my_set)
+
+# another_list = list(my_set)
+# another_list.sort()
+# print(another_list)
+
+# another_set = set("hello")
+# print(another_set)
+# #it iterates the string and removes the duplicates
 
 # ----------------------------------------------------------------------
 # Exercise 3: Set Operations - Cannot Index!
@@ -39,6 +72,18 @@
 #
 # Write your code for Exercise 3 below:
 
+# my_set = {1, 2, 3, 4, 5}
+# # Sets have no index
+# # print(my_set[0])
+
+# # Sets have no index
+# # print(my_set[1:3])
+
+# print("Yes") if 3 in my_set else print("Not")
+# print(len(my_set))
+
+# for element in my_set:
+#     print(element)
 
 # ----------------------------------------------------------------------
 # Exercise 4: Hashable vs Unhashable
@@ -53,6 +98,20 @@
 #
 # Write your code for Exercise 4 below:
 
+# print(hash(5))
+# print(hash("Hello"))
+# print(hash((1, 2, 3)))
+
+# # Lists aren't hashable
+# # print(hash([1, 2, 3]))
+
+# # sets aren't hashable
+# # print(hash({1, 2, 3}))
+
+# my_set = {1, "hello", (1, 2), 3.14}
+
+# # Sets are unhashable
+# # my_set1 = {1, [2, 3]}
 
 # ----------------------------------------------------------------------
 # Exercise 5: Union Operation (Combining Sets)
@@ -70,6 +129,21 @@
 #
 # Write your code for Exercise 5 below:
 
+# s1 = {"a", "b", "c"}
+# s2 = {"c", "d", "e"}
+# s3 = {"e", "f", "g"}
+
+# union1 = s1 | s2 | s3
+# print(union1)
+
+# union2 = s1.union(s2, s3)
+# print(union2)
+
+# # | cannot be mixed with .union()
+# # not_working = s1 | ["x", "y"]
+
+# working = s1.union(["x", "y"])
+# print(working)
 
 # ----------------------------------------------------------------------
 # Exercise 6: Intersection Operation (Common Elements)
@@ -87,6 +161,21 @@
 #
 # Write your code for Exercise 6 below:
 
+# s1 = {1, 2, 3, 4, 5}
+# s2 = {3, 4, 5, 6, 7}
+# s3 = {4, 5, 6, 7, 8}
+
+# intersection1 = s1 & s2 & s3
+# print(intersection1)
+
+# intersection2 = s1.intersection(s2, s3)
+# print(intersection2)
+
+# s1_s2 = s1 & s2
+# print(s1_s2)
+
+# s2_s3 = s2 & s3
+# print(s2_s3)
 
 # ----------------------------------------------------------------------
 # Exercise 7: Difference Operation (Elements NOT in Other Sets)
@@ -104,6 +193,21 @@
 #
 # Write your code for Exercise 7 below:
 
+# s1 = {1, 2, 3, 4, 5}
+# s2 = {4, 5, 6, 7}
+# s3 = {3, 6, 9}
+
+# diff1 = s1-s2-s3
+# print(diff1)
+
+# diff2 = s1.difference(s2, s3)
+# print(diff2)
+
+# diff3 = s1 - s2
+# print(diff3)
+
+# diff4 = s2-s1
+# print(diff4)
 
 # ----------------------------------------------------------------------
 # Exercise 8: Modifying Sets - add, remove, update
