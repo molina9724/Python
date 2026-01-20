@@ -255,6 +255,17 @@
 #
 # Write your code for Exercise 10 below:
 
+# my_set = {1, 2, 3, 4, 5}
+# my_copy = my_set.copy()
+
+# my_set.clear()
+# print(my_set)
+# print(my_copy)
+
+# print(len(my_set))
+
+# print(id(my_set))
+# print(id(my_copy))
 
 # ----------------------------------------------------------------------
 # Exercise 11: Set Membership Testing (Fast!)
@@ -270,6 +281,18 @@
 # 7. Print whether there are duplicates
 #
 # Write your code for Exercise 11 below:
+
+# big_set = set(range(1000000))
+# print("It is" if 500000 in big_set else "It's not")
+# print("It is" if 1000001 in big_set else "It's not")
+
+# big_list = list(range(1000000))
+# print("It is" if 500000 in big_list else "It's not")
+# print("It is" if 1000001 in big_list else "It's not")
+
+# numbers = [1, 2, 3, 2, 4, 1, 4]
+# has_duplicates = len(numbers) != len(set(numbers))
+# print(has_duplicates)
 
 
 # ----------------------------------------------------------------------
@@ -287,6 +310,17 @@
 #
 # Write your code for Exercise 12 below:
 
+# s1 = {1, 2, 3, 4}
+# s2 = {3, 4, 5, 6}
+
+# sym_diff = s1 ^ s2
+# print(sym_diff)
+
+# sym_diff2 = s1.symmetric_difference(s2)
+# print(sym_diff2)
+
+# manual = (s1 - s2) © (s2 - s1)
+# print(manual)
 
 # ----------------------------------------------------------------------
 # Exercise 13: Subset and Superset Checks
@@ -304,6 +338,37 @@
 #
 # Write your code for Exercise 13 below:
 
+# s1 = {1, 2, 3}
+# s2 = {1, 2, 3, 4, 5}
+# s3 = {1, 2}
+# s4 = {1, 2}
+
+# if s1.issubset(s2):
+#     print("Well, it is")
+# else:
+#     print("It's not")
+
+
+# if s2.issubset(s1):
+#     print("Well, it is")
+# else:
+#     print("It's not")
+
+
+# if s3.issubset(s1):
+#     print("Well, it is")
+# else:
+#     print("It's not")
+
+# # if s3.issubset(s4):
+# #     print("Well, it is")
+# # else:
+# #     print("It's not")
+
+# if s1.isdisjoint({6, 7, 8}):
+#     print("Well, it is")
+# else:
+#     print("It's not")
 
 # ----------------------------------------------------------------------
 # Exercise 14: Practical Use Case - Remove Duplicates from List
@@ -319,6 +384,16 @@
 #
 # Write your code for Exercise 14 below:
 
+# words = ["apple", "banana", "apple", "cherry", "banana", "date"]
+
+# words_set = set(words)
+# words_list = list(words_set)
+
+# print(words)
+# print(words_list)
+
+# words_dic = list(dict.fromkeys(words))
+# print(words_dic)
 
 # ----------------------------------------------------------------------
 # Exercise 15: Practical Use Case - Finding Common Elements
@@ -336,6 +411,28 @@
 #
 # Write your code for Exercise 15 below:
 
+# math_class = {"Alice", "Bob", "Charlie", "David"}
+# science_class = {"Bob", "David", "Eve", "Frank"}
+# english_class = {"Alice", "David", "Frank", "Grace"}
+
+# math_and_science = math_class & science_class
+# print(math_and_science)
+
+# math_or_science_or_english = math_class | science_class | english_class
+# print(math_or_science_or_english)
+
+# only_math = math_class - science_class - english_class
+# print(only_math)
+
+# all_classes = math_class & science_class & english_class
+# print(all_classes)
+
+# only_science = science_class - english_class - math_class
+# print(only_science)
+# only_english = english_class - math_class - science_class
+# print(only_english)
+# only_one_class = only_math | only_english | only_science
+# print(only_one_class)
 
 # ----------------------------------------------------------------------
 # Advanced Exercise 16: Set Comprehension
@@ -354,6 +451,11 @@
 #
 # Write your code for Advanced Exercise 16 below:
 
+# squares = {x**2 for x in range(10)}
+# even_numbers = {x for x in range(1, 21) if x % 2 == 0}
+# vowels = set(char for char in "aeiou")
+
+# words = {"Hello", "how", "are", "you"}
 
 # ----------------------------------------------------------------------
 # Advanced Exercise 17: Frozen Sets (Immutable Sets)
@@ -368,6 +470,17 @@
 #
 # Write your code for Advanced Exercise 17 below:
 
+# fs = frozenset([1, 2, 3, 4, 5])
+# print(fs)
+# print(type(fs))
+
+# # Frozen set are immutable
+# # fs.add(0) won´t work
+# # fs.remove(0) won´t work
+
+# my_dict = {}
+# my_dict[fs] = "Hello"
+# print(my_dict)
 
 # ----------------------------------------------------------------------
 # Advanced Exercise 18: Performance Comparison
@@ -382,3 +495,6 @@
 # 6. Write comments explaining when to use each
 #
 # Write your code for Advanced Exercise 18 below:
+
+big_list = list(range(10000))
+big_set = set(range(10000))
