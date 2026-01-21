@@ -13,6 +13,19 @@
 #
 # Write your code for Exercise 1 below:
 
+# person = {"name": "Alice", "age": 25, "city": "NYC"}
+# person2 = dict(name="Bob", age=30, city="LA")
+
+# empty1 = {}
+# print(empty1)
+# print(type(empty1))
+
+# empty2 = dict()
+# print(empty2)
+# print(type(empty2))
+
+# mixed = {"string": "hello", "number": 42, "list": [1, 2, 3], "bool": True}
+# print(mixed)
 
 # ----------------------------------------------------------------------
 # Exercise 2: Accessing Dictionary Values
@@ -28,6 +41,18 @@
 #
 # Write your code for Exercise 2 below:
 
+# student = {"name": "Charlie", "age": 20,
+#            "grade": 85, "courses": ["Math", "Science"]}
+
+# print(student["name"])
+# print(student["grade"])
+# print(student["courses"])
+
+# # You cannot access a key that doesn't exist
+# # print(student["last_name"])
+
+# print(student.get("email"))
+# print(student.get("email", "No email provided"))
 
 # ----------------------------------------------------------------------
 # Exercise 3: Adding and Modifying Dictionary Items
@@ -43,6 +68,13 @@
 #
 # Write your code for Exercise 3 below:
 
+# inventory = {"apples": 10, "bananas": 5}
+# print(inventory)
+# inventory["oranges"] = 8
+# inventory["apples"] = 15
+# print(inventory)
+# inventory.update({"grapes": 20, "pears": 12})
+# print(inventory)
 
 # ----------------------------------------------------------------------
 # Exercise 4: Removing Dictionary Items
@@ -57,6 +89,19 @@
 # 7. Print the final dictionary
 #
 # Write your code for Exercise 4 below:
+
+# data = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5}
+# del data["a"]
+# value = data.pop("b")
+# print(value)
+
+# value2 = data.pop("z", "Not found")
+# print(value2)
+
+# last_item = data.popitem()
+# print(last_item)
+
+# print(data)
 
 
 # ----------------------------------------------------------------------
@@ -73,6 +118,20 @@
 #
 # Write your code for Exercise 5 below:
 
+# scores = {"Alice": 85, "Bob": 92, "Charlie": 78, "David": 95}
+# keys = scores.keys()
+# values = scores.values()
+# items = scores.items()
+
+# print(keys)
+# print(values)
+# print(items)
+
+# keys_list = list(keys)
+# print(keys_list)
+
+# values_list = list(values)
+# print(values_list)
 
 # ----------------------------------------------------------------------
 # Exercise 6: Iterating Over Dictionaries
@@ -92,6 +151,18 @@
 #
 # Write your code for Exercise 6 below:
 
+# person = {"name": "Alice", "age": 25, "city": "NYC", "job": "Engineer"}
+# for key in person:
+#     print(key)
+
+# for value in person.values():
+#     print(value)
+
+# for key, value in person.items():
+#     print(key, value)
+
+# for index, value in enumerate(person):
+#     print(index, value)
 
 # ----------------------------------------------------------------------
 # Exercise 7: Dictionary Membership Testing
@@ -109,6 +180,22 @@
 #
 # Write your code for Exercise 7 below:
 
+# config = {"debug": True, "timeout": 30, "retries": 3}
+# if "debug" in config:
+#     print(True)
+
+# if "verbose" in config:
+#     print(True)
+# else:
+#     print(False)
+
+# if 50 in config.values():
+#     print(True)
+# else:
+#     print(False)
+
+# if "timeout" in config:
+#     print(config["timeout"])
 
 # ----------------------------------------------------------------------
 # Exercise 8: Nested Dictionaries
@@ -127,6 +214,21 @@
 #
 # Write your code for Exercise 8 below:
 
+# students = {
+#     "student1": {"name": "Alice", "grade": 85, "courses": ["Math", "Science"]},
+#     "student2": {"name": "Bob", "grade": 85, "courses": ["English", "History"]},
+#     "student3": {"name": "Charlie", "grade": 78, "courses": ["Math", "Art"]}
+# }
+
+# print(students["student1"]["grade"])
+# print(students["student2"]["courses"])
+
+# students["student4"] = {"name": "Daniel",
+#                         "grade": 100, "courses": ["Art", "Python"]}
+# print(students)
+
+# for value in students.values():
+#     print(value["name"], value["grade"])
 
 # ----------------------------------------------------------------------
 # Exercise 9: Dictionary Comprehension
