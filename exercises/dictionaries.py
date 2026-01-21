@@ -247,6 +247,19 @@
 #
 # Write your code for Exercise 9 below:
 
+# squares = {x: x**2 for x in range(1, 6)}
+# print(squares)
+
+# keys = ["a", "b", "c"]
+# values = [1, 2, 3]
+# combined = {k: v for k, v in zip(keys, values)}
+
+# scores = {"alice": 85, "Bob": 92, "Charlie": 78, "David": 95}
+# high_scores = {k: v for k, v in scores.items() if v >= 90}
+# print(high_scores)
+
+# doubled = {k: v*2 for k, v in scores.items()}
+# print(doubled)
 
 # ----------------------------------------------------------------------
 # Exercise 10: Dictionary from Lists using zip()
@@ -262,6 +275,22 @@
 #
 # Write your code for Exercise 10 below:
 
+# names = ["Alice", "Bob", "Charlie"]
+# ages = [20, 500, 35]
+
+# combined = {k: v for k, v in zip(names, ages)}
+# print(combined)
+
+# combined2 = dict(zip(names, ages))
+# print(combined2)
+
+# city = {"NYC", "EVG", "Sabanea"}
+
+# combined3 = {
+#     name: {"age": age, "city": city}
+#     for name, age, city in zip(names, ages, city)}
+
+# print(combined3)
 
 # ----------------------------------------------------------------------
 # Exercise 11: Dictionary .get() vs Direct Access
@@ -294,6 +323,25 @@
 #
 # Write your code for Exercise 12 below:
 
+# counts = {"a": 1, "b": 2}
+# set_default = counts.setdefault("a")
+# print(set_default)
+
+# set_default2 = counts.setdefault("c", 3)
+# print(set_default2)
+
+# print(counts)
+
+# via_get = counts.get("d", "Not found")
+# print(via_get)
+# print(counts)
+
+# count_letters = {}
+# letters = ["a", "b", "c", "b", "a"]
+# for letter in letters:
+#     count_letters.setdefault(letter, 0)
+#     count_letters[letter] += 1
+# print(count_letters)
 
 # ----------------------------------------------------------------------
 # Exercise 13: Merging Dictionaries
@@ -312,28 +360,67 @@
 #
 # Write your code for Exercise 13 below:
 
+# # Method 1: .update() (modifies original)
+# dict1 = {"a": 1, "b": 2}
+# dict2 = {"c": 3, "d": 4}
+# dict1.update(dict2)
+# print("After .update():", dict1)
 
-# ----------------------------------------------------------------------
-# Exercise 14: Counting with Dictionaries
-#
-# 1. Create a list of items:
-#    fruits = ["apple", "banana", "apple", "orange", "banana", "apple"]
-# 2. Count occurrences manually using a dictionary:
-#    counts = {}
-#    for fruit in fruits:
-#        if fruit in counts:
-#            counts[fruit] += 1
-#        else:
-#            counts[fruit] = 1
-# 3. Print the counts
-# 4. Alternative using .get():
-#    counts = {}
-#    for fruit in fruits:
-#        counts[fruit] = counts.get(fruit, 0) + 1
-# 5. Compare both methods
-#
-# Write your code for Exercise 14 below:
+# # Method 2: Unpacking (creates new dict)
+# dict1 = {"a": 1, "b": 2}  # ← Recreate!
+# dict2 = {"c": 3, "d": 4}
+# unpack_dict = {**dict1, **dict2}
+# print("Unpacking:", unpack_dict)
 
+# # Method 3: | operator (creates new dict)
+# dict1 = {"a": 1, "b": 2}  # ← Recreate!
+# dict2 = {"c": 3, "d": 4}
+# merged = dict1 | dict2
+# print("| operator:", merged)
+
+# # Method 4: Handling conflicts
+# dict1 = {"a": 1, "b": 2}  # ← Recreate!
+# dict3 = {"b": 3, "c": 4}
+# merged2 = dict1 | dict3
+# print("With conflict:", merged2)
+
+# # ----------------------------------------------------------------------
+# # Exercise 14: Counting with Dictionaries
+# #
+# # 1. Create a list of items:
+# #    fruits = ["apple", "banana", "apple", "orange", "banana", "apple"]
+# # 2. Count occurrences manually using a dictionary:
+# #    counts = {}
+# #    for fruit in fruits:
+# #        if fruit in counts:
+# #            counts[fruit] += 1
+# #        else:
+# #            counts[fruit] = 1
+# # 3. Print the counts
+# # 4. Alternative using .get():
+# #    counts = {}
+# #    for fruit in fruits:
+# #        counts[fruit] = counts.get(fruit, 0) + 1
+# # 5. Compare both methods
+# #
+# # Write your code for Exercise 14 below:
+
+# fruits = ["apple", "banana", "apple", "orange", "banana", "apple"]
+# my_dic = {}
+
+# for fruit in fruits:
+#     if fruit not in my_dic:
+#         my_dic[fruit]=1
+#     else:
+#         my_dic[fruit]+=1
+
+# print(my_dic)
+
+# my_dic2 = {}
+# for fruit in fruits:
+#     my_dic2[fruit]=my_dic2.get(fruit, 0) + 1
+        
+# print(my_dic2)
 
 # ----------------------------------------------------------------------
 # Exercise 15: Dictionary Keys Must Be Hashable
@@ -354,7 +441,6 @@
 #
 # Write your code for Exercise 15 below:
 
-
 # ----------------------------------------------------------------------
 # Exercise 16: Practical Use Case - Student Records
 #
@@ -371,7 +457,6 @@
 #
 # Write your code for Exercise 16 below:
 
-
 # ----------------------------------------------------------------------
 # Exercise 17: Dictionary vs List Performance (Conceptual)
 #
@@ -385,7 +470,6 @@
 # 6. Write comments explaining when to use each
 #
 # Write your code for Exercise 17 below:
-
 
 # ----------------------------------------------------------------------
 # Advanced Exercise 18: Inverting a Dictionary
@@ -405,7 +489,6 @@
 #
 # Write your code for Advanced Exercise 18 below:
 
-
 # ----------------------------------------------------------------------
 # Advanced Exercise 19: Default Dictionary Behavior
 #
@@ -424,7 +507,6 @@
 # 5. Understand when each is clearer
 #
 # Write your code for Advanced Exercise 19 below:
-
 
 # ----------------------------------------------------------------------
 # Advanced Exercise 20: Dictionary as a Cache/Lookup Table
