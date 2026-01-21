@@ -37,6 +37,13 @@
 #
 # Write your code for Exercise 2 below:
 
+# prices = {"apple": 1.50, "banana": 0.75}
+# print(prices)
+# prices["oranges"] = 2.00
+# prices["apple"] = 1.75
+
+# print(prices)
+
 
 # ----------------------------------------------------------------------
 # Exercise 3: Removing Items
@@ -215,7 +222,16 @@
 #
 # Write your code for Exercise 10 below:
 
+# colors = ["red", "blue", "red", "green", "blue", "red", "yellow"]
+# color_counts = {}
 
+# for color in colors:
+#     if color not in color_counts:
+#         color_counts[color] = 1
+#     else:
+#         color_counts[color] += 1
+
+# print(color_counts)
 
 # ----------------------------------------------------------------------
 # Exercise 11: Manual Counting - Method 2 (.get())
@@ -228,6 +244,14 @@
 # 6. Compare: is the result the same as Exercise 10?
 #
 # Write your code for Exercise 11 below:
+
+# colors = ["red", "blue", "red", "green", "blue", "red", "yellow"]
+# color_counts = {}
+
+# for color in colors:
+#     color_counts[color] = color_counts.get(color, 0) + 1
+
+# print(color_counts)
 
 # ----------------------------------------------------------------------
 # Exercise 12: Manual Counting - Method 3 (.setdefault())
@@ -243,6 +267,15 @@
 #
 # Write your code for Exercise 12 below:
 
+# colors = ["red", "blue", "red", "green", "blue", "red", "yellow"]
+# color_counts = {}
+
+# for color in colors:
+#     color_counts.setdefault(color, 0)
+#     color_counts[color] += 1
+
+# print(color_counts)
+
 # ----------------------------------------------------------------------
 # SECTION 5: DICTIONARY COMPREHENSIONS (Gradual Introduction)
 # ----------------------------------------------------------------------
@@ -256,6 +289,12 @@
 # 4. Print that dictionary
 #
 # Write your code for Exercise 13 below:
+
+# square = {x: x**2 for x in range(1, 6)}
+# print(square)
+
+# cubes = {x: x**3 for x in range(1, 11)}
+# print(cubes)
 
 # ----------------------------------------------------------------------
 # Exercise 14: Dictionary Comprehension from a List
