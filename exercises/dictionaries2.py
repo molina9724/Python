@@ -308,6 +308,10 @@
 #
 # Write your code for Exercise 14 below:
 
+# words = ["cat", "elephant", "dog", "butterfly"]
+# my_dic = {word: len(word) for word in words}
+# print(my_dic)
+
 # ----------------------------------------------------------------------
 # Exercise 15: Dictionary Comprehension with Condition
 #
@@ -318,6 +322,9 @@
 #
 # Write your code for Exercise 15 below:
 
+# my_dic = {x: x**2 for x in range(1, 11) if x % 2 == 0}
+# print(my_dic)
+
 # ----------------------------------------------------------------------
 # Exercise 16: Transforming an Existing Dictionary
 #
@@ -327,6 +334,12 @@
 # 3. Print both the original and discounted dictionaries
 #
 # Write your code for Exercise 16 below:
+
+# prices = {"apple": 2.00, "banana": 1.50, "orange": 3.00}
+# ten_discount = {fruit: price*0.9 for fruit, price in prices.items()}
+
+# print(prices)
+# print(ten_discount)
 
 # ----------------------------------------------------------------------
 # SECTION 6: COMBINING CONCEPTS (Slightly More Complex)
@@ -342,6 +355,11 @@
 #
 # Write your code for Exercise 17 below:
 
+# scores = {"Alice": 85, "Bob": 92, "Charlie": 78, "David": 95, "Eve": 88}
+# only_high = {key: value for key, value in scores.items() if value >= 90}
+# print(only_high)
+# print(len(only_high))
+
 # ----------------------------------------------------------------------
 # Exercise 18: Combining Two Lists into a Dictionary
 #
@@ -354,6 +372,16 @@
 # 5. Print that dictionary (should be the same)
 #
 # Write your code for Exercise 18 below:
+
+# names = ["Alice", "Bob", "Charlie"]
+# ages = [25, 30, 35]
+
+# mixed = dict(zip(names, ages))
+# print(type(mixed))
+
+# mixed2 = {key: value for key, value in zip(names, ages)}
+# print(mixed)
+# print(mixed2)
 
 # ----------------------------------------------------------------------
 # Exercise 19: Grouping Data (Practical Example)
