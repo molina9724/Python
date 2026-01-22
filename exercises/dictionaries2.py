@@ -454,6 +454,17 @@
 #
 # Write your code for Exercise 21 below:
 
+# inventory = {"apples": 50, "bananas": 30, "oranges": 20}
+# sales = {"apples": 15, "bananas": 10, "grapes": 5}
+
+# updated_inventory = {key: inventory.get(
+#     key) - sales.get(key, 0) for key in inventory.keys()}
+
+# print(updated_inventory)
+# updated_inventory["grapes"] = 25
+
+# print(updated_inventory)
+
 # ----------------------------------------------------------------------
 # Exercise 22: Student Grade Statistics
 #
@@ -472,6 +483,27 @@
 #
 # Write your code for Exercise 22 below:
 
+# students = {
+#     "Alice": [85, 90, 78],
+#     "Bob": [92, 88, 95],
+#     "Charlie": [78, 82, 80]
+# }
+# avg_dic = {}
+
+# for student, grades in students.items():
+#     avg_dic[student] = sum(grades)/len(grades)
+
+# print(avg_dic)
+
+# highest_average = max(avg_dic.values())
+# highest_student = ""
+
+# for student, avg in avg_dic.items():
+#     if highest_average == avg:
+#         highest_student = student
+
+# print(highest_student, highest_average)
+
 # ----------------------------------------------------------------------
 # Exercise 23: Merging Dictionaries with Conflict Resolution
 #
@@ -485,6 +517,17 @@
 # 6. Compare: what's different?
 #
 # Write your code for Exercise 23 below:
+
+# dict1 = {"a": 1, "b": 2, "c": 3}
+# dict2 = {"b": 20, "c": 30, "d": 4}
+
+# dict3 = dict1 | dict2
+# print(dict3)
+
+# dict4 = dict2 | dict1
+# print(dict4)
+
+# second dic will override first
 
 # ----------------------------------------------------------------------
 # Exercise 24: Building a Phone Book
@@ -503,6 +546,19 @@
 #
 # Write your code for Exercise 24 below:
 
+# phone_numbers = {}
+# phone_numbers["Alice"] = "555-1234"
+# phone_numbers["Bob"] = "555-5678"
+# phone_numbers["Charlie"] = "555-9012"
+
+# print(phone_numbers)
+# print(phone_numbers["Bob"])
+# print(phone_numbers.get("David", "Not found"))
+# phone_numbers["Alice"] = "555-0000"
+# phone_numbers.pop("Charlie")
+
+# print(phone_numbers)
+
 # ----------------------------------------------------------------------
 # Exercise 25: Advanced Counting - Letter Frequency
 #
@@ -515,6 +571,25 @@
 # 7. BONUS: Convert all letters to lowercase first so 'H' and 'h' count as the same
 #
 # Write your code for Exercise 25 below:
+
+# text = "hello world".lower()
+# letter_counts = {}
+
+# for char in text:
+#     if char != " ":
+#         if char not in letter_counts:
+#             letter_counts[char] = 1
+#         else:
+#             letter_counts[char] += 1
+
+# print(letter_counts.values())
+
+# most_repeated_letter = ""
+# most_repeated_times = max(letter_counts.values())
+# for letter, repetitions in letter_counts.items():
+#     if most_repeated_times == repetitions:
+#         most_repeated_letter = letter
+# print(most_repeated_letter, most_repeated_times)
 
 # ======================================================================
 # END OF EXERCISES
