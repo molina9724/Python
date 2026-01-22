@@ -399,6 +399,19 @@
 #
 # Write your code for Exercise 19 below:
 
+# students = [("Alice", "A"), ("Bob", "B"), ("Charlie", "A"),
+#             ("David", "C"), ("Eve", "B")]
+# grade_groups = {}
+# name = ""
+# grade = ""
+# my_list = []
+
+# for name, grade in students:
+#     if grade not in grade_groups:
+#         grade_groups[grade] = [name]
+#     else:
+#         grade_groups[grade].append(name)
+
 # ----------------------------------------------------------------------
 # Exercise 20: Word Frequency Counter
 #
@@ -411,6 +424,18 @@
 #          then loop to find which key has that count
 #
 # Write your code for Exercise 20 below:
+
+# text = "the cat and the dog and the bird"
+# words_list = text.split()
+
+# my_dic = {word: (words_list.count(word)) for word in words_list}
+
+# number_of_repetitions = max(my_dic.values())
+
+# for word, count in my_dic.items():
+#     if count == number_of_repetitions:
+#         most_common_word = word
+#         break
 
 # ----------------------------------------------------------------------
 # SECTION 7: CHALLENGE EXERCISES (Putting It All Together)
