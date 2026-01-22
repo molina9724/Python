@@ -101,6 +101,13 @@
 
 # Write your code for Exercise B5 below:
 
+# week1 = {"apples": 20, "bananas": 15, "oranges": 10}
+# week2 = {"apples": 15, "bananas": 10, "grapes": 5}
+
+# all_keys = week1 | week2
+
+# total = {key: week1.get(key, 0) + week2.get(key, 0)
+#          for key in all_keys.keys()}
 
 # ----------------------------------------------------------------------
 # Exercise B6: Transform Keys
@@ -114,6 +121,8 @@
 
 # Write your code for Exercise B6 below:
 
+# grades = {"alice": 85, "bob": 92, "charlie": 78}
+# names_list = {name.title(): grade for name, grade in grades.items()}
 
 # ----------------------------------------------------------------------
 # Exercise B7: Nested Comprehension
@@ -128,6 +137,8 @@
 
 # Write your code for Exercise B7 below:
 
+# students = {"Alice": [85, 90, 78], "Bob": [92, 88, 95], "Charlie": [78, 82, 80]}
+# highest = {key: max(grades) for key,grades in students.items()}
 
 # ----------------------------------------------------------------------
 # Exercise B8: Multiple Conditions
@@ -138,10 +149,14 @@
 #    - Apply a 10% discount to those items
 # 3. Print the result
 #
-# Expected: {'apple': 2.25, 'orange': 2.7, 'grape': 4.05}
+# Expected: {'apple': 2.25, 'orange': 2.7}
 
 # Write your code for Exercise B8 below:
 
+# products = {"apple": 2.50, "banana": 1.00,
+#             "orange": 3.00, "grape": 4.50, "mango": 5.00}
+# new_dic = {key: price*0.9 for key, price in products.items() if price >=
+#            2 and price <= 4}
 
 # ----------------------------------------------------------------------
 # Exercise B9: Swap Keys and Values
@@ -154,6 +169,8 @@
 
 # Write your code for Exercise B9 below:
 
+# codes = {"A": 1, "B": 2, "C": 3}
+# inverted = {value: key for key, value in codes.items()}
 
 # ----------------------------------------------------------------------
 # Exercise B10: Complex Grouping with Comprehension
@@ -168,3 +185,10 @@
 # Expected: {85: ['Alice', 'David'], 92: ['Bob', 'Eve'], 78: ['Charlie']}
 
 # Write your code for Exercise B10 below:
+
+# scores = [("Alice", 85), ("Bob", 92), ("Charlie", 78),
+#           ("David", 85), ("Eve", 92)]
+
+# my_dic = {}
+# for name, score in scores:
+#     my_dic.setdefault(score, []).append(name)
