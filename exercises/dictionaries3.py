@@ -10,6 +10,11 @@
 
 # Write your code for Exercise B1 below:
 
+# prices = {"apple": 2.50, "banana": 1.00, "orange": 3.00}
+# double = {key: value*2 for key, value in prices.items()}
+
+# print(prices)
+# print(double)
 
 # ----------------------------------------------------------------------
 # Exercise B2: Using .get() in Comprehension
@@ -25,6 +30,11 @@
 
 # Write your code for Exercise B2 below:
 
+# stock = {"apple": 50, "banana": 30, "orange": 20}
+# sold = {"apple": 10, "banana": 5, "grape": 3}
+
+# remaining = {key: stock.get(key) - sold.get(key, 0) for key in stock.keys()}
+# print(remaining)
 
 # ----------------------------------------------------------------------
 # Exercise B3: Filter and Transform
@@ -38,6 +48,13 @@
 
 # Write your code for Exercise B3 below:
 
+# temps = {"Mon": 72, "Tue": 85, "Wed": 68, "Thu": 90, "Fri": 78}
+
+# only_high = {key: (value-32)*5/9 for key,
+#              value in temps.items() if value >= 75}
+
+# for day, temp in only_high.items():
+#     print(f"{day} - {temp:.1f}")
 
 # ----------------------------------------------------------------------
 # Exercise B4: .setdefault() Practice
