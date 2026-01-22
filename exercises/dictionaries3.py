@@ -72,6 +72,20 @@
 
 # Write your code for Exercise B4 below:
 
+# purchases = [("Alice", "apple"), ("Bob", "banana"), ("Alice", "orange"),
+#              ("Charlie", "apple"), ("Bob", "apple")]
+
+# my_dic = {}
+# for person, fruit in purchases:
+#     # if person not in my_dic:
+#     #     my_dic[person] = [fruit]
+#     # else:
+#     #     my_dic[person].append(fruit)
+
+#     my_dic.setdefault(person, []).append(fruit)
+
+
+# print(my_dic)
 
 # ----------------------------------------------------------------------
 # Exercise B5: Combining with .get()
