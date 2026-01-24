@@ -358,3 +358,303 @@
 # print(calculate("subtract", 10, 5))
 # print(calculate("multiply", 10, 5))
 # print(calculate("divide", 10, 5))
+
+# ============================================================================
+# FUNCTIONS REINFORCEMENT EXERCISES (FR1-FR15)
+# ============================================================================
+# Focus: Functions chapter concepts where you needed help
+# - Using map() and filter() correctly
+# - Passing functions as arguments
+# - Returning functions
+# - Storing functions in dictionaries
+# - Lambda functions (bonus - related to map/filter)
+# - Reading instructions carefully
+# ============================================================================
+
+# ----------------------------------------------------------------------
+# Exercise FR1: Basic map() Pattern
+# 1. Create a function called add_ten that takes a number and returns number + 10
+# 2. Create a list: nums = [5, 15, 25, 35]
+# 3. Use map() to apply add_ten to all numbers
+# 4. Convert to list and print
+#
+# Expected: [15, 25, 35, 45]
+
+# Write your code for Exercise FR1 below:
+
+# def add_ten(number):
+#     return number+10
+
+# nums = [5, 15, 25, 35]
+# plus_ten = list(map(add_ten, nums))
+# print(plus_ten)
+
+# ----------------------------------------------------------------------
+# Exercise FR2: Basic filter() Pattern
+# 1. Create a function called is_positive that takes a number and returns True if > 0
+# 2. Create a list: nums = [-5, 3, -2, 8, -1, 10]
+# 3. Use filter() to get only positive numbers
+# 4. Convert to list and print
+#
+# Expected: [3, 8, 10]
+
+# Write your code for Exercise FR2 below:
+
+# def is_positive(number):
+#     return True if number > 0 else False
+
+
+# nums = [-5, 3, -2, 8, -1, 10]
+# only_positive = list(filter(is_positive, nums))
+# print(only_positive)
+
+# ----------------------------------------------------------------------
+# Exercise FR3: map() with Strings
+# 1. Create a function called get_length that takes a string and returns its length
+# 2. Create a list: words = ["hi", "hello", "hey", "goodbye"]
+# 3. Use map() to get the length of each word
+# 4. Convert to list and print
+#
+# Expected: [2, 5, 3, 7]
+
+# Write your code for Exercise FR3 below:
+
+# def get_length(string):
+#     return len(string)
+
+
+# words = ["hi", "hello", "hey", "goodbye"]
+# length_words = list(map(len, words))
+# print(length_words)
+
+# ----------------------------------------------------------------------
+# Exercise FR4: filter() with Strings
+# 1. Create a function called starts_with_h that takes a string
+#    and returns True if it starts with 'h'
+# 2. Create a list: words = ["hello", "world", "hi", "python", "hey"]
+# 3. Use filter() to get only words starting with 'h'
+# 4. Convert to list and print
+#
+# Expected: ['hello', 'hi', 'hey']
+
+# Write your code for Exercise FR4 below:
+
+# def starts_with_h(string):
+#     return True if string[0] == "h" else False
+
+
+# words = ["hello", "world", "hi", "python", "hey"]
+# only_h = list(filter(starts_with_h, words))
+# print(only_h)
+
+# ----------------------------------------------------------------------
+# Exercise FR5: Passing a Function as Argument
+# 1. Create a function called square that takes x and returns x ** 2
+# 2. Create a function called cube that takes x and returns x ** 3
+# 3. Create a function called apply_operation that takes:
+#    - operation (a function)
+#    - number (a number)
+#    It should call operation on number and return the result
+# 4. Test: print(apply_operation(square, 5))
+# 5. Test: print(apply_operation(cube, 3))
+#
+# Expected:
+# 25
+# 27
+
+# Write your code for Exercise FR5 below:
+
+# def square(number):
+#     return number**2
+
+
+# def cube(number):
+#     return number**3
+
+# def apply_operation(operation, number):
+#     return operation(number)
+
+# print(apply_operation(square, 5))
+# print(apply_operation(cube, 3))
+
+# ----------------------------------------------------------------------
+# Exercise FR6: Returning a Function
+# 1. Create a function called make_multiplier that takes a number n
+# 2. Inside it, create a function called multiplier that takes x and returns x * n
+# 3. Return the multiplier function
+# 4. Call: times_five = make_multiplier(5)
+# 5. Call: print(times_five(10))
+# 6. Call: times_three = make_multiplier(3)
+# 7. Call: print(times_three(10))
+#
+# Expected:
+# 50
+# 30
+
+# Write your code for Exercise FR6 below:
+
+# def make_multiplier(n):
+#     def multiplier(x):
+#         return x*n
+#     return multiplier
+
+
+# times_five = make_multiplier(5)
+# print(times_five(10))
+
+# times_three = make_multiplier(3)
+# print(times_three(10))
+
+# ----------------------------------------------------------------------
+# Exercise FR7: Function with Multiple Default Parameters
+# 1. Create a function called create_user that takes:
+#    - name (required)
+#    - age (default: 18)
+#    - country (default: "USA")
+# 2. It should return a string: "name, age, from country"
+# 3. Test with: create_user("Alice")
+# 4. Test with: create_user("Bob", 25)
+# 5. Test with: create_user("Charlie", 30, "Canada")
+# 6. Print all three results
+#
+# Expected:
+# Alice, 18, from USA
+# Bob, 25, from USA
+# Charlie, 30, from Canada
+
+# Write your code for Exercise FR7 below:
+
+
+# ----------------------------------------------------------------------
+# Exercise FR8: Combining map() and filter()
+# 1. Create a function called is_even that returns True if number is even
+# 2. Create a function called square that returns number squared
+# 3. Create a list: numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+# 4. First, use filter() to get only even numbers
+# 5. Then, use map() to square those even numbers
+# 6. Convert to list and print
+#
+# Expected: [4, 16, 36, 64]
+# (2²=4, 4²=16, 6²=36, 8²=64)
+
+# Write your code for Exercise FR8 below:
+
+
+# ----------------------------------------------------------------------
+# Exercise FR9: Function that Returns Multiple Functions
+# 1. Create a function called get_math_operations that takes no parameters
+# 2. Inside, define three functions:
+#    - add(a, b) returns a + b
+#    - subtract(a, b) returns a - b
+#    - multiply(a, b) returns a * b
+# 3. Return all three functions as a tuple
+# 4. Call: add_func, sub_func, mul_func = get_math_operations()
+# 5. Test each function and print results
+#
+# Expected:
+# 15  (from add_func(10, 5))
+# 5   (from sub_func(10, 5))
+# 50  (from mul_func(10, 5))
+
+# Write your code for Exercise FR9 below:
+
+
+# ----------------------------------------------------------------------
+# Exercise FR10: Using Lambda with map()
+# 1. Create a list: numbers = [1, 2, 3, 4, 5]
+# 2. Use map() with a lambda function to add 5 to each number
+#    Syntax: lambda x: x + 5
+# 3. Convert to list and print
+#
+# Expected: [6, 7, 8, 9, 10]
+#
+# Lambda is an anonymous function - you don't need to define it separately!
+
+# Write your code for Exercise FR10 below:
+
+
+# ----------------------------------------------------------------------
+# Exercise FR11: Using Lambda with filter()
+# 1. Create a list: numbers = [10, 15, 20, 25, 30, 35, 40]
+# 2. Use filter() with a lambda function to get numbers > 25
+# 3. Convert to list and print
+#
+# Expected: [30, 35, 40]
+
+# Write your code for Exercise FR11 below:
+
+
+# ----------------------------------------------------------------------
+# Exercise FR12: Function that Modifies Behavior Based on Parameter
+# 1. Create a function called create_greeting that takes a style parameter
+#    - If style is "formal", return a function that says "Good day, {name}"
+#    - If style is "casual", return a function that says "Hey {name}!"
+# 2. Test: formal_greet = create_greeting("formal")
+# 3. Test: casual_greet = create_greeting("casual")
+# 4. Print: formal_greet("Alice")
+# 5. Print: casual_greet("Bob")
+#
+# Expected:
+# Good day, Alice
+# Hey Bob!
+
+# Write your code for Exercise FR12 below:
+
+
+# ----------------------------------------------------------------------
+# Exercise FR13: Using all() with a Custom Function
+# 1. Create a function called is_passing that takes a score and returns True if >= 60
+# 2. Create a list: scores = [75, 82, 90, 68]
+# 3. Use all() with a generator expression to check if all scores are passing
+#    Hint: all(is_passing(score) for score in scores)
+# 4. Print the result
+# 5. Try with: scores2 = [75, 55, 90, 68]
+# 6. Print that result
+#
+# Expected:
+# True
+# False
+
+# Write your code for Exercise FR13 below:
+
+
+# ----------------------------------------------------------------------
+# Exercise FR14: Using any() with a Custom Function
+# 1. Create a function called is_excellent that takes a score and returns True if >= 90
+# 2. Create a list: scores = [75, 82, 85, 68]
+# 3. Use any() to check if any score is excellent
+# 4. Print the result
+# 5. Try with: scores2 = [75, 92, 85, 68]
+# 6. Print that result
+#
+# Expected:
+# False
+# True
+
+# Write your code for Exercise FR14 below:
+
+
+# ----------------------------------------------------------------------
+# Exercise FR15: Comprehensive Function Challenge
+# 1. Create a function called process_numbers that takes:
+#    - numbers (a list)
+#    - operation (a function)
+#    - filter_func (a function, default: None)
+# 2. If filter_func is provided, first filter the numbers
+# 3. Then apply operation to the (filtered) numbers using map()
+# 4. Return the result as a list
+# 5. Test with:
+#    - process_numbers([1,2,3,4,5], lambda x: x*2)
+#    - process_numbers([1,2,3,4,5], lambda x: x*2, lambda x: x > 2)
+# 6. Print both results
+#
+# Expected:
+# [2, 4, 6, 8, 10]  (all doubled)
+# [6, 8, 10]  (only >2, then doubled: 3*2=6, 4*2=8, 5*2=10)
+
+# Write your code for Exercise FR15 below:
+
+
+# ============================================================================
+# END OF FUNCTIONS REINFORCEMENT EXERCISES
+# ============================================================================
