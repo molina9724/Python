@@ -126,3 +126,131 @@
 
 # print(add_item("Apple"))
 # print(add_item("Banana"))
+
+# ----------------------------------------------------------------------
+# Exercise AR7: The "Kitchen Sink" (Mixing All Types)
+# 1. Create a function called `super_printer` that takes:
+#    - `title` (positional)
+#    - `*args` (arbitrary positional)
+#    - `**kwargs` (arbitrary keyword)
+# 2. Print the title.
+# 3. Print "Items:" followed by the args tuple.
+# 4. Print "Settings:" followed by the kwargs dictionary.
+# 5. Test it with: super_printer("My Data", 1, 2, 3, color="blue", debug=True)
+
+# Write your code for Exercise AR7 below:
+
+# def super_printer(title, *args, **kwargs):
+#     print(f"{title}")
+#     for item in args:
+#         print(f"Items: {item}")
+#     for key, value in kwargs.items():
+#         print(f"Settings: {key} - {value}")
+
+
+# super_printer("My Data", 1, 2, 3, color="blue", debug=True)
+
+# ----------------------------------------------------------------------
+# Exercise AR8: The String Joiner (*args)
+# 1. Create a function called `join_words` that takes:
+#    - `separator` (positional)
+#    - `*words` (arbitrary arguments)
+# 2. Use the string .join() method to join all words using the separator.
+#    Hint: separator.join(words)
+# 3. Return the result.
+# 4. Test: print(join_words("-", "Python", "is", "cool")) -> "Python-is-cool"
+# 5. Test: print(join_words(" ", "Hello", "World")) -> "Hello World"
+
+# Write your code for Exercise AR8 below:
+
+# def join_words(separator, *words):
+#     joined_words = separator.join(words)
+#     return joined_words
+
+
+# print(join_words(" - ", "Python", "is", "cool"))
+# print(join_words(" ", "Hello", "World"))
+
+# ----------------------------------------------------------------------
+# Exercise AR9: Dictionary Merging (Unpacking Trick)
+# 1. You have two dictionaries:
+#    default_settings = {"theme": "light", "notifications": True}
+#    user_overrides = {"theme": "dark"}
+# 2. Create a new dictionary called `final_config`.
+# 3. Use the unpacking operator `**` inside the curly braces `{}` to merge them.
+#    Syntax hint: {**dict1, **dict2}
+#    (Note: dict2 wins if there are duplicate keys!)
+# 4. Print `final_config`.
+
+# Write your code for Exercise AR9 below:
+
+# default_settings = {"theme": "light", "notifications": True}
+# user_overrides = {"theme": "dark"}
+
+# final_config = {**default_settings, **user_overrides}
+# print(final_config)
+
+# ----------------------------------------------------------------------
+# Exercise AR10: The Wrapper (Passing Args Through)
+# 1. Create a function `math_op(a, b)` that returns a + b.
+# 2. Create a function `logger(func, *args)` that:
+#    - Prints "Running function..."
+#    - Calls `func` passing `*args` into it.
+#    - Returns the result.
+# 3. Test: print(logger(math_op, 10, 20))
+#    (This teaches you how to pass arguments *through* a middleman function)
+
+# Write your code for Exercise AR10 below:
+
+# def math_op(a, b):
+#     return a + b
+
+
+# def logger(func, *args):
+#     print("Running function... ")
+#     return (func(*args))
+
+
+# print(logger(math_op, 10, 20))
+
+# ----------------------------------------------------------------------
+# Exercise AR11: Kwargs Filtering
+# 1. Create a function `create_user(**kwargs)`
+# 2. Inside, check if the key "admin" is in kwargs.
+#    - If yes, and it's True, print "Creating Admin Account"
+#    - Otherwise, print "Creating Standard Account"
+# 3. Print the full user data (kwargs) at the end.
+# 4. Test: create_user(username="bob", admin=True)
+# 5. Test: create_user(username="alice", admin=False)
+# 6. Test: create_user(username="charlie")
+
+# Write your code for Exercise AR11 below:
+
+# def create_user(**kwargs):
+#     if kwargs.get("admin") == True:
+#         print("Creating Admin Account")
+#     else:
+#         print("Creating Standard Account")
+#     for key, value in kwargs.items():
+#         print(f"{key} - {value}")
+
+
+# create_user(username="bob", admin=True)
+# create_user(username="alice", admin=False)
+# create_user(username="charlie")
+
+# ----------------------------------------------------------------------
+# Exercise AR12: Unpacking in Loops
+# 1. Create a list of tuples, where each tuple is (name, age):
+#    people = [("Alice", 30), ("Bob", 25), ("Charlie", 35)]
+# 2. Write a for loop that unpacks these directly in the loop statement.
+#    Syntax: for name, age in people:
+# 3. Inside the loop, print "{name} is {age} years old."
+# (This is a very common form of unpacking!)
+
+# Write your code for Exercise AR12 below:
+
+# people = [("Alice", 30), ("Bob", 25), ("Charlie", 35)]
+
+# for name, age in people:
+#     print(f"{name} is {age} years old.")
