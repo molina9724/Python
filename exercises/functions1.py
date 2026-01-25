@@ -524,6 +524,13 @@
 
 # Write your code for Exercise FR7 below:
 
+# def create_user(name, age=18, country="USA"):
+#     return (f"{name}, {age}, from {country}")
+
+
+# print(create_user("Alice"))
+# print(create_user("Bob", 25))
+# print(create_user("Charlie", 30, "Canada"))
 
 # ----------------------------------------------------------------------
 # Exercise FR8: Combining map() and filter()
@@ -539,6 +546,19 @@
 
 # Write your code for Exercise FR8 below:
 
+# def is_even(number):
+#     return number % 2 == 0
+
+
+# def square(number):
+#     return number**2
+
+
+# numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+# even_numbers = filter(is_even, numbers)
+# square_numbers = map(square, even_numbers)
+# final_list = list(square_numbers)
+# print(final_list)
 
 # ----------------------------------------------------------------------
 # Exercise FR9: Function that Returns Multiple Functions
@@ -558,6 +578,22 @@
 
 # Write your code for Exercise FR9 below:
 
+# def get_math_operations():
+#     def add(a, b):
+#         return a+b
+
+#     def subtract(a, b):
+#         return a-b
+
+#     def multiply(a, b):
+#         return a*b
+#     return add, subtract, multiply
+
+
+# add_func, sub_func, mul_func = get_math_operations()
+# print(add_func(5, 5))
+# print(sub_func(5, 5))
+# print(mul_func(5, 5))
 
 # ----------------------------------------------------------------------
 # Exercise FR10: Using Lambda with map()
@@ -572,6 +608,10 @@
 
 # Write your code for Exercise FR10 below:
 
+# numbers = [1, 2, 3, 4, 5]
+# add_five = map(lambda x: x+5, numbers)
+# my_list = list(add_five)
+# print(my_list)
 
 # ----------------------------------------------------------------------
 # Exercise FR11: Using Lambda with filter()
@@ -583,6 +623,9 @@
 
 # Write your code for Exercise FR11 below:
 
+# numbers = [10, 15, 20, 25, 30, 35, 40]
+# my_list = list(filter(lambda x: x > 25, numbers))
+# print(my_list)
 
 # ----------------------------------------------------------------------
 # Exercise FR12: Function that Modifies Behavior Based on Parameter
@@ -600,6 +643,18 @@
 
 # Write your code for Exercise FR12 below:
 
+# def create_greeting(style):
+#     if style == "formal":
+#         return lambda name: f"Good day, {name}"
+#     else:
+#         return lambda name: f"Hey {name}!"
+
+
+# formal_greet = create_greeting("formal")
+# casual_greet = create_greeting("casual")
+
+# print(formal_greet("Alice"))
+# print(casual_greet("Bob"))
 
 # ----------------------------------------------------------------------
 # Exercise FR13: Using all() with a Custom Function
@@ -617,6 +672,17 @@
 
 # Write your code for Exercise FR13 below:
 
+# def is_passing(score):
+#     return score >= 60
+
+
+# scores = [75, 82, 90, 68]
+# result = all(is_passing(score) for score in scores)
+# print(result)
+
+# scores2 = [75, 55, 90, 68]
+# result2 = all(is_passing(score) for score in scores2)
+# print(result2)
 
 # ----------------------------------------------------------------------
 # Exercise FR14: Using any() with a Custom Function
@@ -633,6 +699,17 @@
 
 # Write your code for Exercise FR14 below:
 
+# def is_excellent(score):
+#     return score >= 90
+
+
+# scores = [75, 82, 85, 68]
+# results = any(is_excellent(score) for score in scores)
+# print(results)
+
+# scores2 = [75, 92, 85, 68]
+# results2 = any(is_excellent(score) for score in scores2)
+# print(results2)
 
 # ----------------------------------------------------------------------
 # Exercise FR15: Comprehensive Function Challenge
@@ -654,7 +731,14 @@
 
 # Write your code for Exercise FR15 below:
 
+def process_numbers(numbers, operation, filter_func=None):
+    if filter_func is not None:
+        numbers = filter(filter_func, numbers)
+    return list(map(operation, numbers))
 
-# ============================================================================
-# END OF FUNCTIONS REINFORCEMENT EXERCISES
-# ============================================================================
+
+number1 = process_numbers([1, 2, 3, 4, 5], lambda x: x*2)
+print(number1)
+
+number2 = process_numbers([1, 2, 3, 4, 5], lambda x: x*2, lambda x: x > 2)
+print(number2)
