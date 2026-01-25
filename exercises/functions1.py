@@ -758,6 +758,19 @@
 
 # Write your code for Review 1 below:
 
+# names = ["Alice", "Bob", "Charlie", "Dave"]
+
+
+# def starts_with_z(name):
+#     return name[0] == "Z"
+
+
+# test = any(starts_with_z(name) for name in names)
+# print(test)
+
+# names.append("Zack")
+# test2 = any(starts_with_z(name) for name in names)
+# print(test2)
 
 # ----------------------------------------------------------------------
 # Review 2: Generator Expressions with all()
@@ -769,6 +782,10 @@
 
 # Write your code for Review 2 below:
 
+# temperatures = [98.6, 99.5, 102.0, 98.2]
+
+# under_hundred = all(temperature < 100 for temperature in temperatures)
+# print(under_hundred)
 
 # ----------------------------------------------------------------------
 # Review 3: The "Greedy" Lambda Fix
@@ -784,3 +801,15 @@
 #    print(tripler(10))  -> Should be 30
 
 # Write your code for Review 3 below:
+
+# def get_multiplier(kind):
+#     if kind == "double":
+#         return lambda x: x*2
+#     elif kind == "triple":
+#         return lambda x: x*3
+
+
+# doubler = get_multiplier("double")
+# print(doubler(10))
+# tripler = get_multiplier("triple")
+# print(tripler(10)
