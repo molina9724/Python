@@ -731,14 +731,56 @@
 
 # Write your code for Exercise FR15 below:
 
-def process_numbers(numbers, operation, filter_func=None):
-    if filter_func is not None:
-        numbers = filter(filter_func, numbers)
-    return list(map(operation, numbers))
+# def process_numbers(numbers, operation, filter_func=None):
+#     if filter_func is not None:
+#         numbers = filter(filter_func, numbers)
+#     return list(map(operation, numbers))
 
 
-number1 = process_numbers([1, 2, 3, 4, 5], lambda x: x*2)
-print(number1)
+# number1 = process_numbers([1, 2, 3, 4, 5], lambda x: x*2)
+# print(number1)
 
-number2 = process_numbers([1, 2, 3, 4, 5], lambda x: x*2, lambda x: x > 2)
-print(number2)
+# number2 = process_numbers([1, 2, 3, 4, 5], lambda x: x*2, lambda x: x > 2)
+# print(number2)
+
+# ----------------------------------------------------------------------
+# REVIEW SESSION: Generators & Lambdas
+# ----------------------------------------------------------------------
+
+# ----------------------------------------------------------------------
+# Review 1: Generator Expressions with any()
+# 1. Create a list of names: ["Alice", "Bob", "Charlie", "Dave"]
+# 2. Define a helper function `starts_with_z(name)` that returns True if name starts with "Z"
+# 3. Use any() with a generator expression to check if ANY name starts with "Z"
+#    (Do NOT use square brackets [])
+# 4. Print the result (Should be False)
+# 5. Add "Zack" to the list and run the check again (Should be True)
+
+# Write your code for Review 1 below:
+
+
+# ----------------------------------------------------------------------
+# Review 2: Generator Expressions with all()
+# 1. Create a list of temperatures: [98.6, 99.5, 102.0, 98.2]
+# 2. Use all() with a lambda inside the generator to check if ALL temps are < 100
+#    (Syntax: all(lambda_logic(t) for t in temps) ... wait, you don't need a separate function!)
+#    (Try writing the condition directly: t < 100 for t in temps)
+# 3. Print the result (Should be False)
+
+# Write your code for Review 2 below:
+
+
+# ----------------------------------------------------------------------
+# Review 3: The "Greedy" Lambda Fix
+# 1. Create a function `get_multiplier(kind)`
+# 2. If kind is "double", return a lambda that multiplies by 2
+# 3. If kind is "triple", return a lambda that multiplies by 3
+# 4. IMPORTANT: Do not try to put the if/else inside one lambda line.
+#    Use a standard if/else block to return the correct lambda.
+# 5. Test:
+#    doubler = get_multiplier("double")
+#    print(doubler(10))  -> Should be 20
+#    tripler = get_multiplier("triple")
+#    print(tripler(10))  -> Should be 30
+
+# Write your code for Review 3 below:
