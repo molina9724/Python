@@ -17,6 +17,12 @@
 
 # Write your code for Exercise L1 below:
 
+# def double(x): return x*2
+
+
+# print(double(5))
+# print(double(10))
+
 
 # ----------------------------------------------------------------------
 # Exercise L2: Lambda with Two Arguments
@@ -31,6 +37,9 @@
 
 # Write your code for Exercise L2 below:
 
+# add = lambda a,b:a+b
+# print(add(3,7))
+# print(add(10,20))
 
 # ----------------------------------------------------------------------
 # Exercise L3: Lambda with map()
@@ -42,44 +51,53 @@
 
 # Write your code for Exercise L3 below:
 
+# numbers = [1,2,3,4,5]
+# square = list(map(lambda x:x**2, numbers))
 
 # ----------------------------------------------------------------------
 # Exercise L4: Lambda with filter()
 # 1. Create a list: numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 # 2. Use filter() with a lambda to get only odd numbers
-#    Hint: x % 2 != 0
 # 3. Convert to list and print
 #
 # Expected: [1, 3, 5, 7, 9]
 
 # Write your code for Exercise L4 below:
 
+# numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# odd = list(filter(lambda x:x%2!=0, numbers))
+# print(odd)
+
 
 # ----------------------------------------------------------------------
-# Exercise L5: Sorting with Lambda - Sort by Second Element
+# Exercise L5: Sorting with Lambda - FIRST TIME
 # 1. Create a list: pairs = [(1, 'one'), (3, 'three'), (2, 'two'), (4, 'four')]
 # 2. Sort the list by the SECOND element (the string) using .sort() with key parameter
-#    Hint: key=lambda x: x[1]
 # 3. Print the sorted list
 #
+# Hint: pairs.sort(key=lambda x: x[1])
+#
 # Expected: [(4, 'four'), (1, 'one'), (3, 'three'), (2, 'two')]
-# (Alphabetically: 'four', 'one', 'three', 'two')
 
 # Write your code for Exercise L5 below:
 
+pairs = [(1, 'one'), (3, 'three'), (2, 'two'), (4, 'four')]
+pairs.sort(key=lambda x: x[1])
+print(pairs)
 
 # ----------------------------------------------------------------------
-# Exercise L6: Sorting with Lambda - Sort by Length
+# Exercise L6: Sorting with Lambda - Practice (NO HINT)
 # 1. Create a list: words = ["python", "is", "awesome", "fun"]
 # 2. Sort the list by word length using sorted() with key parameter
-#    Hint: key=lambda x: len(x)
 # 3. Print the sorted list
 #
 # Expected: ['is', 'fun', 'python', 'awesome']
-# (Lengths: 2, 3, 6, 7)
 
 # Write your code for Exercise L6 below:
 
+words = ["python", "is", "awesome", "fun"]
+words.sort(key=lambda x: len(x))
+print(words)
 
 # ----------------------------------------------------------------------
 # Exercise L7: Lambda vs Regular Function
@@ -96,10 +114,9 @@
 
 
 # ----------------------------------------------------------------------
-# Exercise L8: map() with Lambda - String Transformation
+# Exercise L8: map() with Lambda - Practice (NO HINT)
 # 1. Create a list: names = ["alice", "bob", "charlie"]
 # 2. Use map() with a lambda to capitalize each name
-#    Hint: lambda x: x.capitalize()
 # 3. Convert to list and print
 #
 # Expected: ['Alice', 'Bob', 'Charlie']
@@ -108,7 +125,7 @@
 
 
 # ----------------------------------------------------------------------
-# Exercise L9: filter() with Lambda - Multiple Conditions
+# Exercise L9: filter() with Lambda - Multiple Conditions (NO HINT)
 # 1. Create a list: numbers = [5, 12, 17, 8, 23, 14, 30]
 # 2. Use filter() with a lambda to get numbers that are:
 #    - Greater than 10 AND
@@ -121,7 +138,7 @@
 
 
 # ----------------------------------------------------------------------
-# Exercise L10: Sorting Dictionaries with Lambda
+# Exercise L10: Sorting Dictionaries with Lambda - FIRST TIME
 # 1. Create a list of dictionaries:
 #    students = [
 #        {"name": "Alice", "grade": 85},
@@ -129,8 +146,9 @@
 #        {"name": "Charlie", "grade": 78}
 #    ]
 # 2. Sort by grade (highest first) using sorted() with key and reverse parameters
-#    Hint: key=lambda x: x["grade"], reverse=True
 # 3. Print the sorted list
+#
+# Hint: sorted(students, key=lambda x: x["grade"], reverse=True)
 #
 # Expected: [{'name': 'Bob', 'grade': 92}, {'name': 'Alice', 'grade': 85},
 #            {'name': 'Charlie', 'grade': 78}]
@@ -139,7 +157,7 @@
 
 
 # ----------------------------------------------------------------------
-# Exercise L11: Lambda with Multiple Operations
+# Exercise L11: Lambda with Multiple Operations (NO HINT)
 # 1. Create a list: numbers = [1, 2, 3, 4, 5]
 # 2. Use map() with a lambda to:
 #    - Multiply each number by 2
@@ -147,32 +165,31 @@
 # 3. Convert to list and print
 #
 # Expected: [12, 14, 16, 18, 20]
-# (1*2+10=12, 2*2+10=14, etc.)
 
 # Write your code for Exercise L11 below:
 
 
 # ----------------------------------------------------------------------
-# Exercise L12: Combining map() and filter() with Lambdas
+# Exercise L12: Combining map() and filter() with Lambdas (NO HINT)
 # 1. Create a list: numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 # 2. First, use filter() with a lambda to get only even numbers
 # 3. Then, use map() with a lambda to square those numbers
 # 4. Convert to list and print
 #
 # Expected: [4, 16, 36, 64, 100]
-# (2²=4, 4²=16, 6²=36, 8²=64, 10²=100)
 
 # Write your code for Exercise L12 below:
 
 
 # ----------------------------------------------------------------------
-# Exercise L13: Lambda with Conditional Expression
+# Exercise L13: Lambda with Conditional Expression - FIRST TIME
 # 1. Create a list: numbers = [-5, 3, -2, 8, -1, 10]
 # 2. Use map() with a lambda that:
 #    - Returns the number if it's positive
 #    - Returns 0 if it's negative
-#    Hint: lambda x: x if x > 0 else 0
 # 3. Convert to list and print
+#
+# Hint: lambda x: x if x > 0 else 0
 #
 # Expected: [0, 3, 0, 8, 0, 10]
 
@@ -180,21 +197,21 @@
 
 
 # ----------------------------------------------------------------------
-# Exercise L14: Sorting with Multiple Keys
+# Exercise L14: Sorting with Multiple Keys - FIRST TIME
 # 1. Create a list of tuples:
 #    data = [("Alice", 25), ("Bob", 30), ("Charlie", 25), ("David", 30)]
 # 2. Sort by age first, then by name (both ascending)
-#    Hint: key=lambda x: (x[1], x[0])
 # 3. Print the sorted list
 #
+# Hint: key=lambda x: (x[1], x[0])
+#
 # Expected: [('Alice', 25), ('Charlie', 25), ('Bob', 30), ('David', 30)]
-# (Age 25s first, alphabetically; then age 30s, alphabetically)
 
 # Write your code for Exercise L14 below:
 
 
 # ----------------------------------------------------------------------
-# Exercise L15: Practical Lambda - Processing Data
+# Exercise L15: Practical Lambda - Processing Data (NO HINT)
 # 1. Create a list of dictionaries:
 #    products = [
 #        {"name": "apple", "price": 2.50, "quantity": 10},
@@ -214,29 +231,27 @@
 # ============================================================================
 # BONUS: reduce() Function (Optional - Advanced)
 # ============================================================================
-# Note: reduce() is in the functools module
-# from functools import reduce
 
 # ----------------------------------------------------------------------
-# Exercise L16 (BONUS): Using reduce() with Lambda
+# Exercise L16 (BONUS): Using reduce() with Lambda - FIRST TIME
 # 1. Import reduce from functools
 # 2. Create a list: numbers = [1, 2, 3, 4, 5]
 # 3. Use reduce() with a lambda to multiply all numbers together
-#    Hint: reduce(lambda x, y: x * y, numbers)
 # 4. Print the result
 #
+# Hint: from functools import reduce
+#       reduce(lambda x, y: x * y, numbers)
+#
 # Expected: 120
-# (1 * 2 * 3 * 4 * 5 = 120)
 
 # Write your code for Exercise L16 below:
 
 
 # ----------------------------------------------------------------------
-# Exercise L17 (BONUS): reduce() to Find Maximum
+# Exercise L17 (BONUS): reduce() to Find Maximum (NO HINT)
 # 1. Import reduce from functools
 # 2. Create a list: numbers = [3, 7, 2, 9, 1, 5]
 # 3. Use reduce() with a lambda to find the maximum number
-#    Hint: reduce(lambda x, y: x if x > y else y, numbers)
 # 4. Print the result
 #
 # Expected: 9
