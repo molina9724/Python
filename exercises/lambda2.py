@@ -140,6 +140,16 @@
 
 # Write your code for Exercise AL9 below:
 
+employees = [
+    {"name": "Alice", "salary": 50000, "department": "IT"},
+    {"name": "Bob", "salary": 60000, "department": "HR"},
+    {"name": "Charlie", "salary": 55000, "department": "IT"},
+    {"name": "David", "salary": 45000, "department": "HR"}
+]
+
+it_fifty = list(filter(lambda person: (
+    person["department"] == "IT" and person["salary"] > 50000), employees))
+print(it_fifty)
 
 # ----------------------------------------------------------------------
 # Exercise AL10: Reduce to Calculate Average
