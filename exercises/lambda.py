@@ -81,9 +81,9 @@
 
 # Write your code for Exercise L5 below:
 
-pairs = [(1, 'one'), (3, 'three'), (2, 'two'), (4, 'four')]
-pairs.sort(key=lambda x: x[1])
-print(pairs)
+# pairs = [(1, 'one'), (3, 'three'), (2, 'two'), (4, 'four')]
+# pairs.sort(key=lambda x: x[1])
+# print(pairs)
 
 # ----------------------------------------------------------------------
 # Exercise L6: Sorting with Lambda - Practice (NO HINT)
@@ -95,9 +95,9 @@ print(pairs)
 
 # Write your code for Exercise L6 below:
 
-words = ["python", "is", "awesome", "fun"]
-words.sort(key=lambda x: len(x))
-print(words)
+# words = ["python", "is", "awesome", "fun"]
+# words.sort(key=lambda x: len(x))
+# print(words)
 
 # ----------------------------------------------------------------------
 # Exercise L7: Lambda vs Regular Function
@@ -112,6 +112,13 @@ print(words)
 
 # Write your code for Exercise L7 below:
 
+# def multiply(x,y):
+#     return x*y
+
+# multiply_lambda = lambda x,y:x*y
+
+# print(multiply(3,4))
+# print(multiply_lambda(3,4))
 
 # ----------------------------------------------------------------------
 # Exercise L8: map() with Lambda - Practice (NO HINT)
@@ -123,6 +130,10 @@ print(words)
 
 # Write your code for Exercise L8 below:
 
+# names = ["alice", "bob", "charlie"]
+# big_names = list(map(lambda x:x.capitalize() , names))
+
+# print(big_names)
 
 # ----------------------------------------------------------------------
 # Exercise L9: filter() with Lambda - Multiple Conditions (NO HINT)
@@ -135,6 +146,12 @@ print(words)
 # Expected: [12, 14, 30]
 
 # Write your code for Exercise L9 below:
+
+# numbers = [5, 12, 17, 8, 23, 14, 30]
+# other_list = list(filter(lambda x: x > 10 and x %
+#                   2 == 0, numbers))
+
+# print(other_list)
 
 
 # ----------------------------------------------------------------------
@@ -155,6 +172,14 @@ print(words)
 
 # Write your code for Exercise L10 below:
 
+# students = [
+#     {"name": "Alice", "grade": 85},
+#     {"name": "Bob", "grade": 92},
+#     {"name": "Charlie", "grade": 78}
+# ]
+
+# sorted_students = sorted(students, key=lambda x: x["grade"], reverse=True)
+# print(sorted_students)
 
 # ----------------------------------------------------------------------
 # Exercise L11: Lambda with Multiple Operations (NO HINT)
@@ -168,6 +193,9 @@ print(words)
 
 # Write your code for Exercise L11 below:
 
+# numbers = [1, 2, 3, 4, 5]
+# another_list = list(map(lambda x: x*2+10, numbers))
+# print(another_list)
 
 # ----------------------------------------------------------------------
 # Exercise L12: Combining map() and filter() with Lambdas (NO HINT)
@@ -180,6 +208,11 @@ print(words)
 
 # Write your code for Exercise L12 below:
 
+# numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# even_numbers = filter(lambda x: x % 2 == 0, numbers)
+# squared = list(map(lambda x: x**2, even_numbers))
+
+# print(squared)
 
 # ----------------------------------------------------------------------
 # Exercise L13: Lambda with Conditional Expression - FIRST TIME
@@ -195,6 +228,9 @@ print(words)
 
 # Write your code for Exercise L13 below:
 
+# numbers = [-5, 3, -2, 8, -1, 10]
+# bigger_zero = list(map(lambda x: x if x > 0 else 0, numbers))
+# print(bigger_zero)
 
 # ----------------------------------------------------------------------
 # Exercise L14: Sorting with Multiple Keys - FIRST TIME
@@ -209,6 +245,10 @@ print(words)
 
 # Write your code for Exercise L14 below:
 
+# data = [("Alice", 25), ("Bob", 30), ("Charlie", 25), ("David", 30)]
+# data.sort(key=lambda x: (x[1], x[0]))
+
+# print(data)
 
 # ----------------------------------------------------------------------
 # Exercise L15: Practical Lambda - Processing Data (NO HINT)
@@ -227,6 +267,17 @@ print(words)
 
 # Write your code for Exercise L15 below:
 
+# products = [
+#     {"name": "apple", "price": 2.50, "quantity": 10},
+#     {"name": "banana", "price": 1.00, "quantity": 5},
+#     {"name": "orange", "price": 3.00, "quantity": 0},
+#     {"name": "grape", "price": 4.00, "quantity": 8}
+# ]
+
+# only_stock = list(filter(lambda x: x["quantity"] > 0, products))
+# only_fruit = list(map(lambda x: x["name"], only_stock))
+
+# print(only_fruit)
 
 # ============================================================================
 # BONUS: reduce() Function (Optional - Advanced)
