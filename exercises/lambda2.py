@@ -91,6 +91,8 @@
 
 # Write your code for Exercise AL6 below:
 
+# inventory = {"apple": 50, "banana": 0, "orange": 30, "grape": 0, "mango": 20}
+# bigger_than_zero = dict(filter(lambda x: x[1] > 0, inventory.items()))
 
 # ----------------------------------------------------------------------
 # Exercise AL7: Map with Index - Enumerate
@@ -102,6 +104,9 @@
 
 # Write your code for Exercise AL7 below:
 
+# words = ["python", "is", "awesome"]
+# my_list = list(map(lambda x: x, enumerate(words)))
+# print(my_list)
 
 # ----------------------------------------------------------------------
 # Exercise AL8: Nested Lambda - Transform Nested Data
@@ -114,6 +119,10 @@
 
 # Write your code for Exercise AL8 below:
 
+# matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+# double = list(
+#     map(lambda lists: list(map(lambda element: element*2, lists)), matrix))
+# print(double)
 
 # ----------------------------------------------------------------------
 # Exercise AL9: Filter with Complex Dictionary Condition
