@@ -314,10 +314,10 @@
 
 # Write your code for Exercise L17 below:
 
-from functools import reduce
-numbers = [3, 7, 2, 9, 1, 5]
-reduced = reduce(lambda x, y: max(x, y), numbers)
-print(reduced)
+# from functools import reduce
+# numbers = [3, 7, 2, 9, 1, 5]
+# reduced = reduce(lambda x, y: max(x, y), numbers)
+# print(reduced)
 
 # ============================================================================
 # END OF LAMBDA FUNCTIONS EXERCISES
