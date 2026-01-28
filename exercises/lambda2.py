@@ -217,6 +217,10 @@
 
 # Write your code for Exercise AL13 below:
 
+# data = [1, None, 3, None, 5, 0, None, 7]
+# no_none = list(filter(lambda x: x is not None, data))
+# print(no_none)
+
 
 # ----------------------------------------------------------------------
 # Exercise AL14: Map with Multiple Lists using zip()
@@ -231,6 +235,12 @@
 
 # Write your code for Exercise AL14 below:
 
+# a = [1, 2, 3]
+# b = [4, 5, 6]
+# c = [7, 8, 9]
+
+# abc = list(map(sum, zip(a, b, c)))
+# print(abc)
 
 # ----------------------------------------------------------------------
 # Exercise AL15: Complex Sorting - Custom Logic
@@ -254,6 +264,11 @@
 
 # Write your code for Exercise AL16 below:
 
+# from functools import reduce
+# words = ["Python", "is", "really", "awesome"]
+
+# concatenated = reduce(lambda x, y: f"{x} {y}", words)
+# print(concatenated)
 
 # ----------------------------------------------------------------------
 # Exercise AL17: Filter and Map Chain - Real World
@@ -272,17 +287,33 @@
 
 # Write your code for Exercise AL17 below:
 
+# transactions = [
+#     {"id": 1, "amount": 100, "status": "completed"},
+#     {"id": 2, "amount": 50, "status": "pending"},
+#     {"id": 3, "amount": 200, "status": "completed"},
+#     {"id": 4, "amount": 75, "status": "failed"}
+# ]
+
+# completed_trans = list(
+#     filter(lambda transaction: transaction["status"] == "completed", transactions))
+# print(completed_trans)
+
+# amount = list(map(lambda x: x["amount"], completed_trans))
+# print(amount)
 
 # ----------------------------------------------------------------------
-# Exercise AL18: Sort with Custom Comparison
-# 1. Create a list: words = ["apple", "Banana", "cherry", "Date"]
-# 2. Sort case-insensitively (all lowercase for comparison)
+# Exercise AL18: Sort with Custom Comparison (Fixed)
+# 1. Create a list: words = ["banana", "Cherry", "apple", "Date"]
+# 2. Sort it so it ignores case (treats "C" like "c").
 # 3. Print the sorted list
 #
-# Expected: ['apple', 'Banana', 'cherry', 'Date']
+# Expected: ['apple', 'banana', 'Cherry', 'Date']
 
 # Write your code for Exercise AL18 below:
 
+# words = ["banana", "Cherry", "apple", "Date"]
+# words.sort(key=str.lower)
+# print(words)
 
 # ----------------------------------------------------------------------
 # Exercise AL19: Reduce to Find Longest String
@@ -295,6 +326,10 @@
 
 # Write your code for Exercise AL19 below:
 
+# from functools import reduce
+# words = ["hi", "hello", "hey", "goodbye", "greetings"]
+
+# longest = reduce(lambda x,y:x if len(x)>len(y) else y, words)
 
 # ----------------------------------------------------------------------
 # Exercise AL20: Comprehensive Challenge
@@ -310,7 +345,7 @@
 # 4. Use map() to extract just their names
 # 5. Convert to list and print
 #
-# Expected: ['Alice', 'Bob', 'David']
+# Expected: ['Bob', 'David']
 
 # Write your code for Exercise AL20 below:
 
@@ -318,3 +353,17 @@
 # ============================================================================
 # END OF ADVANCED LAMBDA PRACTICE
 # ============================================================================
+
+# students = [
+#     {"name": "Alice", "grades": [85, 90, 78]},
+#     {"name": "Bob", "grades": [92, 88, 95]},
+#     {"name": "Charlie", "grades": [70, 75, 72]},
+#     {"name": "David", "grades": [88, 85, 90]}
+# ]
+
+# grades = list(filter(lambda student: sum(
+#     student["grades"]) / len(student["grades"]) >= 85, students))
+# print(grades)
+
+# only_names = list(map(lambda student: student["name"], grades))
+# print(only_names)
