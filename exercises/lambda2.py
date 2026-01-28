@@ -140,16 +140,16 @@
 
 # Write your code for Exercise AL9 below:
 
-employees = [
-    {"name": "Alice", "salary": 50000, "department": "IT"},
-    {"name": "Bob", "salary": 60000, "department": "HR"},
-    {"name": "Charlie", "salary": 55000, "department": "IT"},
-    {"name": "David", "salary": 45000, "department": "HR"}
-]
+# employees = [
+#     {"name": "Alice", "salary": 50000, "department": "IT"},
+#     {"name": "Bob", "salary": 60000, "department": "HR"},
+#     {"name": "Charlie", "salary": 55000, "department": "IT"},
+#     {"name": "David", "salary": 45000, "department": "HR"}
+# ]
 
-it_fifty = list(filter(lambda person: (
-    person["department"] == "IT" and person["salary"] > 50000), employees))
-print(it_fifty)
+# it_fifty = list(filter(lambda person: (
+#     person["department"] == "IT" and person["salary"] > 50000), employees))
+# print(it_fifty)
 
 # ----------------------------------------------------------------------
 # Exercise AL10: Reduce to Calculate Average
@@ -163,6 +163,11 @@ print(it_fifty)
 
 # Write your code for Exercise AL10 below:
 
+# from functools import reduce
+# numbers = [10, 20, 30, 40, 50]
+# result = reduce(lambda x, y: (x+y), numbers)
+# total = result/len(numbers)
+# print(total)
 
 # ----------------------------------------------------------------------
 # Exercise AL11: Lambda with zip()
@@ -176,6 +181,11 @@ print(it_fifty)
 
 # Write your code for Exercise AL11 below:
 
+# names = ["Alice", "Bob", "Charlie"]
+# scores = [85, 92, 78]
+
+# task = list(map(lambda x: f"{x[0]}: {x[1]}", zip(names, scores)))
+# print(task)
 
 # ----------------------------------------------------------------------
 # Exercise AL12: Sort Dictionary by Value Length
@@ -188,6 +198,14 @@ print(it_fifty)
 
 # Write your code for Exercise AL12 below:
 
+# data = {"a": "apple", "b": "banana", "c": "cat", "d": "dog"}
+
+# data_list = list(data.items())
+
+# data_list.sort(key=lambda x: len(x[1]))
+
+# my_dict = dict(data_list)
+# print(my_dict)
 
 # ----------------------------------------------------------------------
 # Exercise AL13: Filter None Values
