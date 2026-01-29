@@ -101,23 +101,23 @@
 
 # Write your code for Exercise R5 below:
 
-def fibonacci(n):
-    if n <= 0:
-        print("N must be >1")
-    elif n == 1:
-        print(0)
-    else:
-        x = 0
-        y = 1
-        z = x+y
-        for i in range(3, n):
-            x = y
-            y = z
-            z = x+y
-        return z
+# def fibonacci(n):
+#     if n <= 0:
+#         print("N must be >1")
+#     elif n == 1:
+#         print(0)
+#     else:
+#         x = 0
+#         y = 1
+#         z = x+y
+#         for i in range(3, n):
+#             x = y
+#             y = z
+#             z = x+y
+#         return z
 
 
-print(fibonacci(8))
+# print(fibonacci(8))
 
 
 # ----------------------------------------------------------------------
@@ -129,7 +129,6 @@ print(fibonacci(8))
 # Expected: 5
 
 # Write your code for Exercise R6 below:
-
 
 # ----------------------------------------------------------------------
 # Exercise R7: Sum of Digits
