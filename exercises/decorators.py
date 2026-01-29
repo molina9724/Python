@@ -21,6 +21,21 @@
 # Write your code below:
 
 
+def uppercase_decorator(func):
+    def wrapper():
+        result = func()
+        lower = result.upper()
+        return lower
+    return wrapper
+
+
+@uppercase_decorator
+def greet():
+    return "hello world"
+
+
+print(greet())
+
 # ----------------------------------------------------------------------
 # Exercise D2: Using @ Syntax
 # Take your uppercase_decorator from D1
