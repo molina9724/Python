@@ -21,6 +21,15 @@
 
 # Write your code for Exercise R1 below:
 
+# def countdown(n):
+#     if n == 0:
+#         print("Done")
+#     else:
+#         print(n)
+#         return countdown(n-1)
+
+
+# countdown(5)
 
 # ----------------------------------------------------------------------
 # Exercise R2: Sum of Numbers
@@ -32,6 +41,14 @@
 
 # Write your code for Exercise R2 below:
 
+# def sum_to_n(n):
+#     if n == 0:
+#         return 0
+#     else:
+#         return n+sum_to_n(n-1)
+
+
+# print(sum_to_n(5))
 
 # ----------------------------------------------------------------------
 # Exercise R3: Factorial
@@ -43,6 +60,14 @@
 
 # Write your code for Exercise R3 below:
 
+# def factorial(n):
+#     if n == 0 or n == 1:
+#         return 1
+#     else:
+#         return n*factorial(n-1)
+
+
+# print(factorial(5))
 
 # ----------------------------------------------------------------------
 # Exercise R4: Power Function
@@ -54,6 +79,16 @@
 
 # Write your code for Exercise R4 below:
 
+# def power(base, exponent):
+#     if base == 0 and exponent != 0:
+#         return 0
+#     elif exponent == 0:
+#         return 1
+#     else:
+#         return base*power(base, exponent-1)
+
+
+# print(power(0, 4))
 
 # ----------------------------------------------------------------------
 # Exercise R5: Fibonacci Sequence
@@ -65,6 +100,24 @@
 # Expected: 8
 
 # Write your code for Exercise R5 below:
+
+def fibonacci(n):
+    if n <= 0:
+        print("N must be >1")
+    elif n == 1:
+        print(0)
+    else:
+        x = 0
+        y = 1
+        z = x+y
+        for i in range(3, n):
+            x = y
+            y = z
+            z = x+y
+        return z
+
+
+print(fibonacci(8))
 
 
 # ----------------------------------------------------------------------
