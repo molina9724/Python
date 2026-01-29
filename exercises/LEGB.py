@@ -347,13 +347,13 @@
 # Your explanation: ???
 
 # Uncomment to test:
-funcs = []
-for i in range(3):
-    def func(x=i):
-        print(x)
-    funcs.append(func)
-for f in funcs:
-    f()
+# funcs = []
+# for i in range(3):
+#     def func(x=i):
+#         print(x)
+#     funcs.append(func)
+# for f in funcs:
+#     f()
 
 
 # ----------------------------------------------------------------------
@@ -378,7 +378,7 @@ for f in funcs:
 #
 # level1()
 
-# Your prediction: ???
+# Your prediction: level2
 
 # Uncomment to test:
 # x = "global"
