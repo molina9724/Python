@@ -21,20 +21,20 @@
 # Write your code below:
 
 
-def uppercase_decorator(func):
-    def wrapper():
-        result = func()
-        lower = result.upper()
-        return lower
-    return wrapper
+# def uppercase_decorator(func):
+#     def wrapper():
+#         result = func()
+#         lower = result.upper()
+#         return lower
+#     return wrapper
 
 
-@uppercase_decorator
-def greet():
-    return "hello world"
+# @uppercase_decorator
+# def greet():
+#     return "hello world"
 
 
-print(greet())
+# print(greet())
 
 # ----------------------------------------------------------------------
 # Exercise D2: Using @ Syntax
@@ -47,6 +47,20 @@ print(greet())
 
 # Write your code below:
 
+# def uppercase_decorator(func):
+#     def wrapper():
+#         result = func()
+#         lower = result.upper()
+#         return lower
+#     return wrapper
+
+
+# @uppercase_decorator
+# def say_name():
+#     return "jhon doe"
+
+
+# print(say_name())
 
 # ----------------------------------------------------------------------
 # Exercise D3: Before and After
@@ -67,6 +81,20 @@ print(greet())
 
 # Write your code below:
 
+# def announce(func):
+#     def wrapper():
+#         print("Starting...")
+#         func()
+#         print("Finished")
+#     return wrapper
+
+
+# @announce
+# def do_work():
+#     print("Working...")
+
+
+# do_work()
 
 # ----------------------------------------------------------------------
 # Exercise D4: Decorator with Function Arguments
@@ -86,6 +114,20 @@ print(greet())
 
 # Write your code below:
 
+# def double_result(func):
+#     def wrapper(*args, **kwargs):
+#         total = func(*args, **kwargs)
+#         total *= 2
+#         return total
+#     return wrapper
+
+
+# @double_result
+# def add(a, b):
+#     return a+b
+
+
+# print(add(3, 4))
 
 # ----------------------------------------------------------------------
 # Exercise D5: Multiple Functions, One Decorator
@@ -102,6 +144,28 @@ print(greet())
 
 # Write your code below:
 
+# def add_stars(func):
+#     def wrapper(*args):
+#         split_word = func(*args).split()
+#         split_word.append(" ***")
+#         split_word.insert(0, "*** ")
+#         joined_word = " ".join(split_word)
+#         print(joined_word)
+#     return wrapper
+
+
+# @add_stars
+# def greet_name(name, lastname):
+#     return f"Hello, {name} {lastname}"
+
+
+# @add_stars
+# def farewell(name, lastname):
+#     return f"Goodbye, {name} {lastname}"
+
+
+# greet_name("Alice", "Estrada")
+# farewell("Bob", "Arteaga")
 
 # ----------------------------------------------------------------------
 # Exercise D6: Stacking Decorators - Order Matters
@@ -122,6 +186,29 @@ print(greet())
 
 # Write your code below:
 
+# def bold(func):
+#     def wrapper():
+#         text = func()
+#         bold_text = f"<b>{text}</b>"
+#         return bold_text
+#     return wrapper
+
+
+# def italic(func):
+#     def wrapper():
+#         text = func()
+#         bold_text = f"<i>{text}</i>"
+#         return (bold_text)
+#     return wrapper
+
+
+# @bold
+# @italic
+# def get_text():
+#     return "Hello"
+
+
+# print(get_text())
 
 # ----------------------------------------------------------------------
 # Exercise D7: Timing Decorator
@@ -143,6 +230,7 @@ print(greet())
 # Function took 1.00 seconds
 
 # Write your code below:
+
 
 
 # ----------------------------------------------------------------------
