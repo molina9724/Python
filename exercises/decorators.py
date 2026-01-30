@@ -451,6 +451,29 @@
 
 # Write your code below:
 
+# def cache(func):
+#     cache_dict = {}
+
+#     def decorator(n):
+#         if n in cache_dict:
+#             print(f"Using cache... {cache_dict[n]}")
+#             return cache_dict[n]
+#         else:
+#             cache_dict[n] = func(n)
+#             print(cache_dict[n])
+#             return cache_dict[n]
+#     return decorator
+
+
+# @cache
+# def expensive_function(n):
+#     print("Calculating...")
+#     return n*n
+
+
+# expensive_function(5)
+# expensive_function(5)
+# expensive_function(3)
 
 # ----------------------------------------------------------------------
 # Exercise D14: Debug Decorator
@@ -475,6 +498,22 @@
 
 # Write your code below:
 
+# def debug(func):
+#     def wrapper(*args):
+#         print(f"Calling: {func.__name__}")
+#         print(f"Arguments: {args}")
+#         result = func(*args)
+#         print(f"Result: {result}")
+#         return result
+#     return wrapper
+
+
+# @debug
+# def add(a, b):
+#     return a + b
+
+
+# add(3, 5)
 
 # ----------------------------------------------------------------------
 # Exercise D15: Practical Application - Login Required
@@ -494,6 +533,24 @@
 
 # Write your code below:
 
+# def login_required(func):
+#     def wrapper(user):
+#         if user is None:
+#             print("Please login first!")
+#             return None
+#         else:
+#             print(func(user))
+#             return func(user)
+#     return wrapper
+
+
+# @login_required
+# def view_profile(user):
+#     return f"Profile of {user}"
+
+
+# view_profile("Alice")
+# view_profile(None)
 
 # ============================================================================
 # BONUS CHALLENGES (Optional)
