@@ -231,7 +231,26 @@
 
 # Write your code below:
 
+# import time
 
+
+# def timer(func):
+#     def wrapper():
+#         start = time.time()
+#         result = func()
+#         end = time.time()
+#         print(end-start)
+#         return result
+#     return wrapper
+
+
+# @timer
+# def slow_function():
+#     time.sleep(1)
+#     return "Done"
+
+
+# print(slow_function())
 
 # ----------------------------------------------------------------------
 # Exercise D8: Validation Decorator
@@ -251,6 +270,24 @@
 
 # Write your code below:
 
+# def positive_only(func):
+#     def wrapper(*args):
+#         if all(x >= 0 for x in args):
+#             return func(*args)
+#         else:
+#             print("Error: All arguments must be positive!")
+#     return wrapper
+
+
+# @positive_only
+# def multiply(a, b):
+#     return a*b
+
+
+# print(multiply(3, 4))
+# print(multiply(0, 4))
+# multiply(-5, 4)
+# multiply(5, -4)
 
 # ----------------------------------------------------------------------
 # Exercise D9: Call Counter Decorator
@@ -273,6 +310,27 @@
 # Write your code below:
 
 
+# def count_calls(func):
+#     number = 0
+
+#     def wrapper():
+#         nonlocal number
+#         number += 1
+#         print(f"Call #{number}")
+#         func()
+#     return wrapper
+
+
+# @count_calls
+# def say_hi():
+#     print("Hi!")
+
+
+# say_hi()
+# say_hi()
+# say_hi()
+
+
 # ----------------------------------------------------------------------
 # Exercise D10: Repeat Decorator
 # Create a decorator called repeat_twice that:
@@ -290,6 +348,19 @@
 
 # Write your code below:
 
+# def repeat_twice(func):
+#     def wrapper(*args, **kwargs):
+#         func(*args, **kwargs)
+#         func(*args, **kwargs)
+#     return wrapper
+
+
+# @repeat_twice
+# def greet(name):
+#     print(f"Hello, {name}!")
+
+
+# greet("Alice")
 
 # ----------------------------------------------------------------------
 # Exercise D11: Decorator with Arguments - Repeat N Times
@@ -310,6 +381,20 @@
 
 # Write your code below:
 
+# def repeat(n):
+#     def decorator(func):
+#         def wrapper():
+#             for i in range(n):
+#                 func()
+#         return wrapper
+#     return decorator
+
+
+# @repeat(3)
+# def say_hello():
+#     print("Hello!")
+
+# say_hello()
 
 # ----------------------------------------------------------------------
 # Exercise D12: Decorator with Arguments - Prefix
@@ -327,6 +412,21 @@
 
 # Write your code below:
 
+# def prefix(prefix):
+#     def decorator(func):
+#         def wrapper():
+#             full_name = prefix + func()
+#             return full_name
+#         return wrapper
+#     return decorator
+
+
+# @prefix("Mr. ")
+# def get_name():
+#     return "Smith"
+
+
+# print(get_name())
 
 # ----------------------------------------------------------------------
 # Exercise D13: Cache/Memoization Decorator
