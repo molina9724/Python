@@ -569,57 +569,58 @@
 
 # Write your code below:
 
-import time
+# import time
 
 
-def timer(func):
-    def wrapper(*args):
-        my_func = func
-        start = time.time()
-        result = my_func(*args)
-        end = time.time()
-        print(end-start)
-        return result
-    return wrapper
+# def timer(func):
+#     def wrapper(*args):
+#         my_func = func
+#         start = time.time()
+#         result = my_func(*args)
+#         end = time.time()
+#         print(end-start)
+#         return result
+#     return wrapper
 
 
-def count_calls(func):
-    number = 0
+# def count_calls(func):
+#     number = 0
 
-    def wrapper(*args):
-        nonlocal number
-        number += 1
-        print(f"Call #{number}")
-        result = func(*args)
-        return result
-    return wrapper
-
-
-def cache(func):
-    cache_dict = {}
-
-    def decorator(*args):
-        for element in args:
-            if element in cache_dict:
-                print(f"Using cache... {cache_dict[element]}")
-                cache_dict[element]
-            else:
-                cache_dict[element] = func(element)
-                print(cache_dict[element])
-                cache_dict[element]
-    return decorator
+#     def wrapper(*args):
+#         nonlocal number
+#         number += 1
+#         print(f"Call #{number}")
+#         return func(*args)
+#     return wrapper
 
 
-@cache
-@count_calls
-@timer
-def expensive_function(n):
-    print("Calculating...")
-    time.sleep(1)
-    return n * n
+# def cache(func):
+#     cache_dict = {}
+
+#     def decorator(*args):
+#         if args in cache_dict:
+#             print("Caching...")
+#             return cache_dict[args]
+#         else:
+#             result = func(*args)
+#             cache_dict[args] = result
+#             return result
+#     return decorator
 
 
-expensive_function(5, 10)
+# @cache
+# @count_calls
+# @timer
+# def expensive_function(*args):
+#     print("Calculating...")
+#     time.sleep(1)
+#     for arg in args:
+#         return arg * arg
+
+
+# expensive_function(5, 10)
+# expensive_function(5, 10)
+# expensive_function(2, 10)
 
 # ----------------------------------------------------------------------
 # Exercise D17 (BONUS): Decorator Class
