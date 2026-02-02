@@ -335,12 +335,25 @@ from collections import Counter
 
 # Write your code below:
 
+# def my_replace(text, old, new):
+#     replaced = ""
+#     while True:
+#         index = text.find(old)
+#         if index != -1:
+#             replaced += text[0:index] + new
+#             text = text[index+len(old):]
+#         else:
+#             replaced += text
+#             break
+#     return replaced
 
-# Test your solution:
+
+# # Test your solution:
 # print("🔴 my_replace('hello world', 'world', 'Python'):", my_replace(
 #     "hello world", "world", "Python"))  # -> hello Python
 # print("🔴 my_replace('aaa', 'a', 'b'):", my_replace("aaa", "a", "b"))  # -> bbb
-# print("🔴 my_replace('hello', 'x', 'y'):", my_replace("hello", "x", "y"))  # -> hello
+# print("🔴 my_replace('hello', 'x', 'y'):",
+#       my_replace("hello", "x", "y"))  # -> hello
 # print("🔴 my_replace('', 'a', 'b') [empty]:", my_replace("", "a", "b"))  # -> ""
 # print("🔴 my_replace('hello', 'll', 'LL'):",
 #       my_replace("hello", "ll", "LL"))  # -> heLLo
