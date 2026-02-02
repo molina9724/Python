@@ -18,14 +18,17 @@
 # Edge: count_vowels("AEIOU") -> 5 (uppercase)
 
 # Write your code below:
-def count_vowels(text):
-    lower_text = text.lower()
-    vowels = {"a", "e", "i", "o", "u"}
-    vowel_count = 0
-    for char in lower_text:
-        if char in vowels:
-            vowel_count += 1
-    return vowel_count
+from collections import Counter
+
+
+# def count_vowels(text):
+#     lower_text = text.lower()
+#     vowels = {"a", "e", "i", "o", "u"}
+#     vowel_count = 0
+#     for char in lower_text:
+#         if char in vowels:
+#             vowel_count += 1
+#     return vowel_count
 
 
 # Test your solution:
@@ -184,12 +187,20 @@ def count_vowels(text):
 # Write your code below:
 
 
-# Test your solution:
-# print("🟡 find_duplicates([1, 2, 3, 2, 4, 3]):", find_duplicates([1, 2, 3, 2, 4, 3]))  # -> [2, 3]
-# print("🟡 find_duplicates(['a', 'b', 'a', 'c']):", find_duplicates(["a", "b", "a", "c"]))  # -> ['a']
+# def find_duplicates(items):
+#     counter = Counter(items)
+#     return [key for key, value in counter.items() if value > 1]
+
+
+# # Test your solution:
+# print("🟡 find_duplicates([1, 2, 3, 2, 4, 3]):",
+#       find_duplicates([1, 2, 3, 2, 4, 3]))  # -> [2, 3]
+# print("🟡 find_duplicates(['a', 'b', 'a', 'c']):",
+#       find_duplicates(["a", "b", "a", "c"]))  # -> ['a']
 # print("🟡 find_duplicates([1, 2, 3]):", find_duplicates([1, 2, 3]))  # -> []
 # print("🟡 find_duplicates([]) [empty]:", find_duplicates([]))  # -> []
-# print("🟡 find_duplicates([1, 1, 1, 1]) [all same]:", find_duplicates([1, 1, 1, 1]))  # -> [1]
+# print("🟡 find_duplicates([1, 1, 1, 1]) [all same]:",
+#       find_duplicates([1, 1, 1, 1]))  # -> [1]
 # print("🟡 find_duplicates([1]) [single]:", find_duplicates([1]))  # -> []
 
 
@@ -209,8 +220,16 @@ def count_vowels(text):
 
 # Write your code below:
 
+# def remove_duplicates(items):
+#     seen = set()
+#     result = []
+#     for element in items:
+#         if element not in seen:
+#             seen.add(element)
+#             result.append(element)
+#     return result
 
-# Test your solution:
+# # Test your solution:
 # print("🟡 remove_duplicates([1, 2, 3, 2, 4, 3]):", remove_duplicates([1, 2, 3, 2, 4, 3]))  # -> [1, 2, 3, 4]
 # print("🟡 remove_duplicates(['a', 'b', 'a', 'c']):", remove_duplicates(["a", "b", "a", "c"]))  # -> ['a', 'b', 'c']
 # print("🟡 remove_duplicates([1, 1, 1]):", remove_duplicates([1, 1, 1]))  # -> [1]
