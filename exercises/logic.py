@@ -251,17 +251,30 @@ from collections import Counter
 # Edge: count_character_frequency("") -> {} (empty string)
 # Edge: count_character_frequency("   ") -> {} (only spaces)
 # Edge: count_character_frequency("a") -> {'a': 1} (single char)
-
 # Write your code below:
+
+# def count_character_frequency(text):
+#     letter_count = dict()
+#     for char in text:
+#         if char != " ":
+#             letter_count[char] = letter_count.setdefault(char, 0) + 1
+#     return letter_count
+#     return Counter(char for char in text if char != " ") -> One liner
 
 
 # Test your solution:
-# print("🟡 count_character_frequency('hello'):", count_character_frequency("hello"))  # -> {'h': 1, 'e': 1, 'l': 2, 'o': 1}
-# print("🟡 count_character_frequency('aaa'):", count_character_frequency("aaa"))  # -> {'a': 3}
-# print("🟡 count_character_frequency('ab ab'):", count_character_frequency("ab ab"))  # -> {'a': 2, 'b': 2}
-# print("🟡 count_character_frequency('') [empty]:", count_character_frequency(""))  # -> {}
-# print("🟡 count_character_frequency('   ') [spaces]:", count_character_frequency("   "))  # -> {}
-# print("🟡 count_character_frequency('a') [single]:", count_character_frequency("a"))  # -> {'a': 1}
+# print("🟡 count_character_frequency('hello'):", count_character_frequency(
+#     "hello"))  # -> {'h': 1, 'e': 1, 'l': 2, 'o': 1}
+# print("🟡 count_character_frequency('aaa'):",
+#       count_character_frequency("aaa"))  # -> {'a': 3}
+# print("🟡 count_character_frequency('ab ab'):",
+#       count_character_frequency("ab ab"))  # -> {'a': 2, 'b': 2}
+# print("🟡 count_character_frequency('') [empty]:",
+#       count_character_frequency(""))  # -> {}
+# print("🟡 count_character_frequency('   ') [spaces]:", count_character_frequency(
+#     "   "))  # -> {}
+# print("🟡 count_character_frequency('a') [single]:",
+#       count_character_frequency("a"))  # -> {'a': 1}
 
 
 # ----------------------------------------------------------------------
@@ -281,9 +294,23 @@ from collections import Counter
 
 # Write your code below:
 
+# def my_split(text, separator=" "):
+#     partial_word = ""
+#     words = list()
 
-# Test your solution:
-# print("🔴 my_split('hello world'):", my_split("hello world"))  # -> ['hello', 'world']
+#     for char in text:
+#         if char != separator:
+#             partial_word += char
+#         else:
+#             words.append(partial_word)
+#             partial_word = ""
+#     words.append(partial_word)
+#     return words
+
+
+# # Test your solution:
+# print("🔴 my_split('hello world'):", my_split(
+#     "hello world"))  # -> ['hello', 'world']
 # print("🔴 my_split('a,b,c', ','):", my_split("a,b,c", ","))  # -> ['a', 'b', 'c']
 # print("🔴 my_split('one'):", my_split("one"))  # -> ['one']
 # print("🔴 my_split('') [empty]:", my_split(""))  # -> [''] or []
@@ -310,11 +337,13 @@ from collections import Counter
 
 
 # Test your solution:
-# print("🔴 my_replace('hello world', 'world', 'Python'):", my_replace("hello world", "world", "Python"))  # -> hello Python
+# print("🔴 my_replace('hello world', 'world', 'Python'):", my_replace(
+#     "hello world", "world", "Python"))  # -> hello Python
 # print("🔴 my_replace('aaa', 'a', 'b'):", my_replace("aaa", "a", "b"))  # -> bbb
 # print("🔴 my_replace('hello', 'x', 'y'):", my_replace("hello", "x", "y"))  # -> hello
 # print("🔴 my_replace('', 'a', 'b') [empty]:", my_replace("", "a", "b"))  # -> ""
-# print("🔴 my_replace('hello', 'll', 'LL'):", my_replace("hello", "ll", "LL"))  # -> heLLo
+# print("🔴 my_replace('hello', 'll', 'LL'):",
+#       my_replace("hello", "ll", "LL"))  # -> heLLo
 
 
 # ----------------------------------------------------------------------
