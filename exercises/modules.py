@@ -325,8 +325,37 @@
 
 # Write your code below:
 
+# from statistics import mean
+# from statistics import median
+# from statistics import mode
+# from statistics import stdev
+# from statistics import StatisticsError
 
-# Test your solution:
+
+# def calculate_stats(numbers):
+#     my_mean = mean(numbers)
+#     my_median = median(numbers)
+
+#     try:
+#         my_mode = mode(numbers)
+#     except StatisticsError:
+#         my_mode = None
+
+#     if len(numbers) > 1:
+#         my_std_dev = stdev(numbers)
+#     else:
+#         my_std_dev = None
+
+#     my_max = max(numbers)
+#     my_min = min(numbers)
+#     my_range = my_max - my_min
+
+#     calculation = {"mean": my_mean, "median": my_median,
+#                    "mode": my_mode, "stdev": my_std_dev, "range": my_range}
+#     return calculation
+
+
+# # Test your solution:
 # print("🔴 calculate_stats([1, 2, 2, 3, 4]):", calculate_stats([1, 2, 2, 3, 4]))
 # print("🔴 calculate_stats([5, 5, 5]):", calculate_stats([5, 5, 5]))
 # print("🔴 calculate_stats([10]):", calculate_stats([10]))
@@ -353,12 +382,25 @@
 
 # Write your code below:
 
+# import os
 
-# Test your solution:
-# print("🔴 build_path('home', 'user', 'documents', 'file.txt'):")
-# print("  ", build_path("home", "user", "documents", "file.txt"))
-# print("🔴 build_path('.', 'data', 'test.csv'):")
-# print("  ", build_path(".", "data", "test.csv"))
+
+# def build_path(*parts):
+#     full_path = os.path.join(*parts)
+#     normal = os.path.normpath(full_path)
+
+#     directory = os.path.dirname(normal)
+#     filename = os.path.basename(normal)
+#     exists = os.path.exists(normal)
+
+#     file_information = {"full_path": normal, "directory": directory,
+#                         "filename": filename, "exists": exists}
+#     return file_information
+
+
+# # Test your solution:
+# print("🔴", build_path("home", "user", "documents", "file.txt"))
+# print("🔴", build_path(".", "data", "test.csv"))
 
 
 # ======================================================================
