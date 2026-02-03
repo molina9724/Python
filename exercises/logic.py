@@ -376,6 +376,19 @@ from collections import Counter
 
 # Write your code below:
 
+# def my_count(text, substring):
+#     count = 0
+#     if substring == "":
+#         return 0
+#     while True:
+#         index = text.find(substring)
+#         if index != -1:
+#             count += 1
+#             text = text[index+len(substring):]
+#         else:
+#             break
+#     return count
+
 
 # Test your solution:
 # print("🔴 my_count('hello', 'l'):", my_count("hello", "l"))  # -> 2
@@ -383,6 +396,9 @@ from collections import Counter
 # print("🔴 my_count('hello', 'x'):", my_count("hello", "x"))  # -> 0
 # print("🔴 my_count('', 'a') [empty text]:", my_count("", "a"))  # -> 0
 # print("🔴 my_count('aaaa', 'aa') [non-overlap]:", my_count("aaaa", "aa"))  # -> 2
+# print(my_count("", "a"))
+# print(my_count("hello", ""))
+# print(my_count("aaaa", "aa"))
 
 
 # ----------------------------------------------------------------------
@@ -401,6 +417,14 @@ from collections import Counter
 # Edge: [1, 2, 3, 4, 5] -> [5, 4, 3, 2, 1] (odd length)
 
 # Write your code below:
+
+# def my_reverse_list(items):
+#     for index in range(len(items)//2):
+#         left = items[index]
+#         right = items[len(items)-(index+1)]
+
+#         items[index] = right
+#         items[len(items)-(index+1)] = left
 
 
 # Test your solution:
