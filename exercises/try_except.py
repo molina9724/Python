@@ -20,6 +20,9 @@
 
 # Write your code below:
 
+import random
+
+
 def safe_divide(a, b):
     try:
         return a/b
@@ -229,8 +232,21 @@ def safe_divide(a, b):
 
 # Write your code below:
 
+# def process_file_simulation(filename):
+#     try:
+#         if filename == "valid.txt":
+#             return "File processed"
+#         elif filename == "error.txt":
+#             raise Exception("Processing error")
+#         else:
+#             return "Not found"
+#     except Exception:
+#         return "Processing error"
+#     finally:
+#         print("Cleanup complete")
 
-# Test your solution:
+
+# # Test your solution:
 # print("🟡 Result:", process_file_simulation("valid.txt"))
 # print("🟡 Result:", process_file_simulation("error.txt"))
 # print("🟡 Result:", process_file_simulation("other.txt"))
@@ -254,12 +270,21 @@ def safe_divide(a, b):
 
 # Write your code below:
 
+# def validate_age(age):
+#     if type(age) != int:
+#         raise ValueError("Age must be an integer")
+#     if age < 0:
+#         raise ValueError("Age cannot be negative")
+#     if age > 150:
+#         raise ValueError("Age cannot exceed 150")
+#     return "Valid age"
+
 
 # Test your solution:
 # print("🟡 validate_age(25):", validate_age(25))
 # print("🟡 validate_age(0):", validate_age(0))
 # try:
-#     print("🟡 validate_age(-5):", validate_age(-5))
+# print("🟡 validate_age(-5):", validate_age(-5))
 # except ValueError as e:
 #     print("🟡 validate_age(-5): ValueError -", e)
 
@@ -285,8 +310,22 @@ def safe_divide(a, b):
 
 # Write your code below:
 
+# def complex_operation(data):
+#     try:
+#         values = data["values"]
+#         index = data["index"]
+#         return values[index]/10
+#     except KeyError:
+#         return "Missing required key"
+#     except IndexError:
+#         return "Index out of range"
+#     except TypeError:
+#         return "Invalid data type"
+#     except ZeroDivisionError:
+#         return "Division error"
 
-# Test your solution:
+
+# # Test your solution:
 # print("🟡 complex_operation({'values': [100,200,300], 'index': 1}):",
 #       complex_operation({"values": [100, 200, 300], "index": 1}))
 # print("🟡 complex_operation({'values': [100], 'index': 5}):",
@@ -371,12 +410,28 @@ def safe_divide(a, b):
 
 # Write your code below:
 
+# def exception_handler(func):
+#     def wrapper(*args, **kwargs):
+#         my_dict = dict()
+#         try:
+#             my_dict["error"] = False
+#             my_dict["result"] = func(*args, **kwargs)
+#             return my_dict
+#         except Exception as e:
+#             my_dict["error"] = True
+#             my_dict["type"] = type(e).__name__
+#             my_dict["message"] = str(e)
+#             return my_dict
+#     return wrapper
 
-# Test your solution:
+# # Test your solution:
+
+
 # @exception_handler
 # def risky_divide(a, b):
 #     return a / b
-#
+
+
 # print("🔴 risky_divide(10, 2):", risky_divide(10, 2))
 # print("🔴 risky_divide(10, 0):", risky_divide(10, 0))
 
@@ -405,12 +460,23 @@ def safe_divide(a, b):
 
 
 # Test your solution:
-# import random
+
+# def retry(func, max_attempts, *args, **kwargs):
+#     counter = 1
+#     while counter <= max_attempts:
+#         try:
+#             return {"success": True, "result": func(*args, **kwargs), "attempts": counter}
+#         except ValueError:
+#             counter += 1
+#     return {"success": False, "error": ValueError.__name__, "attempts": max_attempts}
+
+
 # def unstable():
-#     if random.random() < 0.5:
+#     if random.random() < 0.9:
 #         raise ValueError("Failed")
 #     return "OK"
-#
+
+
 # print("🔴 retry(unstable, 5):", retry(unstable, 5))
 
 
@@ -477,6 +543,12 @@ def safe_divide(a, b):
 
 # Write your code below:
 
+# def process_transaction(transaction):
+#     if transaction["type"] == "withdraw":
+#         if transaction["amount"] < 0:
+#             raise ValueError("amount must be positive")
+#         elif transaction["amount"] > 10000:
+#             raise
 
 # Test your solution:
 # print("🔴 Valid withdraw:", process_transaction({"type": "withdraw", "amount": 500, "account": "1234567890"}))
