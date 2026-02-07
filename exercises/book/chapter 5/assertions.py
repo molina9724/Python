@@ -19,9 +19,13 @@
 # 3. Write another assert that checks if age is less than 150
 # 4. Run the code - it should pass silently (no output means success!)
 #
-# Hint: assert condition, "error message"
 
 # Write your code below:
+
+
+# age = 25
+# assert age > 0, "Age should be >=0"
+# assert age < 150, "Age should be <150"
 
 
 # Test: Run this - if no error, your asserts passed!
@@ -40,6 +44,10 @@
 
 # Write your code below:
 
+# username = "CJ"
+# assert len(username) != 0, "username must not be empty"
+# username = ""
+
 
 # print("🟢 EASY 2: Username is valid!")
 
@@ -53,13 +61,15 @@
 # Test: double(5) → 10
 # Test: double(3.5) → 7.0
 # Test: double("hello") → AssertionError
-#
-# Hint: Use isinstance(n, (int, float))
 
 # Write your code below:
 
+# def double(n):
+#     assert isinstance(n, (int, float)), "n must be either int or float"
+#     return 2*n
 
-# Test your solution:
+
+# # Test your solution:
 # print("🟢 double(5):", double(5))         # → 10
 # print("🟢 double(3.5):", double(3.5))     # → 7.0
 # print("🟢 double('hello'):", double("hello"))  # → AssertionError!
@@ -77,8 +87,11 @@
 
 # Write your code below:
 
+# def get_first(items):
+#     assert len(items) != 0, "items must not be empty"
+#     return items[0]
 
-# Test your solution:
+# # Test your solution:
 # print("🟢 get_first([1, 2, 3]):", get_first([1, 2, 3]))  # → 1
 # print("🟢 get_first(['a', 'b']):", get_first(["a", "b"]))  # → "a"
 # print("🟢 get_first([]):", get_first([]))  # → AssertionError
@@ -100,10 +113,19 @@
 
 # Write your code below:
 
+# def create_user(name, age, email):
+#     assert len(name) != 0, "Name must not be empty"
+#     assert 0 <= age <= 150, "Age must be between 0-150"
+#     assert "@" in email, "Email must contain @"
+#     return {"name": name, "age": age, "email": email}
 
-# Test your solution:
+
+# # Test your solution:
 # print("🟡 create_user valid:", create_user("Alice", 25, "alice@email.com"))
 # print("🟡 create_user empty name:", create_user("", 25, "alice@email.com"))
+# print("🟡 create_user empty name:", create_user("CJ", -10, "alice@email.com"))
+# print("🟡 create_user empty name:", create_user("CJ", 180, "alice@email.com"))
+# print("🟡 create_user empty name:", create_user("CJ", 25, "aliceemail.com"))
 
 
 # ----------------------------------------------------------------------
@@ -120,10 +142,20 @@
 
 # Write your code below:
 
+# def divide(a, b):
+#     assert isinstance(a, (int, float)), "a must be int or float"
+#     assert isinstance(b, (int, float)), "b must be int or float"
+#     assert b != 0, "b must not be 0"
+#     return a/b
 
-# Test your solution:
+
+# # Test your solution:
 # print("🟡 divide(10, 2):", divide(10, 2))  # → 5.0
+# print("🟡 divide(10, 2):", divide("10", 2))  # → AssertionError
+# print("🟡 divide(10, 2):", divide(10, "2"))  # → AssertionError
+# print("🟡 divide(10, 2):", divide("10", "2"))  # → AssertionError
 # print("🟡 divide(7, 0):", divide(7, 0))    # → AssertionError
+# print("🟡 divide(7, 0):", divide(0, 0))    # → AssertionError
 
 
 # ----------------------------------------------------------------------
@@ -144,11 +176,18 @@
 
 # Write your code below:
 
+# def calculate_discount(price, discount):
+#     assert price >= 0, "price must not be negative"
+#     assert 0 <= discount <= 100, "discount must be between 0-100"
+#     final_price = price * (1-discount/100)
+#     return final_price
 
 # Test your solution:
 # print("🟡 calculate_discount(100, 20):", calculate_discount(100, 20))  # → 80.0
 # print("🟡 calculate_discount(50, 0):", calculate_discount(50, 0))      # → 50.0
 # print("🟡 calculate_discount(100, 150):", calculate_discount(100, 150))  # → Error
+# print("🟡 calculate_discount(100, 150):", calculate_discount(-10, 10))  # → Error
+# print("🟡 calculate_discount(100, 150):", calculate_discount(100, -10))  # → Error
 
 
 # ----------------------------------------------------------------------
@@ -159,11 +198,19 @@
 #    - numbers is not empty
 #    - all items in numbers are int or float
 # 3. Calculate and return the average
-#
-# Hint: Use all() with a generator expression for the type check
-#       all(isinstance(n, (int, float)) for n in numbers)
 
 # Write your code below:
+
+# def average(numbers):
+#     assert isinstance(numbers, list), "numbers must be a list"
+#     assert len(numbers) != 0, "numbers must contain at least 1 value"
+
+#     for element in numbers:
+#         assert isinstance(element, (int, float)
+#                           ), "all items must be either float or int"
+#     # assert all(isinstance(x, (int, float)) for x in numbers)
+
+#     return sum(numbers)/len(numbers)
 
 
 # Test your solution:
