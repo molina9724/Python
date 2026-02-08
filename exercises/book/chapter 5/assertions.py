@@ -264,6 +264,17 @@
 
 # Write your code below:
 
+# def factorial(n):
+#     assert isinstance(n, int), "n must be an int"
+#     assert n >= 0, "n must be >=0"
+#     result = 1
+#     if n == 0:
+#         assert result >= 1, "factorial results is always positive, there must be a mistake"
+#         return result
+#     result = n * factorial(n-1)
+#     assert result >= 1, "result is always >=1"
+#     return result
+
 
 # Test your solution:
 # print("🔴 factorial(5):", factorial(5))    # → 120
@@ -292,11 +303,23 @@
 
 # Write your code below:
 
+# def parse_coordinate(coord_string):
+#     assert isinstance(coord_string, str), "it must be a string"
+#     assert coord_string.count(",") == 1, "it must contain only one ,"
+#     coordinates = coord_string.split(",")
+#     lat = float(coordinates[0])
+#     lon = float(coordinates[1])
+#     assert -90 <= lat <= 90, "lat must be in between -90/90"
+#     assert -180 <= lon <= 180, "lon must be in between -180/180"
+#     return (lat, lon)
+
 
 # Test your solution:
 # print("🔴 parse_coordinate('40.7,-74.0'):", parse_coordinate("40.7,-74.0"))
 # print("🔴 parse_coordinate('0,0'):", parse_coordinate("0,0"))
 # print("🔴 parse_coordinate('91,0'):", parse_coordinate("91,0"))  # → Error
+# print("🔴 parse_coordinate('40.7;-74.0'):", parse_coordinate("40.7;-74.0"))  # → Error
+# parse_coordinate("40.7,50.5,extra")  # Contains commas... but how many?
 
 
 # ----------------------------------------------------------------------
@@ -314,6 +337,16 @@
 # Test: my_sort([5, 4, 3, 2, 1]) → [1, 2, 3, 4, 5]
 
 # Write your code below:
+
+# def is_sorted(items):
+#     return all(items[index] <= items[index+1] for index in range(len(items) - 1))
+
+
+# def my_sort(items):
+#     assert isinstance(items, list)
+#     items.sort()
+#     assert is_sorted(items), "items is not sorted"
+#     return items
 
 
 # Test your solution:
