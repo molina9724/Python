@@ -27,17 +27,19 @@
 #     print(str(e))
 
 import random
-
-# coin_flip = list()
-# for index in range(100):
-#     coin_flip.append(random.randint(0, 1))
-
-test1 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
-
+head_or_tails = ["T", "H"]
+repetitions = 10000
 results = []
-for index in range(len(test1)-5):
-    if all(test1[index:index+6]):
-        results.append(test1[index:index+6])
 
+for rep in range(repetitions):
+    coin_flip = list()
+    for cero_to_hundred in range(100):
+        coin_flip.append(random.choice(head_or_tails))
+    index = 0
+    while index in range(len(coin_flip)-5):
+        if all(x == coin_flip[index] for x in coin_flip[index:index+6]):
+            results.append(coin_flip[index:index+6])
+            index += 6
+        index += 1
+print(len(results))
 
-x = list(test1[i] for i in range(len(test1)-5))
