@@ -61,17 +61,53 @@
 # Hello, world!
 # That sentence is not a pangram.
 
-import string
+# import string
 
 
-def is_pangram(sentence):
-    clean_sentence = "".join(sentence.lower().split(" "))
-    stripped_sentence = set(clean_sentence)
-    for char in string.ascii_lowercase:
-        if char not in stripped_sentence:
-            return "That sentence is not a pangram."
-    return "That sentence is a pangram."
+# def is_pangram(sentence):
+#     clean_sentence = "".join(sentence.lower().split(" "))
+#     stripped_sentence = set(clean_sentence)
+#     for char in string.ascii_lowercase:
+#         if char not in stripped_sentence:
+#             return "That sentence is not a pangram."
+#     return "That sentence is a pangram."
 
 
-print(is_pangram("Hello there"))
-print(is_pangram("The quick brown fox jumps over the yellow lazy dog."))
+# print(is_pangram("Hello there"))
+# print(is_pangram("The quick brown fox jumps over the yellow lazy dog."))
+
+# Coordinate Directions
+
+# Write a function named get_end_coordinates(directions) that accepts a list of north, south, east, and west directions and returns a numeric pair of Cartesian coordinates.
+
+# The first part of the program should repeatedly ask the user to enter N, S, E, or W (but should accept the lowercase n, s, e, and w as well) and should collect these inputs in a list. The loop should exit when the user enters a blank string. Next, the program should pass the list to the get_end_coordinates() function.
+
+# Going north should increase the y-coordinate by one, while going south should decrease it by one. Likewise, going east should increase the x-coordinate by one, while going west should decrease it by one.
+
+# You can represent the coordinates in another list. For example, the function call get_end_coordinates(['N', 'N', 'W']) should return the list [-1, 2], and the function call get_end_coordinates(['E', 'W', 'E', 'E']) should return the coordinates [2, 0]. Your program should print the list returned by get_end_coordinates().
+
+def get_end_coordinates(directions):
+    x = 0
+    y = 0
+    directions = [x.lower() for x in directions]
+    for element in directions:
+        if element == "n":
+            y += 1
+        elif element == "s":
+            y -= 1
+        elif element == "e":
+            x += 1
+        elif element == "w":
+            x -= 1
+    return [x, y]
+
+
+coordinates = []
+user_input = None
+while True:
+    user_input = input("Where do you want to go? N/E/S/W: ")
+    if user_input != "":
+        coordinates.append(user_input)
+    else:
+        print(get_end_coordinates(coordinates))
+        break
