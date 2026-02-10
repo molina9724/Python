@@ -86,28 +86,28 @@
 
 # You can represent the coordinates in another list. For example, the function call get_end_coordinates(['N', 'N', 'W']) should return the list [-1, 2], and the function call get_end_coordinates(['E', 'W', 'E', 'E']) should return the coordinates [2, 0]. Your program should print the list returned by get_end_coordinates().
 
-def get_end_coordinates(directions):
-    x = 0
-    y = 0
-    directions = [x.lower() for x in directions]
-    for element in directions:
-        if element == "n":
-            y += 1
-        elif element == "s":
-            y -= 1
-        elif element == "e":
-            x += 1
-        elif element == "w":
-            x -= 1
-    return [x, y]
+# def get_end_coordinates(directions):
+#     x = 0
+#     y = 0
+#     directions = [x.lower() for x in directions]
+#     for element in directions:
+#         if element == "n":
+#             y += 1
+#         elif element == "s":
+#             y -= 1
+#         elif element == "e":
+#             x += 1
+#         elif element == "w":
+#             x -= 1
+#     return [x, y]
 
 
-coordinates = []
-user_input = None
-while True:
-    user_input = input("Where do you want to go? N/E/S/W: ")
-    if user_input != "":
-        coordinates.append(user_input)
-    else:
-        print(get_end_coordinates(coordinates))
-        break
+# coordinates = []
+# user_input = None
+# while True:
+#     user_input = input("Where do you want to go? N/E/S/W: ")
+#     if user_input != "":
+#         coordinates.append(user_input)
+#     else:
+#         print(get_end_coordinates(coordinates))
+#         break
