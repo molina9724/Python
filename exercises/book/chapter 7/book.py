@@ -53,3 +53,86 @@
 # pet_owners = {'Alice': ['Spot', 'Mittens'], 'Al': ['Zophie']}
 # for pet in pet_owners['Alice']:
 #     print(pet)
+
+# 35. Two teams, 'Home' and 'Visitor', played a game of baseball across nine innings, numbered 1 through 9. (Programmers did not invent baseball, so the first inning is not zero.) To model this game, create a dictionary with the keys 'Home' and 'Visitor'. The values for these two keys should also be dictionaries, with integer keys 1 through 9, to represent each inning. The values for each of the inning keys should be the score for the inning. The score was 0 in all innings except for the third, when the Home team scored one run. (It wasn’t an exciting game.) Write the code for this dictionary.
+
+# baseball = {"Home": {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0},
+#             "Visitor": {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0}}
+
+# 36. Instead of manually writing the dictionary in the previous question, write a for loop that can automatically generate it. You can work from the following template:
+
+# game = {'Home': {}, 'Visitor': {}}
+# for inning in range(1, 10):  # Loop from 1 to 9.
+#     game['Home'][inning] = 0
+#     game['Visitor'][inning] = 0
+# game['Home'][3] = 1  # Set one run in third inning.
+
+# print(game)
+
+# 37. A deranged billionaire has purchased the entire baseball league so that they can make the following rule change: All baseball games will now have 9,999 innings instead of 9 innings. Change the code in your previous answer to reflect this new game. Again, the only run scored was by the Home team in the third inning. (The teams were too tired to score any more runs later in the game.)
+
+# game = {'Home': {}, 'Visitor': {}}
+# for inning in range(1, 10000):  # Loop from 1 to 9999.
+#     game['Home'][inning] = 0
+#     game['Visitor'][inning] = 0
+# game['Home'][3] = 1  # Set one run in third inning.
+
+# print(game)
+
+# Random Weather Data Generator
+
+# Random Weather Data Generator
+
+# Write a function named get_random_weather_data() that returns a dictionary of random weather data. The dictionary should have the keys and values in Table 7-1.
+# Table 7-1: Keys and Values for the Weather Dictionary
+
+# Key
+# Value
+# 'temp'
+# A random float from -50 to 50
+# 'feels_like'
+# A float that is within 10 degrees of the 'temp' value
+# 'humidity'
+# A random integer between 0 and 100
+# 'pressure'
+# A random integer between 990 and 1010
+
+# The program should then call this function from a loop 100 times, storing the returned dictionaries in a list. Finally, it should print the list. Save this program in a file named weatherDataGen.py.
+
+import random
+
+
+def get_random_weather_data():
+    temp = random.uniform(-50, 50)
+    feels_like = random.uniform(temp-10, temp+10)
+    temperature = {'temp': temp,
+                   'feels_like': feels_like,
+                   'humidity': random.randint(0, 100),
+                   'pressure': random.randint(990, 1010)}
+    return temperature
+
+
+temperature_recorder = []
+for iteration in range(100):
+    temperature_recorder.append(get_random_weather_data())
+# print(temperature_recorder)
+
+# Add a function named get_average_temperature(weather_data) to the program in the previous practice project. This function should accept a list of the weather data dictionaries described in the previous project and return the average temperature in their 'temp' keys. To calculate the average, add all of the temperature numbers in the dictionaries and divide the result by the number of dictionaries.
+
+# The list passed to get_average_temperature() can contain any number of dictionaries but should always contain at least one. Generate a list of 100 weather dictionaries by calling get_random_weather_data(), then pass this list to get_average_temperature() and print the average it returns.
+
+# Add this new function to your weatherDataGen.py program and save this new program as avgTemp.py.
+
+
+def get_average_temperature(weather_data):
+    total_records = len(weather_data)
+    if total_records > 0:
+        total_temperature = 0
+        for record in weather_data:
+            total_temperature += record["temp"]
+    else:
+        return "Take that empty shit somewhere else"
+    return total_temperature/total_records
+
+
+print(get_average_temperature(temperature_recorder))
