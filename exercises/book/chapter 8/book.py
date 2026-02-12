@@ -9,38 +9,79 @@
 # The rest of the program should randomly choose a secret word from a list of five-character words and then give the user six tries to guess it. You can use this list of words:
 
 
-import random
+# import random
 
 
-def get_word_hint(secret_word, guess_word):
-    hint = ""
-    for index in range(len(guess_word)):
-        if secret_word[index] == guess_word[index]:
-            hint += "O"
-        elif guess_word[index] in secret_word:
-            hint += "o"
-        else:
-            hint += "x"
-    if len(hint) < 5:
-        empty_spaces = 5 - len(hint)
-        hint += empty_spaces * "_"
-    return hint
+# def get_word_hint(secret_word, guess_word):
+#     hint = ""
+#     for index in range(len(guess_word)):
+#         if secret_word[index] == guess_word[index]:
+#             hint += "O"
+#         elif guess_word[index] in secret_word:
+#             hint += "o"
+#         else:
+#             hint += "x"
+#     if len(hint) < 5:
+#         empty_spaces = 5 - len(hint)
+#         hint += empty_spaces * "_"
+#     return hint
 
 
-def play():
-    max_attempts = 6
-    guess_word = ""
-    attempt = 1
-    words = 'MITTS FLOAT BRICK LIKED DWARF COMMA GNASH ROOMS UNITE BEARS SPOOL ARMOR'.split()
-    secret_word = random.choice(words)
+# def play():
+#     max_attempts = 6
+#     guess_word = ""
+#     attempt = 1
+#     words = 'MITTS FLOAT BRICK LIKED DWARF COMMA GNASH ROOMS UNITE BEARS SPOOL ARMOR'.split()
+#     secret_word = random.choice(words)
 
-    while attempt <= max_attempts:
-        guess_word = input("Guess the word: ").upper()
-        if secret_word == guess_word:
-            return "You won"
-        print(get_word_hint(secret_word, guess_word))
-        attempt += 1
-    return "You lost"
+#     while attempt <= max_attempts:
+#         guess_word = input("Guess the word: ").upper()
+#         if secret_word == guess_word:
+#             return "You won"
+#         print(get_word_hint(secret_word, guess_word))
+#         attempt += 1
+#     return "You lost"
 
 
-print(play())
+# print(play())
+
+# mOcKiNg SpOnGeBoB mEmE
+
+# You may have seen the “Mocking Spongebob” meme format, which renders a statement in alternating uppercase and lowercase letters. Write a function named spongecase(text) that takes a string argument and returns the string in this format. Apply the following rules:
+
+#     Leave non-letters unmodified.
+#     Make the first letter lowercase.
+#     For every letter, set the next letter to the opposite case. (Non-letter characters don’t change the case used for the next letter.)
+
+# The program should ask the user for a sentence and then display that sentence with “Mocking Spongebob” casing:
+
+# Enter a sentence:
+# Hello. It is nice to meet you.
+# hElLo. It Is NiCe To MeEt YoU.
+
+# def spongecase(text):
+#     mocking = ""
+#     index = 1
+#     last_was_lower = True
+#     mocking = text[0].lower()
+#     while index <= len(text)-1:
+#         if text[index].isalpha():
+#             if last_was_lower:
+#                 mocking += text[index].upper()
+#                 last_was_lower = False
+#             else:
+#                 mocking += text[index].lower()
+#                 last_was_lower = True
+#         else:
+#             mocking += text[index]
+#         index += 1
+#     return mocking
+
+
+# print(spongecase("Hello. It is nice to meet you."),
+#       "→ Expected: hElLo. It Is NiCe To MeEt YoU.")
+# print(spongecase("SPONGEBOB"), "→ Expected: sPoNgEbOb")
+# print(spongecase("I love Python!"), "→ Expected: i LoVe PyThOn!")
+# print(spongecase("abc"), "→ Expected: aBc")
+# print(spongecase("a b c"), "→ Expected: a B c")
+# print(spongecase("Hello!!!"), "→ Expected: hElLo!!!")
