@@ -14,18 +14,33 @@ import random
 
 def get_word_hint(secret_word, guess_word):
     hint = ""
-    for index in range(len(secret_word)):
+    for index in range(len(guess_word)):
         if secret_word[index] == guess_word[index]:
             hint += "O"
         elif guess_word[index] in secret_word:
             hint += "o"
         else:
             hint += "x"
+    if len(hint) < 5:
+        empty_spaces = 5 - len(hint)
+        hint += empty_spaces * "_"
     return hint
 
 
-words = 'MITTS FLOAT BRICK LIKED DWARF COMMA GNASH ROOMS UNITE BEARS SPOOL ARMOR'.split()
-secret_word = random.choice(words)
-print(secret_word)
-print("BRICK")
-print(get_word_hint(secret_word, "BRICK"))
+def play():
+    max_attempts = 6
+    guess_word = ""
+    attempt = 1
+    words = 'MITTS FLOAT BRICK LIKED DWARF COMMA GNASH ROOMS UNITE BEARS SPOOL ARMOR'.split()
+    secret_word = random.choice(words)
+
+    while attempt <= max_attempts:
+        guess_word = input("Guess the word: ").upper()
+        if secret_word == guess_word:
+            return "You won"
+        print(get_word_hint(secret_word, guess_word))
+        attempt += 1
+    return "You lost"
+
+
+print(play())
