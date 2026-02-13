@@ -184,33 +184,33 @@
 
 # Write your code below:
 
-class Counter:
-    def __init__(self, count=0):
-        self.count = count
+# class Counter:
+#     def __init__(self, count=0):
+#         self.count = count
 
-    def increment(self):
-        self.count += 1
+#     def increment(self):
+#         self.count += 1
 
-    def decrement(self):
-        self.count -= 1
+#     def decrement(self):
+#         self.count -= 1
 
-    def reset(self):
-        self.count = 0
+#     def reset(self):
+#         self.count = 0
 
-    def get_count(self):
-        return self.count
+#     def get_count(self):
+#         return self.count
 
 
-# Test your solution:
-c = Counter()
-print("🟢 Initial count:", c.get_count())
-c.increment()
-c.increment()
-print("🟢 After 2 increments:", c.get_count())
-c.decrement()
-print("🟢 After decrement:", c.get_count())
-c.reset()
-print("🟢 After reset:", c.get_count())
+# # Test your solution:
+# c = Counter()
+# print("🟢 Initial count:", c.get_count())
+# c.increment()
+# c.increment()
+# print("🟢 After 2 increments:", c.get_count())
+# c.decrement()
+# print("🟢 After decrement:", c.get_count())
+# c.reset()
+# print("🟢 After reset:", c.get_count())
 
 
 # ----------------------------------------------------------------------
@@ -231,14 +231,23 @@ print("🟢 After reset:", c.get_count())
 
 # Write your code below:
 
+class Dog():
+    species = "Canis familiaris"
+    dog_count = 0
+
+    def __init__(self, name, age) -> None:
+        self.name = name
+        self.age = age
+        Dog.dog_count += 1
+
 
 # Test your solution:
-# print("🟢 Initial dog_count:", Dog.dog_count)
-# d1 = Dog("Buddy", 3)
-# print("🟢 After d1:", Dog.dog_count)
-# d2 = Dog("Max", 5)
-# print("🟢 After d2:", Dog.dog_count)
-# print("🟢 d1.species:", d1.species)
+print("🟢 Initial dog_count:", Dog.dog_count)
+d1 = Dog("Buddy", 3)
+print("🟢 After d1:", Dog.dog_count)
+d2 = Dog("Max", 5)
+print("🟢 After d2:", Dog.dog_count)
+print("🟢 d1.species:", d1.species)
 
 
 # =====================================================================
