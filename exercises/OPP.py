@@ -231,23 +231,23 @@
 
 # Write your code below:
 
-class Dog():
-    species = "Canis familiaris"
-    dog_count = 0
+# class Dog():
+#     species = "Canis familiaris"
+#     dog_count = 0
 
-    def __init__(self, name, age) -> None:
-        self.name = name
-        self.age = age
-        Dog.dog_count += 1
+#     def __init__(self, name, age) -> None:
+#         self.name = name
+#         self.age = age
+#         Dog.dog_count += 1
 
 
-# Test your solution:
-print("🟢 Initial dog_count:", Dog.dog_count)
-d1 = Dog("Buddy", 3)
-print("🟢 After d1:", Dog.dog_count)
-d2 = Dog("Max", 5)
-print("🟢 After d2:", Dog.dog_count)
-print("🟢 d1.species:", d1.species)
+# # Test your solution:
+# print("🟢 Initial dog_count:", Dog.dog_count)
+# d1 = Dog("Buddy", 3)
+# print("🟢 After d1:", Dog.dog_count)
+# d2 = Dog("Max", 5)
+# print("🟢 After d2:", Dog.dog_count)
+# print("🟢 d1.species:", d1.species)
 
 
 # =====================================================================
@@ -275,8 +275,31 @@ print("🟢 d1.species:", d1.species)
 
 # Write your code below:
 
+# class Animal:
+#     def __init__(self, name):
+#         self.name = name
 
-# Test your solution:
+#     def speak(self) -> str:
+#         return "Some sound"
+
+
+# class Cat(Animal):
+#     def __init__(self, name):
+#         super().__init__(name)
+
+#     def speak(self):
+#         return f"{self.name} says Meow!"
+
+
+# class Dog(Animal):
+#     def __init__(self, name):
+#         super().__init__(name)
+
+#     def speak(self):
+#         return f"{self.name} says Woof!"
+
+
+# # Test your solution:
 # cat = Cat("Whiskers")
 # dog = Dog("Buddy")
 # print("🟢 cat.speak():", cat.speak())
@@ -302,8 +325,26 @@ print("🟢 d1.species:", d1.species)
 
 # Write your code below:
 
+# class Vehicle:
+#     def __init__(self, brand, model, year):
+#         self.brand = brand
+#         self.model = model
+#         self.year = year
 
-# Test your solution:
+#     def info(self) -> str:
+#         return f"{self.year} {self.brand} {self.model}"
+
+
+# class Car(Vehicle):
+#     def __init__(self, brand, model, year, num_doors):
+#         super().__init__(brand, model, year)
+#         self.num_doors = num_doors
+
+#     def info(self):
+#         return f"{self.year} {self.brand} {self.model} ({self.num_doors} doors)"
+
+
+# # Test your solution:
 # v = Vehicle("Toyota", "Camry", 2020)
 # c = Car("Honda", "Civic", 2022, 4)
 # print("🟡 v.info():", v.info())
@@ -330,6 +371,35 @@ print("🟢 d1.species:", d1.species)
 
 # Write your code below:
 
+# class LivingThing:
+#     alive = True
+
+#     def breathe(self):
+#         return "Breathing"
+
+
+# class Animal(LivingThing):
+#     can_move = True
+
+#     def move(self):
+#         return "Moving"
+
+
+# class Mammal(Animal):
+#     warm_blooded = True
+
+#     def feed_young(self):
+#         return "Feeding milk"
+
+
+# class Human(Mammal):
+#     def __init__(self, name):
+#         super().__init__()
+#         self.name = name
+
+#     def speak(self):
+#         return f"{self.name} is speaking"
+
 
 # Test your solution:
 # h = Human("Alice")
@@ -338,7 +408,6 @@ print("🟢 d1.species:", d1.species)
 # print("🟡 h.warm_blooded:", h.warm_blooded)
 # print("🟡 h.breathe():", h.breathe())
 # print("🟡 h.speak():", h.speak())
-
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 3: isinstance and issubclass
@@ -358,6 +427,8 @@ print("🟢 d1.species:", d1.species)
 # Write your predictions first, then verify with code
 # ----------------------------------------------------------------------
 
+# bob = Human("Bob")
+
 # Write your predictions:
 # 1.
 # 2.
@@ -371,8 +442,15 @@ print("🟢 d1.species:", d1.species)
 
 # Verify with code:
 # bob = Human("Bob")
-# print("🟡 isinstance(bob, Human):", isinstance(bob, Human))
-# ... add more tests
+# print("🟡 1. isinstance(bob, Human):", isinstance(bob, Human))
+# print("🟡 2. isinstance(bob, Mammal):", isinstance(bob, Mammal))
+# print("🟡 3. isinstance(bob, Animal):", isinstance(bob, Animal))
+# print("🟡 4. isinstance(bob, LivingThing):", isinstance(bob, LivingThing))
+# print("🟡 5. isinstance(bob, object):", isinstance(bob, object))
+# print("🟡 6. issubclass(Human, Mammal):", issubclass(Human, Mammal))
+# print("🟡 7. issubclass(Human, LivingThing):", issubclass(Human, LivingThing))
+# print("🟡 8. issubclass(Mammal, Human):", issubclass(Mammal, Human))
+# print("🟡 9. issubclass(Animal, Animal):", issubclass(Animal, Animal))
 
 
 # =====================================================================
@@ -401,8 +479,24 @@ print("🟢 d1.species:", d1.species)
 
 # Write your code below:
 
+# class BankAccount:
+#     def __init__(self, account_holder, balance=0) -> None:
+#         self._account_holder = account_holder
+#         self._balance = balance
 
-# Test your solution:
+#     def deposit(self, amount):
+#         if amount > 0:
+#             self._balance += amount
+
+#     def withdraw(self, amount):
+#         if amount <= self._balance:
+#             self._balance -= amount
+
+#     def get_balance(self):
+#         return self._balance
+
+
+# # Test your solution:
 # acc = BankAccount("Alice")
 # print("🟡 Initial balance:", acc.get_balance())
 # acc.deposit(100)
@@ -433,8 +527,28 @@ print("🟢 d1.species:", d1.species)
 
 # Write your code below:
 
+# class SecureAccount:
+#     def __init__(self, pin, balance) -> None:
+#         self.__pin = pin
+#         self.__balance = balance
 
-# Test your solution:
+#     def verify_pin(self, pin):
+#         return self.__pin == pin
+
+#     def get_balance(self, pin):
+#         if pin == self.__pin:
+#             return self.__balance
+#         else:
+#             return "Access Denied"
+
+#     def change_pin(self, oldpin, newpin):
+#         if oldpin == self.__pin:
+#             self.__pin = newpin
+#             return "PIN Changed"
+#         return "Wrong PIN"
+
+
+# # Test your solution:
 # sa = SecureAccount("1234", 1000)
 # print("🟡 verify_pin('1234'):", sa.verify_pin("1234"))
 # print("🟡 verify_pin('0000'):", sa.verify_pin("0000"))
@@ -444,7 +558,9 @@ print("🟢 d1.species:", d1.species)
 #     print(sa.__pin)
 # except AttributeError as e:
 #     print("🟡 sa.__pin raises AttributeError")
-
+# print(sa.change_pin("1234", "0000"))
+# print("🟡 verify_pin('0000'):", sa.verify_pin("0000"))
+# print(sa.change_pin("1234", "0000"))
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 6: Getters and Setters (Manual)
