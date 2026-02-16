@@ -277,12 +277,46 @@
 # Write your code below:
 
 
-# Test your solution:
+# class DatabaseConfig:
+#     host = "localhost"
+#     port = 5432
+#     database = "default"
+
+#     @classmethod
+#     def configure(cls, host, port, database):
+#         cls.host = host
+#         cls.port = port
+#         cls.database = database
+
+#     @classmethod
+#     def from_dict(cls, a_dict):
+#         cls.host = a_dict["host"]
+#         cls.port = a_dict["port"]
+#         cls.database = a_dict["database"]
+
+#         # for key, value in a_dict.items():
+#         #     setattr(cls, key, value)
+#         # You need to use setattr. Dot notation ALWAYS uses the literal name after the dot, not the variable's value.
+
+#     @classmethod
+#     def from_url(cls, url):
+#         cls.host = url[0 : url.find(":")]
+#         cls.port = url[url.find(":") + 1 : url.find("/")]
+#         cls.database = url[url.find("/") + 1 :]
+
+#     @classmethod
+#     def get_connection_string(cls):
+#         return f"{cls.host}:{cls.port}/{cls.database}"
+
+
+# # Test your solution:
 # print("🟡 Initial:", DatabaseConfig.get_connection_string())
 # DatabaseConfig.configure("192.168.1.1", 3306, "mydb")
 # print("🟡 After configure:", DatabaseConfig.get_connection_string())
 # DatabaseConfig.from_url("server:1234/production")
 # print("🟡 After from_url:", DatabaseConfig.get_connection_string())
+# DatabaseConfig.from_dict({"host": 1, "port": 2, "database": 3})
+# print("After from_dict:", DatabaseConfig.get_connection_string())
 
 
 # ----------------------------------------------------------------------
