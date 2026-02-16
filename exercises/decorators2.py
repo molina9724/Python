@@ -339,14 +339,36 @@
 # Write your code below:
 
 
-# Test your solution:
+# class Employee:
+#     def __init__(self, name, role, salary):
+#         self.name = name
+#         self.role = role
+#         self.salary = salary
+
+#     @classmethod
+#     def create_manager(cls, name):
+#         return cls(name, role="Manager", salary=80000)
+
+#     @classmethod
+#     def create_developer(cls, name):
+#         return cls(name, role="Developer", salary=70000)
+
+#     @classmethod
+#     def create_intern(cls, name):
+#         return cls(name, role="Intern", salary=30000)
+
+#     def __str__(self):
+#         return f"{self.name} - {self.role} (${self.salary})"
+
+
+# # Test your solution:
 # mgr = Employee.create_manager("Alice")
 # dev = Employee.create_developer("Bob")
 # intern = Employee.create_intern("Charlie")
 # print("🟡 Manager:", mgr)
 # print("🟡 Developer:", dev)
 # print("🟡 Intern:", intern)
-
+# print(mgr.__str__())
 
 # =====================================================================
 #                      SECTION 3: @property
@@ -469,13 +491,48 @@
 # Write your code below:
 
 
-# Test your solution:
+# class User:
+#     def __init__(self, username, password):
+#         self._username = username
+#         self._password = password
+
+#     @property
+#     def username(self):
+#         return self._username
+
+#     @username.setter
+#     def username(self, value):
+#         self._username = value
+
+#     @username.deleter
+#     def username(self):
+#         self._username = "deleted_user"
+
+#     @property
+#     def password(self):
+#         return "*****"
+
+#     @password.setter
+#     def password(self, new_password):
+#         self._password = new_password
+
+#     @password.deleter
+#     def password(self):
+#         self._password = None
+
+#     def verify_password(self, pwd):
+#         return self._password == pwd
+
+
+# # Test your solution:
 # u = User("john_doe", "secret123")
 # print("🟡 u.username:", u.username)
 # print("🟡 u.password:", u.password)
 # print("🟡 verify_password('secret123'):", u.verify_password("secret123"))
 # del u.username
+# del u.password
 # print("🟡 After delete username:", u.username)
+# print("🟡 After delete password:", u.password)
 
 
 # ----------------------------------------------------------------------
