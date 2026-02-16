@@ -556,7 +556,55 @@
 # Write your code below:
 
 
-# Test your solution:
+# class Rectangle:
+#     def __init__(self, width, height):
+#         self._width = width
+#         self._height = height
+#         self._area_cache = None
+#         self._perimeter_cache = None
+
+#     @property
+#     def width(self):
+#         return self._width
+
+#     @width.setter
+#     def width(self, value):
+#         self._width = value
+#         self._area_cache = None
+#         self._perimeter_cache = None
+
+#     @property
+#     def height(self):
+#         return self._height
+
+#     @height.setter
+#     def height(self, value):
+#         self._height = value
+#         self._area_cache = None
+#         self._perimeter_cache = None
+
+#     @property
+#     def area(self):
+#         if self._area_cache is None:
+#             print("Calculating area...")
+#             self._area_cache = self.width * self.height
+#             return self._area_cache
+#         else:
+#             print("Caching...")
+#             return self._area_cache
+
+#     @property
+#     def perimeter(self):
+#         if self._perimeter_cache is None:
+#             print("Calculating perimeter...")
+#             self._perimeter_cache = self.width * 2 + self.height * 2
+#             return self._perimeter_cache
+#         else:
+#             print("Caching...")
+#             return self._perimeter_cache
+
+
+# # Test your solution:
 # r = Rectangle(5, 3)
 # print("🔴 First r.area call:")
 # print("   Result:", r.area)
@@ -565,6 +613,8 @@
 # r.width = 10
 # print("🔴 After changing width:")
 # print("   Result:", r.area)
+# print(r.perimeter)
+# print(r.perimeter)
 
 
 # =====================================================================
