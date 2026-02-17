@@ -787,8 +787,56 @@
 
 # Write your code below:
 
+# from abc import ABC
+# from abc import abstractmethod
 
-# Test your solution:
+
+# class Vehicle(ABC):
+#     @property
+#     @abstractmethod
+#     def max_speed(self) -> int:
+#         pass
+
+#     @property
+#     @abstractmethod
+#     def fuel_type(self) -> str:
+#         pass
+
+#     def info(self):
+#         return f"{type(self).__name__} - Max Speed: {self.max_speed}, Fuel: {self.fuel_type}"
+
+
+# class Car(Vehicle):
+#     @property
+#     def max_speed(self):
+#         return 200
+
+#     @property
+#     def fuel_type(self):
+#         return "Gasoline"
+
+
+# class ElectricCar(Vehicle):
+#     @property
+#     def max_speed(self):
+#         return 250
+
+#     @property
+#     def fuel_type(self):
+#         return "Electric"
+
+
+# class Bicycle(Vehicle):
+#     @property
+#     def max_speed(self):
+#         return 30
+
+#     @property
+#     def fuel_type(self):
+#         return "Human power"
+
+
+# # Test your solution:
 # car = Car()
 # ecar = ElectricCar()
 # bike = Bicycle()
@@ -820,6 +868,28 @@
 # ----------------------------------------------------------------------
 
 # Write your code below:
+
+from abc import ABC
+from abc import abstractmethod
+
+
+class DataProcessor(ABC):
+    @abstractmethod
+    def read_data(self, source):
+        pass
+
+    @abstractmethod
+    def process_data(self, data):
+        pass
+
+    @abstractmethod
+    def write_data(self, data, destination):
+        pass
+
+    def run(self, source, destination):
+        data = self.read_data(source)
+        processed = self.process_data(data)
+        self.write_data(processed, destination)
 
 
 # Test your solution:
