@@ -635,7 +635,7 @@
 #
 # Create class Circle(Shape):
 # - Attribute: radius
-# - Implement area() and perimeter()
+# - Implement area() and p1erimeter()
 #
 # Test: Shape() -> raises TypeError
 # Test: r = Rectangle(4, 5)
@@ -648,8 +648,36 @@
 
 # Write your code below:
 
+# from abc import ABC, abstractmethod
 
-# Test your solution:
+
+# class Shape(ABC):
+#     @abstractmethod
+#     def area(self):
+#         pass
+
+#     @abstractmethod
+#     def perimeter(self):
+#         raise NotImplementedError("You have to implement the perimeter() method")
+
+#     def describe(self):
+#         return f"This shape has area {self.area()} and perimeter {self.perimeter()}"
+
+
+# class Rectangle(Shape):
+#     def __init__(self, width, height):
+#         super().__init__()
+#         self.width = width
+#         self.height = height
+
+#     def area(self):
+#         return self.width * self.height
+
+#     def perimeter(self):
+#         return self.width * 2 + self.height * 2
+
+
+# # Test your solution:
 # try:
 #     s = Shape()
 # except TypeError as e:
@@ -680,8 +708,50 @@
 
 # Write your code below:
 
+# from abc import ABC
+# from abc import abstractmethod
 
-# Test your solution:
+
+# class Animal(ABC):
+#     is_alive = True
+
+#     @abstractmethod
+#     def speak(self) -> str:
+#         pass
+
+#     @abstractmethod
+#     def move(self) -> str:
+#         pass
+
+#     def describe(self):
+#         return f"{type(self).__name__} says {self.speak()} and {self.move()}"
+
+
+# class Dog(Animal):
+#     def move(self):
+#         return "runs"
+
+#     def speak(self):
+#         return "Woof!"
+
+
+# class Cat(Animal):
+#     def move(self):
+#         return "walks"
+
+#     def speak(self):
+#         return "Meow!"
+
+
+# class Bird(Animal):
+#     def move(self):
+#         return "flies"
+
+#     def speak(self):
+#         return "Chirp!"
+
+
+# # Test your solution:
 # d = Dog()
 # c = Cat()
 # b = Bird()
