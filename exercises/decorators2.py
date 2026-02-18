@@ -391,9 +391,27 @@
 # ----------------------------------------------------------------------
 
 # Write your code below:
+# import math
 
 
-# Test your solution:
+# class Circle:
+#     def __init__(self, radius):
+#         self.radius = radius
+
+#     @property
+#     def diameter(self):
+#         return self.radius * 2
+
+#     @property
+#     def area(self):
+#         return math.pi * self.radius**2
+
+#     @property
+#     def circumference(self):
+#         return 2 * math.pi * self.radius
+
+
+# # Test your solution:
 # c = Circle(5)
 # print("🟢 c.radius:", c.radius)
 # print("🟢 c.diameter:", c.diameter)
@@ -426,7 +444,37 @@
 # Write your code below:
 
 
-# Test your solution:
+# class Temperature:
+#     def __init__(self, celsius):
+#         self._celsius = celsius
+
+#     @property
+#     def celsius(self):
+#         return self._celsius
+
+#     @celsius.setter
+#     def celsius(self, value):
+#         if value >= -273.15:
+#             self._celsius = value
+
+#     @property
+#     def fahrenheit(self):
+#         return self._celsius * 9 / 5 + 32
+
+#     @fahrenheit.setter
+#     def fahrenheit(self, value):
+#         self._celsius = value
+
+#     @property
+#     def kelvin(self):
+#         return self._celsius + 273.15
+
+#     @kelvin.setter
+#     def kelvin(self, value):
+#         self._celsius = value
+
+
+# # Test your solution:
 # t = Temperature(25)
 # print("🟡 t.celsius:", t.celsius)
 # print("🟡 t.fahrenheit:", t.fahrenheit)
@@ -457,7 +505,47 @@
 # Write your code below:
 
 
-# Test your solution:
+# class Person:
+#     def __init__(self, name, age, email):
+#         self._name = name
+#         self._age = age
+#         self._email = email
+
+#     @property
+#     def name(self):
+#         return self._name
+
+#     @name.setter
+#     def name(self, value):
+#         if len(value) != 0:
+#             self._name = value
+#         else:
+#             print("Error: name must be non-empty")
+
+#     @property
+#     def age(self):
+#         return self._age
+
+#     @age.setter
+#     def age(self, value):
+#         if 0 <= value <= 150:
+#             self._age = value
+#         else:
+#             print("Error: age must be between 0 and 150")
+
+#     @property
+#     def email(self):
+#         return self._email
+
+#     @email.setter
+#     def email(self, value):
+#         if "@" in value:
+#             self._email = value
+#         else:
+#             print("Error: email must contain an '@'")
+
+
+# # Test your solution:
 # p = Person("Alice", 30, "alice@email.com")
 # print("🟡 p.name:", p.name)
 # p.name = ""
@@ -466,7 +554,8 @@
 # print("🟡 After invalid age:", p.age)
 # p.name = "Bob"
 # print("🟡 After valid name change:", p.name)
-
+# p.email = "invalid"
+# print(p.email)
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 6: Property with Deleter
@@ -869,30 +958,52 @@
 
 # Write your code below:
 
-from abc import ABC
-from abc import abstractmethod
+# from abc import ABC
+# from abc import abstractmethod
 
 
-class DataProcessor(ABC):
-    @abstractmethod
-    def read_data(self, source):
-        pass
+# class DataProcessor(ABC):
+#     @abstractmethod
+#     def read_data(self, source) -> str:
+#         pass
 
-    @abstractmethod
-    def process_data(self, data):
-        pass
+#     @abstractmethod
+#     def process_data(self, data) -> str:
+#         pass
 
-    @abstractmethod
-    def write_data(self, data, destination):
-        pass
+#     @abstractmethod
+#     def write_data(self, data, destination) -> str:
+#         pass
 
-    def run(self, source, destination):
-        data = self.read_data(source)
-        processed = self.process_data(data)
-        self.write_data(processed, destination)
+#     def run(self, source, destination):
+#         data = self.read_data(source)
+#         processed = self.process_data(data)
+#         self.write_data(processed, destination)
 
 
-# Test your solution:
+# class CSVProcessor(DataProcessor):
+#     def read_data(self, source):
+#         return f"Reading CSV from {source}"
+
+#     def process_data(self, data):
+#         return f"Processing CSV: {data}"
+
+#     def write_data(self, data, destination):
+#         return f"Writing CSV to {destination}"
+
+
+# class JSONProcessor(DataProcessor):
+#     def read_data(self, source):
+#         return f"Reading JSON from {source}"
+
+#     def process_data(self, data):
+#         return f"Processing JSON: {data}"
+
+#     def write_data(self, data, destination):
+#         return f"Writing JSON to {destination}"
+
+
+# # Test your solution:
 # csv = CSVProcessor()
 # print("🔴 CSVProcessor.run():")
 # csv.run("input.csv", "output.csv")
@@ -934,16 +1045,69 @@ class DataProcessor(ABC):
 
 # Write your code below:
 
+import random
+
+
+class BankAccount:
+    bank_name = "MyBank"
+    total_accounts = 0
+
+    def __init__(self, owner, account_number="", balance=0):
+        self._account_number = BankAccount.generate_account_number()
+        self._balance = balance
+        self._owner = owner
+        BankAccount.total_accounts += 1
+
+    @staticmethod
+    def generate_account_number():
+        account = ""
+        for _ in range(0, 10):
+            account += str(random.randint(0, 9))
+        return account
+
+    @staticmethod
+    def validate_amount(amount):
+        return amount > 0
+
+    @classmethod
+    def get_bank_info(cls):
+        return f"{cls.bank_name} has {cls.total_accounts} accounts"
+
+    @classmethod
+    def change_bank_name(cls, name):
+        cls.bank_name = name
+
+    @property
+    def balance(self):
+        return self._balance
+
+    @property
+    def owner(self):
+        return self._owner
+
+    @owner.setter
+    def owner(self, owner):
+        if len(owner) > 0:
+            self._owner = owner
+
+    def deposit(self, amount):
+        if amount > 0:
+            self._balance += amount
+
+    def withdraw(self, amount):
+        if amount <= self._balance:
+            self._balance -= amount
+
 
 # Test your solution:
-# print("🔴 Initial bank info:", BankAccount.get_bank_info())
-# acc = BankAccount("Alice")
-# print("🔴 After creating account:", BankAccount.get_bank_info())
-# print("🔴 Balance:", acc.balance)
-# acc.deposit(1000)
-# print("🔴 After deposit:", acc.balance)
-# acc.withdraw(300)
-# print("🔴 After withdraw:", acc.balance)
+print("🔴 Initial bank info:", BankAccount.get_bank_info())
+acc = BankAccount("Alice")
+print("🔴 After creating account:", BankAccount.get_bank_info())
+print("🔴 Balance:", acc.balance)
+acc.deposit(1000)
+print("🔴 After deposit:", acc.balance)
+acc.withdraw(300)
+print("🔴 After withdraw:", acc.balance)
 
 
 # ----------------------------------------------------------------------
