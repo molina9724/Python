@@ -1045,69 +1045,69 @@
 
 # Write your code below:
 
-import random
+# import random
 
 
-class BankAccount:
-    bank_name = "MyBank"
-    total_accounts = 0
+# class BankAccount:
+#     bank_name = "MyBank"
+#     total_accounts = 0
 
-    def __init__(self, owner, account_number="", balance=0):
-        self._account_number = BankAccount.generate_account_number()
-        self._balance = balance
-        self._owner = owner
-        BankAccount.total_accounts += 1
+#     def __init__(self, owner, account_number="", balance=0):
+#         self._account_number = BankAccount.generate_account_number()
+#         self._balance = balance
+#         self._owner = owner
+#         BankAccount.total_accounts += 1
 
-    @staticmethod
-    def generate_account_number():
-        account = ""
-        for _ in range(0, 10):
-            account += str(random.randint(0, 9))
-        return account
+#     @staticmethod
+#     def generate_account_number():
+#         account = ""
+#         for _ in range(0, 10):
+#             account += str(random.randint(0, 9))
+#         return account
 
-    @staticmethod
-    def validate_amount(amount):
-        return amount > 0
+#     @staticmethod
+#     def validate_amount(amount):
+#         return amount > 0
 
-    @classmethod
-    def get_bank_info(cls):
-        return f"{cls.bank_name} has {cls.total_accounts} accounts"
+#     @classmethod
+#     def get_bank_info(cls):
+#         return f"{cls.bank_name} has {cls.total_accounts} accounts"
 
-    @classmethod
-    def change_bank_name(cls, name):
-        cls.bank_name = name
+#     @classmethod
+#     def change_bank_name(cls, name):
+#         cls.bank_name = name
 
-    @property
-    def balance(self):
-        return self._balance
+#     @property
+#     def balance(self):
+#         return self._balance
 
-    @property
-    def owner(self):
-        return self._owner
+#     @property
+#     def owner(self):
+#         return self._owner
 
-    @owner.setter
-    def owner(self, owner):
-        if len(owner) > 0:
-            self._owner = owner
+#     @owner.setter
+#     def owner(self, owner):
+#         if len(owner) > 0:
+#             self._owner = owner
 
-    def deposit(self, amount):
-        if amount > 0:
-            self._balance += amount
+#     def deposit(self, amount):
+#         if amount > 0:
+#             self._balance += amount
 
-    def withdraw(self, amount):
-        if amount <= self._balance:
-            self._balance -= amount
+#     def withdraw(self, amount):
+#         if amount <= self._balance:
+#             self._balance -= amount
 
 
-# Test your solution:
-print("🔴 Initial bank info:", BankAccount.get_bank_info())
-acc = BankAccount("Alice")
-print("🔴 After creating account:", BankAccount.get_bank_info())
-print("🔴 Balance:", acc.balance)
-acc.deposit(1000)
-print("🔴 After deposit:", acc.balance)
-acc.withdraw(300)
-print("🔴 After withdraw:", acc.balance)
+# # Test your solution:
+# print("🔴 Initial bank info:", BankAccount.get_bank_info())
+# acc = BankAccount("Alice")
+# print("🔴 After creating account:", BankAccount.get_bank_info())
+# print("🔴 Balance:", acc.balance)
+# acc.deposit(1000)
+# print("🔴 After deposit:", acc.balance)
+# acc.withdraw(300)
+# print("🔴 After withdraw:", acc.balance)
 
 
 # ----------------------------------------------------------------------
@@ -1133,8 +1133,44 @@ print("🔴 After withdraw:", acc.balance)
 
 # Write your code below:
 
+# from abc import ABC
+# from abc import abstractmethod
 
-# Test your solution:
+
+# class Logger(ABC):
+#     log_level = "INFO"
+
+#     @classmethod
+#     def set_log_level(cls, level):
+#         cls.log_level = level
+
+#     @classmethod
+#     def get_log_level(cls):
+#         return cls.log_level
+
+#     @staticmethod
+#     def format_message(level, message):
+#         return f"[{level}] {message}"
+
+#     @abstractmethod
+#     def log(self, message):
+#         pass
+
+
+# class ConsoleLogger(Logger):
+#     def log(self, message):
+#         print(self.format_message(self.log_level, message))
+
+
+# class FileLogger(Logger):
+#     def __init__(self, filename):
+#         super().__init__()
+#         self.filename = filename
+
+#     def log(self, message):
+#         return f"{self.filename}: {self.format_message(self.log_level, message)}"
+
+# # Test your solution:
 # Logger.set_log_level("DEBUG")
 # print("🔴 Log level:", Logger.get_log_level())
 # console = ConsoleLogger()
@@ -1217,15 +1253,68 @@ print("🔴 After withdraw:", acc.balance)
 # ----------------------------------------------------------------------
 
 # Write your code below:
+# from abc import ABC
+# from abc import abstractmethod
 
 
-# Test your solution:
+# class Plugin(ABC):
+#     registered_plugins = []
+
+#     @abstractmethod
+#     def execute(self, data):
+#         pass
+
+#     @property
+#     @abstractmethod
+#     def name(self):
+#         pass
+
+#     @property
+#     @abstractmethod
+#     def version(self):
+#         pass
+
+#     @classmethod
+#     def register(cls, plugin):
+#         cls.registered_plugins.append(str(plugin.__name__))
+
+#     @classmethod
+#     def get_all_plugins(cls):
+#         return cls.registered_plugins
+
+#     @staticmethod
+#     def validate_plugin():
+#         return (
+#             True if (Plugin.name is not None and Plugin.version is not None) else False
+#         )
+
+
+# class UppercasePlugin(Plugin):
+#     name = "Uppercase"  # type: ignore
+#     version = "1.0"  # type: ignore
+
+#     def execute(self, data):
+#         return data.upper()
+
+
+# class ReversePlugin(Plugin):
+#     name = "Reverse"  # type: ignore
+#     version = "1.0"  # type: ignore
+
+#     def execute(self, data):
+#         return data[::-1]
+
+
+# # Test your solution:
 # Plugin.register(UppercasePlugin)
 # Plugin.register(ReversePlugin)
-# print("🔴 Registered plugins:", Plugin.get_all_plugins())
+# print("🔴 Registered plugins:", (Plugin.get_all_plugins()))
 # up = UppercasePlugin()
+# print(up.validate_plugin())
 # print("🔴 UppercasePlugin.execute('hello'):", up.execute("hello"))
-
+# lo = ReversePlugin()
+# print("🔴 ReversePlugin.execute('hello'):", lo.execute("hello"))
+# print(lo.validate_plugin())
 
 # ----------------------------------------------------------------------
 # 🔴 HARD 8: ORM-Style Model
