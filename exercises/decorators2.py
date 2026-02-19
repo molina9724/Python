@@ -1345,13 +1345,68 @@
 
 # Write your code below:
 
+# from abc import ABC
+# from abc import abstractmethod
 
-# Test your solution:
+
+# class Model(ABC):
+#     _table_name = None
+
+#     @classmethod
+#     def table_name(cls):
+#         return cls._table_name
+
+#     @classmethod
+#     def create_table(cls):
+#         return f'"CREATE TABLE {cls.table_name()}"'
+
+#     @classmethod
+#     def find(cls, id):
+#         return f'"SELECT * FROM {cls.table_name()} WHERE ID = {id}"'
+
+#     @classmethod
+#     def all(cls):
+#         return f'"SELECT * FROM {cls.table_name()}"'
+
+#     @property
+#     def id(self):
+#         return self.identification
+
+#     @id.setter
+#     def id(self, value):
+#         self.identification = value
+
+#     def save(self):
+#         return f'"INSERT INTO {self._table_name}"'
+
+#     def delete(self):
+#         return f'"DELETE FROM {self._table_name} WHERE id = {self.id}"'
+
+#     @staticmethod
+#     def sanitize(value):
+#         return value.replace('"', "")
+
+
+# class User(Model):
+#     _table_name = "users"
+
+#     def __init__(self, identification, name, email):
+#         super().__init__()
+#         self.identification = identification
+#         self.name = name
+#         self.email = email
+
+
+# # Test your solution:
 # print("🔴 User.table_name():", User.table_name())
 # print("🔴 User.find(1):", User.find(1))
 # print("🔴 User.all():", User.all())
 # u = User(1, "Alice", "alice@email.com")
+# u.id = 2
+# print("🔴 User.table_name():", u.id)
 # print("🔴 u.save():", u.save())
+# print("🔴 User.all():", u.delete())
+# print(User.sanitize(u.find(1)))
 
 
 # ----------------------------------------------------------------------
@@ -1375,8 +1430,49 @@
 
 # Write your code below:
 
+# from abc import ABC
+# from abc import abstractmethod
+# import json
 
-# Test your solution:
+
+# class Serializable(ABC):
+#     @abstractmethod
+#     def to_dict(self):
+#         pass
+
+#     @classmethod
+#     def from_dict(cls, a_dict):
+#         pass
+
+#     def to_json(self):
+#         return json.dumps(self.to_dict())
+
+#     @classmethod
+#     def from_json(cls, json_string):
+#         a_dict = json.loads(json_string)
+#         return cls.from_dict(a_dict)
+
+
+# class Product(Serializable):
+#     def __init__(self, name, price, quantity):
+#         super().__init__()
+#         self.name = name
+#         self.price = price
+#         self.quantity = quantity
+
+#     def to_dict(self):
+#         a_dict = dict()
+#         a_dict["name"] = self.name
+#         a_dict["price"] = self.price
+#         a_dict["quantity"] = self.quantity
+#         return a_dict
+
+#     @classmethod
+#     def from_dict(cls, a_dict):
+#         return cls(a_dict["name"], a_dict["price"], a_dict["quantity"])
+
+
+# # Test your solution:
 # p = Product("Laptop", 999.99, 5)
 # print("🔴 p.to_dict():", p.to_dict())
 # print("🔴 p.to_json():", p.to_json())
