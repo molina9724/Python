@@ -146,15 +146,17 @@
 #
 # This is a real interview question at FAANG companies.
 #
-# Hint: You need to track minimum price seen so far while iterating
-#
 # Test: Find the buy day, sell day, and max profit
 # ----------------------------------------------------------------------
+
+# Comprar en dia 4 en 260
+# Vender en dia 6 en 290
 
 # stock_prices = [310, 315, 275, 295, 260, 270, 290, 230, 255, 250]
 # # Days:          0    1    2    3    4    5    6    7    8    9
 
 # Write your code below:
+
 
 
 # Test your solution:
