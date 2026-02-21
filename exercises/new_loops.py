@@ -21,29 +21,36 @@
 # Input: ["Song A", "Song B", "Song C", "Song D"]
 # Output: [("Song A", "Song B"), ("Song B", "Song C"),
 #          ("Song C", "Song D"), ("Song D", "Song A")]
+#
+# Test: pairs -> [('Bohemian Rhapsody', 'Hotel California'),
+#                 ('Hotel California', 'Stairway to Heaven'),
+#                 ('Stairway to Heaven', 'Sweet Child O Mine'),
+#                 ('Sweet Child O Mine', 'Bohemian Rhapsody')]
 # ----------------------------------------------------------------------
 
-import random
-from datetime import datetime, timedelta
-playlist = [
-    "Bohemian Rhapsody",
-    "Hotel California",
-    "Stairway to Heaven",
-    "Sweet Child O Mine",
-]
+# import random
+# from datetime import datetime, timedelta
+
+# playlist = [
+#     "Bohemian Rhapsody",
+#     "Hotel California",
+#     "Stairway to Heaven",
+#     "Sweet Child O Mine",
+# ]
 
 # Write your code below:
 
+# pairs = []
+# for index in range(len(playlist)):
+#     if index == len(playlist) - 1:
+#         pairs.append((playlist[index], playlist[0]))
+#     else:
+#         pairs.append((playlist[index], playlist[index + 1]))
 
 # Test your solution:
 # print("🟢 Pairs:")
 # for pair in pairs:
 #     print(f"  Now: {pair[0]} → Next: {pair[1]}")
-# Expected:
-# ('Bohemian Rhapsody', 'Hotel California')
-# ('Hotel California', 'Stairway to Heaven')
-# ('Stairway to Heaven', 'Sweet Child O Mine')
-# ('Sweet Child O Mine', 'Bohemian Rhapsody')
 
 
 # ----------------------------------------------------------------------
@@ -53,25 +60,29 @@ playlist = [
 #
 # Data structure: {product: [store1_price, store2_price, store3_price]}
 # Store names: ["Amazon", "Walmart", "Target"]
+#
+# Test: "iPhone 15: Best price $979 at Walmart (save $20 vs worst)"
+# Test: "AirPods Pro: Best price $239 at Walmart (save $20 vs worst)"
+# Test: "MacBook Air: Best price $1079 at Target (save $70 vs worst)"
+# Test: "iPad: Best price $429 at Walmart (save $20 vs worst)"
 # ----------------------------------------------------------------------
 
-prices = {
-    "iPhone 15": [999, 979, 989],
-    "AirPods Pro": [249, 239, 259],
-    "MacBook Air": [1099, 1149, 1079],
-    "iPad": [449, 429, 449],
-}
-stores = ["Amazon", "Walmart", "Target"]
+# prices = {
+#     "iPhone 15": [999, 979, 989],
+#     "AirPods Pro": [249, 239, 259],
+#     "MacBook Air": [1099, 1149, 1079],
+#     "iPad": [449, 429, 449],
+# }
+# stores = ["Amazon", "Walmart", "Target"]
 
 # Write your code below:
 
+# for key, value in prices.items():
+#     print(
+#         f"{key}: Best price ${min(value)} at {stores[value.index(min(value))]} (save ${max(value) - min(value)} vs {stores[value.index(max(value))]})"
+#     )
 
 # Test your solution:
-# Expected:
-# "iPhone 15: Best price $979 at Walmart (save $20 vs worst)"
-# "AirPods Pro: Best price $239 at Walmart (save $20 vs worst)"
-# "MacBook Air: Best price $1079 at Target (save $70 vs worst)"
-# "iPad: Best price $429 at Walmart (save $20 vs worst)"
 
 
 # ----------------------------------------------------------------------
@@ -81,25 +92,8 @@ stores = ["Amazon", "Walmart", "Target"]
 #
 # Input: List of (sender, message) tuples
 # Output: Grouped messages
-# ----------------------------------------------------------------------
-
-chat_log = [
-    ("Alice", "Hey!"),
-    ("Alice", "You there?"),
-    ("Alice", "Hello???"),
-    ("Bob", "Sorry, was in a meeting"),
-    ("Bob", "What's up?"),
-    ("Alice", "Want to grab lunch?"),
-    ("Bob", "Sure!"),
-    ("Bob", "Where?"),
-    ("Bob", "I'm thinking tacos"),
-]
-
-# Write your code below:
-
-
-# Test your solution:
-# Expected:
+#
+# Test output:
 # Alice:
 #   - Hey!
 #   - You there?
@@ -113,6 +107,31 @@ chat_log = [
 #   - Sure!
 #   - Where?
 #   - I'm thinking tacos
+# ----------------------------------------------------------------------
+
+# chat_log = [
+#     ("Alice", "Hey!"),
+#     ("Alice", "You there?"),
+#     ("Alice", "Hello???"),
+#     ("Bob", "Sorry, was in a meeting"),
+#     ("Bob", "What's up?"),
+#     ("Alice", "Want to grab lunch?"),
+#     ("Bob", "Sure!"),
+#     ("Bob", "Where?"),
+#     ("Bob", "I'm thinking tacos"),
+# ]
+
+# # Write your code below:
+# previous_person = chat_log[0][0]
+# print(f"{previous_person}:")
+# for sender, message in chat_log:
+#     if sender != previous_person:
+#         print(f"{sender}:")
+#     print(f"    - {message}")
+#     previous_person = sender
+
+
+# Test your solution:
 
 
 # =====================================================================
@@ -128,16 +147,17 @@ chat_log = [
 # This is a real interview question at FAANG companies.
 #
 # Hint: You need to track minimum price seen so far while iterating
+#
+# Test: Find the buy day, sell day, and max profit
 # ----------------------------------------------------------------------
 
-stock_prices = [310, 315, 275, 295, 260, 270, 290, 230, 255, 250]
-# Days:          0    1    2    3    4    5    6    7    8    9
+# stock_prices = [310, 315, 275, 295, 260, 270, 290, 230, 255, 250]
+# # Days:          0    1    2    3    4    5    6    7    8    9
 
 # Write your code below:
 
 
 # Test your solution:
-# Expected: Find the buy day, sell day, and max profit
 # print("🟡 Buy on day X at $Y, sell on day A at $B")
 # print("🟡 Profit: $Z")
 
@@ -148,26 +168,28 @@ stock_prices = [310, 315, 275, 295, 260, 270, 290, 230, 255, 250]
 # (3+ errors within 5 seconds = "error burst")
 #
 # Real scenario: Alert system for server monitoring
+#
+# Test: "Burst at 1:00:00 AM - 3 errors in 2 seconds"
+# Test: "Burst at 2:30:00 AM - 4 errors in 3 seconds"
 # ----------------------------------------------------------------------
 
-# Timestamps in seconds since midnight when errors occurred
-error_timestamps = [
-    3600,  # 1:00:00 AM
-    3601,  # 1:00:01 AM
-    3602,  # 1:00:02 AM  <- burst 1 (3 errors in 2 sec)
-    7200,  # 2:00:00 AM  (isolated error)
-    9000,  # 2:30:00 AM
-    9001,  # 2:30:01 AM
-    9002,  # 2:30:02 AM
-    9003,  # 2:30:03 AM  <- burst 2 (4 errors in 3 sec)
-    14400,  # 4:00:00 AM  (isolated error)
-]
+# # Timestamps in seconds since midnight when errors occurred
+# error_timestamps = [
+#     3600,  # 1:00:00 AM
+#     3601,  # 1:00:01 AM
+#     3602,  # 1:00:02 AM  <- burst 1 (3 errors in 2 sec)
+#     7200,  # 2:00:00 AM  (isolated error)
+#     9000,  # 2:30:00 AM
+#     9001,  # 2:30:01 AM
+#     9002,  # 2:30:02 AM
+#     9003,  # 2:30:03 AM  <- burst 2 (4 errors in 3 sec)
+#     14400,  # 4:00:00 AM  (isolated error)
+# ]
 
 # Write your code below:
 
 
 # Test your solution:
-# Expected:
 # print("🟡 Burst at 1:00:00 AM - 3 errors in 2 seconds")
 # print("🟡 Burst at 2:30:00 AM - 4 errors in 3 seconds")
 
@@ -178,11 +200,15 @@ error_timestamps = [
 # But you can only process 100 at a time (memory limits)
 #
 # Simulate batch processing with progress reporting
+#
+# Test: "Processing batch 1: users 1-100 (10% complete)"
+# Test: "Processing batch 2: users 101-200 (20% complete)"
+# ... etc
 # ----------------------------------------------------------------------
 
-# Simulated user IDs (imagine this came from a database)
-all_user_ids = list(range(1, 1001))  # Users 1-1000
-BATCH_SIZE = 100
+# # Simulated user IDs (imagine this came from a database)
+# all_user_ids = list(range(1, 1001))  # Users 1-1000
+# BATCH_SIZE = 100
 
 # Write your code below:
 # 1. Process in batches of 100
@@ -190,10 +216,6 @@ BATCH_SIZE = 100
 
 
 # Test your solution:
-# Expected:
-# print("🟡 Processing batch 1: users 1-100 (10% complete)")
-# print("🟡 Processing batch 2: users 101-200 (20% complete)")
-# ... etc
 
 
 # ----------------------------------------------------------------------
@@ -201,26 +223,27 @@ BATCH_SIZE = 100
 # Given everyone's busy times, find when everyone is FREE
 #
 # Real scenario: Google Calendar's "Find a time" feature
-# ----------------------------------------------------------------------
-
-# Times are in 24h format (9 = 9:00 AM, 14 = 2:00 PM)
-# Each person has list of (start, end) busy blocks
-
-schedules = {
-    "Alice": [(9, 10), (12, 13), (14, 16)],
-    "Bob": [(10, 11), (12, 14), (16, 17)],
-    "Charlie": [(9, 11), (13, 14), (15, 16)],
-}
-
+#
 # Working hours: 9 AM to 6 PM (9-18)
 # Find all 1-hour slots where everyone is free
+#
+# Test: Free slots at 11:00, 17:00
+# ----------------------------------------------------------------------
+
+# # Times are in 24h format (9 = 9:00 AM, 14 = 2:00 PM)
+# # Each person has list of (start, end) busy blocks
+#
+# schedules = {
+#     "Alice": [(9, 10), (12, 13), (14, 16)],
+#     "Bob": [(10, 11), (12, 14), (16, 17)],
+#     "Charlie": [(9, 11), (13, 14), (15, 16)],
+# }
 
 # Write your code below:
 
 
 # Test your solution:
-# Expected:
-# print("🟡 Free slots: 11:00, 17:00")
+# print("🟡 Free slots:", free_slots)
 
 
 # ----------------------------------------------------------------------
@@ -229,21 +252,22 @@ schedules = {
 # Given text and max width, break into lines without cutting words
 #
 # Real scenario: Every text editor, terminal, messaging app
+#
+# Test output (max_width=30):
+# "The quick brown fox jumps"
+# "over the lazy dog. Pack my"
+# "box with five dozen liquor"
+# "jugs."
 # ----------------------------------------------------------------------
 
-text = "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs."
-max_width = 30
+# text = "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs."
+# max_width = 30
 
 # Write your code below:
 
 
 # Test your solution:
-# Expected:
 # print("🟡 Wrapped text:")
-# "The quick brown fox jumps"
-# "over the lazy dog. Pack my"
-# "box with five dozen liquor"
-# "jugs."
 
 
 # =====================================================================
@@ -257,31 +281,34 @@ max_width = 30
 # Window size: 5 seconds
 #
 # Real scenario: DDoS detection, performance monitoring
+#
+# Test: Second 5: avg=119.0 - Normal
+# Test: Second 15: avg=160.4 - ⚠️ ALERT: High traffic!
 # ----------------------------------------------------------------------
 
-# Requests per second for 20 seconds
-requests_per_second = [
-    45,
-    52,
-    48,
-    150,
-    200,
-    180,
-    160,
-    55,
-    50,
-    48,
-    52,
-    49,
-    51,
-    300,
-    350,
-    400,
-    380,
-    60,
-    55,
-    50,
-]
+# # Requests per second for 20 seconds
+# requests_per_second = [
+#     45,
+#     52,
+#     48,
+#     150,
+#     200,
+#     180,
+#     160,
+#     55,
+#     50,
+#     48,
+#     52,
+#     49,
+#     51,
+#     300,
+#     350,
+#     400,
+#     380,
+#     60,
+#     55,
+#     50,
+# ]
 
 # Write your code below:
 # Calculate 5-second moving average
@@ -289,11 +316,6 @@ requests_per_second = [
 
 
 # Test your solution:
-# Expected:
-# print("🔴 Second 5: avg=119.0 - Normal")
-# print("🔴 Second 6: avg=126.0 - Normal")
-# ...
-# print("🔴 Second 15: avg=160.4 - ⚠️ ALERT: High traffic!")
 
 
 # ----------------------------------------------------------------------
@@ -302,25 +324,26 @@ requests_per_second = [
 # Backwards iteration for undo, forward for redo
 #
 # Real scenario: Every application with undo functionality
-# ----------------------------------------------------------------------
-
-# Action history: (action_type, data)
-history = [
-    ("insert", "Hello"),
-    ("insert", " "),
-    ("insert", "World"),
-    ("delete", "World"),
-    ("insert", "Python"),
-    ("format", "bold"),
-]
-
-current_position = len(history)  # At the end (all actions applied)
-
-# Write your code below:
+#
 # Implement:
 # undo(n) - go back n steps, return the actions being undone
 # redo(n) - go forward n steps, return the actions being redone
 # get_current_state_description() - describe what's currently applied
+# ----------------------------------------------------------------------
+
+# # Action history: (action_type, data)
+# history = [
+#     ("insert", "Hello"),
+#     ("insert", " "),
+#     ("insert", "World"),
+#     ("delete", "World"),
+#     ("insert", "Python"),
+#     ("format", "bold"),
+# ]
+#
+# current_position = len(history)  # At the end (all actions applied)
+
+# Write your code below:
 
 
 # Test your solution:
@@ -336,28 +359,28 @@ current_position = len(history)  # At the end (all actions applied)
 # Same score = same rank, next rank skips appropriately
 #
 # Real scenario: Any competitive platform (games, Kaggle, etc.)
+#
+# Test: Rank 1: Alice - 2500 pts
+# Test: Rank 1: Bob - 2500 pts
+# Test: Rank 3: Charlie - 2400 pts   (rank 3, not 2!)
+# Test: Rank 3: Diana - 2400 pts
+# Test: Rank 3: Eve - 2400 pts
+# Test: Rank 6: Frank - 2200 pts     (rank 6, not 4!)
 # ----------------------------------------------------------------------
 
-scores = [
-    ("Alice", 2500),
-    ("Bob", 2500),
-    ("Charlie", 2400),
-    ("Diana", 2400),
-    ("Eve", 2400),
-    ("Frank", 2200),
-]
+# scores = [
+#     ("Alice", 2500),
+#     ("Bob", 2500),
+#     ("Charlie", 2400),
+#     ("Diana", 2400),
+#     ("Eve", 2400),
+#     ("Frank", 2200),
+# ]
 
 # Write your code below:
 
 
 # Test your solution:
-# Expected:
-# print("🔴 Rank 1: Alice - 2500 pts")
-# print("🔴 Rank 1: Bob - 2500 pts")
-# print("🔴 Rank 3: Charlie - 2400 pts")   (rank 3, not 2!)
-# print("🔴 Rank 3: Diana - 2400 pts")
-# print("🔴 Rank 3: Eve - 2400 pts")
-# print("🔴 Rank 6: Frank - 2200 pts")     (rank 6, not 4!)
 
 
 # ----------------------------------------------------------------------
@@ -366,36 +389,37 @@ scores = [
 # Must install dependencies before the package that needs them
 #
 # Real scenario: npm, pip, apt - package managers
+#
+# Test install order:
+# 1. core-js (no deps)
+# 2. babel (needs core-js ✓)
+# 3. react (needs babel ✓)
+# 4. axios (no deps)
+# 5. lodash (no deps)
+# 6. web-app (needs react ✓, axios ✓, lodash ✓)
+# 7. jest (no deps)
+# 8. testing-lib (needs jest ✓, react ✓)
 # ----------------------------------------------------------------------
 
-# package: [list of dependencies]
-packages = {
-    "web-app": ["react", "axios", "lodash"],
-    "react": ["babel"],
-    "axios": [],
-    "lodash": [],
-    "babel": ["core-js"],
-    "core-js": [],
-    "testing-lib": ["jest", "react"],
-    "jest": [],
-}
-
-# User wants to install "web-app" and "testing-lib"
-to_install = ["web-app", "testing-lib"]
+# # package: [list of dependencies]
+# packages = {
+#     "web-app": ["react", "axios", "lodash"],
+#     "react": ["babel"],
+#     "axios": [],
+#     "lodash": [],
+#     "babel": ["core-js"],
+#     "core-js": [],
+#     "testing-lib": ["jest", "react"],
+#     "jest": [],
+# }
+#
+# # User wants to install "web-app" and "testing-lib"
+# to_install = ["web-app", "testing-lib"]
 
 # Write your code below:
 
 
 # Test your solution:
-# Expected install order:
-# print("🔴 1. core-js (no deps)")
-# print("🔴 2. babel (needs core-js ✓)")
-# print("🔴 3. react (needs babel ✓)")
-# print("🔴 4. axios (no deps)")
-# print("🔴 5. lodash (no deps)")
-# print("🔴 6. web-app (needs react ✓, axios ✓, lodash ✓)")
-# print("🔴 7. jest (no deps)")
-# print("🔴 8. testing-lib (needs jest ✓, react ✓)")
 
 
 # ----------------------------------------------------------------------
@@ -404,20 +428,19 @@ to_install = ["web-app", "testing-lib"]
 # Iterate through paired data to calculate improvement
 #
 # Real scenario: Every tech company runs A/B tests
-# ----------------------------------------------------------------------
-
-# Daily conversion rates (%) for version A and B over 2 weeks
-version_a = [2.1, 2.3, 2.0, 2.2, 2.4, 2.1,
-             2.3, 2.2, 2.0, 2.1, 2.3, 2.2, 2.1, 2.2]
-version_b = [2.4, 2.5, 2.3, 2.6, 2.4, 2.5,
-             2.7, 2.4, 2.3, 2.5, 2.6, 2.4, 2.5, 2.6]
-
-# Write your code below:
+#
 # Calculate:
 # 1. Days where B beat A (and by how much)
 # 2. Average improvement of B over A
 # 3. Consistency (did B win every day?)
 # 4. Verdict: "Version B is better with X% average improvement"
+# ----------------------------------------------------------------------
+
+# # Daily conversion rates (%) for version A and B over 2 weeks
+# version_a = [2.1, 2.3, 2.0, 2.2, 2.4, 2.1, 2.3, 2.2, 2.0, 2.1, 2.3, 2.2, 2.1, 2.2]
+# version_b = [2.4, 2.5, 2.3, 2.6, 2.4, 2.5, 2.7, 2.4, 2.3, 2.5, 2.6, 2.4, 2.5, 2.6]
+
+# Write your code below:
 
 
 # Test your solution:
@@ -432,23 +455,23 @@ version_b = [2.4, 2.5, 2.3, 2.6, 2.4, 2.5,
 # Iterate through sorted players to find best pairs
 #
 # Real scenario: Any multiplayer game matchmaking
-# ----------------------------------------------------------------------
-
-players = [
-    {"name": "xX_Destroyer_Xx", "skill": 2100, "waiting_since": 45},
-    {"name": "CasualGamer42", "skill": 1200, "waiting_since": 120},
-    {"name": "ProPlayer99", "skill": 2050, "waiting_since": 30},
-    {"name": "Newbie123", "skill": 800, "waiting_since": 90},
-    {"name": "AverageJoe", "skill": 1500, "waiting_since": 60},
-    {"name": "SilverSurfer", "skill": 1550, "waiting_since": 55},
-    {"name": "BronzeBeast", "skill": 850, "waiting_since": 80},
-    {"name": "GoldGamer", "skill": 1800, "waiting_since": 40},
-]
-
+#
 # Rules:
 # - Skill difference should be < 300 for fair match
 # - Prioritize players waiting longer
 # - If no good match, player keeps waiting
+# ----------------------------------------------------------------------
+
+# players = [
+#     {"name": "xX_Destroyer_Xx", "skill": 2100, "waiting_since": 45},
+#     {"name": "CasualGamer42", "skill": 1200, "waiting_since": 120},
+#     {"name": "ProPlayer99", "skill": 2050, "waiting_since": 30},
+#     {"name": "Newbie123", "skill": 800, "waiting_since": 90},
+#     {"name": "AverageJoe", "skill": 1500, "waiting_since": 60},
+#     {"name": "SilverSurfer", "skill": 1550, "waiting_since": 55},
+#     {"name": "BronzeBeast", "skill": 850, "waiting_since": 80},
+#     {"name": "GoldGamer", "skill": 1800, "waiting_since": 40},
+# ]
 
 # Write your code below:
 
@@ -464,35 +487,33 @@ players = [
 # Iterate by weeks and days to create the grid
 #
 # Real scenario: GitHub contribution graph
+#
+# Show activity levels: ░ (0) ▒ (1-2) ▓ (3-5) █ (6+)
 # ----------------------------------------------------------------------
 
-# Simulated commit data: {date_string: commit_count}
-
-# Generate sample data for past year
-commits = {}
-start_date = datetime.now() - timedelta(days=365)
-for i in range(365):
-    date = start_date + timedelta(days=i)
-    date_str = date.strftime("%Y-%m-%d")
-    # Random commits (more on weekdays)
-    if date.weekday() < 5:  # Weekday
-        commits[date_str] = random.choices(
-            [0, 1, 2, 3, 5, 8], weights=[20, 30, 25, 15, 7, 3]
-        )[0]
-    else:  # Weekend
-        commits[date_str] = random.choices(
-            [0, 1, 2, 3], weights=[50, 30, 15, 5])[0]
+# # Simulated commit data: {date_string: commit_count}
+# from datetime import datetime, timedelta
+# import random
+#
+# # Generate sample data for past year
+# commits = {}
+# start_date = datetime.now() - timedelta(days=365)
+# for i in range(365):
+#     date = start_date + timedelta(days=i)
+#     date_str = date.strftime("%Y-%m-%d")
+#     # Random commits (more on weekdays)
+#     if date.weekday() < 5:  # Weekday
+#         commits[date_str] = random.choices(
+#             [0, 1, 2, 3, 5, 8], weights=[20, 30, 25, 15, 7, 3]
+#         )[0]
+#     else:  # Weekend
+#         commits[date_str] = random.choices([0, 1, 2, 3], weights=[50, 30, 15, 5])[0]
 
 # Write your code below:
 # Create a 7-row (days) x 52-col (weeks) grid representation
-# Show activity levels: ░ (0) ▒ (1-2) ▓ (3-5) █ (6+)
 
 
 # Test your solution:
-# Expected:
-# print("🔴 Mon: ░▒░▓██▒░...")
-# print("🔴 Tue: ▒▒▓░░█▒▓...")
-# etc.
 
 
 # =====================================================================
@@ -508,64 +529,64 @@ for i in range(365):
 # Iterate with multiple criteria
 # ----------------------------------------------------------------------
 
-posts = [
-    {
-        "id": 1,
-        "author": "friend",
-        "likes": 150,
-        "comments": 45,
-        "hours_ago": 2,
-        "topic": "tech",
-    },
-    {
-        "id": 2,
-        "author": "celebrity",
-        "likes": 5000,
-        "comments": 500,
-        "hours_ago": 5,
-        "topic": "music",
-    },
-    {
-        "id": 3,
-        "author": "friend",
-        "likes": 20,
-        "comments": 8,
-        "hours_ago": 0.5,
-        "topic": "food",
-    },
-    {
-        "id": 4,
-        "author": "news",
-        "likes": 1000,
-        "comments": 200,
-        "hours_ago": 1,
-        "topic": "tech",
-    },
-    {
-        "id": 5,
-        "author": "friend",
-        "likes": 80,
-        "comments": 25,
-        "hours_ago": 8,
-        "topic": "travel",
-    },
-    {
-        "id": 6,
-        "author": "acquaintance",
-        "likes": 300,
-        "comments": 50,
-        "hours_ago": 3,
-        "topic": "tech",
-    },
-]
-
-user_preferences = {
-    "interests": ["tech", "food"],
-    "close_friends": ["friend"],
-    "weight_engagement": 0.3,
-    "weight_recency": 0.4,
-    "weight_relevance": 0.3,
-}
+# posts = [
+#     {
+#         "id": 1,
+#         "author": "friend",
+#         "likes": 150,
+#         "comments": 45,
+#         "hours_ago": 2,
+#         "topic": "tech",
+#     },
+#     {
+#         "id": 2,
+#         "author": "celebrity",
+#         "likes": 5000,
+#         "comments": 500,
+#         "hours_ago": 5,
+#         "topic": "music",
+#     },
+#     {
+#         "id": 3,
+#         "author": "friend",
+#         "likes": 20,
+#         "comments": 8,
+#         "hours_ago": 0.5,
+#         "topic": "food",
+#     },
+#     {
+#         "id": 4,
+#         "author": "news",
+#         "likes": 1000,
+#         "comments": 200,
+#         "hours_ago": 1,
+#         "topic": "tech",
+#     },
+#     {
+#         "id": 5,
+#         "author": "friend",
+#         "likes": 80,
+#         "comments": 25,
+#         "hours_ago": 8,
+#         "topic": "travel",
+#     },
+#     {
+#         "id": 6,
+#         "author": "acquaintance",
+#         "likes": 300,
+#         "comments": 50,
+#         "hours_ago": 3,
+#         "topic": "tech",
+#     },
+# ]
+#
+# user_preferences = {
+#     "interests": ["tech", "food"],
+#     "close_friends": ["friend"],
+#     "weight_engagement": 0.3,
+#     "weight_recency": 0.4,
+#     "weight_relevance": 0.3,
+# }
 
 # Write your code below:
 # Calculate score for each post and return sorted feed
@@ -583,29 +604,29 @@ user_preferences = {
 # Like Git diff - show what was added/removed
 #
 # Real scenario: Version control, Google Docs revision history
-# ----------------------------------------------------------------------
-
-old_text = """def hello():
-    print("Hello")
-    return True"""
-
-new_text = """def hello(name):
-    print(f"Hello {name}")
-    print("Welcome!")
-    return True"""
-
-# Write your code below:
-
-
-# Test your solution:
-# Expected:
-# print("🔥 Diff:")
+#
+# Test output:
 # - def hello():
 # + def hello(name):
 # -     print("Hello")
 # +     print(f"Hello {name}")
 # +     print("Welcome!")
 #       return True
+# ----------------------------------------------------------------------
+
+# old_text = """def hello():
+#     print("Hello")
+#     return True"""
+#
+# new_text = """def hello(name):
+#     print(f"Hello {name}")
+#     print("Welcome!")
+#     return True"""
+
+# Write your code below:
+
+
+# Test your solution:
 
 
 # ======================================================================
