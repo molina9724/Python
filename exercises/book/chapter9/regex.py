@@ -237,6 +237,18 @@ import re
 
 # Write your code below:
 
+# pattern_a = re.compile(r"^Hello")
+# results_a = pattern_a.findall(texts[0])
+# print(results_a[0])
+
+# pattern_b = re.compile(r"\d$")
+# results_b = pattern_b.findall(texts[2])
+# print(results_b[0])
+
+
+# pattern_c = re.compile(r"^\d+$")
+# results_c = pattern_c.findall(texts[4])
+# print(results_c[0])
 
 # Test your solution:
 
@@ -255,8 +267,15 @@ import re
 
 # text = "The cat found a catapult catalog in the catacombs."
 
-# Write your code below:
+# # Write your code below:
 
+# pattern = re.compile(r"\bcat.*?\b")
+# results = pattern.findall(text)
+# print(results)
+
+# patter2 = re.compile(r"\Bcat")
+# results2 = patter2.findall(text)
+# print(results2)
 
 # Test your solution:
 # print("🟡 Words starting with cat:", results)
@@ -278,6 +297,9 @@ import re
 
 # Write your code below:
 
+pattern = re.compile(r"Agent \w+")
+replaced_text = pattern.sub("Censored", "Agent Alice contacted Agent Bob.")
+print(replaced_text)
 
 # Test your solution:
 # print("🟡 Censored:", censored)
