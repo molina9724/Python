@@ -390,8 +390,11 @@ import re
 #     "normal@test.info",
 # ]
 
-# Write your code below:
+# # Write your code below:
 
+# pattern = re.compile(r"^[\w.-_\d]+@[\w]+\.[a-zA-Z]{2,4}$")
+# results = pattern.findall(emails[6])
+# print(results)
 
 # Test your solution:
 # for email in emails:
@@ -425,6 +428,21 @@ import re
 #     "12345678",
 #     "Str0ngP@ss",
 # ]
+
+# pattern_1 = re.compile(r".{8,}")
+# pattern_2 = re.compile(r"[a-z]+")
+# pattern_3 = re.compile(r"[A-Z]+")
+# pattern_4 = re.compile(r"\d+")
+
+
+# for pwd in passwords:
+#     if (
+#         pattern_1.search(pwd)
+#         and pattern_2.search(pwd)
+#         and pattern_3.search(pwd)
+#         and pattern_4.search(pwd)
+#     ):
+#         print(f"{pwd} is perfect ")
 
 # Write your code below:
 
