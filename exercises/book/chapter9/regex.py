@@ -297,9 +297,12 @@ import re
 
 # Write your code below:
 
-pattern = re.compile(r"Agent \w+")
-replaced_text = pattern.sub("Censored", "Agent Alice contacted Agent Bob.")
-print(replaced_text)
+# pattern_a = re.compile(r"Agent (\w)\w*")
+# replaced_text_a = pattern_a.sub("Censored", "Agent Alice contacted Agent Bob.")
+# print(replaced_text_a)
+
+# replaced_text_b = pattern_a.sub(r"\1****", "Agent Alice contacted Agent Bob.")
+# print(replaced_text_b)
 
 # Test your solution:
 # print("🟡 Censored:", censored)
@@ -317,8 +320,14 @@ print(replaced_text)
 # ----------------------------------------------------------------------
 
 # texts = ["RoboCop is cool", "ROBOCOP protects", "Have you seen robocop?"]
+# string = " ".join(texts)
 
-# Write your code below:
+# # Write your code below:
+
+# pattern = re.compile(r"robocop", re.IGNORECASE | re.DOTALL)
+
+# test = pattern.findall(string)
+# print(test)
 
 
 # Test your solution:
@@ -342,8 +351,15 @@ print(replaced_text)
 
 # html = "<To serve man> for dinner.>"
 
-# Write your code below:
+# # Write your code below:
 
+# pattern = re.compile(r"<.*>")
+# greedy_result = pattern.findall(html)
+# print(greedy_result)
+
+# pattern2 = re.compile(r"<.*?>")
+# lazy_result = pattern2.findall(html)
+# print(lazy_result)
 
 # Test your solution:
 # print("🔴 Greedy:", greedy_result)
