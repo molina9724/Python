@@ -252,18 +252,18 @@ import re
 # Hint: capture the last 4 digits as a group
 # ----------------------------------------------------------------------
 
-# cards = [
-#     "4111-1111-1111-1111",
-#     "5500000000005555",
-#     "3782-822463-10005",
-# ]
+cards = [
+    "4111-1111-1111-1111",
+    "5500000000005555",
+    "3782-822463-10005",
+]
 
 # Write your code below:
-
+pattern = re.compile(r"(.+)(-?\d{4}$)")
 
 # Test your solution:
 # for card in cards:
-#     print(f"🟡 {card} -> {masked}")
+# print(f"🟡 {card} -> {pattern.sub('XXXX', cards[0])}")
 
 
 # =====================================================================
