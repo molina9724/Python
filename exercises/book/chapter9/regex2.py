@@ -155,34 +155,34 @@ import re
 
 # Write your code below:
 
+# pattern = re.compile(r"(\w+)\s+\1")
+# result = pattern.findall(text)
 
-
-# Test your solution:
+# # Test your solution:
 # print("🟡 Repeated words:", result)
 
 
 # ----------------------------------------------------------------------
-# 🟡 MEDIUM 8: CSV Value Extractor
-# Extract values from a CSV line, handling quoted strings
-# Values are separated by commas
-# Quoted values can contain commas inside them
+# 🟡 MEDIUM 8: Data Scraper
+# Extract all key:value pairs from a config-style string
+# Format: key=value separated by semicolons
+# Keys are letters/underscores only, values can be anything except ;
 #
-# Simple version (no quotes):
-# Test: "Alice,30,New York" -> ['Alice', '30', 'New York']
-#
-# With quotes:
-# Test: 'Alice,30,"New York, NY"' -> handle the quoted comma
-# Hint: Match either "quoted text" or non-comma characters
+# Test: "name=Alice;age=30;city=Miami"
+#   -> [('name', 'Alice'), ('age', '30'), ('city', 'Miami')]
+# Test: "host=localhost;port=5432;db=myapp"
+#   -> [('host', 'localhost'), ('port', '5432'), ('db', 'myapp')]
 # ----------------------------------------------------------------------
 
-# line1 = "Alice,30,Engineer,Miami"
-# line2 = "Bob,25,Designer,Chicago"
+# config = "name=Alice;age=30;city=Miami;role=Engineer"
 
-# Write your code below:
+# # Write your code below:
 
+# pattern = re.compile(r"(\w+)=(.\w)")
+# result = pattern.findall(config)
 
-# Test your solution:
-# print("🟡 CSV values:", result)
+# # Test your solution:
+# print("🟡 Config values:", result)
 
 
 # =====================================================================
@@ -217,8 +217,23 @@ import re
 #     "also-valid",
 # ]
 
-# Write your code below:
+# # Write your code below:
 
+# pattern1 = re.compile(r".{3,16}")
+# pattern2 = re.compile(r"(?:\w+|\-+|\_+)+")
+# pattern3 = re.compile(r"^[a-zA-Z]")
+# pattern4 = re.compile(r"[a-zA-Z]$")
+
+# results = ""
+# for name in usernames:
+#     if (
+#         pattern1.fullmatch(name)
+#         and pattern2.search(name)
+#         and pattern3.search(name)
+#         and pattern4.search(name)
+#     ):
+#         print(name)
+#         print("You did it, you son of a bitch")
 
 # Test your solution:
 # for u in usernames:
