@@ -252,14 +252,25 @@ import re
 # Hint: capture the last 4 digits as a group
 # ----------------------------------------------------------------------
 
-cards = [
-    "4111-1111-1111-1111",
-    "5500000000005555",
-    "3782-822463-10005",
-]
+# cards = [
+#     "4111-1111-1111-1111",
+#     "5500000000005555",
+#     "3782-822463-10005",
+# ]
 
-# Write your code below:
-pattern = re.compile(r"(.+)(-?\d{4}$)")
+# # Write your code below:
+# pattern = re.compile(r"(.+)(-?\d{4}$)")
+# results = pattern.findall(cards[0])
+# print(results)
+
+# only_digits_pattern = re.compile(r"\d")
+
+# for card in cards:
+#     replaced = only_digits_pattern.sub("X", pattern.findall(card)[0][0])
+#     # replaced = re.sub(r"\d(?=.{4,})", "X", card)
+#     # replaced = re.sub(r"\d(?=[\d-]{4,})", "X", card)
+#     # print(replaced)
+#     print(f"{replaced}{pattern.findall(card)[0][1]}")
 
 # Test your solution:
 # for card in cards:
@@ -283,13 +294,15 @@ pattern = re.compile(r"(.+)(-?\d{4}$)")
 # ----------------------------------------------------------------------
 
 # text = """Check out [Google](https://google.com) for search,
-# [GitHub](https://github.com) for code, and
-# [Stack Overflow](https://stackoverflow.com) for answers."""
+# # [GitHub](https://github.com) for code, and
+# # [Stack Overflow](https://stackoverflow.com) for answers."""
 
-# Write your code below:
+# # Write your code below:
 
+# pattern = re.compile(r"\[(.+)\]\((.+)\)")
+# result = pattern.findall(text)
 
-# Test your solution:
+# # Test your solution:
 # for text, url in result:
 #     print(f"🔴 Text: '{text}' -> URL: {url}")
 
@@ -307,21 +320,39 @@ pattern = re.compile(r"(.+)(-?\d{4}$)")
 # Use sub() with a function or back reference
 # ----------------------------------------------------------------------
 
-# camel_names = [
-#     "getElementById",
-#     "firstName",
-#     "lastName",
-#     "maxRetryCount",
-#     "isValid",
-#     "toString",
-# ]
+camel_names = [
+    "getElementById",
+    "firstName",
+    "lastName",
+    "maxRetryCount",
+    "isValid",
+    "toString",
+]
 
 # Write your code below:
 
+# pattern = re.compile(r"([A-Z])")
+
+# test1 = pattern.sub(r"_\1", camel_names[0]).lower()
+# print(test1)
 
 # Test your solution:
 # for name in camel_names:
 #     print(f"🔴 {name} -> {snake}")
+
+snake_case = [
+    "get_element_by_id",
+    "first_name","""  """
+    "last_name",
+    "max_retry_count",
+    "is_valid",
+    "to_string",
+]
+
+pattern = re.compile(r"(_)(\w)")
+test1 = pattern.sub(lambda m: f"{m.group(2)}".upper(), snake_case[0 ])
+
+print(test1)
 
 
 # ----------------------------------------------------------------------
@@ -395,3 +426,6 @@ pattern = re.compile(r"(.+)(-?\d{4}$)")
 # - re.sub() with strings AND functions
 # - re.search() vs re.findall() vs re.fullmatch()
 # ======================================================================
+
+
+
