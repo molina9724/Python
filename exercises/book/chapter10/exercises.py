@@ -148,6 +148,14 @@ import zipfile
 
 # # Write your code below:
 
+# valid_extensions = [".txt", ".csv", ".log"]
+# valid_file = Path("valid_file.txt")
+# invalid_file = Path("invalid_file.invalid")
+
+# if valid_file.suffix in valid_extensions:
+#     print("You have a valid extension right there")
+# else:
+#     print("Your file extension is invalid")
 
 # ----------------------------------------------------------------------
 # 🟢 EASY 5: File Size Calculation
