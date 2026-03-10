@@ -7,7 +7,7 @@
 # ======================================================================
 
 import os
-import pathlib
+from pathlib import Path
 import shutil
 import zipfile
 
@@ -31,6 +31,44 @@ import zipfile
 # # Write your code below:
 
 
+# print(Path.cwd())
+# os.chdir("/Users/daniel_molina/Downloads/platform-tools")
+# print(Path.cwd())
+
+# print(Path("/Users").is_dir())
+# print(Path("/Users/NoExist").is_dir())
+# print(Path("/Users/daniel_molina/Downloads/chromedriver_108").is_file())
+# print(Path("/Users/NoExistFile").is_file())
+
+# print(Path.home())
+# print(Path.cwd().is_absolute())
+# print(Path("notAbsoulte").is_absolute())
+
+# test = Path(Path.cwd() / "spam.txt")
+# print(test.anchor)
+# print(test.parent)
+# print(test.stem)
+# print(test.suffix)
+# print(test.name)
+# print(test.parts)
+
+# test2 = test.parents
+# for parent in test2:
+#     print(parent)
+
+# print(test.stat().st_size)
+# test3 = Path(Path.cwd())
+# print(list(test3.glob("*")))
+# print(list(test3.glob("*.??")))
+
+# for file in test3.glob("*"):
+#     print(file)
+
+# txt = Path(f"{Path.cwd()}/spam.txt")
+# print(txt.exists())
+# txt.write_text("3")
+# print(txt.read_text())
+
 # ----------------------------------------------------------------------
 # 🟢 EASY 2: Creating and Deleting Files
 # Use Python to:
@@ -45,6 +83,27 @@ import zipfile
 # ----------------------------------------------------------------------
 
 # # Write your code below:
+# try:
+#     my_file = Path("xxx.txt")
+#     my_file.write_text("Hello, world!")
+
+#     if my_file.exists():
+#         print(f"File '{my_file}' created and contains: {my_file.read_text()}")
+
+#     new_file = my_file.rename("yyy.txt")
+#     print(f"File renamed to '{new_file}'")
+
+#     if new_file.exists():
+#         new_file.unlink()
+#         print(f"File '{new_file}' deleted successfully")
+#     else:
+#         print(f"File '{new_file}' does not exist for deletion")
+# except FileNotFoundError as e:
+#     print("Error: File not found!", e)
+# except PermissionError as e:
+#     print("Error: Permission denied!", e)
+# except Exception as e:
+#     print("An unexpected error occurred:", e)
 
 
 # ----------------------------------------------------------------------
@@ -60,6 +119,20 @@ import zipfile
 
 # # Write your code below:
 
+# file_path = Path("easy3.txt")
+# first_line = "Line 1\n"
+# last_line = "Line 2\n"
+
+# with file_path.open("w") as file:
+#     file.write(first_line)
+
+# with file_path.open("a") as file:
+#     file.write(last_line)
+
+# with file_path.open("r") as file:
+#     content = file.readlines()
+#     if content[-1] == last_line:
+#         print("You did it, you son of a bitch!")
 
 # ----------------------------------------------------------------------
 # 🟢 EASY 4: File Extension Validation
