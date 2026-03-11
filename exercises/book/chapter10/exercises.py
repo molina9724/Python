@@ -293,6 +293,13 @@ import zipfile
 
 # # Write your code below:
 
+my_path = Path.cwd() / "folder"
+my_path.mkdir(parents=True, exist_ok=True)
+
+new_folder = my_path.rename("renamed_folder")
+
+if new_folder.exists():
+    shutil.rmtree(my_path)
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 10: Traversing Directories
