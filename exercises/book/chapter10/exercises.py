@@ -169,6 +169,15 @@ import zipfile
 
 # # Write your code below:
 
+# my_file = Path("string.txt")
+# with open(my_file, "a") as file:
+#     file.write("Hello\n")
+#     file.write("Hello you\n")
+#     file.write("Are you there?\n")
+# print(my_file.stat().st_size)
+# print(my_file.stat().st_size / 1024)
+# print(my_file.stat().st_size / 1024**2)
+
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 6: Counting Lines and Words
@@ -183,6 +192,16 @@ import zipfile
 
 # # Write your code below:
 
+# file_path = Path("string.txt")
+# words_total = 0
+# lines_total = 0
+# with open(file_path, "r") as file:
+#     for single_line in file:
+#         lines_total += 1
+#         words_total += len(single_line.split())
+
+# print(f"There are {lines_total} lines in your file")
+# print(f"There are {words_total} words your file")
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 7: File Comparisons
@@ -198,6 +217,30 @@ import zipfile
 
 # # Write your code below:
 
+string1 = Path("string1.txt")
+string2 = Path("string2.txt")
+
+with open(string1, "a") as file1, open(string2, "a") as file2:
+    file1.write("123456")
+    file2.write("12345")
+
+if string1.stat().st_size != string2.stat().st_size:
+    print(f"{string1} and {string2} are different files, their size are different")
+else:
+    with open(string1, "r") as file1, open(string2, "r") as file2:
+        for line_number, (line1, line2) in enumerate(zip(file1, file2), start=1):
+            if line1 != line2:
+                print(f"The files are different in line number {line_number}")
+                print(f"{file1} reads {line1}")
+                print(f"{file2} reads {line2}")
+                break
+        else:
+            if next(line1, None):
+                print(f"Files are different, {file1} has more lines")
+            elif next(line2, None):
+                print(f"Files are different, {file2} has more lines")
+            else:
+                print("The files are identical")
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 8: File Permission Checks
