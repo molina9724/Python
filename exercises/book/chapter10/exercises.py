@@ -217,30 +217,30 @@ import zipfile
 
 # # Write your code below:
 
-string1 = Path("string1.txt")
-string2 = Path("string2.txt")
+# string1 = Path("string1.txt")
+# string2 = Path("string2.txt")
 
-with open(string1, "a") as file1, open(string2, "a") as file2:
-    file1.write("123456")
-    file2.write("12345")
+# with open(string1, "a") as file1, open(string2, "a") as file2:
+#     file1.write("123456")
+#     file2.write("12345")
 
-if string1.stat().st_size != string2.stat().st_size:
-    print(f"{string1} and {string2} are different files, their size are different")
-else:
-    with open(string1, "r") as file1, open(string2, "r") as file2:
-        for line_number, (line1, line2) in enumerate(zip(file1, file2), start=1):
-            if line1 != line2:
-                print(f"The files are different in line number {line_number}")
-                print(f"{file1} reads {line1}")
-                print(f"{file2} reads {line2}")
-                break
-        else:
-            if next(line1, None):
-                print(f"Files are different, {file1} has more lines")
-            elif next(line2, None):
-                print(f"Files are different, {file2} has more lines")
-            else:
-                print("The files are identical")
+# if string1.stat().st_size != string2.stat().st_size:
+#     print(f"{string1} and {string2} are different files, their size are different")
+# else:
+#     with open(string1, "r") as file1, open(string2, "r") as file2:
+#         for line_number, (line1, line2) in enumerate(zip(file1, file2), start=1):
+#             if line1 != line2:
+#                 print(f"The files are different in line number {line_number}")
+#                 print(f"{file1} reads {line1}")
+#                 print(f"{file2} reads {line2}")
+#                 break
+#         else:
+#             if next(line1, None):
+#                 print(f"Files are different, {file1} has more lines")
+#             elif next(line2, None):
+#                 print(f"Files are different, {file2} has more lines")
+#             else:
+#                 print("The files are identical")
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 8: File Permission Checks
@@ -255,6 +255,25 @@ else:
 
 # # Write your code below:
 
+# file_path = Path("permissions.txt")
+# # with open(file_path, "a") as file:
+# #     file.write("Let's check the permissions")
+
+# if os.access(file_path, os.R_OK):
+#     print("You can read the file")
+# else:
+#     print("You can NOT read the file")
+# if os.access(file_path, os.W_OK):
+#     print("You can write the file")
+# else:
+#     print("You can NOT write the file")
+# if os.access(file_path, os.X_OK):
+#     print("You can execute the file")
+# else:
+#     print("You can NOT execute the file")
+
+# # Changing all the permissions to No
+# file_path.chmod(0o000)
 
 # =====================================================================
 #                    SECTION 2: DIRECTORY OPERATIONS
