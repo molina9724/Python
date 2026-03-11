@@ -293,13 +293,12 @@ import zipfile
 
 # # Write your code below:
 
-my_path = Path.cwd() / "folder"
-my_path.mkdir(parents=True, exist_ok=True)
+# my_path = Path.cwd() / "folder"
+# my_path.mkdir(parents=True, exist_ok=True)
 
-new_folder = my_path.rename("renamed_folder")
+# new_folder = my_path.rename("renamed_folder")
 
-if new_folder.exists():
-    shutil.rmtree(my_path)
+# if new_folder.exists():
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 10: Traversing Directories
@@ -314,6 +313,18 @@ if new_folder.exists():
 
 # # Write your code below:
 
+
+# def all_files(path, indent=""):
+#     for item in path.iterdir():
+#         if item.is_file():
+#             print(f"{indent}📄 {item.name}")
+#         elif item.is_dir():
+#             print(f"{indent}📁 {item.name}")
+#             all_files(item, indent + "    ")
+
+
+# start_folder = Path("/Users/daniel_molina/Downloads/Python/Python/exercises")
+# all_files(start_folder)
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 11: Directory File Count
