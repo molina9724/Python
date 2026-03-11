@@ -339,6 +339,24 @@ import zipfile
 
 # # Write your code below:
 
+# start_folder = Path("/Users/daniel_molina/Downloads/Python/Python")
+# all_extensions = dict()
+
+
+# def all_files(path):
+
+#     for element in path.iterdir():
+#         if element.is_file():
+#             if element.suffix not in all_extensions.keys():
+#                 all_extensions[element.suffix] = 1
+#             else:
+#                 all_extensions[element.suffix] += 1
+#         elif element.is_dir():
+#             all_files(element)
+#     return all_extensions
+
+
+# print(all_files(start_folder))
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 12: Directory Cleanup
@@ -352,6 +370,31 @@ import zipfile
 # ----------------------------------------------------------------------
 
 # # Write your code below:
+
+# trash = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/trash"
+# )
+# trash.mkdir(parents=True, exist_ok=True)
+
+# test_cleanup = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_cleanup"
+# )
+
+
+# def all_files(path):
+#     for file in path.iterdir():
+#         if file.is_file():
+#             if file.suffix == ".tmp" or file.suffix == ".txt":
+#                 shutil.move(file, trash)
+#         elif file.is_dir():
+#             all_files(file)
+
+
+# all_files(test_cleanup)
+
+# >>> p.glob('*')
+# <generator object Path.glob at 0x000002A6E389DED0>
+# >>> list(p.glob('*'))
 
 
 # ----------------------------------------------------------------------
@@ -367,6 +410,29 @@ import zipfile
 
 # # Write your code below:
 
+# paths = []
+
+
+# def all_files(path, keyword):
+
+#     for file in path.iterdir():
+#         if file.is_file():
+#             if file.suffix == ".txt":
+#                 with open(file, "r") as open_file:
+#                     all_lines = open_file.readlines()
+#                     for line in all_lines:
+#                         words = line.split()
+#                         if keyword in words:
+#                             paths.append(str(file))
+#         elif file.is_dir():
+#             all_files(file, keyword)
+#     return paths
+
+
+# working_folder = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_search"
+# )
+# print(all_files(working_folder, "refactor"))
 
 # ----------------------------------------------------------------------
 # 🔴 HARD 14: Copy Directory Structure
