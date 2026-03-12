@@ -1,2 +1,0 @@
-TODO: refactor the database.
-CONFIDENTIAL: The password is 12345.

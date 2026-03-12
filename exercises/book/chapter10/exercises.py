@@ -447,6 +447,33 @@ import zipfile
 
 # # Write your code below:
 
+file = Path("/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10")
+destination = Path(
+    "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter9"
+)
+
+
+def all_folders(path, copy_to):
+    """
+    The function `all_folders` recursively copies all folders and their contents from a given path to a
+    specified destination.
+
+    :param path: The `path` parameter in the `all_folders` function is expected to be a `Path` object
+    representing the directory from which you want to start copying folders. This function recursively
+    iterates through all folders and subfolders starting from this path
+    :param copy_to: The `copy_to` parameter in the `all_folders` function represents the destination
+    directory where the folders from the `path` directory will be copied to. This parameter should be a
+    `Path` object pointing to the directory where you want to copy the folders
+    """
+    for file in path.iterdir():
+        if file.is_dir():
+            new_folder_path = copy_to / file.name
+            new_folder_path.mkdir(parents=True, exist_ok=True)
+            all_folders(file, new_folder_path)
+
+
+all_folders(file, destination)
+
 
 # ----------------------------------------------------------------------
 # 🔴 HARD 15: Search Files by Criteria
