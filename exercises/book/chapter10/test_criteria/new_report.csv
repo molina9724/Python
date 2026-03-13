@@ -1,0 +1,7 @@
+id,name,status
+1,John,Active
+EOF && cat << 'EOF' > /Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_criteria/level1/old_notes.txt
+This is a very old file.
+EOF && cat << 'EOF' > /Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_criteria/level1/level2/small_doc.txt
+This is a tiny text file.
+EOF && touch -t 202001011200 /Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_criteria/level1/old_notes.txt && ls -lhR /Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_criteria
