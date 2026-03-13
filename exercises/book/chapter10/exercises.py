@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import shutil
 import zipfile
+from datetime import datetime
 
 
 # =====================================================================
@@ -488,6 +489,56 @@ import zipfile
 
 # # Write your code below:
 
+# example = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_criteria"
+# )
+# all_extensions = [".txt", ".csv"]
+# file_details = []
+
+
+# def all_folders(path: Path, size_threshold: float, last_modified: str, extensions: str):
+#     """
+#     This Python function recursively searches through folders to find files that meet specified criteria
+#     based on size, last modified date, and file extensions.
+
+#     :param path: The `path` parameter in the `all_folders` function represents the directory path where
+#     you want to search for files based on certain criteria. It should be of type `Path`, which is
+#     typically a pathlib object representing a file system path. You can pass the directory path as an
+#     argument when calling the
+#     :type path: Path
+#     :param size_threshold: The `size_threshold` parameter is a float value that represents the minimum
+#     file size threshold in megabytes. Files larger than this threshold will be considered for further
+#     processing in the `all_folders` function
+#     :type size_threshold: float
+#     :param last_modified: The `last_modified` parameter in the `all_folders` function is a string that
+#     represents a specific date and time in ISO format (YYYY-MM-DDTHH:MM:SS). This parameter is used to
+#     filter files based on their last modified timestamp. Files that have been modified after the
+#     specified `
+#     :type last_modified: str
+#     :param extensions: extensions: This parameter should be a string containing the file extensions that
+#     you want to filter for. For example, if you only want to consider files with extensions '.txt',
+#     '.csv', and '.pdf', you would provide the string ".txt,.csv,.pdf"
+#     :type extensions: str
+#     :return: The function `all_folders` is returning a list of tuples containing details of files that
+#     meet the specified criteria. Each tuple includes the file name, size in megabytes, and last modified
+#     timestamp in string format.
+#     """
+#     for file in path.iterdir():
+#         if file.is_file():
+#             if (
+#                 (size_mb := file.stat().st_size / (1024 * 1024)) > size_threshold
+#                 and (modified := datetime.fromtimestamp(file.stat().st_mtime))
+#                 > datetime.fromisoformat(last_modified)
+#                 and (file.suffix in all_extensions)
+#             ):
+#                 file_details.append((file.name, f"{size_mb:.2f} MB", str(modified)))
+#         elif file.is_dir():
+#             # We are only going to work with files, not dirs
+#             all_folders(file, size_threshold, last_modified, extensions)
+#     return file_details
+
+
+# print(all_folders(example, 1, "2025-01-01", ".txt"))
 
 # =====================================================================
 #                    SECTION 3: ZIP FILE OPERATIONS
