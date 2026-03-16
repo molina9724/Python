@@ -559,24 +559,24 @@ from datetime import datetime
 
 import zipfile
 
-current_date = datetime.today()
-my_first_zip = zipfile.ZipFile(f"{current_date}.zip", "w")
+# current_date = datetime.today()
+# my_first_zip = zipfile.ZipFile(f"{current_date}.zip", "w")
 
 
-def all_files(path: Path):
+# def all_files(path: Path):
 
-    for file in path.iterdir():
-        if file.is_file() and file.suffix == ".txt":
-            my_first_zip.write(file, arcname=f"{file.name}")
-        elif file.is_dir():
-            all_files(file)
+#     for file in path.iterdir():
+#         if file.is_file() and file.suffix == ".txt":
+#             my_first_zip.write(file, arcname=f"{file.name}")
+#         elif file.is_dir():
+#             all_files(file)
 
 
-example = Path(
-    "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_zip"
-)
-print(all_files(example))
-my_first_zip.close()
+# example = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_zip"
+# )
+# print(all_files(example))
+# my_first_zip.close()
 
 
 # ----------------------------------------------------------------------
@@ -592,6 +592,24 @@ my_first_zip.close()
 
 # # Write your code below:
 
+# zip_file = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/2026-03-16 07:42:22.844819.zip"
+# )
+
+# unzipping = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/unzipping"
+# )
+# unzipping.mkdir(parents=True, exist_ok=True)
+
+# with zipfile.ZipFile(zip_file, "r") as zip:
+#     zip.extractall(unzipping)
+
+# for root, dirs, files in os.walk(unzipping):
+#     all_files = files
+#     for element in all_files:
+#         file = Path(Path(root) / element)
+#         new_name = f"{file.stem}-extracted{file.suffix}"
+#         file.rename(Path(root) / new_name)
 
 # ----------------------------------------------------------------------
 # 🔴 HARD 18: Combining File Operations
