@@ -557,6 +557,27 @@ from datetime import datetime
 
 # # Write your code below:
 
+import zipfile
+
+current_date = datetime.today()
+my_first_zip = zipfile.ZipFile(f"{current_date}.zip", "w")
+
+
+def all_files(path: Path):
+
+    for file in path.iterdir():
+        if file.is_file() and file.suffix == ".txt":
+            my_first_zip.write(file, arcname=f"{file.name}")
+        elif file.is_dir():
+            all_files(file)
+
+
+example = Path(
+    "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_zip"
+)
+print(all_files(example))
+my_first_zip.close()
+
 
 # ----------------------------------------------------------------------
 # 🟡 MEDIUM 17: Extracting and Modifying ZIPs
