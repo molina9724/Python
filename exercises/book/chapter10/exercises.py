@@ -623,6 +623,24 @@ import zipfile
 # ----------------------------------------------------------------------
 
 # # Write your code below:
+# zip_file_original = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/2026-03-16 07:42:22.844819.zip"
+# )
+
+# word_to_look_for = "the"
+# files_with_word = []
+
+# with zipfile.ZipFile(zip_file_original, "r") as zip_file:
+#     for item in zip_file.namelist():
+#         with zip_file.open(item, "r") as txt_file:
+#             content = txt_file.readlines()
+#             for line in content:
+#                 human_text = line.decode()
+#                 words = human_text.split()
+#                 if word_to_look_for in words:
+#                     files_with_word.append(txt_file.name)
+#                     break
+#     print(files_with_word)
 
 
 # ----------------------------------------------------------------------
