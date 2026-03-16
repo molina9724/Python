@@ -655,6 +655,45 @@ import zipfile
 
 # # Write your code below:
 
+# file_a = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_merge/archive_a.zip"
+# )
+# file_b = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_merge/archive_b.zip"
+# )
+
+# results = zipfile.ZipFile("results.zip", "w")
+# results.write(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/test_merge/archive_a/report.txt"
+# )
+# results.close()
+
+# results_path = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/results.zip"
+# )
+
+# with zipfile.ZipFile(results_path, "w") as results:
+#     with zipfile.ZipFile(file_a, "r") as file_a:
+#         for file_name in file_a.namelist():
+#             file = Path(file_name)
+#             if file.name not in results.namelist():
+#                 data = file_a.read(file_name)
+#                 results.writestr(file.name, data)
+
+#     with zipfile.ZipFile(file_b, "r") as file_b:
+#         for file_name in file_b.namelist():
+#             file = Path(file_name)
+#             if file.name not in results.namelist():
+#                 data = file_b.read(file_name)
+#                 results.writestr(file_name, data)
+#             else:
+#                 counter = 1
+#                 new_name = f"{file.stem}_{counter}{file.suffix}"
+#                 while new_name in results.namelist():
+#                     counter += 1
+#                     new_name = f"{file.stem}_{counter}{file.suffix}"
+#                 data = file_b.read(file_name)
+#                 results.writestr(f"{new_name}", data)
 
 # ----------------------------------------------------------------------
 # 🔴 HARD 20: ZIP File Size Reporting
