@@ -11,6 +11,7 @@ from pathlib import Path
 import shutil
 import zipfile
 from datetime import datetime
+import copy
 
 
 # =====================================================================
@@ -729,3 +730,24 @@ import zipfile
 # 2. Directory Operations: traversal, cleanup, tree replication, search.
 # 3. ZIP File Operations: creation, extraction, merging, reporting.
 # ======================================================================
+
+text = """The ADJECTIVE panda walked to the NOUN and then VERB. A nearby NOUN was
+unaffected by these events."""
+
+file = Path("madlibs.txt")
+rewrite_file = Path("rewrite_file.txt")
+
+with open(file, "w") as file_w:
+    file_w.write(text)
+
+change_to = {"ADJECTIVE": "a", "NOUN": "n", "VERB": "v"}
+
+
+with open(file, "r") as file_r:
+    with open(rewrite_file, "a") as file_w:
+        lines = file_r.readlines()
+        for line in lines:
+            new_line = line
+            for keyword, replacement in change_to.items():
+                new_line = new_line.replace(keyword, replacement)
+            file_w.write(new_line)
