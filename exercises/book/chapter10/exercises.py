@@ -707,6 +707,18 @@ import zipfile
 
 # # Write your code below:
 
+# zip_file = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/exercises/book/chapter10/report_test.zip"
+# )
+
+# total_size = 0
+# with zipfile.ZipFile(zip_file, "r") as zip:
+#     for file in zip.infolist():
+#         mb_size = file.file_size / (1024**2)
+#         print(f"{file.filename}, {mb_size} MB")
+#         total_size += mb_size
+#     print(f"Total size: {total_size} MB")
+
 
 # ======================================================================
 # 📊 EXERCISE SUMMARY
