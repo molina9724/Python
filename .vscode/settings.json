@@ -2,5 +2,10 @@
     "wolf.pythonPath": "/Users/daniel_molina/Downloads/Python/Python/.venv/bin/python3.10",
     "python-envs.defaultEnvManager": "ms-python.python:venv",
     "python-envs.pythonProjects": [],
-    "wolf.disableHotModeWarning": true
+    "wolf.disableHotModeWarning": true,
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
