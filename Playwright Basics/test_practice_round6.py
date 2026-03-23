@@ -194,7 +194,7 @@ def test_12_file_download(page: Page):
     with page.expect_download() as download_info:
         download_link.click()
     download = download_info.value
-    download.save_as("/Users/daniel_molina/Downloads" + download.suggested_filename)
+    download.save_as("/Users/daniel_molina/Downloads/" + download.suggested_filename)
 
 
 # =====================================================================
@@ -211,7 +211,23 @@ def test_13_iframe(page: Page):
 # 🟡 14: NESTED FRAMES - /nested_frames
 # Navigate into nested frames. Get text from LEFT, MIDDLE, RIGHT (inside top frame) and BOTTOM frame.
 def test_14_nested_frames(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/nested_frames")
+
+    top = page.frame_locator("frame[name='frame-top']")
+    left = top.frame_locator("frame[name='frame-left']")
+    middle = top.frame_locator("frame[name='frame-middle']")
+    right = top.frame_locator("frame[name='frame-right']")
+    bottom = page.frame_locator("frame[name='frame-bottom']")
+
+    left_text = left.get_by_text("LEFT").inner_text()
+    middle_text = middle.get_by_text("MIDDLE").inner_text()
+    right_text = right.get_by_text("RIGHT").inner_text()
+    bottom_text = bottom.get_by_text("BOTTOM").inner_text()
+
+    assert left_text.strip() == "LEFT"
+    assert right_text.strip() == "RIGHT"
+    assert middle_text.strip() == "MIDDLE"
+    assert bottom_text.strip() == "BOTTOM"
 
 
 # 🟡 15: MULTIPLE WINDOWS - /windows
