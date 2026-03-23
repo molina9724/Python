@@ -81,7 +81,20 @@ def test_04_context_menu(page: Page):
 # 🟡 5: DISAPPEARING ELEMENTS - /disappearing_elements
 # Count menu items, refresh multiple times, detect when "Gallery" appears/disappears, click it when present.
 def test_05_disappearing(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/disappearing_elements")
+    while True:
+        gallery = page.locator("a[href='/gallery/']")
+        gallery_count = gallery.count()
+
+        if gallery_count > 0:
+            gallery.click()
+            expect(page).to_have_url(
+                re.compile(r"https://the-internet.herokuapp.com/gallery/")
+            )
+            break
+        else:
+            print("Gallery didn't show up this time!")
+        page.reload()
 
 
 # =====================================================================
@@ -92,7 +105,13 @@ def test_05_disappearing(page: Page):
 # 🟢 6: DROPDOWN - /dropdown
 # Select "Option 1" by label, verify, select "Option 2" by value, verify, get all options as list.
 def test_06_dropdown(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/dropdown")
+    page.get_by_role("combobox").select_option(label="Option 1")
+    expect(page.get_by_role("combobox")).to_have_value("1")
+    page.get_by_role("combobox").select_option(value="2")
+    expect(page.get_by_role("combobox")).to_have_value("2")
+
+    # Use value, it's more intuitive
 
 
 # =====================================================================
@@ -104,19 +123,36 @@ def test_06_dropdown(page: Page):
 # Click Remove, wait for "It's gone!", verify checkbox gone. Click Add, wait for reappear.
 # Click Enable, wait for input enabled, fill text. Click Disable, verify disabled.
 def test_07_dynamic_controls(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/dynamic_controls")
+    page.get_by_role("button", name="Remove").click()
+    expect(page.get_by_role("checkbox")).not_to_be_visible()
+
+    page.get_by_role("button", name="Add").click()
+    expect(page.get_by_role("checkbox")).to_be_visible()
+
+    page.get_by_role("button", name="Enable").click()
+    expect(page.get_by_role("textbox")).to_be_enabled()
+    page.get_by_role("textbox").fill("1234567890")
+    page.get_by_role("button", name="Disable").click()
+    expect(page.get_by_role("textbox")).to_be_disabled()
 
 
 # 🟡 8: DYNAMIC LOADING (Hidden) - /dynamic_loading/1
 # Click Start, wait for loading, verify "Hello World!" appears. Element exists but is hidden initially.
 def test_08_dynamic_loading_1(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/dynamic_loading")
+    page.get_by_role("link", name="Example 1: Element on page that is hidden").click()
+    page.get_by_role("button", name="Start").click()
+    expect(page.locator("#finish")).to_be_visible()
 
 
 # 🟡 9: DYNAMIC LOADING (Rendered) - /dynamic_loading/2
 # Click Start, wait for loading, verify "Hello World!" appears. Element does NOT exist until loading completes.
 def test_09_dynamic_loading_2(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/dynamic_loading")
+    page.get_by_role("link", name="Example 2: Element rendered after the fact").click()
+    page.get_by_role("button", name="Start").click()
+    expect(page.locator("#finish")).to_be_visible()
 
 
 # 🟡 10: DYNAMIC CONTENT - /dynamic_content
