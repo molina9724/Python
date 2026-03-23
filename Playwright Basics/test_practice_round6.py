@@ -158,7 +158,11 @@ def test_09_dynamic_loading_2(page: Page):
 # 🟡 10: DYNAMIC CONTENT - /dynamic_content
 # Capture text from 3 rows, refresh, verify content changed. Enable static content, refresh, verify it stays same.
 def test_10_dynamic_content(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/dynamic_content")
+    text = page.locator(".large-10.columns").all_inner_texts()
+    page.reload()
+    text_after_refresh = page.locator(".large-10.columns").all_inner_texts()
+    assert text != text_after_refresh
 
 
 # =====================================================================
@@ -169,13 +173,28 @@ def test_10_dynamic_content(page: Page):
 # 🟢 11: FILE UPLOAD - /upload
 # Create a test file, use set_input_files(), click Upload, verify "File Uploaded!" and filename displayed.
 def test_11_file_upload(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/upload")
+    file = Path(
+        "/Users/daniel_molina/Downloads/Python/Python/Playwright Basics/wolf_scratchpad.py"
+    )
+    page.set_input_files(
+        "#file-upload",
+        f"{str(file)}",
+    )
+    page.get_by_role("button", name="Upload").click()
+    expect(page.get_by_role("heading", name="File Uploaded!")).to_be_visible()
+    expect(page.get_by_text(file.name)).to_be_visible()
 
 
 # 🟡 12: FILE DOWNLOAD - /download
 # Get list of downloadable files, click first file, wait for download, verify file was downloaded.
 def test_12_file_download(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/download")
+    download_link = page.locator(".example a").get_by_text("some-file.txt")
+    with page.expect_download() as download_info:
+        download_link.click()
+    download = download_info.value
+    download.save_as("/Users/daniel_molina/Downloads" + download.suggested_filename)
 
 
 # =====================================================================
