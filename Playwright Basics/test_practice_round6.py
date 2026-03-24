@@ -233,7 +233,11 @@ def test_14_nested_frames(page: Page):
 # 🟡 15: MULTIPLE WINDOWS - /windows
 # Click "Click Here", handle new tab, verify "New Window" text, close new tab, switch back.
 def test_15_multiple_windows(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/windows")
+    with page.expect_popup() as popup_info:
+        page.get_by_role("link", name="Click Here").click()
+    new_page = popup_info.value
+    expect(new_page.get_by_text("New Window")).to_be_visible()
 
 
 # =====================================================================
@@ -244,19 +248,37 @@ def test_15_multiple_windows(page: Page):
 # 🟢 16: HOVERS - /hovers
 # Hover over each user image, verify name appears, click "View profile", verify URL, go back. Repeat for all 3.
 def test_16_hovers(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/hovers")
+
+    avatars = page.locator(".figure")
+
+    for index, avatar in enumerate(avatars.all(), 1):
+        avatar.hover()
+        expect(avatar.get_by_text(f"name: user{index}")).to_be_visible()
+        expect(avatar.get_by_role("link", name="View profile")).to_be_visible()
 
 
 # 🟡 17: DRAG AND DROP - /drag_and_drop
 # Verify A is left B is right. Drag A to B, verify swap. Drag again to swap back.
 def test_17_drag_drop(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/drag_and_drop")
+    expect(page.locator("#column-a")).to_have_text("A")
+    expect(page.locator("#column-b")).to_have_text("B")
+
+    page.locator("#column-a").drag_to(page.locator("#column-b"))
+
+    expect(page.locator("#column-a")).to_have_text("B")
+    expect(page.locator("#column-b")).to_have_text("A")
 
 
 # 🟡 18: HORIZONTAL SLIDER - /horizontal_slider
 # Get initial value, use ArrowRight/ArrowLeft to change, set to max (5), set to min (0).
 def test_18_slider(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/horizontal_slider")
+    initial_value = page.get_by_role("slider").input_value()
+    page.get_by_role("slider").click()
+    while page.get_by_role("slider").input_value() != "5":
+        page.keyboard.press("ArrowRight")
 
 
 # =====================================================================
@@ -267,7 +289,27 @@ def test_18_slider(page: Page):
 # 🟢 19: KEY PRESSES - /key_presses
 # Click input, press keys (Enter, Escape, Tab, Backspace, Delete, Arrows, F1, Shift, Space) and verify result text.
 def test_19_key_presses(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/key_presses")
+    page.locator("#target").click()
+    results = {
+        "Enter": "ENTER",
+        "Escape": "ESCAPE",
+        "Tab": "TAB",
+        "Backspace": "BACK_SPACE",
+        "Delete": "DELETE",
+        "ArrowUp": "UP",
+        "ArrowDown": "DOWN",
+        "ArrowLeft": "LEFT",
+        "ArrowRight": "RIGHT",
+        "F1": "F1",
+        "Shift": "SHIFT",
+        "Space": "SPACE",
+    }
+    for key in results.keys():
+        page.keyboard.press(key)
+        expect(page.locator("#result")).to_have_text(f"You entered: {results[key]}")
+        if key == "Enter":
+            page.locator("#target").click()
 
 
 # 🟡 20: INPUTS (Number Field) - /inputs
