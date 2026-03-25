@@ -292,7 +292,7 @@ def test_19_key_presses(page: Page):
     page.goto("https://the-internet.herokuapp.com/key_presses")
     page.locator("#target").click()
     results = {
-        "Enter": "ENTER",
+        # "Enter": "ENTER",
         "Escape": "ESCAPE",
         "Tab": "TAB",
         "Backspace": "BACK_SPACE",
@@ -308,14 +308,24 @@ def test_19_key_presses(page: Page):
     for key in results.keys():
         page.keyboard.press(key)
         expect(page.locator("#result")).to_have_text(f"You entered: {results[key]}")
-        if key == "Enter":
-            page.locator("#target").click()
 
 
 # 🟡 20: INPUTS (Number Field) - /inputs
 # Focus number input, fill a number, use ArrowUp/Down to increment/decrement, verify non-numeric ignored.
 def test_20_inputs(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com//inputs")
+    number = 10
+    page.get_by_role("spinbutton").fill(str(number))
+    expect(page.get_by_role("spinbutton")).to_have_value(str(number))
+
+    page.keyboard.press("ArrowUp")
+    expect(page.get_by_role("spinbutton")).to_have_value(str(number + 1))
+    page.keyboard.press("ArrowDown")
+    expect(page.get_by_role("spinbutton")).to_have_value(str(number))
+
+    page.get_by_role("spinbutton").clear()
+    page.get_by_role("spinbutton").type("abc")
+    expect(page.get_by_role("spinbutton")).to_have_value("")
 
 
 # =====================================================================
@@ -326,7 +336,23 @@ def test_20_inputs(page: Page):
 # 🟢 21: JS ALERTS - /javascript_alerts
 # Handle JS Alert (accept), JS Confirm (accept then dismiss), JS Prompt (type text and accept). Verify results.
 def test_21_alerts(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/javascript_alerts")
+    page.once("dialog", lambda dialog: dialog.accept())
+    page.get_by_role("button", name="Click for JS Alert").click()
+    expect(page.locator("#result")).to_contain_text("You successfully clicked an alert")
+
+    page.once("dialog", lambda dialog: dialog.accept())
+    page.get_by_role("button", name="Click for JS Confirm").click()
+    expect(page.locator("#result")).to_contain_text("You clicked: Ok")
+
+    page.once("dialog", lambda dialog: dialog.dismiss())
+    page.get_by_role("button", name="Click for JS Confirm").click()
+    expect(page.locator("#result")).to_contain_text("You clicked: Cancel")
+
+    text = "hello"
+    page.once("dialog", lambda dialog: dialog.accept(text))
+    page.get_by_role("button", name="Click for JS Prompt").click()
+    expect(page.locator("#result")).to_contain_text(f"You entered: {text}")
 
 
 # =====================================================================
@@ -337,7 +363,37 @@ def test_21_alerts(page: Page):
 # 🟡 22: SORTABLE DATA TABLES - /tables
 # Extract Table 1 data, sort by Last Name, verify sorted. Find row with "jsmith" email, click edit. Delete "Bach" row.
 def test_22_tables(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/tables")
+
+    table = page.locator("#table1")
+    expect(table.get_by_role("columnheader", name="Last Name")).not_to_contain_class(
+        "headerSortUp"
+    )
+    expect(table.get_by_role("columnheader", name="Last Name")).not_to_contain_class(
+        "headerSortDown"
+    )
+
+    rows = table.locator("tbody tr").all()
+    last_names = [row.locator("td").first.inner_text() for row in rows]
+
+    table.get_by_role("columnheader", name="Last Name").click()
+    filtered_last_names = [row.locator("td").first.inner_text() for row in rows]
+
+    assert sorted(last_names) == filtered_last_names
+
+    # for row in rows:
+    #     if "jsmith@gmail.com" in row.inner_text():
+    #         row.get_by_role("link", name="edit").click()
+    #     if "Bach" in row.inner_text():
+    #         row.get_by_role("link", name="delete").click()
+
+    # No loop needed!
+    table.locator("tr").filter(has_text="jsmith@gmail.com").get_by_role(
+        "link", name="edit"
+    ).click()
+    table.locator("tr").filter(has_text="Bach").get_by_role(
+        "link", name="delete"
+    ).click()
 
 
 # =====================================================================

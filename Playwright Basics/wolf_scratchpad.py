@@ -1,4 +1,4 @@
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 from pathlib import Path
 
 # 🐺 WOLF SCRATCHPAD
@@ -10,15 +10,27 @@ with sync_playwright() as p:
     browser = p.chromium.launch(headless=True)
     page = browser.new_page()
 
-    # 2. Go to the URL
-    page.goto("https://the-internet.herokuapp.com/upload")
+    page.goto("https://the-internet.herokuapp.com/tables")
 
-    file = Path(
-        "/Users/daniel_molina/Downloads/Python/Python/Playwright Basics/wolf_scratchpad.py"
+    table = page.locator("#table1")
+    expect(table.get_by_role("columnheader", name="Last Name")).not_to_contain_class(
+        "headerSortUp"
     )
-    print(file.name)
-    print(type(file.name))
-    text = page.locator("#uploaded-files").all_inner_texts()
-    print(text)
+    expect(table.get_by_role("columnheader", name="Last Name")).not_to_contain_class(
+        "headerSortDown"
+    )
 
-    browser.close()
+    rows = table.locator("tbody tr").all()
+    last_names = [row.locator("td").first.inner_text() for row in rows]
+
+    table.get_by_role("columnheader", name="Last Name").click()
+    filtered_last_names = [row.locator("td").first.inner_text() for row in rows]
+
+    print((last_names.sort()))
+
+    print((filtered_last_names))
+
+    for row in rows:
+        print(row.inner_text())
+
+    # assert last_names.sort() == filtered_last_names
