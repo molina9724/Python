@@ -456,7 +456,24 @@ def test_26_entry_ad(page: Page):
 # 🔴 27: EXIT INTENT - /exit_intent
 # Move mouse to top of viewport to trigger exit intent modal. Verify content, close, trigger again.
 def test_27_exit_intent(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/exit_intent")
+    page.locator("html").dispatch_event("mouseleave")
+    expect(page.locator(".modal")).to_be_visible()
+
+    title = page.locator(".modal-title").inner_text()
+    assert title.lower() == "This is a modal window".lower()
+
+    body = page.locator(".modal-body").inner_text()
+    assert (
+        body.lower()
+        == "It's commonly used to encourage a user to take an action (e.g., give their e-mail address to sign up for something).".lower()
+    )
+
+    page.locator(".modal-footer").click()
+    expect(page.locator(".modal")).not_to_be_visible()
+    page.reload()
+    page.locator("html").dispatch_event("mouseleave")
+    expect(page.locator(".modal")).to_be_visible()
 
 
 # 🔴 28: FLOATING MENU - /floating_menu
