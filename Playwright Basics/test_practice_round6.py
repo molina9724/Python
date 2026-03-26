@@ -39,7 +39,7 @@ def test_02_login(page: Page):
     page.get_by_role("textbox", name="password").fill("SuperSecretPassword!")
     page.get_by_role("button", name="Login").click()
 
-    expect(page.locator("#flash")).to_contain_text("You logged into a secure area! ")
+    expect(page.locator("#flash")).to_contain_text("You logged into a secure area!")
     page.locator("a.button[href='/logout']").click()
     expect(page.locator("#flash")).to_contain_text("You logged out of the secure area!")
 
@@ -479,7 +479,13 @@ def test_27_exit_intent(page: Page):
 # 🔴 28: FLOATING MENU - /floating_menu
 # Verify menu visible, scroll down 1000px, verify menu still visible. Click Home, verify scrolled to top.
 def test_28_floating_menu(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/floating_menu")
+    expect(page.get_by_role("heading", name="Floating Menu")).to_be_visible()
+    page.mouse.wheel(0, 1000)
+    expect(page.get_by_role("heading", name="Floating Menu")).to_be_visible()
+    page.get_by_role("link", name="Home").click()
+    page.evaluate("window.scrollTo(0, 0)")
+    assert page.evaluate("window.scrollY") == 0
 
 
 # =====================================================================
@@ -490,10 +496,50 @@ def test_28_floating_menu(page: Page):
 # 🔴 29: BASIC AUTH - /basic_auth
 # Access with credentials in URL (admin:admin@...). Also try browser context http_credentials. Verify success.
 def test_29_basic_auth(page: Page):
-    pass
+    page.goto("https://admin:admin@the-internet.herokuapp.com/basic_auth")
+    expect(page.get_by_role("heading", name="Basic Auth")).to_be_visible()
+    expect(
+        page.get_by_text("Congratulations! You must have the proper credentials.")
+    ).to_be_visible()
 
 
 # 🔴 30: FORM AUTHENTICATION (Full Suite) - /login
 # Test: wrong creds, correct user wrong pass, empty fields, correct login, access /secure without login, login+logout.
 def test_30_auth_test_suite(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/login")
+
+    # Usecase1 - correct user wrong pass
+    page.get_by_role("textbox", name="Username").fill("tomsmith")
+    page.get_by_role("textbox", name="Password").fill("WrongPassword")
+    page.get_by_role("button", name="Login").click()
+    expect(page.locator("#flash")).to_have_text(re.compile("Your password is invalid"))
+
+    # Usecase2 - empty fields
+    page.reload()
+    page.get_by_role("button", name="Login").click()
+    expect(page.locator("#flash")).to_have_text(re.compile("Your username is invalid!"))
+
+    # Usecase2 - correct login
+    page.get_by_role("textbox", name="Username").fill("tomsmith")
+    page.get_by_role("textbox", name="Password").fill("SuperSecretPassword!")
+    page.get_by_role("button", name="Login").click()
+    expect(page.locator("#flash")).to_have_text(
+        re.compile("You logged into a secure area!")
+    )
+
+    # Usecase3 - access /secure without login
+    page.goto("https://the-internet.herokuapp.com/login/secure")
+    expect(page.get_by_role("heading")).to_have_text(re.compile("Not Found"))
+
+    # Usecase4 - login+logout
+    page.goto("https://the-internet.herokuapp.com/login")
+    page.get_by_role("textbox", name="Username").fill("tomsmith")
+    page.get_by_role("textbox", name="Password").fill("SuperSecretPassword!")
+    page.get_by_role("button", name="Login").click()
+    expect(page.locator("#flash")).to_have_text(
+        re.compile("You logged into a secure area!")
+    )
+    page.locator(".button.secondary.radius").click()
+    expect(page.locator("#flash")).to_have_text(
+        re.compile("You logged out of the secure area!")
+    )
