@@ -404,25 +404,53 @@ def test_22_tables(page: Page):
 # 🟡 23: CHALLENGING DOM - /challenging_dom
 # Buttons have random IDs. Find blue/red/green buttons by class. Click each. Get table data, find cell at row 3 col 4.
 def test_23_challenging_dom(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/challenging_dom")
+    all_buttons = page.locator(".large-2.columns .button").all()
+    for button in all_buttons:
+        button.click()
+
+    table_data = page.locator(".large-10.columns table")
+    cell = page.locator("tbody tr").nth(2).locator("td").nth(3)
+
+    expect(cell).to_have_text(re.compile(r"Definiebas\d+"))
 
 
 # 🟡 24: NOTIFICATION MESSAGES - /notification_message_rendered
 # Click "Click here" multiple times, capture notification messages, collect all unique messages.
 def test_24_notifications(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/notification_message_rendered")
+
+    messages = []
+    for _ in range(10):
+        page.get_by_role("link", name="Click here").click()
+        message = page.locator("#flash").inner_text()
+        if message not in messages:
+            messages.append(message)
+    assert len(messages) >= 2
 
 
 # 🔴 25: INFINITE SCROLL - /infinite_scroll
 # Get initial paragraph count, scroll down, wait for new content, verify count increased, scroll until 20+ paragraphs.
 def test_25_infinite_scroll(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/infinite_scroll")
+
+    while page.locator(".jscroll-added").count() < 20:
+        old_count = page.locator(".jscroll-added").count()
+        page.keyboard.press("End")
+        expect(page.locator(".jscroll-added")).to_have_count(old_count + 1)
 
 
 # 🔴 26: ENTRY AD (Popup Modal) - /entry_ad
 # Modal auto-appears. Verify visible, get title/body, close it, re-enable it, refresh and verify it reappears.
 def test_26_entry_ad(page: Page):
-    pass
+    page.goto("https://the-internet.herokuapp.com/entry_ad")
+    expect(page.locator(".modal-title")).to_be_visible()
+    title = page.locator(".modal-title").inner_text()
+    body = page.locator(".modal-footer").inner_text()
+    page.locator("#modal").get_by_text("Close").click()
+    page.get_by_role("link", name="click here").click()
+    page.reload()
+    expect(page.locator(".modal-title")).to_be_visible()
 
 
 # 🔴 27: EXIT INTENT - /exit_intent

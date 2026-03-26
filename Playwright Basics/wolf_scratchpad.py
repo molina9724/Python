@@ -10,27 +10,12 @@ with sync_playwright() as p:
     browser = p.chromium.launch(headless=True)
     page = browser.new_page()
 
-    page.goto("https://the-internet.herokuapp.com/tables")
+    page.goto("https://the-internet.herokuapp.com/notification_message_rendered")
 
-    table = page.locator("#table1")
-    expect(table.get_by_role("columnheader", name="Last Name")).not_to_contain_class(
-        "headerSortUp"
-    )
-    expect(table.get_by_role("columnheader", name="Last Name")).not_to_contain_class(
-        "headerSortDown"
-    )
-
-    rows = table.locator("tbody tr").all()
-    last_names = [row.locator("td").first.inner_text() for row in rows]
-
-    table.get_by_role("columnheader", name="Last Name").click()
-    filtered_last_names = [row.locator("td").first.inner_text() for row in rows]
-
-    print((last_names.sort()))
-
-    print((filtered_last_names))
-
-    for row in rows:
-        print(row.inner_text())
-
-    # assert last_names.sort() == filtered_last_names
+    messages = []
+    for _ in range(10):
+        page.get_by_role("link", name="Click here").click()
+        message = page.locator("#flash").inner_text().strip()
+        if message not in messages:
+            messages.append(message)
+    print(messages)
