@@ -29,7 +29,11 @@ def before_each_after_each(page: Page):
 @pytest.fixture(scope="function")
 def browser_context(browser):
     context = browser.new_context()
+    # 🎥 Manually start the "Flight Recorder"
+    context.tracing.start(screenshots=True, snapshots=True, sources=True)
     yield context
+    # 💾 Save the trace to a file
+    context.tracing.stop(path="test-results/manual-trace.zip")
     context.close()
 
 

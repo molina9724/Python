@@ -26,11 +26,14 @@ Run these directly in your VS Code terminal (Zsh).
 | Goal | Command |
 | :--- | :--- |
 | **Run All Tests** | `pytest "Playwright Basics/test_practice_round6.py"` |
-| **Run Specific Test** | `pytest "Playwright Basics/test_practice_round6.py" -k "test_10"` |
-| **Show Prints (-s)** | `pytest "Playwright Basics/test_practice_round6.py" -s` |
+| **Run Multiple Browsers** | `pytest --browser chromium --browser firefox` |
+| **Parallel Execution** | `pytest -n auto` (Requires `pip install pytest-xdist`) |
+| **Slowdown Mode** | `pytest --slowmo 500` |
 | **Headed Mode** | `pytest --headed` |
-| **Debug Mode** | `PWDEBUG=1 pytest -s "Playwright Basics/test_practice_round6.py" -k "test_name"` |
-| **Launch Inspector** | `npx playwright codegen https://the-internet.herokuapp.com` |
+| **Trace Viewer (Record)**| `pytest --tracing on` (Produces `test-results/trace.zip`) |
+| **Trace Viewer (Open)** | `playwright show-trace test-results/*/trace.zip` |
+| **Launch Inspector** | `playwright codegen https://the-internet.herokuapp.com` |
+| **Debug Mode** | `PWDEBUG=1 pytest -s -k "test_name"` |
 
 ---
 
