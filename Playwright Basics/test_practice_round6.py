@@ -30,10 +30,10 @@ def before_each_after_each(page: Page):
 def browser_context(browser):
     context = browser.new_context()
     # 🎥 Manually start the "Flight Recorder"
-    context.tracing.start(screenshots=True, snapshots=True, sources=True)
+    # context.tracing.start(screenshots=True, snapshots=True, sources=True)
     yield context
     # 💾 Save the trace to a file
-    context.tracing.stop(path="test-results/manual-trace.zip")
+    # context.tracing.stop(path="test-results/manual-trace.zip")
     context.close()
 
 
@@ -42,6 +42,12 @@ def page(browser_context):
     page = browser_context.new_page()
     yield page
     page.close()
+
+
+# 🟣 VISUAL REGRESSION TEST (The Internet)
+def test_visual_homepage_the_internet(page, assert_snapshot):
+    page.goto("https://the-internet.herokuapp.com/")
+    assert_snapshot(page.screenshot(), name="the-internet-home.png")
 
 
 # 🟢 1: ADD/REMOVE ELEMENTS - /add_remove_elements/
