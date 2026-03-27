@@ -2,9 +2,11 @@
 # 🎭 PLAYWRIGHT EXERCISES - the-internet.herokuapp.com
 # ======================================================================
 
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page, expect, sync_playwright
 from pathlib import Path
 import re
+import pytest
+import sys
 
 BASE_URL = "https://the-internet.herokuapp.com"
 
@@ -14,8 +16,33 @@ BASE_URL = "https://the-internet.herokuapp.com"
 # =====================================================================
 
 
+@pytest.fixture(scope="function", autouse=True)
+def before_each_after_each(page: Page):
+    # Before each instructions until yield
+    print("Before the test runs")
+    page.goto("https://the-internet.herokuapp.com")
+    yield
+    # After each instructions after yield
+    print("After the test runs")
+
+
+@pytest.fixture(scope="function")
+def browser_context(browser):
+    context = browser.new_context()
+    yield context
+    context.close()
+
+
+@pytest.fixture(scope="function")
+def page(browser_context):
+    page = browser_context.new_page()
+    yield page
+    page.close()
+
+
 # 🟢 1: ADD/REMOVE ELEMENTS - /add_remove_elements/
 # Click "Add Element" 5 times, verify 5 Delete buttons, remove 2, verify 3 remain, remove all.
+@pytest.mark.skip(reason="Just want to skip one")
 def test_01_add_remove(page: Page):
     page.goto("https://the-internet.herokuapp.com/add_remove_elements/")
     for _ in range(5):
@@ -33,6 +60,7 @@ def test_01_add_remove(page: Page):
 
 # 🟢 2: BASIC LOGIN FLOW - /login
 # Fill username "tomsmith", password "SuperSecretPassword!", login, verify success, logout, verify back on login.
+@pytest.mark.skipif(sys.version_info < (3, 12), reason="Requires Python 3.12 or higher")
 def test_02_login(page: Page):
     page.goto("https://the-internet.herokuapp.com/login")
     page.get_by_role("textbox", name="username").fill("tomsmith")
@@ -505,33 +533,28 @@ def test_29_basic_auth(page: Page):
 
 # 🔴 30: FORM AUTHENTICATION (Full Suite) - /login
 # Test: wrong creds, correct user wrong pass, empty fields, correct login, access /secure without login, login+logout.
-def test_30_auth_test_suite(page: Page):
+@pytest.mark.parametrize(
+    "user, password, expected",
+    [
+        ("tomsmith", "WrongPassword", "Your password is invalid"),
+        ("", "", "Your username is invalid"),
+        ("tomsmith", "SuperSecretPassword!", "You logged into a secure area"),
+    ],
+)
+def test_30a_login_scenarios(page: Page, user, password, expected):
     page.goto("https://the-internet.herokuapp.com/login")
-
-    # Usecase1 - correct user wrong pass
-    page.get_by_role("textbox", name="Username").fill("tomsmith")
-    page.get_by_role("textbox", name="Password").fill("WrongPassword")
+    page.get_by_role("textbox", name="Username").fill(user)
+    page.get_by_role("textbox", name="Password").fill(password)
     page.get_by_role("button", name="Login").click()
-    expect(page.locator("#flash")).to_have_text(re.compile("Your password is invalid"))
+    expect(page.locator("#flash")).to_have_text(re.compile(expected))
 
-    # Usecase2 - empty fields
-    page.reload()
-    page.get_by_role("button", name="Login").click()
-    expect(page.locator("#flash")).to_have_text(re.compile("Your username is invalid!"))
 
-    # Usecase2 - correct login
-    page.get_by_role("textbox", name="Username").fill("tomsmith")
-    page.get_by_role("textbox", name="Password").fill("SuperSecretPassword!")
-    page.get_by_role("button", name="Login").click()
-    expect(page.locator("#flash")).to_have_text(
-        re.compile("You logged into a secure area!")
-    )
-
-    # Usecase3 - access /secure without login
+def test_30b_secure_without_login(page: Page):
     page.goto("https://the-internet.herokuapp.com/login/secure")
     expect(page.get_by_role("heading")).to_have_text(re.compile("Not Found"))
 
-    # Usecase4 - login+logout
+
+def test_30c_login_logout(page: Page):
     page.goto("https://the-internet.herokuapp.com/login")
     page.get_by_role("textbox", name="Username").fill("tomsmith")
     page.get_by_role("textbox", name="Password").fill("SuperSecretPassword!")
