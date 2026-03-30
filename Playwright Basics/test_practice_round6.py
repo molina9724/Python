@@ -2,7 +2,7 @@
 # 🎭 PLAYWRIGHT EXERCISES - the-internet.herokuapp.com
 # ======================================================================
 
-from playwright.sync_api import Page, expect, sync_playwright
+from playwright.sync_api import Page, expect, sync_playwright, Playwright
 from pathlib import Path
 import re
 import pytest
@@ -27,6 +27,27 @@ def before_each_after_each(page: Page):
 
 
 @pytest.fixture(scope="function")
+def page(browser_context):
+    page = browser_context.new_page()
+    yield page
+    page.close()
+
+
+@pytest.fixture(scope="function")
+def mobile_page(browser, playwright: Playwright):
+    iphone13 = playwright.devices["iPhone 13"]
+    context = browser.new_context(**iphone13)
+    page = context.new_page()
+    # 🎥 Manually start the "Flight Recorder"
+    # context.tracing.start(screenshots=True, snapshots=True, sources=True)
+    yield page
+    # 💾 Save the trace to a file
+    # context.tracing.stop(path="test-results/manual-trace.zip")
+    page.close()
+    context.close()
+
+
+@pytest.fixture(scope="function")
 def browser_context(browser):
     context = browser.new_context()
     # 🎥 Manually start the "Flight Recorder"
@@ -35,13 +56,6 @@ def browser_context(browser):
     # 💾 Save the trace to a file
     # context.tracing.stop(path="test-results/manual-trace.zip")
     context.close()
-
-
-@pytest.fixture(scope="function")
-def page(browser_context):
-    page = browser_context.new_page()
-    yield page
-    page.close()
 
 
 # 🟣 VISUAL REGRESSION TEST (The Internet)
@@ -84,8 +98,8 @@ def test_02_login(page: Page):
 
 # 🟢 3: CHECKBOXES - /checkboxes
 # Verify initial states, check/uncheck both, verify states changed, toggle back to original.
-def test_03_checkboxes(page: Page):
-    page.goto("https://the-internet.herokuapp.com/checkboxes")
+def test_03_checkboxes(mobile_page):
+    mobile_page.goto("https://the-internet.herokuapp.com/checkboxes")
 
     # ⚠️ NOTE: We cannot use get_by_role("checkbox", name="checkbox 1") here!
     # The developer of this training site wrote terrible, inaccessible HTML.
@@ -93,14 +107,14 @@ def test_03_checkboxes(page: Page):
     # so Playwright (and Screen Readers) see a raw checkbox with absolutely no name attached to it.
     # We are forced to use .first and .last to locate them instead!
 
-    expect(page.get_by_role("checkbox").first).not_to_be_checked()
-    expect(page.get_by_role("checkbox").last).to_be_checked()
+    expect(mobile_page.get_by_role("checkbox").first).not_to_be_checked()
+    expect(mobile_page.get_by_role("checkbox").last).to_be_checked()
 
-    page.get_by_role("checkbox").first.check()
-    expect(page.get_by_role("checkbox").first).to_be_checked()
+    mobile_page.get_by_role("checkbox").first.check()
+    expect(mobile_page.get_by_role("checkbox").first).to_be_checked()
 
-    page.get_by_role("checkbox").last.uncheck()
-    expect(page.get_by_role("checkbox").last).not_to_be_checked()
+    mobile_page.get_by_role("checkbox").last.uncheck()
+    expect(mobile_page.get_by_role("checkbox").last).not_to_be_checked()
 
 
 # 🟡 4: CONTEXT MENU (Right-click) - /context_menu

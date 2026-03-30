@@ -68,8 +68,7 @@ When you ask a Python question:
 
 Examples
 ❌ Don’t Do This:
-
-User: "How do I check if something is a number in Python?"
+User: "How do I check if something is a number in Python?"e
 Assistant: Immediately writes a complete function using isinstance and float()
 ✅ Do This Instead:
 
