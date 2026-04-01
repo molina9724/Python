@@ -117,7 +117,7 @@ class TestListOperations(unittest.TestCase):
 
     def test_reverse(self):
         a_list = [1, 2, 3, 4, 5]
-        self.assertEqual(reversed(a_list), [5, 4, 3, 2, 1])
+        self.assertEqual(list(reversed(a_list)), [5, 4, 3, 2, 1])
 
 
 # =====================================================================
@@ -138,6 +138,26 @@ class TestListOperations(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class TestEqualityAsserts(unittest.TestCase):
+
+    def test_equal_numbers(self):
+        self.assertEqual(5 + 5, 10)
+
+    def test_equal_strings(self):
+        self.assertEqual("a", "a")
+
+    def test_equal_lists(self):
+        self.assertEqual([1, 2, 3], [1, 2, 3])
+
+    def test_not_equal(self):
+        self.assertNotEqual(1, 2)
+
+    def test_equal_dicts(self):
+        dic1 = {1: "a", 2: "b", 3: "c"}
+        dic2 = {1: "a", 2: "b", 3: "c"}
+        self.assertEqual(dic1, dic2)
+
+
 # ----------------------------------------------------------------------
 # 🟢 5: BOOLEAN ASSERTS
 #
@@ -149,6 +169,23 @@ class TestListOperations(unittest.TestCase):
 # 5. test_false_empty: use assertFalse to verify empty list is falsy
 # 6. test_true_membership: use assertTrue for 'a' in 'apple'
 # ----------------------------------------------------------------------
+
+
+class TestBooleanAsserts(unittest.TestCase):
+    def test_true_expression(self):
+        self.assertTrue(10 > 5)
+
+    def test_false_expression(self):
+        self.assertFalse(10 < 5)
+
+    def test_true_string(self):
+        self.assertTrue("Hello")
+
+    def test_false_string(self):
+        self.assertFalse("")
+
+    def test_true_membership(self):
+        self.assertTrue("a" in "apple")
 
 
 # ----------------------------------------------------------------------
@@ -164,6 +201,28 @@ class TestListOperations(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class TestIdentityAsserts(unittest.TestCase):
+    def test_is_same(self):
+        a = b = [1, 2, 3]
+        self.assertIs(a, b)
+
+    def test_is_not_same(self):
+        a = [1, 2, 3]
+        b = [1, 2, 3]
+        self.assertIsNot(a, b)
+
+    def test_is_none(self):
+        none_variable = None
+        self.assertIsNone(none_variable)
+
+    def test_is_not_none(self):
+        no_none = 0
+        self.assertIsNotNone(no_none)
+
+    def test_is_singleton(self):
+        self.assertIs(True, True)
+
+
 # ----------------------------------------------------------------------
 # 🟡 7: MEMBERSHIP ASSERTS
 #
@@ -177,6 +236,24 @@ class TestListOperations(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class TestMembershipAsserts(unittest.TestCase):
+    def test_in_list(self):
+        self.assertIn(3, [1, 2, 3])
+
+    def test_not_in_list(self):
+        self.assertNotIn(1, [2, 3, 4])
+
+    def test_in_string(self):
+        self.assertIn("py", "python")
+
+    def test_in_dict(self):
+        a_dict = {1: "a", 2: "b", 3: "c"}
+        self.assertIn(1, a_dict)
+
+    def test_not_in_string(self):
+        self.assertNotIn("x", "python")
+
+
 # ----------------------------------------------------------------------
 # 🟡 8: INSTANCE ASSERTS
 #
@@ -188,6 +265,28 @@ class TestListOperations(unittest.TestCase):
 # 5. test_not_instance: use assertNotIsInstance to verify "5" is not int
 # 6. test_custom_class: create a class, instantiate, verify instance
 # ----------------------------------------------------------------------
+
+
+class ThisIsMyClass:
+    pass
+
+
+class TestInstanceAsserts(unittest.TestCase):
+    def test_is_string(self):
+        self.assertIsInstance("Hello", str)
+
+    def test_is_int(self):
+        self.assertIsInstance(10, int)
+
+    def test_is_list(self):
+        self.assertIsInstance([1, 2, 3], list)
+
+    def test_not_instance(self):
+        self.assertNotIsInstance(50, frozenset)
+
+    def test_custom_class(self):
+        an_object = ThisIsMyClass()
+        self.assertIsInstance(an_object, ThisIsMyClass)
 
 
 # =====================================================================
@@ -210,6 +309,27 @@ class TestListOperations(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+# class TestWithSetUp(unittest.TestCase):
+#     def setUp(self):
+#         self.test_list = [1, 2, 3]
+
+#     def tearDown(self):
+#         print("Test completed")
+
+#     def test_list_exists(self):
+#         self.assertIsNotNone(self.test_list)
+
+#     def test_list_length(self):
+#         self.assertEqual(len(self.test_list), 3)
+
+#     def test_modify_list(self):
+#         self.test_list.append(4)
+#         self.assertEqual(len(self.test_list), 4)
+
+#     def test_original_list(self):
+#         self.assertEqual(len(self.test_list), 3)
+
+
 # ----------------------------------------------------------------------
 # 🟡 10: setUpClass AND tearDownClass
 #
@@ -225,6 +345,30 @@ class TestListOperations(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class TestWithSetUp(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        # print("Starting TestCase")
+        cls.shared_data = []
+
+    @classmethod
+    def tearDownClass(cls):
+        pass
+        # print("Finished Test case")
+
+    def test_first(self):
+        self.shared_data.append("First")
+        self.assertEqual(len(self.shared_data), 1)
+
+    def test_second(self):
+        self.shared_data.append("Second")
+        self.assertEqual(len(self.shared_data), 2)
+
+    def test_third(self):
+        self.shared_data.append("Third")
+        self.assertEqual(len(self.shared_data), 3)
+
+
 # ----------------------------------------------------------------------
 # 🟡 11: COMBINED FIXTURES
 #
@@ -237,6 +381,34 @@ class TestListOperations(unittest.TestCase):
 # 6. Create 3 test methods with simple assertions
 # 7. Run and observe execution order
 # ----------------------------------------------------------------------
+
+
+class TestAllFixtures(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        print("=== TestCase Started ===")
+        cls.counter = 0
+
+    @classmethod
+    def tearDownClass(cls):
+        print("=== TestCase Finished ===")
+
+    def setUp(self):
+        TestAllFixtures.counter += 1
+        print(f"Test #{self.counter} starting")
+
+    def tearDown(self):
+        print(f"Test #{self.counter} finished")
+
+    def test_first(self):
+        self.assertEqual(1, 1)
+
+    def test_second(self):
+        self.assertEqual(1, 1)
+
+    def test_third(self):
+        self.assertEqual(1, 1)
 
 
 # =====================================================================
@@ -260,6 +432,30 @@ class TestListOperations(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class TestAddition(unittest.TestCase):
+
+    def test_add_positive(self):
+        self.assertEqual(1 + 2, 3)
+
+    def test_add_negative(self):
+        self.assertEqual(1 + (-1), 0)
+
+
+class TestSubtraction(unittest.TestCase):
+    def test_sub_positive(self):
+        self.assertEqual(1 - 1, 0)
+
+    def test_sub_negative(self):
+        self.assertEqual(1 - (-1), 2)
+
+
+# def suite():
+#     math_suite = unittest.TestSuite()
+#     math_suite.addTest(unittest.makeSuite(TestAddition))
+#     math_suite.addTest(unittest.makeSuite(TestSubtraction))
+#     return math_suite
+
+
 # ----------------------------------------------------------------------
 # 🟡 13: NESTED TEST SUITES
 #
@@ -273,6 +469,52 @@ class TestListOperations(unittest.TestCase):
 #
 # Hint: Use addTests([suite_1, suite_2]) for adding multiple suites
 # ----------------------------------------------------------------------
+
+
+class TestMultiplication(unittest.TestCase):
+    def test_mul_positive(self):
+        self.assertEqual(2 * 2, 4)
+
+
+class TestDivision(unittest.TestCase):
+    def test_div_positive(self):
+        self.assertEqual(2 / 2, 1)
+
+
+# ----------------------------------------------------------------------
+# Commentary on suite construction and best practices (added by reviewer):
+#
+# ⚠️ Note: This code uses unittest.defaultTestLoader.loadTestsFromTestCase, which is the modern and future-proof method to aggregate all test methods from a TestCase class into a suite.
+# Older courses and materials sometimes use unittest.makeSuite(), but that method is deprecated in Python 3.11+ and should be avoided for new code.
+#
+# Example alternate construction:
+#   suite_1 = unittest.TestSuite([
+#       unittest.defaultTestLoader.loadTestsFromTestCase(TestAddition),
+#       unittest.defaultTestLoader.loadTestsFromTestCase(TestSubtraction),
+#   ])
+#
+# Both methods (the code here, and the commented alternate above) are valid up to Python 3.10. Always prefer the loader idiom for future compatibility!
+# For more, see: https://docs.python.org/3/library/unittest.html#unittest.TestLoader.loadTestsFromTestCase
+# ----------------------------------------------------------------------
+
+suite_1 = unittest.TestSuite()
+suite_1.addTests(
+    [
+        unittest.defaultTestLoader.loadTestsFromTestCase(TestAddition),
+        unittest.defaultTestLoader.loadTestsFromTestCase(TestSubtraction),
+    ]
+)
+
+suite_2 = unittest.TestSuite()
+suite_2.addTests(
+    [
+        unittest.defaultTestLoader.loadTestsFromTestCase(TestMultiplication),
+        unittest.defaultTestLoader.loadTestsFromTestCase(TestDivision),
+    ]
+)
+
+master_suite = unittest.TestSuite()
+master_suite.addTests([(suite_1), suite_2])
 
 
 # =====================================================================
@@ -292,6 +534,18 @@ class TestListOperations(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class TestSkipping(unittest.TestCase):
+    def test_normal(self):
+        pass
+
+    @unittest.skip("Just skipping this one!")
+    def test_skipped(self):
+        pass
+
+    def test_normal_2(self):
+        pass
+
+
 # ----------------------------------------------------------------------
 # 🟡 15: CONDITIONAL SKIP
 #
@@ -306,6 +560,31 @@ class TestListOperations(unittest.TestCase):
 # 5. test_always_runs: a test that runs on all platforms
 # ----------------------------------------------------------------------
 
+
+class TestConditionalSkip(unittest.TestCase):
+    @unittest.skipIf(sys.platform.startswith("win"), "Skipping on Windows")
+    def test_skip_on_windows(self):
+        pass
+
+    @unittest.skipIf(sys.platform.startswith("linux"), "We're skipping Linux, man")
+    def test_skip_on_linux(self):
+        pass
+
+    @unittest.skipIf(sys.platform.startswith("darwin"), "We're skipping Mac, man")
+    def test_skip_on_mac(self):
+        pass
+
+    @unittest.skipUnless(
+        os.getenv("RUN_SLOW_TESTS"), "Skipped since you haven't setup RUN_SLOW_TESTS"
+    )
+    def test_skip_unless_env(self):
+        pass
+
+    def test_always_run(self):
+        pass
+
+
+print(sys.platform)
 
 # ----------------------------------------------------------------------
 # 🟡 16: SKIP ENTIRE TEST CASE
@@ -537,4 +816,8 @@ class TestListOperations(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    # runner = unittest.TextTestRunner(verbosity=2)
+    # runner.run(master_suite)
+    # Uncomment for only the test suite and comment unittest.main()
+
     unittest.main()
