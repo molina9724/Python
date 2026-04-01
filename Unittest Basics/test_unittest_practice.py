@@ -703,9 +703,6 @@ class TestCalculator(unittest.TestCase):
             self.calculator.divide(1, 0)
 
 
-# my_c = Calculator()
-# print(my_c.divide(1, 0))
-
 # ----------------------------------------------------------------------
 # 🟡 19: TEST A USER CLASS
 #
@@ -721,6 +718,56 @@ class TestCalculator(unittest.TestCase):
 #    - test_get_domain
 #    - test_empty_email
 # ----------------------------------------------------------------------
+
+
+class User:
+    def __init__(self, username, email):
+        self.username = username
+        self.email = email
+
+    def is_valid_email(self):
+        return "@" in self.email
+
+    def get_domain(self):
+        try:
+            at_index = self.email.index("@")
+            domain = self.email[at_index + 1 :]
+            return domain
+        except ValueError:
+            raise
+
+
+class TestValidUser(unittest.TestCase):
+    def setUp(self):
+        self.user = User("John", "john@example.com")
+
+    def test_valid_email(self):
+        self.assertTrue(self.user.is_valid_email())
+
+    def test_get_domain(self):
+        self.assertEqual(self.user.get_domain(), "example.com")
+
+
+class TestInvalidUser(unittest.TestCase):
+    def setUp(self):
+        self.user = User("Jane", "invalid-email")
+
+    def test_invalid_email(self):
+        self.assertFalse(self.user.is_valid_email())
+
+    def test_get_domain_invalid(self):
+        with self.assertRaises(ValueError):
+            self.user.get_domain()
+
+
+class TestUserEmptyEmail(unittest.TestCase):
+    def setUp(self):
+        self.user = User("Alex", "")
+
+    def test_empty_email_invalid(self):
+        self.assertFalse(self.user.is_valid_email())
+        with self.assertRaises(ValueError):
+            self.user.get_domain()
 
 
 # ----------------------------------------------------------------------
