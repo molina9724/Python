@@ -784,6 +784,70 @@ class TestUserEmptyEmail(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class Item:
+    def __init__(self, name, price, quantity=1):
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+
+
+class ShoppingCart:
+    def __init__(self):
+        self.all_items = list()
+
+    def add_item(self, item: Item):
+        self.all_items.append(item)
+
+    def remove_item(self, name: str):
+        for item in self.all_items:
+            if name in item.name:
+                self.all_items.remove(item)
+
+    def get_total(self):
+        total = 0
+        for item in self.all_items:
+            total += item.price
+        return total
+
+    def get_item_count(self):
+        item_count = 0
+        for item in self.all_items:
+            item_count += item.quantity
+        return item_count
+
+    def clear(self):
+        self.all_items.clear()
+
+
+class TestShoppingCart(unittest.TestCase):
+    def setUp(self):
+        self.cart = ShoppingCart()
+        self.item = Item("test", 1, 1)
+
+    def test_add_item(self):
+        self.cart.add_item(self.item)
+        self.assertEqual(self.cart.get_item_count(), 1)
+
+    def test_remove_item(self):
+        self.cart.add_item(self.item)
+        self.assertEqual(self.cart.get_item_count(), 1)
+        self.cart.remove_item(self.item.name)
+        self.assertEqual(self.cart.get_item_count(), 0)
+
+    def test_get_total(self):
+        self.cart.add_item(self.item)
+        self.assertEqual(self.cart.get_total(), 1)
+
+    def test_item_count(self):
+        self.cart.add_item(self.item)
+        self.assertEqual(self.cart.get_item_count(), 1)
+
+    def test_clear(self):
+        self.cart.add_item(self.item)
+        self.cart.clear()
+        self.assertEqual(self.cart.get_item_count(), 0)
+
+
 # ----------------------------------------------------------------------
 # 🔴 21: TEST A FILE HANDLER
 #
