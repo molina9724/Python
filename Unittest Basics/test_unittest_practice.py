@@ -667,6 +667,45 @@ class TestExpectedFailure(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class Calculator:
+    def add(self, a, b):
+        return a + b
+
+    def subtract(self, a, b):
+        return a - b
+
+    def multiply(self, a, b):
+        return a * b
+
+    def divide(self, a, b):
+        try:
+            return a / b
+        except ZeroDivisionError:
+            raise ValueError("Cannot divide by zero")
+
+
+class TestCalculator(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.calculator = Calculator()
+
+    def test_add(self):
+        self.assertEqual(self.calculator.add(1, 1), 2)
+
+    def test_subtract(self):
+        self.assertEqual(self.calculator.subtract(1, 1), 0)
+
+    def test_multiply(self):
+        self.assertEqual(self.calculator.multiply(1, 1), 1)
+
+    def test_divide_by_zero(self):
+        with self.assertRaises(ValueError):
+            self.calculator.divide(1, 0)
+
+
+# my_c = Calculator()
+# print(my_c.divide(1, 0))
+
 # ----------------------------------------------------------------------
 # 🟡 19: TEST A USER CLASS
 #
