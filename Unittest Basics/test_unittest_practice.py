@@ -598,6 +598,18 @@ print(sys.platform)
 # ----------------------------------------------------------------------
 
 
+@unittest.skip("Because I say so")
+class TestSkippedClass(unittest.TestCase):
+    def test_always_run_1(self):
+        pass
+
+    def test_always_run_2(self):
+        pass
+
+    def test_always_run_3(self):
+        pass
+
+
 # =====================================================================
 #                    SECTION 6: EXPECTED FAILURES
 # =====================================================================
@@ -617,6 +629,22 @@ print(sys.platform)
 # 4. test_normal_pass: a regular passing test
 # 5. test_normal_fail: a regular failing test (to compare)
 # ----------------------------------------------------------------------
+
+
+class TestExpectedFailure(unittest.TestCase):
+    @unittest.expectedFailure
+    def test_expected_failure(self):
+        self.assertEqual(1, 2)
+
+    @unittest.expectedFailure
+    def test_unexpected_success(self):
+        self.assertEqual(1, 1)
+
+    def test_normal_pass(self):
+        pass
+
+    def test_normal_fail(self):
+        self.assertEqual(1, 2)
 
 
 # =====================================================================
