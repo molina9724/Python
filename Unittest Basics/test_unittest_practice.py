@@ -879,6 +879,65 @@ class TestShoppingCart(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class BankAccount:
+    def __init__(self, owner, balance=0):
+        self.owner = owner
+        self.balance = balance
+
+    def deposit_amount(self, amount):
+        if amount <= 0:
+            raise ValueError
+        else:
+            self.balance += amount
+
+    def withdraw(self, amount):
+        if self.balance - amount < 0:
+            raise ValueError
+        else:
+            self.balance -= amount
+
+    def get_balance(self):
+        return self.balance
+
+    def transfer(self, amount, another_account):
+        if amount > 0 and isinstance(another_account, BankAccount):
+            self.balance -= amount
+            another_account.balance += amount
+
+
+class TestBankAccount(unittest.TestCase):
+    def setUp(self):
+        self.bank_account = BankAccount("test", 20)
+        self.bank_account2 = BankAccount("test", 20)
+        self.amount = 10
+
+    def test_deposit_amount(self):
+        balance = self.bank_account.get_balance()
+        self.bank_account.deposit_amount(self.amount)
+        self.assertEqual(self.bank_account.get_balance(), balance + self.amount)
+
+    def test_withdraw_amount(self):
+        balance = self.bank_account.get_balance()
+        self.bank_account.withdraw(self.amount)
+        self.assertEqual(self.bank_account.get_balance(), balance - self.amount)
+
+    def test_get_balance(self):
+        self.assertGreaterEqual(self.bank_account.get_balance(), 0)
+
+    def test_transfer(self):
+        balance = self.bank_account.get_balance()
+        balance2 = self.bank_account2.get_balance()
+        self.bank_account.transfer(self.amount, self.bank_account2)
+        self.assertEqual(
+            self.bank_account.get_balance(),
+            balance - self.amount,
+        )
+        self.assertEqual(
+            self.bank_account2.get_balance(),
+            balance2 + self.amount,
+        )
+
+
 # =====================================================================
 #                    SECTION 8: ADVANCED SCENARIOS
 # =====================================================================
