@@ -7,7 +7,7 @@
 import unittest
 import sys
 import os
-
+import re
 
 # =====================================================================
 #                    SECTION 1: BASIC TEST CASES
@@ -720,7 +720,7 @@ class TestCalculator(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
-class User:
+class SimpleUser:
     def __init__(self, username, email):
         self.username = username
         self.email = email
@@ -739,7 +739,7 @@ class User:
 
 class TestValidUser(unittest.TestCase):
     def setUp(self):
-        self.user = User("John", "john@example.com")
+        self.user = SimpleUser("John", "john@example.com")
 
     def test_valid_email(self):
         self.assertTrue(self.user.is_valid_email())
@@ -750,7 +750,7 @@ class TestValidUser(unittest.TestCase):
 
 class TestInvalidUser(unittest.TestCase):
     def setUp(self):
-        self.user = User("Jane", "invalid-email")
+        self.user = SimpleUser("Jane", "invalid-email")
 
     def test_invalid_email(self):
         self.assertFalse(self.user.is_valid_email())
@@ -762,7 +762,7 @@ class TestInvalidUser(unittest.TestCase):
 
 class TestUserEmptyEmail(unittest.TestCase):
     def setUp(self):
-        self.user = User("Alex", "")
+        self.user = SimpleUser("Alex", "")
 
     def test_empty_email_invalid(self):
         self.assertFalse(self.user.is_valid_email())
@@ -1006,6 +1006,97 @@ class TestBankAccount(unittest.TestCase):
 #    - search_by_name(name) - partial match, case insensitive
 # 2. Create TestUserDatabase with full CRUD test coverage
 # ----------------------------------------------------------------------
+
+
+class User:
+    def __init__(self, id: int, name: str, email: str):
+        self.id = id
+        self.name = name
+        self.email = email
+
+
+class UserDatabase:
+    def __init__(self):
+        self.all_users = []
+
+    def add_user(self, user: User):
+        self.all_users.append(user)
+
+    def get_user(self, user_id: int):
+        for user in self.all_users:
+            if user_id == user.id:
+                return user
+        return f"{user_id} doesn't exist in the database"
+
+    def delete_user(self, user_id: int):
+        for user in self.all_users:
+            if user_id == user.id:
+                self.all_users.remove(user)
+                return f"{user_id} deleted from the database"
+        return f"{user_id} doesn't exist in the database"
+
+    def get_all_users(self):
+        return self.all_users
+
+    def search_by_name(self, name: str):
+        for user in self.all_users:
+            if name.lower() in user.name.lower():
+                return user
+        return f"{name} doesn't exist in the database"
+
+
+class TestUserDatabase(unittest.TestCase):
+    def setUp(self):
+        self.test_data_base = UserDatabase()
+        self.test_user = User(1, "test", "test@test.com")
+        self.test_data_base.add_user(self.test_user)
+        self.invalid_id = 2
+        self.invalid_name = "invalid_name"
+
+    def test_add_user(self):
+        self.assertEqual(len(self.test_data_base.all_users), 1)
+        self.assertEqual(self.test_data_base.all_users[0], self.test_user)
+
+    def test_get_user(self):
+        self.assertEqual(
+            self.test_data_base.get_user(self.test_user.id), self.test_user
+        )
+
+    def test_delete_valid_user(self):
+        self.assertEqual(
+            self.test_data_base.delete_user(self.test_user.id),
+            f"{self.test_user.id} deleted from the database",
+        )
+
+    def test_delete_invalid_user(self):
+        self.assertEqual(
+            self.test_data_base.delete_user(self.invalid_id),
+            f"{self.invalid_id} doesn't exist in the database",
+        )
+
+    def test_get_all_users(self):
+        self.assertEqual(
+            self.test_data_base.get_all_users(), self.test_data_base.all_users
+        )
+
+    def test_search_valid_user(self):
+        self.assertEqual(
+            self.test_data_base.search_by_name(self.test_user.name),
+            self.test_user,
+        )
+
+    def test_search_invalid_user(self):
+        self.assertEqual(
+            self.test_data_base.search_by_name(self.invalid_name),
+            f"{self.invalid_name} doesn't exist in the database",
+        )
+
+    def test_search_valid_user_partial_name(self):
+        partial = self.test_user.name[:2]
+        self.assertEqual(
+            self.test_data_base.search_by_name(partial),
+            self.test_user,
+        )
 
 
 # ----------------------------------------------------------------------
