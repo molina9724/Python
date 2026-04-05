@@ -864,6 +864,57 @@ class TestShoppingCart(unittest.TestCase):
 #    - Full test coverage for all methods
 # ----------------------------------------------------------------------
 
+from pathlib import Path
+
+
+class FileHandler:
+    def __init__(self, name):
+        self.path = Path(
+            f"/Users/daniel_molina/Downloads/Python/Python/Unittest Basics/{name}"
+        )
+
+    def write_file(self, content):
+        with open(self.path, "a") as file:
+            file.write(content)
+
+    def read_file(self):
+        with open(self.path, "r") as file:
+            all_lines = file.readlines()
+        return all_lines
+
+    def file_exists(self):
+        return self.path.exists()
+
+    def delete_file(self):
+        if self.path.exists():
+            self.path.unlink()
+
+
+class TestFileHandler(unittest.TestCase):
+    test_file_name = "test_file.txt"
+    test_context = "Initial context"
+
+    @classmethod
+    def setUpClass(cls):
+        cls.file_handler = FileHandler(cls.test_file_name)
+        with open(cls.file_handler.path, "w") as file:
+            file.write(cls.test_context)
+
+    @classmethod
+    def tearDownClass(cls):
+        if cls.file_handler.path.exists():
+            cls.file_handler.delete_file()
+
+    def test_file_exists(self):
+        self.assertTrue(self.file_handler.file_exists())
+
+    def test_delete_file(self):
+        self.assertFalse(self.file_handler.delete_file())
+
+    def test_read_file(self):
+        self.assertEqual(len(self.file_handler.read_file()), 1)
+        self.assertEqual(self.file_handler.read_file()[0], self.test_context)
+
 
 # ----------------------------------------------------------------------
 # 🔴 22: TEST A BANK ACCOUNT
