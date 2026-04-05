@@ -1110,6 +1110,100 @@ class TestUserDatabase(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class PasswordValidator:
+    def __init__(self, password):
+        self.password = password
+
+    def validate(self):
+        errors = []
+        if len(self.password) < 8:
+            errors.append("Password must be at least 8 characters long.")
+        if not re.search(r"[A-Z]", self.password):
+            errors.append("Password must contain at least one uppercase letter.")
+        if not re.search(r"[a-z]", self.password):
+            errors.append("Password must contain at least one lowercase letter.")
+        if not re.search(r"\d", self.password):
+            errors.append("Password must contain at least one digit.")
+        if not re.search(r"\W", self.password):
+            errors.append("Password must contain at least one special character.")
+        return (len(errors) == 0), errors
+
+
+class TestPasswordValidator(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.valid_length = PasswordValidator("12345678")
+        cls.invalid_length = PasswordValidator("1234567")
+
+        cls.uppercase = PasswordValidator("A")
+        cls.lowercase = PasswordValidator("a")
+
+        cls.digit = PasswordValidator("1")
+        cls.no_digit = PasswordValidator("no_digit")
+
+        cls.special_char = PasswordValidator("*")
+        cls.no_special_char = PasswordValidator("noSpecialChar")
+
+        cls.valid_password = PasswordValidator("12345678Aa0*")
+
+    def test_passes_min_len(self):
+        valid, errors = self.valid_length.validate()
+        self.assertFalse(valid)
+        self.assertNotIn("Password must be at least 8 characters long.", errors)
+
+    def test_fails_min_length(self):
+        valid, errors = self.invalid_length.validate()
+        self.assertFalse(valid)
+        self.assertIn("Password must be at least 8 characters long.", errors)
+
+    def test_fails_uppercase(self):
+        valid, errors = self.lowercase.validate()
+        self.assertFalse(valid)
+        self.assertIn("Password must contain at least one uppercase letter.", errors)
+
+    def test_passes_uppercase(self):
+        valid, errors = self.uppercase.validate()
+        self.assertFalse(valid)
+        self.assertNotIn("Password must contain at least one uppercase letter.", errors)
+
+    def test_fails_lowercase(self):
+        valid, errors = self.uppercase.validate()
+        self.assertFalse(valid)
+        self.assertIn("Password must contain at least one lowercase letter.", errors)
+
+    def test_passes_lowercase(self):
+        valid, errors = self.lowercase.validate()
+        self.assertFalse(valid)
+        self.assertNotIn("Password must contain at least one lowercase letter.", errors)
+
+    def test_fails_digit(self):
+        valid, errors = self.no_digit.validate()
+        self.assertFalse(valid)
+        self.assertIn("Password must contain at least one digit.", errors)
+
+    def test_passes_digit(self):
+        valid, errors = self.digit.validate()
+        self.assertFalse(valid)
+        self.assertNotIn("Password must contain at least one digit.", errors)
+
+    def test_fails_special_char(self):
+        valid, errors = self.no_special_char.validate()
+        self.assertFalse(valid)
+        self.assertIn("Password must contain at least one special character.", errors)
+
+    def test_passes_special_char(self):
+        valid, errors = self.special_char.validate()
+        self.assertFalse(valid)
+        self.assertNotIn(
+            "Password must contain at least one special character.", errors
+        )
+
+    def test_valid_password(self):
+        valid, errors = self.valid_password.validate()
+        self.assertTrue(valid)
+        self.assertEqual(errors, [])
+
+
 # ----------------------------------------------------------------------
 # 🔴 25: COMPLETE TEST SUITE PROJECT
 #
