@@ -103,6 +103,20 @@ class Test3(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class Test4(unittest.TestCase):
+    def test_args_list(self):
+        m = mock.Mock()
+
+        args = [(1, 2), ("a", "b"), (True, False)]
+        expected = list()
+        for arg in args:
+            # Unpack the tuple for more similar working
+            m(*arg)
+            expected.append(mock.call(*arg))
+
+        self.assertEqual(m.call_args_list, expected)
+
+
 # =====================================================================
 #                    SECTION 2: MOCK RETURN VALUES
 # =====================================================================
@@ -122,6 +136,21 @@ class Test3(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class Test5(unittest.TestCase):
+    def test_return_value(self):
+        m = mock.Mock()
+        value = 42
+        m.return_value = value
+        self.assertEqual(m(), value)
+
+        value2 = "hello"
+        m2 = mock.Mock(return_value=value2)
+        self.assertEqual(m2(), value2)
+
+        m3 = mock.Mock(return_value=[])
+        self.assertEqual(m3(), [])
+
+
 # ----------------------------------------------------------------------
 # 🟡 6: SIDE EFFECT - MULTIPLE RETURNS
 #
@@ -134,6 +163,20 @@ class Test3(unittest.TestCase):
 # 4. Call it third time - should return 3
 # 5. Call it fourth time - observe what happens
 # ----------------------------------------------------------------------
+
+
+class Test6(unittest.TestCase):
+    def test_side_effect(self):
+        side_effect = [1, 2, 3]
+        m = mock.Mock(side_effect=side_effect)
+
+        self.assertEqual(m(), side_effect[0])
+        self.assertEqual(m(), side_effect[1])
+        self.assertEqual(m(), side_effect[2])
+
+        # Exception raised if consumed
+        with self.assertRaises(StopIteration):
+            m()
 
 
 # ----------------------------------------------------------------------
@@ -150,6 +193,23 @@ class Test3(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class Test7(unittest.TestCase):
+    def test_side_effect_error(self):
+        m = mock.Mock(side_effect=ValueError("error"))
+
+        try:
+            m()
+        except ValueError as e:
+            self.assertEqual(str(e), "error")
+        else:
+            self.fail("ValueError not raised")
+
+    def test_connection_error(self):
+        m = mock.Mock(side_effect=ConnectionError)
+        with self.assertRaises(ConnectionError):
+            m()
+
+
 # ----------------------------------------------------------------------
 # 🟡 8: SIDE EFFECT - CUSTOM FUNCTION
 #
@@ -162,6 +222,27 @@ class Test3(unittest.TestCase):
 # 4. Call mock(100) and verify it returns 200
 # 5. Create a side_effect function that behaves differently based on input
 # ----------------------------------------------------------------------
+
+
+class Test8(unittest.TestCase):
+    def double(self, x):
+        return x * 2
+
+    def side_effect_func(self, x):
+        if x % 2 == 0:
+            return x + 1
+        else:
+            return x + 2
+
+    def test_double(self):
+        m = mock.Mock(side_effect=self.double)
+        self.assertEqual(m(5), 10)
+        self.assertEqual(m(100), 200)
+
+    def test_side_effect(self):
+        m = mock.Mock(side_effect=self.side_effect_func)
+        self.assertEqual(m(5), 7)
+        self.assertEqual(m(6), 7)
 
 
 # =====================================================================
@@ -183,6 +264,16 @@ class Test3(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class Test9(unittest.TestCase):
+    def test_assert_called(self):
+        m = mock.Mock()
+        m()
+        m.assert_called()
+
+        n = mock.Mock()
+        n.assert_called()
+
+
 # ----------------------------------------------------------------------
 # 🟢 10: ASSERT CALLED ONCE
 #
@@ -197,6 +288,20 @@ class Test3(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class Test10(unittest.TestCase):
+    def test_call_once(self):
+        m = mock.Mock()
+        m()
+        m.assert_called_once()
+
+    @unittest.expectedFailure
+    def test_call_twice(self):
+        m = mock.Mock()
+        m()
+        m()
+        m.assert_called_once()
+
+
 # ----------------------------------------------------------------------
 # 🟡 11: ASSERT CALLED WITH
 #
@@ -209,6 +314,28 @@ class Test3(unittest.TestCase):
 # 4. Use assert_called_with(1, 2) - observe it fails
 # 5. Call mock with keyword arguments and verify with assert_called_with
 # ----------------------------------------------------------------------
+
+
+class Test11(unittest.TestCase):
+    def test_with_full_arguments(self):
+        m = mock.Mock()
+        m(1, 2, 3)
+        m.assert_called_with(1, 2, 3)
+
+    @unittest.expectedFailure
+    def test_with_missing_arguments(self):
+        full_arguments = 1, 2, 3
+        missing_arguments = 1, 2
+
+        m = mock.Mock()
+        m(full_arguments)
+        m.assert_called_with(missing_arguments)
+
+    def test_with_keyword_arguments(self):
+        keyword_arguments = {"a": 10, "b": 20, "c": 30}
+        m = mock.Mock()
+        m(**keyword_arguments)
+        m.assert_called_with(**keyword_arguments)
 
 
 # ----------------------------------------------------------------------
