@@ -1201,7 +1201,7 @@ class TestPasswordValidator(unittest.TestCase):
     def test_valid_password(self):
         valid, errors = self.valid_password.validate()
         self.assertTrue(valid)
-        self.assertEqual(errors, [])
+        self.assertNotEqual(errors, [], msg="Working badly")
 
 
 # ----------------------------------------------------------------------
