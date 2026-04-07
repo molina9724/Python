@@ -352,6 +352,22 @@ class Test11(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class Test12(unittest.TestCase):
+    def test_called_once_with(self):
+        m = mock.Mock()
+        args = ("test", 123)
+        m(*args)
+        m.assert_called_once_with(*args)
+
+    @unittest.expectedFailure
+    def test_called_twice_with(self):
+        m = mock.Mock()
+        args = ("test", 123)
+        m(*args)
+        m(*args)
+        m.assert_called_once_with(*args)
+
+
 # ----------------------------------------------------------------------
 # 🟡 13: ASSERT ANY CALL
 #
@@ -366,6 +382,15 @@ class Test11(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class Test13(unittest.TestCase):
+    def test_any_call(self):
+        m = mock.Mock()
+        m(1)
+        m(2)
+        m(3)
+        m.assert_any_call(2)
+
+
 # ----------------------------------------------------------------------
 # 🟡 14: ASSERT NOT CALLED
 #
@@ -377,6 +402,18 @@ class Test11(unittest.TestCase):
 # 3. Call the mock
 # 4. Use assert_not_called() - observe it fails
 # ----------------------------------------------------------------------
+
+
+class Test14(unittest.TestCase):
+    def test_not_called(self):
+        m = mock.Mock()
+        m.assert_not_called()
+
+    @unittest.expectedFailure
+    def test_not_called_but_called(self):
+        m = mock.Mock()
+        m()
+        m.assert_not_called()
 
 
 # =====================================================================
@@ -398,6 +435,23 @@ class Test11(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+def get_data():
+    return "real data"
+
+
+def process_data():
+    return get_data()
+
+
+class TestPatchFunction(unittest.TestCase):
+    @mock.patch("test_unittest_mock_object.get_data")
+    def test_process_data_uses_mocked_get_data(self, mock_get_data: mock.Mock):
+        mock_get_data.return_value = "fake data"
+        result = process_data()
+        self.assertEqual(result, "fake data")
+        mock_get_data.assert_called_once()
+
+
 # ----------------------------------------------------------------------
 # 🟡 16: PATCH A CLASS METHOD
 #
@@ -409,6 +463,24 @@ class Test11(unittest.TestCase):
 # 3. Write a test using @mock.patch to mock the first method
 # 4. Verify the dependent method uses the mocked version
 # ----------------------------------------------------------------------
+
+
+class MyClass:
+    def return_one(self):
+        return 1
+
+    def add_one(self):
+        return self.return_one() + 1
+
+
+class TestMyClass(unittest.TestCase):
+    @mock.patch("test_unittest_mock_object.MyClass.return_one")
+    def test_mock_return_one(self, mock_return_one: mock.Mock):
+        mock_return_one.return_value = 2
+        test = MyClass()
+        result = test.return_one()
+        self.assertEqual(result, 2)
+        mock_return_one.assert_called_once()
 
 
 # ----------------------------------------------------------------------
@@ -425,6 +497,21 @@ class Test11(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+def return_one():
+    return 1
+
+
+class TestReturnOne(unittest.TestCase):
+    def test_return_one(self):
+        with mock.patch("test_unittest_mock_object.return_one") as mocked:
+            mocked.return_value = 2
+            result = return_one()
+            self.assertEqual(result, 2)
+            mocked.assert_called_once()
+        # It'll only work within the with
+        self.assertEqual(return_one(), 1)
+
+
 # ----------------------------------------------------------------------
 # 🔴 18: MULTIPLE PATCHES
 #
@@ -437,6 +524,36 @@ class Test11(unittest.TestCase):
 # 4. Configure both mocks with different return values
 # 5. Verify both are used correctly
 # ----------------------------------------------------------------------
+
+
+def return_a():
+    return "a"
+
+
+def return_b():
+    return "b"
+
+
+def return_a_and_b():
+    return return_a(), return_b()
+
+
+class TestAB(unittest.TestCase):
+    @mock.patch("test_unittest_mock_object.return_a")
+    @mock.patch("test_unittest_mock_object.return_b")
+    def test_a_and_b(self, mock_b, mock_a):
+        # mock_b replaces return_b
+        # mock_a replaces return_a
+        mock_a.return_value = "z"
+        mock_b.return_value = "y"
+
+        result1, result2 = return_a_and_b()
+
+        self.assertEqual(result1, "z")  # return_a replaced
+        self.assertEqual(result2, "y")  # return_b replaced
+
+        mock_a.assert_called_once()
+        mock_b.assert_called_once()
 
 
 # =====================================================================
