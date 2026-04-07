@@ -575,6 +575,27 @@ class TestAB(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 
+class Test19(unittest.TestCase):
+    # Each access to an undefined attribute creates a new Mock,
+    # unless it's been explicitly assigned
+
+    def test_mock_fake_attributes(self):
+        # This doesn't create attributes, just another mock
+        m = mock.Mock()
+        m.foo
+        self.assertIsNot(m, m.foo)
+        m.foo.bar.baz
+        self.assertIsNot(m.foo, m.foo.bar.baz)
+        m.foo.bar.return_value = "deep value"
+        self.assertEqual(m.foo.bar(), "deep value")
+
+    def test_mock_real_attributes(self):
+        # Right way to create an attribute for a mock
+        m = mock.Mock()
+        m.random_attribute = 1
+        self.assertEqual(m.random_attribute, 1)
+
+
 # ----------------------------------------------------------------------
 # 🟡 20: CONFIGURE MOCK
 #
@@ -586,6 +607,21 @@ class TestAB(unittest.TestCase):
 # 3. Set return_value, name, and custom attributes
 # 4. Verify all configurations applied correctly
 # ----------------------------------------------------------------------
+
+
+class Test20(unittest.TestCase):
+    def test_mock_configured_vs_auto_attribute(self):
+        m = mock.Mock()
+        m.configure_mock(return_value=True, name="named", x=9)
+        # These are "real" attributes
+
+        self.assertIs(m.return_value, True)
+        self.assertEqual(m.name, "named")
+        self.assertEqual(m.x, 9)
+
+        # These are not set—auto-created child mocks
+        self.assertIsNot(m.not_configured, 9)
+        self.assertIsInstance(m.not_configured, mock.Mock)
 
 
 # ----------------------------------------------------------------------
