@@ -625,17 +625,62 @@ class Test20(unittest.TestCase):
 
 
 # ----------------------------------------------------------------------
-# 🟡 21: SPEC PARAMETER
+# 🟡 21: SPEC & AUTOSPEC PARAMETER
 #
-# Learn: spec parameter to restrict mock
+# Learn: spec and autospec to restrict and enforce mocks
 #
 # Tasks:
 # 1. Create a real class with specific methods
 # 2. Create a Mock with spec=YourClass
-# 3. Access a method that exists in the class - should work
-# 4. Access a method that doesn't exist - should raise AttributeError
-# 5. Compare behavior with a Mock without spec
+#    - Allows only class's attributes/methods (AttributeError for fake ones)
+#    - Does *not* enforce correct function signatures (wrong arg count/type allowed!)
+# 3. Create a Mock or patch with autospec=True
+#    - Restricts to real attributes/methods
+#    - **Also enforces correct argument count/names!**
+#    - Using the wrong args (missing/too many) raises TypeError just like real function
+# 4. Compare:
+#    - spec only (bad calls succeed, fail at runtime)
+#    - autospec (bad calls fail IMMEDIATELY, safer for refactoring)
+#
+# Why use autospec? Prevents false positives and catches breaking API changes!
+#
+# Quick reference:
+#   spec=Class      → Only real attributes allowed
+#   autospec=Class  → Real attributes & correct signature enforced
 # ----------------------------------------------------------------------
+#
+# Example:
+#   class Foo:
+#       def bar(self, x): pass
+#   m = mock.Mock(spec=Foo)
+#   m.bar()         # works (bad!)
+#   n = mock.create_autospec(Foo)
+#   n.bar()         # TypeError: missing argument 'x'
+#   n.fake()        # AttributeError: ...
+# ----------------------------------------------------------------------
+
+
+class Operations:
+    @staticmethod
+    def add_2(a, b):
+        return a + b
+
+    @staticmethod
+    def subtract_2(a, b):
+        return a - b
+
+
+class TestOperations(unittest.TestCase):
+
+    @mock.patch(
+        "test_unittest_mock_object.Operations",
+        spec=Operations,
+        side_effect=[Operations.add_2(1, 2), Operations.subtract_2(1, 2)],
+        autospec=True,
+    )
+    def test_operations(self, mock_operations):
+        self.assertEqual(mock_operations(), 3)
+        self.assertEqual(mock_operations(), -1)
 
 
 # =====================================================================
