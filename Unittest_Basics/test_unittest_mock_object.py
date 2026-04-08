@@ -701,6 +701,49 @@ class TestOperations(unittest.TestCase):
 # 5. Test API error scenario (mock raises exception)
 # ----------------------------------------------------------------------
 
+import requests
+import json
+
+
+def fetch_user_data(user_id):
+    response = requests.get(
+        f"https://jsonplaceholder.typicode.com/users/{user_id}"
+    ).json()
+    return response
+
+
+def display_user(user_id):
+    response = fetch_user_data(user_id)
+    id = response["id"]
+    name = response["name"]
+    username = response["id"]
+    email = response["email"]
+
+    return f"User #{id}, {name}, {username}, {email}"
+
+
+class TestAPICall(unittest.TestCase):
+
+    @mock.patch("test_unittest_mock_object.fetch_user_data", autospec=True)
+    def test_fetch_user_successful_call(self, mock_fetch_user_data):
+        json_file = {"id": 1, "name": "test", "username": "test_test"}
+        mock_fetch_user_data.return_value = json_file
+        self.assertEqual(fetch_user_data(1), json_file)
+
+        self.assertIn("id", json_file)
+        self.assertIn("name", json_file)
+        self.assertIn("username", json_file)
+
+        mock_fetch_user_data.assert_called_once()
+
+    @mock.patch("test_unittest_mock_object.fetch_user_data", autospec=True)
+    def test_fetch_user_unsuccessful_call(self, mock_fetch_user_data):
+        empty_json_file = dict()
+        mock_fetch_user_data.return_value = empty_json_file
+        self.assertEqual(fetch_user_data(1), empty_json_file)
+        self.assertFalse(empty_json_file)
+        mock_fetch_user_data.assert_called_once()
+
 
 # ----------------------------------------------------------------------
 # 🔴 23: MOCK FILE OPERATIONS
