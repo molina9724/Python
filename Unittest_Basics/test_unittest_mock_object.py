@@ -758,6 +758,37 @@ class TestAPICall(unittest.TestCase):
 # 5. Test file not found scenario
 # ----------------------------------------------------------------------
 
+from pathlib import Path
+
+test_file = Path(
+    "/Users/daniel_molina/Downloads/Python/Python/Unittest_Basics/test_file.txt"
+)
+with open(test_file, "a") as file:
+    file.write("hello\n")
+
+
+def read_config_file(file_name: Path):
+    hello_flag = False
+
+    with open(file_name, "r") as file:
+        for line in file.readlines():
+            if "hello" in line.lower():
+                hello_flag = True
+
+    return hello_flag
+
+
+def simple_function(file_name: Path):
+    results = read_config_file(file_name)
+    return (
+        "Your file says hello!" if results else "Too bad, no one says hello nowadays :X"
+    )
+
+
+class TestReadConfig(unittest.TestCase):
+    def test_mock_read_config(self):
+        pass
+
 
 # ----------------------------------------------------------------------
 # 🔴 24: MOCK DATABASE
