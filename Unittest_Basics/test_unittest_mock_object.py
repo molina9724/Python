@@ -759,6 +759,7 @@ class TestAPICall(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 from pathlib import Path
+from unittest.mock import patch, mock_open
 
 test_file = Path(
     "/Users/daniel_molina/Downloads/Python/Python/Unittest_Basics/test_file.txt"
@@ -768,14 +769,12 @@ with open(test_file, "a") as file:
 
 
 def read_config_file(file_name: Path):
-    hello_flag = False
-
     with open(file_name, "r") as file:
         for line in file.readlines():
             if "hello" in line.lower():
-                hello_flag = True
+                return True
 
-    return hello_flag
+    return False
 
 
 def simple_function(file_name: Path):
@@ -786,8 +785,15 @@ def simple_function(file_name: Path):
 
 
 class TestReadConfig(unittest.TestCase):
-    def test_mock_read_config(self):
-        pass
+    @patch("builtins.open", mock_open(read_data="hello"))
+    def test_mock_read_config_true(self):
+        result = read_config_file(Path("mock_file.txt"))
+        self.assertTrue(result)
+
+    @patch("builtins.open", mock_open(read_data="random_string_that_will_return_false"))
+    def test_mock_read_config_false(self):
+        result = read_config_file(Path("mock_file.txt"))
+        self.assertFalse(result)
 
 
 # ----------------------------------------------------------------------
@@ -803,6 +809,38 @@ class TestReadConfig(unittest.TestCase):
 # 5. Test database connection error handling
 # ----------------------------------------------------------------------
 
+
+class Database:
+    def __init__(self, host, port, name):
+        self.host = host
+        self.port = port
+        self.name = name
+        self.users = list()
+
+    def select_all(self):
+        return self.users
+
+
+class TestDatabase(unittest.TestCase):
+    @mock.patch("test_unittest_mock_object.Database", autospec=Database)
+    def test_mock_database(self, database_mock):
+        database_mock.configure_mock(
+            host="localhost", port=8080, name="mock_database", users=list()
+        )
+        database_mock.users.append(1)
+        database_mock.users.append(2)
+        database_mock.users.append(3)
+
+        def select_all(self):
+            return self.users
+
+        self.assertEqual(select_all(database_mock), [1, 2, 3])
+
+
+test = Database("localhost", 8080, "database")
+test.users.append(1)
+test.users.append(2)
+print(test.select_all())
 
 # ----------------------------------------------------------------------
 # 🔴 25: MOCK DATETIME
