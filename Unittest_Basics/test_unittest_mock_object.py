@@ -837,11 +837,6 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(select_all(database_mock), [1, 2, 3])
 
 
-test = Database("localhost", 8080, "database")
-test.users.append(1)
-test.users.append(2)
-print(test.select_all())
-
 # ----------------------------------------------------------------------
 # 🔴 25: MOCK DATETIME
 #
@@ -854,6 +849,56 @@ print(test.select_all())
 # 4. Test evening behavior
 # 5. Test edge cases (midnight, noon)
 # ----------------------------------------------------------------------
+
+import datetime
+
+
+def now():
+    return datetime.datetime.now()
+
+
+def time_depending_func(time: datetime.time):
+    noon = datetime.time(12, 0)
+
+    if time >= noon:
+        return "Get to work"
+    else:
+        return "Go to sleep"
+
+
+t = datetime.time(23, 1, 2)
+t2 = datetime.time(0, 5)
+print(t)
+t2 = datetime.time(10)
+print(t < t2)
+
+a = datetime.datetime.now()
+
+
+class Test25(unittest.TestCase):
+    @mock.patch("test_unittest_mock_object.now", spec=True)
+    def test_mock_time_morning(self, mock_date_now):
+        mock_date_now.return_value = datetime.time(3, 33)
+        self.assertEqual(time_depending_func(mock_date_now()), "Go to sleep")
+        mock_date_now.assert_called_once()
+
+    @mock.patch("test_unittest_mock_object.now", spec=True)
+    def test_mock_time_evening(self, mock_date_now):
+        mock_date_now.return_value = datetime.time(15, 15)
+        self.assertEqual(time_depending_func(mock_date_now()), "Get to work")
+        mock_date_now.assert_called_once()
+
+    @mock.patch("test_unittest_mock_object.now", spec=True)
+    def test_mock_time_midnight(self, mock_date_now):
+        mock_date_now.return_value = datetime.time(0, 0)
+        self.assertEqual(time_depending_func(mock_date_now()), "Go to sleep")
+        mock_date_now.assert_called_once()
+
+    @mock.patch("test_unittest_mock_object.now", spec=True)
+    def test_mock_time_noon(self, mock_date_now):
+        mock_date_now.return_value = datetime.time(12, 0)
+        self.assertEqual(time_depending_func(mock_date_now()), "Get to work")
+        mock_date_now.assert_called_once()
 
 
 # ======================================================================
