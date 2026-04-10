@@ -90,7 +90,6 @@ class TestStringMethods(unittest.TestCase):
 
 
 class TestListOperations(unittest.TestCase):
-
     def test_append(self):
         a_list = list()
         value = 10
@@ -139,7 +138,6 @@ class TestListOperations(unittest.TestCase):
 
 
 class TestEqualityAsserts(unittest.TestCase):
-
     def test_equal_numbers(self):
         self.assertEqual(5 + 5, 10)
 
@@ -384,7 +382,6 @@ class TestWithSetUp(unittest.TestCase):
 
 
 class TestAllFixtures(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         print("=== TestCase Started ===")
@@ -433,7 +430,6 @@ class TestAllFixtures(unittest.TestCase):
 
 
 class TestAddition(unittest.TestCase):
-
     def test_add_positive(self):
         self.assertEqual(1 + 2, 3)
 
@@ -870,7 +866,7 @@ from pathlib import Path
 class FileHandler:
     def __init__(self, name):
         self.path = Path(
-            f"/Users/daniel_molina/Downloads/Python/Python/Unittest Basics/{name}"
+            f"/Users/daniel_molina/Downloads/Python/Python/Unittest_Basics/{name}"
         )
 
     def write_file(self, content):

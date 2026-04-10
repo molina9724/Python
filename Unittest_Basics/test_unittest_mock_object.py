@@ -671,7 +671,6 @@ class Operations:
 
 
 class TestOperations(unittest.TestCase):
-
     @mock.patch(
         "test_unittest_mock_object.Operations",
         spec=Operations,
@@ -723,7 +722,6 @@ def display_user(user_id):
 
 
 class TestAPICall(unittest.TestCase):
-
     @mock.patch("test_unittest_mock_object.fetch_user_data", autospec=True)
     def test_fetch_user_successful_call(self, mock_fetch_user_data):
         json_file = {"id": 1, "name": "test", "username": "test_test"}
