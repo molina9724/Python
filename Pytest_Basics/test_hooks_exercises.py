@@ -88,6 +88,11 @@ import pytest
 # ----------------------------------------------------------------------
 
 
+def test_dynamic(dynamic_input):
+    print(f"Dynamic input: {dynamic_input}")
+    assert isinstance(dynamic_input, int)
+
+
 # ----------------------------------------------------------------------
 # 🟡 6: PARAMETRIZE FROM COMMAND LINE
 #
@@ -102,6 +107,11 @@ import pytest
 # ----------------------------------------------------------------------
 
 
+def test_parametrized_data(test_data):
+    print("Key from CLI", test_data)
+    assert isinstance(test_data, str)
+
+
 # ----------------------------------------------------------------------
 # 🔴 7: CONDITIONAL PARAMETRIZATION
 #
@@ -114,6 +124,15 @@ import pytest
 # 4. Create tests using these fixtures
 # 5. Verify correct number of test combinations generated
 # ----------------------------------------------------------------------
+
+
+def test_user_type(user_type):
+    print(user_type)
+    assert user_type in ["admin", "user", "guest"]
+
+
+def test_permission(permission):
+    assert permission in ["read", "write", "read_and_write"]
 
 
 # ----------------------------------------------------------------------
