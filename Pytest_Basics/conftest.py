@@ -1,4 +1,6 @@
 import pytest
+import json
+from pathlib import Path
 
 
 def pytest_addoption(parser):
@@ -76,10 +78,31 @@ def test_data(request):
 #         metafunc.parametrize("test_data", data)
 
 
+# def pytest_generate_tests(metafunc):
+#     if "user_type" in metafunc.fixturenames:
+#         test_data = ["admin", "user", "guest"]
+#         metafunc.parametrize("user_type", test_data)
+#     elif "permission" in metafunc.fixturenames:
+#         test_data = ["read", "write", "read_and_write"]
+#         metafunc.parametrize("permission", test_data)
+
+
+json_test = Path(
+    "/Users/daniel_molina/Downloads/Python/Python/Pytest_Basics/json_test.json"
+)
+
+data = {
+    1: True,
+    2: True,
+    3: True,
+    4: False,
+    5: False,
+}
+
+with open(json_test, "w") as json_file:
+    json.dump(data, json_file)
+
+
 def pytest_generate_tests(metafunc):
-    if "user_type" in metafunc.fixturenames:
-        test_data = ["admin", "user", "guest"]
-        metafunc.parametrize("user_type", test_data)
-    elif "permission" in metafunc.fixturenames:
-        test_data = ["read", "write", "read_and_write"]
-        metafunc.parametrize("permission", test_data)
+    if "json_data" in metafunc.fixturenames:
+        metafunc.parametrize("json_data", data.keys())

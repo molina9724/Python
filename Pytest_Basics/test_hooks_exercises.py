@@ -6,7 +6,7 @@
 # ======================================================================
 
 import pytest
-
+import json
 
 # =====================================================================
 #                    SECTION 1: pytest_addoption
@@ -147,6 +147,13 @@ def test_permission(permission):
 # 4. Handle file not found gracefully
 # 5. Create tests that use the external data
 # ----------------------------------------------------------------------
+
+
+def test_json_params(json_data):
+    if int(json_data) % 2 == 0:
+        assert True
+    else:
+        assert False
 
 
 # =====================================================================
