@@ -189,6 +189,38 @@ def test_json_params(json_data):
 # ----------------------------------------------------------------------
 
 
+class TestSmokeAndRegression:
+
+    @pytest.mark.smoke
+    def test_smoke_1(self):
+        assert True
+
+    @pytest.mark.smoke
+    def test_smoke_2(self):
+        assert True
+
+    @pytest.mark.smoke
+    @pytest.mark.regression
+    def test_smoke_3(self):
+        assert True
+
+    @pytest.mark.regression
+    def test_regression_1(self):
+        assert True
+
+    @pytest.mark.regression
+    def test_regression_2(self):
+        assert True
+
+    @pytest.mark.regression
+    @pytest.mark.smoke
+    def test_regression_3(self):
+        assert True
+
+    def test_with_no_mark(self):
+        assert True
+
+
 # ----------------------------------------------------------------------
 # 🔴 11: MODIFY COLLECTION
 #

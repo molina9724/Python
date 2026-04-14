@@ -1,6 +1,9 @@
 import pytest
 import json
 from pathlib import Path
+from _pytest.nodes import Item
+from _pytest.main import Session
+from _pytest.config import Config
 
 
 def pytest_addoption(parser):
@@ -106,3 +109,43 @@ with open(json_test, "w") as json_file:
 def pytest_generate_tests(metafunc):
     if "json_data" in metafunc.fixturenames:
         metafunc.parametrize("json_data", data.keys())
+
+
+# def pytest_collection_finish(session: pytest.Session):
+#     for item in session.items:
+#         print(f"Test name: {item.name} - Test location: {item.location}")
+#     print(f"Total amount of test cases: {len(session.items)}")
+
+
+def pytest_collection_finish(session: pytest.Session):
+    smoke_test_cases = []
+    regression_test_cases = []
+    for item in session.items:
+        if item.get_closest_marker("smoke") is not None:
+            smoke_test_cases.append(item.name)
+        if item.get_closest_marker("regression") is not None:
+            regression_test_cases.append(item.name)
+    if smoke_test_cases:
+        print(
+            f"'smoke' marker was found {len(smoke_test_cases)} times. The following are the test cases marked with it: {smoke_test_cases}"
+        )
+    if regression_test_cases:
+        print(
+            f"'regression' marker was found {len(regression_test_cases)} times. The following are the test cases marked with it: {regression_test_cases}"
+        )
+
+
+def pytest_collection_modifyitems(session: Session, config: Config, items: list[Item]):
+    smoke = list()
+    regression = list()
+    others = list()
+
+    for item in items:
+        if item.get_closest_marker("smoke"):
+            smoke.append(item)
+        elif item.get_closest_marker("regression"):
+            regression.append(item)
+        else:
+            others.append(item)
+
+    items[:] = others + regression + smoke
