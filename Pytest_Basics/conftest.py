@@ -4,6 +4,8 @@ from pathlib import Path
 from _pytest.nodes import Item
 from _pytest.main import Session
 from _pytest.config import Config
+import os
+import time
 
 
 def pytest_addoption(parser):
@@ -135,17 +137,76 @@ def pytest_collection_finish(session: pytest.Session):
         )
 
 
-def pytest_collection_modifyitems(session: Session, config: Config, items: list[Item]):
-    smoke = list()
-    regression = list()
-    others = list()
+# def pytest_collection_modifyitems(session: Session, config: Config, items: list[Item]):
+#     smoke = list()
+#     regression = list()
+#     others = list()
 
-    for item in items:
-        if item.get_closest_marker("smoke"):
-            smoke.append(item)
-        elif item.get_closest_marker("regression"):
-            regression.append(item)
-        else:
-            others.append(item)
+#     for item in items:
+#         if item.get_closest_marker("smoke"):
+#             smoke.append(item)
+#         elif item.get_closest_marker("regression"):
+#             regression.append(item)
+#         else:
+#             others.append(item)
 
-    items[:] = others + regression + smoke
+#     items[:] = others + regression + smoke
+
+
+# def pytest_collection_modifyitems(session: Session, config: Config, items: list[Item]):
+#     smoke = list()
+#     regression = list()
+#     others = list()
+
+#     for item in items:
+#         if item.get_closest_marker("smoke"):
+#             smoke.append(item)
+#         elif item.get_closest_marker("regression"):
+#             regression.append(item)
+#         else:
+#             others.append(item)
+
+#     if os.environ.get("LOGNAME") == "daniel_molina":
+#         print(
+#             f"Since 'LOGNAME' is not what I expected then we're removing all the test cases that don't have either the smoke or regression mark, which are the following: {others}"
+#         )
+#         items[:] = smoke + regression
+
+
+# def pytest_sessionstart(session: Session):
+#     session._start_time = time.time()  # type: ignore[attr-defined]
+
+
+# def pytest_sessionfinish(session: Session, exitstatus):
+#     start = getattr(session, "_start_time", None)
+#     if start is not None:
+#         duration = time.time() - start
+#         print(f"Total duration: {duration:.2f} seconds")
+#     else:
+#         print("No start time found.")
+#     finish = time.time()
+
+#     reporter = session.config.pluginmanager.get_plugin("terminalreporter")
+
+#     print("Test is finished, here are the results:")
+#     print(f"Test cases collected: {session.testscollected}")
+
+#     try:
+#         passed_test_cases = len(reporter.stats["passed"])  # type: ignore
+#         print(f"Test cases passed: {passed_test_cases}")
+#     except KeyError:
+#         print("No test cases passed")
+
+#     print(f"Amount of test cases failed: {session.testsfailed}")
+#     if hasattr(exitstatus, "name"):
+#         print(f"The final status is: {exitstatus.name}")
+#     else:
+#         print("The final status is successful")
+#     if (start is not None) and (finish is not None):  # usually only start can be None
+#         duration = finish - start
+#         print(duration)
+
+
+def pytest_runtest_setup(item: Item):
+    if item.get_closest_marker("smoke"):
+        pytest.skip("Just skipping if you have the smoke mark")
