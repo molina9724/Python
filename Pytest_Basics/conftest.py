@@ -207,6 +207,21 @@ def pytest_collection_finish(session: pytest.Session):
 #         print(duration)
 
 
-def pytest_runtest_setup(item: Item):
-    if item.get_closest_marker("smoke"):
-        pytest.skip("Just skipping if you have the smoke mark")
+# def pytest_runtest_setup(item: Item):
+#     if item.get_closest_marker("smoke"):
+#         pytest.skip("Just skipping if you have the smoke mark")
+
+
+def pytest_configure(config: Config):
+    config.addinivalue_line(
+        "markers",
+        "custom_marker: Marker created via pytest_configure",
+    )
+    print("This is the global config and I'm the boss here")
+    config._boss = "CJ"  # type: ignore
+    config._custom = True  # type: ignore
+
+
+def pytest_collection_modifyitems(session: Session, config: Config, items: list[Item]):
+    print(f"Verifying who's the boss after global changes: {config._boss}")  # type: ignore
+    print(f"Running custom config: {config._custom}")  # type: ignore
