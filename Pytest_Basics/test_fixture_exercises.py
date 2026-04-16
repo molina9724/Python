@@ -5,7 +5,7 @@
 # ======================================================================
 
 import pytest
-
+from pathlib import Path
 
 # =====================================================================
 #                    SECTION 1: BASIC FIXTURES
@@ -220,6 +220,17 @@ def test_custom_api_endpoint(custom_api_endpoint):
 # ----------------------------------------------------------------------
 
 
+@pytest.fixture()
+def setup():
+    print("SETUP")
+    yield "yielded value"
+    print("TEARDOWN")
+
+
+def test_setup(setup):
+    assert setup == "yielded value"
+
+
 # ----------------------------------------------------------------------
 # 🟡 7: FILE HANDLING FIXTURE
 #
@@ -232,6 +243,26 @@ def test_custom_api_endpoint(custom_api_endpoint):
 # 4. Create a test that writes to the file
 # 5. Verify the file is properly closed after test
 # ----------------------------------------------------------------------
+
+
+@pytest.fixture
+def temp_file():
+    path = Path("test_fixture_file.txt")
+
+    yield path
+
+    if path.exists():
+        path.unlink()
+
+
+def test_temp_file(temp_file):
+    write_test = "this is a test\n"
+
+    with open(temp_file, "w") as f:
+        f.write(write_test)
+
+    with open(temp_file, "r") as f:
+        assert f.read() == write_test
 
 
 # ----------------------------------------------------------------------
