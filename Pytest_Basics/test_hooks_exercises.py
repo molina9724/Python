@@ -370,9 +370,9 @@ class TestSmokeAndRegression:
 # ----------------------------------------------------------------------
 
 
-@pytest.mark.custom_marker
-def test_true():
-    assert True
+# @pytest.mark.custom_marker
+# def test_true():
+#     assert True
 
 
 # =====================================================================
@@ -392,6 +392,22 @@ def test_true():
 # 4. Create tests marked for specific environments
 # 5. Run with different --env values and observe behavior
 # ----------------------------------------------------------------------
+
+
+def test_stg():
+    assert False
+
+
+def test_stg_2():
+    assert True
+
+
+def test_prod_1():
+    assert True
+
+
+def test_dev_1():
+    assert True
 
 
 # ----------------------------------------------------------------------

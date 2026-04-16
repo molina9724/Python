@@ -13,8 +13,8 @@ def pytest_addoption(parser):
         "--env",
         action="store",
         default="dev",
-        choices=("dev", "staging", "prod"),
-        help="my option: dev/staging/prod",
+        choices=("dev", "stg", "prod"),
+        help="my option: dev/stg/prod",
     )
     parser.addoption(
         "--slow",
@@ -41,9 +41,16 @@ def pytest_addoption(parser):
     )
 
 
-@pytest.fixture
-def env(request):
-    return request.config.getoption("--env")
+pytest.fixture
+
+
+def retries(request):
+    return request.config.getoption("--retries")
+
+
+# @pytest.fixture
+# def env(request):
+#     return request.config.getoption("--env")
 
 
 @pytest.fixture
@@ -212,16 +219,69 @@ def pytest_collection_finish(session: pytest.Session):
 #         pytest.skip("Just skipping if you have the smoke mark")
 
 
-def pytest_configure(config: Config):
-    config.addinivalue_line(
-        "markers",
-        "custom_marker: Marker created via pytest_configure",
-    )
-    print("This is the global config and I'm the boss here")
-    config._boss = "CJ"  # type: ignore
-    config._custom = True  # type: ignore
+# def pytest_configure(config: Config):
+#     config.addinivalue_line(
+#         "markers",
+#         "custom_marker: Marker created via pytest_configure",
+#     )
+#     print("This is the global config and I'm the boss here")
+#     config._boss = "CJ"  # type: ignore
+#     config._custom = True  # type: ignore
+
+
+# def pytest_collection_modifyitems(session: Session, config: Config, items: list[Item]):
+#     print(f"Verifying who's the boss after global changes: {config._boss}")  # type: ignore
+#     print(f"Running custom config: {config._custom}")  # type: ignore
+
+
+@pytest.fixture
+def env(request):
+    value = request.config.getoption("--env")
+    if value is None:
+        raise KeyError("You must provide --env to run these tests.")
+    request.config._env = value
+    return value
 
 
 def pytest_collection_modifyitems(session: Session, config: Config, items: list[Item]):
-    print(f"Verifying who's the boss after global changes: {config._boss}")  # type: ignore
-    print(f"Running custom config: {config._custom}")  # type: ignore
+    env = config.getoption("--env")
+
+    session._env = env
+
+    dev = list()
+    stg = list()
+    prod = list()
+    for item in items:
+        if "dev" in item.name:
+            dev.append(item)
+        elif "stg" in item.name:
+            stg.append(item)
+        elif "prod" in item.name:
+            prod.append(item)
+
+    if env == "dev":
+        items[:] = dev
+    elif env == "stg":
+        items[:] = stg
+    if env == "prod":
+        items[:] = prod
+
+
+def pytest_sessionfinish(session: Session, exitstatus):
+    reporter = session.config.pluginmanager.get_plugin("terminalreporter")
+
+    print(f"These are the results for {session._env}")
+    print(f"Test cases collected: {session.testscollected}")
+
+    passed_test_cases = len(reporter.stats["passed"])  # type: ignore
+    print(f"Test cases passed: {passed_test_cases}")
+
+    print(f"Test cases failed: {session.testsfailed}")
+
+
+# def pytest_runtest_makereport(item: Item, call):
+#     report = yield
+#     report = report.get_result()
+
+#     if report.when == "call":
+#         print(f"Test {item.name} finished with outcome: {report.outcome}")
