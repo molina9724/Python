@@ -41,34 +41,27 @@ def pytest_addoption(parser):
     )
 
 
-pytest.fixture
-
-
-def retries(request):
-    return request.config.getoption("--retries")
-
-
 # @pytest.fixture
 # def env(request):
 #     return request.config.getoption("--env")
 
 
-@pytest.fixture
-def slow(request):
-    return request.config.getoption("--slow")
+# @pytest.fixture
+# def slow(request):
+#     return request.config.getoption("--slow")
 
 
-@pytest.fixture
-def browser(request):
-    return request.config.getoption("--mybrowser")
+# @pytest.fixture
+# def browser(request):
+#     return request.config.getoption("--mybrowser")
 
 
-@pytest.fixture
-def api_key(request):
-    value = request.config.getoption("--api-key")
-    if value is None:
-        raise KeyError("You must provide --api-key to run these tests.")
-    return value
+# @pytest.fixture
+# def api_key(request):
+#     value = request.config.getoption("--api-key")
+#     if value is None:
+#         raise KeyError("You must provide --api-key to run these tests.")
+#     return value
 
 
 # def pytest_generate_tests(metafunc):
@@ -99,25 +92,25 @@ def test_data(request):
 #         metafunc.parametrize("permission", test_data)
 
 
-json_test = Path(
-    "/Users/daniel_molina/Downloads/Python/Python/Pytest_Basics/json_test.json"
-)
+# json_test = Path(
+#     "/Users/daniel_molina/Downloads/Python/Python/Pytest_Basics/json_test.json"
+# )
 
-data = {
-    1: True,
-    2: True,
-    3: True,
-    4: False,
-    5: False,
-}
+# data = {
+#     1: True,
+#     2: True,
+#     3: True,
+#     4: False,
+#     5: False,
+# }
 
-with open(json_test, "w") as json_file:
-    json.dump(data, json_file)
+# with open(json_test, "w") as json_file:
+#     json.dump(data, json_file)
 
 
-def pytest_generate_tests(metafunc):
-    if "json_data" in metafunc.fixturenames:
-        metafunc.parametrize("json_data", data.keys())
+# def pytest_generate_tests(metafunc):
+#     if "json_data" in metafunc.fixturenames:
+#         metafunc.parametrize("json_data", data.keys())
 
 
 # def pytest_collection_finish(session: pytest.Session):
@@ -126,22 +119,22 @@ def pytest_generate_tests(metafunc):
 #     print(f"Total amount of test cases: {len(session.items)}")
 
 
-def pytest_collection_finish(session: pytest.Session):
-    smoke_test_cases = []
-    regression_test_cases = []
-    for item in session.items:
-        if item.get_closest_marker("smoke") is not None:
-            smoke_test_cases.append(item.name)
-        if item.get_closest_marker("regression") is not None:
-            regression_test_cases.append(item.name)
-    if smoke_test_cases:
-        print(
-            f"'smoke' marker was found {len(smoke_test_cases)} times. The following are the test cases marked with it: {smoke_test_cases}"
-        )
-    if regression_test_cases:
-        print(
-            f"'regression' marker was found {len(regression_test_cases)} times. The following are the test cases marked with it: {regression_test_cases}"
-        )
+# def pytest_collection_finish(session: pytest.Session):
+#     smoke_test_cases = []
+#     regression_test_cases = []
+#     for item in session.items:
+#         if item.get_closest_marker("smoke") is not None:
+#             smoke_test_cases.append(item.name)
+#         if item.get_closest_marker("regression") is not None:
+#             regression_test_cases.append(item.name)
+#     if smoke_test_cases:
+#         print(
+#             f"'smoke' marker was found {len(smoke_test_cases)} times. The following are the test cases marked with it: {smoke_test_cases}"
+#         )
+#     if regression_test_cases:
+#         print(
+#             f"'regression' marker was found {len(regression_test_cases)} times. The following are the test cases marked with it: {regression_test_cases}"
+#         )
 
 
 # def pytest_collection_modifyitems(session: Session, config: Config, items: list[Item]):
@@ -234,54 +227,46 @@ def pytest_collection_finish(session: pytest.Session):
 #     print(f"Running custom config: {config._custom}")  # type: ignore
 
 
-@pytest.fixture
-def env(request):
-    value = request.config.getoption("--env")
-    if value is None:
-        raise KeyError("You must provide --env to run these tests.")
-    request.config._env = value
-    return value
+# @pytest.fixture
+# def env(request):
+#     value = request.config.getoption("--env")
+#     if value is None:
+#         raise KeyError("You must provide --env to run these tests.")
+#     request.config._env = value
+#     return value
 
 
-def pytest_collection_modifyitems(session: Session, config: Config, items: list[Item]):
-    env = config.getoption("--env")
+# def pytest_collection_modifyitems(session: Session, config: Config, items: list[Item]):
+#     env = config.getoption("--env")
 
-    session._env = env
+#     session._env = env  # type: ignore
 
-    dev = list()
-    stg = list()
-    prod = list()
-    for item in items:
-        if "dev" in item.name:
-            dev.append(item)
-        elif "stg" in item.name:
-            stg.append(item)
-        elif "prod" in item.name:
-            prod.append(item)
+#     dev = list()
+#     stg = list()
+#     prod = list()
+#     for item in items:
+#         if "dev" in item.name:
+#             dev.append(item)
+#         elif "stg" in item.name:
+#             stg.append(item)
+#         elif "prod" in item.name:
+#             prod.append(item)
 
-    if env == "dev":
-        items[:] = dev
-    elif env == "stg":
-        items[:] = stg
-    if env == "prod":
-        items[:] = prod
-
-
-def pytest_sessionfinish(session: Session, exitstatus):
-    reporter = session.config.pluginmanager.get_plugin("terminalreporter")
-
-    print(f"These are the results for {session._env}")
-    print(f"Test cases collected: {session.testscollected}")
-
-    passed_test_cases = len(reporter.stats["passed"])  # type: ignore
-    print(f"Test cases passed: {passed_test_cases}")
-
-    print(f"Test cases failed: {session.testsfailed}")
+#     if env == "dev":
+#         items[:] = dev
+#     elif env == "stg":
+#         items[:] = stg
+#     if env == "prod":
+#         items[:] = prod
 
 
-# def pytest_runtest_makereport(item: Item, call):
-#     report = yield
-#     report = report.get_result()
+# def pytest_sessionfinish(session: Session, exitstatus):
+#     reporter = session.config.pluginmanager.get_plugin("terminalreporter")
 
-#     if report.when == "call":
-#         print(f"Test {item.name} finished with outcome: {report.outcome}")
+#     print(f"These are the results for {session._env}")  # type: ignore
+#     print(f"Test cases collected: {session.testscollected}")
+
+#     passed_test_cases = len(reporter.stats["passed"])  # type: ignore
+#     print(f"Test cases passed: {passed_test_cases}")
+
+#     print(f"Test cases failed: {session.testsfailed}")
