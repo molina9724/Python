@@ -280,6 +280,60 @@ def test_temp_file(temp_file):
 # ----------------------------------------------------------------------
 
 
+class Database:
+    host = "localhost"
+    port = 8080
+    database = "default"
+    connection_status = False
+
+    @classmethod
+    def get_connection_status(cls):
+        return cls.connection_status
+
+    @classmethod
+    def connect_database(cls):
+        cls.connection_status = True
+
+    @classmethod
+    def disconnect_database(cls):
+        cls.connection_status = False
+
+    @classmethod
+    def change_port(cls, new_port: int):
+        cls.port = new_port
+
+    @classmethod
+    def change_host(cls, new_host):
+        cls.host = new_host
+
+
+@pytest.fixture()
+def database_connection():
+    test_database = Database()
+    test_database.connect_database()
+    yield test_database
+    test_database.disconnect_database()
+    assert not test_database.get_connection_status()
+
+
+def test_database_successful_connection(database_connection):
+    database_status = database_connection.get_connection_status()
+    assert database_status, f"The database connection status is {database_status}"
+
+
+def test_database_status_false_after_disconnect(database_connection):
+    database_connection.disconnect_database()
+    database_status = database_connection.get_connection_status()
+    assert not database_status  # this should PASS if closed as expected
+
+
+@pytest.mark.xfail
+def test_database_still_connected_after_forced_disconnect(database_connection):
+    database_connection.disconnect_database()
+    database_status = database_connection.get_connection_status()
+    assert database_status  # this should FAIL (xfail) if connection is closed
+
+
 # ----------------------------------------------------------------------
 # 🔴 9: NESTED YIELD FIXTURES
 #
@@ -292,6 +346,25 @@ def test_temp_file(temp_file):
 # 4. Observe the order: A setup → B setup → test → B teardown → A teardown
 # 5. Run with pytest -s to verify order
 # ----------------------------------------------------------------------
+
+
+@pytest.fixture()
+def fixture_a():
+    print("Beginning of FIRST fixture")
+    yield
+    print("End of FIRST fixture")
+
+
+@pytest.fixture()
+def fixture_b(fixture_a):
+    print(" Beginning of SECOND fixture")
+    yield  # Don't remove the yield, this is the one running the test case
+    print(" End of SECOND fixture")
+
+
+def test_fixture_b(fixture_b):
+    print("     This right here is a test case in progress!")
+    assert True
 
 
 # =====================================================================
