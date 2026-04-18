@@ -850,6 +850,36 @@ def test_browser(my_browser_fixture):
 # ----------------------------------------------------------------------
 
 
+@pytest.fixture(scope="session")
+def database_with_rollback():
+    original_data = [1, 2, 3, 4, 5]
+    yield original_data
+    print("-------------------")
+    print(f"Here's your data after the testing with no changes: {original_data}")
+    print("-------------------")
+
+
+@pytest.fixture(scope="function")
+def function_changes(database_with_rollback):
+    func_data = database_connection()
+    func_data.append(6)
+    return func_data
+
+
+def test_append(function_changes):
+    test = 7
+
+    function_changes.append(test)
+    assert test in function_changes
+    assert len(function_changes) == 7
+
+
+def test_remove(function_changes):
+    test = 6
+    function_changes.remove(test)
+    assert len(function_changes) == 5
+
+
 # ----------------------------------------------------------------------
 # 🔴 26: API CLIENT FIXTURE
 #
