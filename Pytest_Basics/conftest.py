@@ -270,3 +270,12 @@ def test_data(request):
 #     print(f"Test cases passed: {passed_test_cases}")
 
 #     print(f"Test cases failed: {session.testsfailed}")
+
+
+@pytest.fixture()
+def override():
+    return True
+
+
+def test_override(override):
+    assert override

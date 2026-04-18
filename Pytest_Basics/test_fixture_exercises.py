@@ -6,6 +6,14 @@
 
 import pytest
 from pathlib import Path
+import datetime
+import webbrowser
+
+from playwright.sync_api import Page, expect, sync_playwright, Playwright
+from pathlib import Path
+import re
+import pytest
+import sys
 
 # =====================================================================
 #                    SECTION 1: BASIC FIXTURES
@@ -386,6 +394,33 @@ def test_fixture_b(fixture_b):
 # ----------------------------------------------------------------------
 
 
+@pytest.fixture(
+    scope="function"
+)  # For function you'll see how the dict is a different object for each and every test case
+def function_scope_fixture():
+    my_dict = {
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+    }
+    print(id(my_dict))
+    return my_dict
+
+
+class TestFunctionScope:
+
+    def test_function_scope_1(self, function_scope_fixture):
+        print(id(function_scope_fixture))
+
+    def test_function_scope_2(self, function_scope_fixture):
+        print(id(function_scope_fixture))
+
+    def test_function_scope_3(self, function_scope_fixture):
+        print(id(function_scope_fixture))
+
+
 # ----------------------------------------------------------------------
 # 🟡 11: MODULE SCOPE
 #
@@ -398,6 +433,33 @@ def test_fixture_b(fixture_b):
 # 4. Run with pytest -s
 # 5. Observe: fixture runs only once for all tests in module
 # ----------------------------------------------------------------------
+
+
+@pytest.fixture(
+    scope="module"
+)  # For scope module you'll see only 1 for all of them, but you need to test the whole file
+def class_module_fixture():
+    my_dict = {
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+    }
+    print(id(my_dict))
+    return my_dict
+
+
+class TestModuleScopeOne:
+
+    def test_class_scope_1(self, class_module_fixture):
+        print(id(class_module_fixture))
+
+
+class TestModuleScopeTwo:
+
+    def test_class_scope_1(self, class_module_fixture):
+        print(id(class_module_fixture))
 
 
 # ----------------------------------------------------------------------
@@ -414,6 +476,31 @@ def test_fixture_b(fixture_b):
 # ----------------------------------------------------------------------
 
 
+@pytest.fixture(scope="class")  # For scope class you'll see only 1 for all of them
+def class_scope_fixture():
+    my_dict = {
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+    }
+    print(id(my_dict))
+    return my_dict
+
+
+class TestClassScope:
+
+    def test_class_scope_1(self, class_scope_fixture):
+        print(id(class_scope_fixture))
+
+    def test_class_scope_2(self, class_scope_fixture):
+        print(id(class_scope_fixture))
+
+    def test_class_scope_3(self, class_scope_fixture):
+        print(id(class_scope_fixture))
+
+
 # ----------------------------------------------------------------------
 # 🔴 13: SESSION SCOPE
 #
@@ -425,6 +512,25 @@ def test_fixture_b(fixture_b):
 # 3. Run pytest on the entire directory
 # 4. Observe: fixture runs only once for all files
 # ----------------------------------------------------------------------
+
+
+@pytest.fixture(scope="session")  # For session class you'll see only 1 for all of them
+def class_session_fixture():
+    my_dict = {
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+    }
+    print(id(my_dict))
+    return my_dict
+
+
+class TestSessionScope:
+
+    def test_class_scope_1(self, class_session_fixture):
+        print(id(class_session_fixture))
 
 
 # ----------------------------------------------------------------------
@@ -439,6 +545,39 @@ def test_fixture_b(fixture_b):
 # 4. Create tests using various combinations
 # 5. Observe the initialization order and frequency
 # ----------------------------------------------------------------------
+
+
+@pytest.fixture(scope="session")
+def session_config():
+    print("SESSION FIXTURE: setup")
+    cfw = {
+        "db_url": "memory:///",
+        "mode": "test",
+    }
+    yield cfw
+    print("SESSION FIXTURE: teardown")
+
+
+@pytest.fixture(scope="module")
+def module_config(session_config):
+    print(" MODULE FIXTURE: setup")
+    resource = {
+        "cfg_snapshot": dict(session_config),
+    }
+    yield resource
+    print(" MODULE FIXTURE: teardown")
+
+
+@pytest.fixture(scope="function")
+def function_data(module_config):
+    print("     CLASS FIXTURE: setup")
+    data = {"mod_dep": module_config}
+    yield data
+    print("     CLASS FIXTURE: teardown")
+
+
+def test_session_config(function_data):
+    print("         Test 1")
 
 
 # =====================================================================
@@ -512,6 +651,15 @@ def test_fixture_b(fixture_b):
 # ----------------------------------------------------------------------
 
 
+@pytest.fixture(autouse=True)
+def autouse_fixture():
+    print("This is a feature with autouse=True")
+
+
+def test_autouse_fixture():
+    assert True
+
+
 # ----------------------------------------------------------------------
 # 🟡 19: AUTOUSE WITH SCOPE
 #
@@ -523,6 +671,28 @@ def test_fixture_b(fixture_b):
 # 3. Create multiple tests
 # 4. Observe which runs when and how often
 # ----------------------------------------------------------------------
+
+
+@pytest.fixture(autouse=True, scope="module")
+def autose_module():
+    print("This is autouse with scope module")
+
+
+@pytest.fixture(autouse=True, scope="function")
+def autouse_function():
+    print("This is autouse with scope function")
+
+
+def test_1():
+    print("Running test case 1")
+
+
+def test_2():
+    print("Running test case 2")
+
+
+def test_3():
+    print("Running test case 3")
 
 
 # ----------------------------------------------------------------------
@@ -537,6 +707,14 @@ def test_fixture_b(fixture_b):
 # 4. Apply to multiple tests automatically
 # 5. No test should need to explicitly request the fixture
 # ----------------------------------------------------------------------
+
+
+@pytest.fixture(autouse=True, scope="function")
+def timing(request):
+    start = datetime.datetime.now()
+    yield
+    finish = datetime.datetime.now()
+    print(f"{request.node.name}: {finish-start}")
 
 
 # =====================================================================
@@ -557,6 +735,17 @@ def test_fixture_b(fixture_b):
 # ----------------------------------------------------------------------
 
 
+@pytest.fixture(params=[1, 2, 3])
+def fixture_with_params(request):
+    print("This is a fixture with params")
+    print(f"Right now you're working with param={request.param}")
+    return request.param
+
+
+def test_fixture_with_params(fixture_with_params):
+    assert fixture_with_params
+
+
 # ----------------------------------------------------------------------
 # 🟡 22: FIXTURE PARAMS WITH IDS
 #
@@ -570,6 +759,16 @@ def test_fixture_b(fixture_b):
 # ----------------------------------------------------------------------
 
 
+@pytest.fixture(params=[4, 5, 6], ids=["first", "second", "third"])
+def fixture_with_params_and_ids(request):
+    print(f"{request.param} : {request}")
+    return request.param
+
+
+def test_10(fixture_with_params_and_ids):
+    assert fixture_with_params_and_ids
+
+
 # ----------------------------------------------------------------------
 # 🔴 23: COMPLEX FIXTURE PARAMS
 #
@@ -581,6 +780,24 @@ def test_fixture_b(fixture_b):
 # 3. Access different keys from request.param
 # 4. Create tests using the complex fixture
 # ----------------------------------------------------------------------
+
+users = [
+    {"name": "benito"},
+    {"name": "carlos"},
+    {"name": "test"},
+]
+
+
+@pytest.fixture(params=users, ids=["dict1", "dict2", "dict3"])
+def complex_params(request):
+    return request.param
+
+
+def test_complex_params(complex_params: dict):
+    print(complex_params)
+
+    assert "name" in complex_params.keys()
+    assert complex_params["name"] in ["benito", "carlos", "test"]
 
 
 # =====================================================================
@@ -600,6 +817,23 @@ def test_fixture_b(fixture_b):
 # 4. Use scope="class" or scope="module" for efficiency
 # 5. Create tests that use the driver
 # ----------------------------------------------------------------------
+
+
+@pytest.fixture(scope="class")
+def my_browser_fixture():
+    playwright = sync_playwright().start()
+    browser = playwright.firefox.launch(headless=True, slow_mo=50)
+    page = browser.new_page()
+    yield page
+    page.close()
+    browser.close()
+    playwright.stop()
+
+
+def test_browser(my_browser_fixture):
+    url = "https://docs.python.org/3/library/webbrowser.html"
+    my_browser_fixture.goto(url)
+    expect(my_browser_fixture).to_have_url(url)
 
 
 # ----------------------------------------------------------------------
