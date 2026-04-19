@@ -14,6 +14,7 @@ from pathlib import Path
 import re
 import pytest
 import sys
+import shutil
 
 # =====================================================================
 #                    SECTION 1: BASIC FIXTURES
@@ -906,6 +907,55 @@ def test_remove(function_changes):
 # 4. Create tests that create files in the temp directory
 # 5. Verify cleanup happens after each test
 # ----------------------------------------------------------------------
+
+
+@pytest.fixture(scope="function")
+def temp_dir():
+    temp_dir = Path(
+        "/Users/daniel_molina/Downloads/Python/Python/Pytest_Basics/temp_dir"
+    )
+    temp_dir.mkdir(parents=True, exist_ok=True)
+    yield temp_dir
+    shutil.rmtree(temp_dir)
+
+
+def test_temp_file_exists(temp_dir):
+    assert temp_dir.exists()
+
+
+def test_temp_create_new_folder(temp_dir):
+    assert temp_dir.exists()
+
+    new_folder = temp_dir / "new_folder"
+    new_folder.mkdir(parents=True, exist_ok=True)
+    assert new_folder.exists()
+
+
+def test_temp_create_new_txt(temp_dir):
+    assert temp_dir.exists()
+
+    txt_test_file = temp_dir / "test.txt"
+    with open(txt_test_file, "a") as file:
+        file.write("Hello")
+
+    assert txt_test_file.exists()
+
+
+# Using tempß
+@pytest.fixture()
+def temp_dir2(tmp_path):
+    temp_folder = tmp_path
+    yield temp_folder
+
+
+def test_temp_file_exists2(temp_dir2):
+    assert temp_dir2.exists()
+
+
+def test_create_file(temp_dir2):
+    f = temp_dir2 / "temp.txt"
+    f.write_text("hello")
+    assert f.exists()
 
 
 # ----------------------------------------------------------------------
