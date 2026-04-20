@@ -273,6 +273,10 @@ def test_remove_tmp_path(tmp_path):
 # ----------------------------------------------------------------------
 
 
+def test_fail_test():
+    assert True
+
+
 # =====================================================================
 #                    SECTION 4: pytest-mock
 # =====================================================================
@@ -294,6 +298,21 @@ def test_remove_tmp_path(tmp_path):
 # ----------------------------------------------------------------------
 
 
+def func_1():
+    return True
+
+
+def func_2():
+    return func_1()
+
+
+def test_mock(mocker):
+    mock = mocker.patch(__name__ + ".func_1", return_value="patched")
+    result = func_2()
+    assert result == "patched"
+    mock.assert_called_once()
+
+
 # ----------------------------------------------------------------------
 # 🟡 13: MOCKER.SPY
 #
@@ -306,6 +325,16 @@ def test_remove_tmp_path(tmp_path):
 # 4. Verify both: real behavior occurred AND call was tracked
 # 5. Check call arguments using spy.assert_called_with()
 # ----------------------------------------------------------------------
+
+import sys
+from pytest_mock import MockerFixture
+
+
+def test_spy_method(mocker: MockerFixture):
+    spy = mocker.spy(sys.modules[__name__], "func_1")
+    result = func_1()
+    assert result is True
+    spy.assert_called_once_with()
 
 
 # ----------------------------------------------------------------------
