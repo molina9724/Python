@@ -6,6 +6,7 @@
 # ======================================================================
 
 import pytest
+from pathlib import Path
 
 
 # =====================================================================
@@ -128,6 +129,18 @@ class TestCalculator:
 # 5. Understand when timeouts are useful
 # ----------------------------------------------------------------------
 
+import time
+
+
+# @pytest.mark.timeout(2)
+def test_timeout():
+    time.sleep(2)
+
+
+# @pytest.mark.timeout(1)
+def test_timeout2():
+    time.sleep(3)
+
 
 # ----------------------------------------------------------------------
 # 🟡 6: GLOBAL TIMEOUT
@@ -201,6 +214,49 @@ class TestCalculator:
 # 4. Use tmp_path fixture for isolation
 # 5. Verify parallel execution now works
 # ----------------------------------------------------------------------
+
+shared_file = Path(
+    "/Users/daniel_molina/Downloads/Python/Python/Pytest_Basics/shared_file.txt"
+)
+
+
+# @pytest.fixture(autouse=True)
+# def clean_shared_file():
+#     # Clean up before each test run
+#     shared_file.write_text("start\n")
+
+
+# def test_read_shared_file():
+#     lines_seen = []
+#     with open(shared_file, "r") as f:
+#         for i in range(10):
+#             lines = f.readlines()
+#             lines_seen.append([l.strip() for l in lines])
+#             time.sleep(0.05)
+#     # Fail if 'testing writing...' line appears unexpectedly (race condition)
+#     for lines in lines_seen:
+#         if any("testing writing" in line for line in lines):
+#             pytest.fail("Concurrent writer detected modification during read!")
+
+
+# def test_write_shared_file():
+#     # Wait to ensure reader is started
+#     time.sleep(0.1)
+#     with open(shared_file, "a") as f:
+#         f.write("testing writing on a shared file\n")
+#         f.flush()
+#         time.sleep(0.1)
+#     assert True
+
+import shutil
+
+
+def test_verify_tmp_path(tmp_path):
+    assert tmp_path.exists()
+
+
+def test_remove_tmp_path(tmp_path):
+    shutil.rmtree(tmp_path)
 
 
 # ----------------------------------------------------------------------
