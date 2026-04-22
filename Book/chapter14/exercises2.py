@@ -30,6 +30,15 @@ from openpyxl.utils import get_column_letter, column_index_from_string
 # 5. Print the title of the active sheet
 # ----------------------------------------------------------------------
 
+wb = load_workbook(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter14/example3.xlsx"
+)
+print(type(wb))
+print(wb.sheetnames)
+print(wb.active)
+active_page = wb.active
+if active_page:
+    print(active_page.title)
 
 # ----------------------------------------------------------------------
 # 🟢 2: ACCESS CELLS BY COORDINATE
