@@ -8,3 +8,4 @@ report.html
 Unittest_Basics/test_file.txt
 .coverage
 .DS_Store
+.wolf*
