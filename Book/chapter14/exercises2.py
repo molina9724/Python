@@ -53,6 +53,15 @@ if active_page:
 # 5. Print values from multiple specific cells
 # ----------------------------------------------------------------------
 
+sheet = wb["Sheet1"]
+print(sheet["A1"].value)
+print(sheet["B2"].value)
+for row in sheet["A1:C3"]:
+    for cell in row:
+        print(cell.value)
+
+# This storages all the data easily
+data = [[cell.value for cell in row] for row in sheet["A1:C3"]]
 
 # ----------------------------------------------------------------------
 # 🟢 3: ACCESS CELLS BY ROW AND COLUMN
