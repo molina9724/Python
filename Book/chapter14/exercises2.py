@@ -76,6 +76,18 @@ data = [[cell.value for cell in row] for row in sheet["A1:C3"]]
 # 5. Print both row and column number of a cell
 # ----------------------------------------------------------------------
 
+print(sheet.cell(row=1, column=1).value)
+print(sheet.cell(row=5, column=3).value)
+
+print(sheet["A1"].value)
+print(sheet["C5"].value)
+
+row = 5
+column = get_column_letter(3)
+coordinate = column + str(row)
+print(coordinate)
+
+print(sheet[coordinate].value)
 
 # ----------------------------------------------------------------------
 # 🟡 4: ITERATE OVER ROWS
@@ -90,6 +102,18 @@ data = [[cell.value for cell in row] for row in sheet["A1:C3"]]
 # 5. Count total number of rows with data
 # ----------------------------------------------------------------------
 
+amount_cells_with_data = 0
+non_empty_cells = list()
+
+for row in sheet.iter_rows(min_row=1, max_row=sheet.max_row):
+    for cell in row:
+        if cell.value is not None:
+            amount_cells_with_data += 1
+        else:
+            non_empty_cells.append(cell.coordinate)
+
+print(amount_cells_with_data)
+print(non_empty_cells)
 
 # ----------------------------------------------------------------------
 # 🟡 5: ITERATE OVER COLUMNS
