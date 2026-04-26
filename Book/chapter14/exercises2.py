@@ -483,6 +483,11 @@ workbook.save(file_path)
 # 5. Verify data shifted up
 # ----------------------------------------------------------------------
 
+m = 2
+n = 5
+
+sheet.insert_rows(n, m)
+sheet.delete_rows(3, 1)
 
 # ----------------------------------------------------------------------
 # 🟡 18: INSERT AND DELETE COLUMNS
@@ -562,6 +567,40 @@ workbook.save(file_path)
 # 7. Set chart title and axis labels
 # ----------------------------------------------------------------------
 
+wb = openpyxl.load_workbook(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter14/myExcelFile.xlsx"
+)
+# Create a new sheet
+sheet = wb.create_sheet("SalesData")
+# Add column headers
+headers = ["Date", "Region", "Product", "Units Sold", "Unit Price", "Revenue"]
+sheet.append(headers)
+# Example static data rows
+data_rows = [
+    [datetime(2024, 4, 1), "North", "Widget A", 10, 12.5, 125.0],
+    [datetime(2024, 4, 1), "South", "Widget B", 7, 15.0, 105.0],
+    [datetime(2024, 4, 2), "East", "Widget A", 13, 12.5, 162.5],
+    [datetime(2024, 4, 2), "West", "Widget C", 5, 20.0, 100.0],
+    [datetime(2024, 4, 3), "North", "Widget B", 20, 15.0, 300.0],
+    [datetime(2024, 4, 3), "South", "Widget C", 8, 20.0, 160.0],
+    [datetime(2024, 4, 4), "East", "Widget A", 15, 12.5, 187.5],
+    [datetime(2024, 4, 4), "West", "Widget B", 6, 15.0, 90.0],
+    [datetime(2024, 4, 5), "North", "Widget C", 9, 20.0, 180.0],
+    [datetime(2024, 4, 5), "South", "Widget A", 11, 12.5, 137.5],
+]
+for row in data_rows:
+    sheet.append(row)
+# Save the workbook
+wb.save("/Users/daniel_molina/Downloads/Python/Python/Book/chapter14/myExcelFile.xlsx")
+
+ref_obj = openpyxl.chart.Reference(sheet, 6, 2, 6, 11)
+series_obj = openpyxl.chart.Series(ref_obj, title="First series")
+chart_obj = openpyxl.chart.BarChart()
+chart_obj.title = "My Chart"
+chart_obj.append(series_obj)
+
+sheet.add_chart(chart_obj, "A13")
+wb.save("/Users/daniel_molina/Downloads/Python/Python/Book/chapter14/myExcelFile.xlsx")
 
 # ----------------------------------------------------------------------
 # 🔴 22: LINE CHART
