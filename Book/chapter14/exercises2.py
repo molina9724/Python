@@ -415,7 +415,7 @@ my_borders = Border(
     bottom=Side(border_style="dashed", color="000000"),
 )
 
-sheet["B15"].border = my_borders
+# sheet["B15"].border = my_borders
 
 workbook.save(file_path)
 
@@ -434,6 +434,13 @@ workbook.save(file_path)
 # 6. Apply different alignments to different columns
 # ----------------------------------------------------------------------
 
+from openpyxl.cell import Cell
+
+my_cell: Cell = sheet["A1"]
+my_alignment = Alignment(wrap_text=True, text_rotation=180)
+my_cell.alignment = my_alignment
+
+workbook.save(file_path)
 
 # =====================================================================
 #                    SECTION 4: ROWS AND COLUMNS
@@ -454,6 +461,14 @@ workbook.save(file_path)
 # 6. Hide a column
 # ----------------------------------------------------------------------
 
+sheet.row_dimensions[3].height = 70
+sheet.column_dimensions["B"].width = 20
+workbook.save(file_path)
+
+sheet.column_dimensions["D"].hidden = True
+sheet.row_dimensions[10].hidden = True
+
+workbook.save(file_path)
 
 # ----------------------------------------------------------------------
 # 🟡 17: INSERT AND DELETE ROWS
@@ -482,6 +497,11 @@ workbook.save(file_path)
 # 5. Verify data shifted left
 # ----------------------------------------------------------------------
 
+sheet.insert_cols(3)
+workbook.save(file_path)
+
+sheet.delete_cols(3)
+workbook.save(file_path)
 
 # ----------------------------------------------------------------------
 # 🟡 19: MERGE AND UNMERGE CELLS
@@ -497,6 +517,14 @@ workbook.save(file_path)
 # 6. Unmerge cells and observe result
 # ----------------------------------------------------------------------
 
+sheet.merge_cells("A1:B2")
+sheet["A1"].value = "Different value"
+
+center_align = Alignment(horizontal="center", vertical="center")
+sheet["A1"].alignment = center_align
+
+
+workbook.save(file_path)
 
 # ----------------------------------------------------------------------
 # 🟡 20: FREEZE PANES
