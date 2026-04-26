@@ -6,6 +6,7 @@
 
 # pip install openpyxl
 
+import openpyxl
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
 from openpyxl.chart import BarChart, LineChart, PieChart, Reference
@@ -185,6 +186,21 @@ print(cells_with_data)
 # 5. Open the file manually to verify
 # ----------------------------------------------------------------------
 
+workbook = openpyxl.Workbook()
+print(workbook.sheetnames)
+
+sheet = workbook.active
+
+sheet.title = "my_sheet"  # type: ignore
+sheet["A1"] = "Here I am"  # type: ignore
+workbook.save(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter14/myExcelFile.xlsx"
+)
+print("Hello")
+
+file_path = (
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter14/myExcelFile.xlsx"
+)
 
 # ----------------------------------------------------------------------
 # 🟢 8: WRITE TO CELLS
@@ -199,6 +215,27 @@ print(cells_with_data)
 # 5. Save and verify the file
 # ----------------------------------------------------------------------
 
+from datetime import datetime
+import string
+
+workbook = openpyxl.load_workbook(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter14/myExcelFile.xlsx"
+)
+sheet = workbook["my_sheet"]
+
+sheet["A1"] = "Names"
+sheet["B1"] = "Ages"
+sheet["C1"] = "Dates"
+
+
+for i in range(2, 12):
+    sheet.cell(row=i, column=1).value = string.ascii_lowercase[i - 2]
+    # sheet["A"+str(i)] = string.ascii_lowercase[i - 2]
+    sheet.cell(row=i, column=2).value = i - 1
+    # sheet["B"+str(i)] = i-1
+    sheet.cell(row=i, column=3).value = datetime.now()
+    # sheet["C"+str(i)] = datetime.now()
+workbook.save(file_path)
 
 # ----------------------------------------------------------------------
 # 🟡 9: CREATE MULTIPLE SHEETS
@@ -214,6 +251,11 @@ print(cells_with_data)
 # 6. Delete one of the sheets
 # ----------------------------------------------------------------------
 
+workbook.create_sheet(index=1, title="Data")
+workbook.create_sheet(index=0, title="Summary")
+workbook.create_sheet(index=1, title="Charts")
+workbook.save(file_path)
+print(workbook.sheetnames)
 
 # ----------------------------------------------------------------------
 # 🟡 10: RENAME AND COPY SHEETS
@@ -228,6 +270,23 @@ print(cells_with_data)
 # 5. Modify copy without affecting original
 # ----------------------------------------------------------------------
 
+print(workbook.active)
+sheet.title = "renamed_sheet"
+sheet = workbook["renamed_sheet"]
+workbook.active = sheet
+
+workbook.copy_worksheet(workbook.active)
+workbook.save(file_path)
+
+copy_sheet = workbook["renamed_sheet Copy"]
+# copy_sheet["A1"] = "different value" this one triggers the assert
+
+for sheet_row, copy_row in zip(sheet.iter_rows(), copy_sheet.iter_rows()):
+    for sheet_cell, copy_row_cell in zip(sheet_row, copy_row):
+        assert sheet_cell.value == copy_row_cell.value
+
+copy_sheet["A1"] = "Check how I modify the copy but not the original one"
+workbook.save(file_path)
 
 # ----------------------------------------------------------------------
 # 🟡 11: WRITE FORMULAS
