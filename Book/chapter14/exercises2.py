@@ -161,10 +161,9 @@ print(sheet.max_column)
 print(sheet.dimensions)
 
 cells_with_data = 0
-for row in sheet.iter_rows(min_row=1, max_row=sheet.max_row):
+for row in sheet.iter_rows(min_row=1, max_row=sheet.max_row, values_only=True):
     for cell in row:
-        if cell.value is not None:
-            cells_with_data += 1
+        cells_with_data += 1
 
 print(cells_with_data)
 
