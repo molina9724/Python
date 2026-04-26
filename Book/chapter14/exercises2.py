@@ -8,7 +8,7 @@
 
 import openpyxl
 from openpyxl import Workbook, load_workbook
-from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
+from openpyxl.styles import Font, PatternFill, Border, Side, Alignment, GradientFill
 from openpyxl.chart import BarChart, LineChart, PieChart, Reference
 from openpyxl.utils import get_column_letter, column_index_from_string
 
@@ -219,7 +219,8 @@ from datetime import datetime
 import string
 
 workbook = openpyxl.load_workbook(
-    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter14/myExcelFile.xlsx"
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter14/myExcelFile.xlsx",
+    data_only=True,
 )
 sheet = workbook["my_sheet"]
 
@@ -302,6 +303,17 @@ workbook.save(file_path)
 # 6. Save and open in Excel to verify formulas work
 # ----------------------------------------------------------------------
 
+sheet["B12"] = "=SUM(B2:B11)"
+workbook.save(file_path)
+
+sheet["B13"] = "=AVERAGE(B2:B11)"
+workbook.save(file_path)
+
+sheet["B14"] = '=IF(A1="Carlos",True,False)'
+workbook.save(file_path)
+
+sheet["B15"] = '=VLOOKUP("c",A1:C11,2,FALSE)'
+workbook.save(file_path)
 
 # =====================================================================
 #                    SECTION 3: CELL STYLING
@@ -322,6 +334,32 @@ workbook.save(file_path)
 # 6. Use different font names
 # ----------------------------------------------------------------------
 
+my_font = Font(
+    name="Calibri",
+    size=32,
+    bold=True,
+    color="3F27F5",
+    italic=True,
+    underline="single",
+)
+sheet["A2"].font = my_font
+
+my_alignment = Alignment(
+    horizontal="center",
+    vertical="center",
+)
+
+sheet["A2"].alignment = my_alignment
+
+my_fill = PatternFill(
+    fill_type="mediumGray",
+    start_color="BBF527",
+    end_color="F5275E",
+)
+
+sheet["A2"].fill = my_fill
+
+workbook.save(file_path)
 
 # ----------------------------------------------------------------------
 # 🟡 13: CELL FILL AND COLORS
@@ -336,6 +374,26 @@ workbook.save(file_path)
 # 5. Create a color-coded legend
 # ----------------------------------------------------------------------
 
+my_gradient_fill = GradientFill(stop=("000000", "FFFFFF"))
+
+for cell in sheet[1]:
+    cell.font = my_font
+    cell.alignment = my_alignment
+    cell.fill = my_gradient_fill
+
+my_legend = [
+    ("Overdue", "FF0000"),
+    ("Due Soon", "FFFF00"),
+    ("On Time", "00FF00"),
+]
+
+row = 1
+for label, color in my_legend:
+    sheet[f"A{row}"].fill = PatternFill(start_color=color, fill_type="solid")
+    sheet[f"B{row}"].value = label
+    row += 1
+
+workbook.save(file_path)
 
 # ----------------------------------------------------------------------
 # 🟡 14: BORDERS
@@ -349,6 +407,17 @@ workbook.save(file_path)
 # 4. Apply different border styles (dashed, dotted)
 # 5. Add borders only to specific sides of cells
 # ----------------------------------------------------------------------
+
+my_borders = Border(
+    left=Side(border_style="dotted", color="000000"),
+    right=Side(border_style="dotted", color="000000"),
+    top=Side(border_style="dashed", color="000000"),
+    bottom=Side(border_style="dashed", color="000000"),
+)
+
+sheet["B15"].border = my_borders
+
+workbook.save(file_path)
 
 
 # ----------------------------------------------------------------------
