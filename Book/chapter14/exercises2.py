@@ -102,18 +102,16 @@ print(sheet[coordinate].value)
 # 5. Count total number of rows with data
 # ----------------------------------------------------------------------
 
-amount_cells_with_data = 0
-non_empty_cells = list()
-
+empty_cells = []
+non_empty_cells = []
 for row in sheet.iter_rows(min_row=1, max_row=sheet.max_row):
     for cell in row:
         if cell.value is not None:
-            amount_cells_with_data += 1
-        else:
             non_empty_cells.append(cell.coordinate)
+        else:
+            empty_cells.append(cell.coordinate)
 
-print(amount_cells_with_data)
-print(non_empty_cells)
+print(empty_cells)
 
 # ----------------------------------------------------------------------
 # 🟡 5: ITERATE OVER COLUMNS
@@ -128,6 +126,21 @@ print(non_empty_cells)
 # 5. Find the column with the maximum value
 # ----------------------------------------------------------------------
 
+import math
+
+maximum_value = -math.inf
+maximum_value_cell = None
+
+for column in sheet.iter_cols(min_row=1, max_row=sheet.max_row):
+    for cell in column:
+        print(cell.value)
+        if isinstance(cell.value, (int, float)):
+            if cell.value > maximum_value:  # type: ignore
+                maximum_value = cell.value
+                maximum_value_cell = cell.coordinate
+
+print(maximum_value)
+print(maximum_value_cell)
 
 # ----------------------------------------------------------------------
 # 🟡 6: GET SHEET DIMENSIONS
@@ -142,6 +155,18 @@ print(non_empty_cells)
 # 5. Calculate total number of cells with data
 # ----------------------------------------------------------------------
 
+print(sheet.max_row)
+print(sheet.max_column)
+
+print(sheet.dimensions)
+
+cells_with_data = 0
+for row in sheet.iter_rows(min_row=1, max_row=sheet.max_row):
+    for cell in row:
+        if cell.value is not None:
+            cells_with_data += 1
+
+print(cells_with_data)
 
 # =====================================================================
 #                    SECTION 2: WRITING TO EXCEL
