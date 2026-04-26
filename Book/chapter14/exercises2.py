@@ -539,6 +539,8 @@ workbook.save(file_path)
 # 5. Freeze both row 1 and column A simultaneously
 # ----------------------------------------------------------------------
 
+sheet.freeze_panes = "A2"
+workbook.save(file_path)
 
 # =====================================================================
 #                    SECTION 5: CHARTS
@@ -607,6 +609,14 @@ workbook.save(file_path)
 # 5. Create a loop that prints letters for columns 1-30
 # ----------------------------------------------------------------------
 
+print(get_column_letter(1))
+print(get_column_letter(27))
+
+print(column_index_from_string("C"))
+print(column_index_from_string("AB"))
+
+for i in range(1, 31):
+    print(get_column_letter(i))
 
 # ----------------------------------------------------------------------
 # 🟡 25: WORKING WITH CELL RANGES
@@ -621,6 +631,9 @@ workbook.save(file_path)
 # 5. Find minimum and maximum values in range
 # ----------------------------------------------------------------------
 
+for row in sheet["A1:C10"]:
+    for cell in row:
+        print(cell.value)
 
 # =====================================================================
 #                    SECTION 7: REAL-WORLD PROJECTS
