@@ -9,3 +9,6 @@ Unittest_Basics/test_file.txt
 .coverage
 .DS_Store
 .wolf*
+token-drive.pickle
+token-sheets.pickle
+credentials-sheets.json
