@@ -47,3 +47,17 @@ else:
 
 print("----------------------------")
 print(second_sheet.title)
+
+header = sheet.getRow(1)
+
+for index, value in enumerate(header):
+    header[index] = value.upper()
+
+sheet.updateRow(1, header)
+
+column_one = sheet.getColumn(1)
+
+for index, value in enumerate(column_one):
+    column_one[index] = value.upper()
+
+sheet.updateColumn(1, column_one)
