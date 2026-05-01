@@ -355,6 +355,9 @@ for index, value in enumerate(column_c):
 
 copy_sheet.updateColumn(3, column_c)
 
+update_row_3 = ["Fight Club", "Chuck P.", 1998, "NotFound"]
+copy_sheet.updateRow(3, update_row_3)
+
 # ----------------------------------------------------------------------
 # 🟡 15: WRITE MULTIPLE ROWS
 #
@@ -366,6 +369,14 @@ copy_sheet.updateColumn(3, column_c)
 # 3. Verify the data was written correctly
 # 4. Clear and rewrite with different data
 # ----------------------------------------------------------------------
+
+my_data = [
+    ["book1", "author1", 2011, "NoPage1"],
+    ["book2", "author2", 2012, "NoPage2"],
+    ["book3", "author3", 2013, "NoPage3"],
+]
+
+copy_sheet.updateRows(my_data, startRow=9)
 
 
 # ----------------------------------------------------------------------
@@ -381,6 +392,12 @@ copy_sheet.updateColumn(3, column_c)
 # 5. Clear all data from the sheet
 # ----------------------------------------------------------------------
 
+copy_sheet["A1"] = ""
+copy_sheet.updateRow(1, [""] * copy_sheet.rowCount)
+copy_sheet.updateColumn(2, [""] * sheet.columnCount)
+
+copy_sheet.clear()
+print("It's all going down, man")
 
 # =====================================================================
 #                    SECTION 5: ROWS AND COLUMNS OPERATIONS
