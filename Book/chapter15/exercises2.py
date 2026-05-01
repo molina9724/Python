@@ -261,6 +261,20 @@ print(row_5)
 # 5. Count total cells with data
 # ----------------------------------------------------------------------
 
+all_rows = copy_sheet.getRows()
+all_columns = copy_sheet.getColumns()
+
+for index, row in enumerate(all_rows, 1):
+    print(index, row)
+
+cells_with_data = 0
+
+for index, column in enumerate(all_columns, 1):
+    for cell in column:
+        if cell is not None:
+            cells_with_data += 1
+
+print(f"Cells with data = {cells_with_data}")
 
 # ----------------------------------------------------------------------
 # 🟡 12: FIND SPECIFIC DATA
@@ -275,6 +289,18 @@ print(row_5)
 # 5. Print the locations of found data
 # ----------------------------------------------------------------------
 
+specific_value = 2022
+
+cells_with_specific_value = list()
+
+for column_index, column in enumerate(all_columns, 1):
+    for cell_index, cell in enumerate(column, 1):
+        if cell == str(specific_value):
+            cells_with_specific_value.append(
+                f"{ezsheets.getColumnLetterOf(column_index)}{cell_index}"
+            )
+
+print(cells_with_specific_value)
 
 # =====================================================================
 #                    SECTION 4: WRITING DATA
@@ -294,6 +320,10 @@ print(row_5)
 # 5. Verify the values were written
 # ----------------------------------------------------------------------
 
+copy_sheet["A1"] = "changed_value"
+copy_sheet["B1"] = "changed_value_2"
+
+copy_sheet[3, 1] = "changed_value_3"
 
 # ----------------------------------------------------------------------
 # 🟢 14: WRITE ROWS AND COLUMNS
@@ -308,6 +338,22 @@ print(row_5)
 # 5. Verify all updates
 # ----------------------------------------------------------------------
 
+row_1 = copy_sheet.getRow(1)
+
+for index, value in enumerate(row_1):
+    row_1[index] = value.upper()
+
+copy_sheet.updateRow(1, row_1)
+
+column_c = copy_sheet.getColumn(3)
+
+for index, value in enumerate(column_c):
+    if index >= 1:
+        if isinstance(int(value), int):
+            value = 2026
+            column_c[index] = value
+
+copy_sheet.updateColumn(3, column_c)
 
 # ----------------------------------------------------------------------
 # 🟡 15: WRITE MULTIPLE ROWS
