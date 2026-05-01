@@ -396,8 +396,8 @@ copy_sheet["A1"] = ""
 copy_sheet.updateRow(1, [""] * copy_sheet.rowCount)
 copy_sheet.updateColumn(2, [""] * sheet.columnCount)
 
-copy_sheet.clear()
-print("It's all going down, man")
+# copy_sheet.clear()
+# print("It's all going down, man")
 
 # =====================================================================
 #                    SECTION 5: ROWS AND COLUMNS OPERATIONS
