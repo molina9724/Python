@@ -92,6 +92,8 @@ print(
     f"You have {len(all_spreadsheets)} of spreadsheets on your account (the ones in trash are counted, too)"
 )
 
+assert "titled_changed" in all_spreadsheets.values()
+
 # =====================================================================
 #                    SECTION 2: WORKING WITH SHEETS
 # =====================================================================
@@ -110,6 +112,17 @@ print(
 # 5. Print sheet dimensions (rows and columns)
 # ----------------------------------------------------------------------
 
+sheet: ezsheets.Sheet = ss.sheets[0]
+print(sheet.title)
+print(sheet.id)
+
+sheet = ss["new_title"]
+print(sheet.title)
+print(sheet.id)
+
+print(
+    f"The sheet {sheet.title} has dimensions: {sheet.rowCount} rows and {sheet.columnCount} columns"
+)
 
 # ----------------------------------------------------------------------
 # 🟡 6: CREATE AND DELETE SHEETS
@@ -124,6 +137,15 @@ print(
 # 5. Delete a sheet by name or index
 # ----------------------------------------------------------------------
 
+if "created_sheet" not in ss.sheetTitles:
+    ss.createSheet(title="created_sheet")
+if "another_sheet" not in ss.sheetTitles:
+    ss.createSheet(title="another_sheet", index=0)
+
+print(ss.sheets)
+
+ss["another_sheet"].delete()
+ss.sheets[1].delete()
 
 # ----------------------------------------------------------------------
 # 🟡 7: SHEET PROPERTIES
@@ -138,6 +160,18 @@ print(
 # 5. Resize the sheet (change row/column count)
 # ----------------------------------------------------------------------
 
+print("SEVEN")
+print(sheet.title)
+
+if "new_title" not in ss.sheetTitles:
+    sheet.title = "new_title"
+
+print(f"Dimensions before change: {sheet.rowCount}X{sheet.columnCount}")
+
+sheet.rowCount = 8
+sheet.columnCount = 8
+
+print(f"Dimensions after change: {sheet.rowCount}X{sheet.columnCount}")
 
 # ----------------------------------------------------------------------
 # 🟡 8: COPY SHEETS
@@ -151,6 +185,19 @@ print(
 # 4. Verify the copy contains the same data
 # ----------------------------------------------------------------------
 
+als_ss = ezsheets.Spreadsheet("https://autbor.com/examplegs")
+als_sheet: ezsheets.Sheet = als_ss[0]
+
+if "Copy of Books" not in ss.sheetTitles:
+    als_sheet.copyTo(ss)
+
+copy_sheet: ezsheets.Sheet = ss["Copy of Books"]
+
+for copy_sheet_row, als_sheet_row in zip(copy_sheet.getRows(), als_sheet.getRows()):
+    for copy_sheet_cell, als_sheet_cell in zip(copy_sheet_row, als_sheet_row):
+        if copy_sheet_cell != als_sheet_cell:
+            print("The backup is broken")
+            break
 
 # =====================================================================
 #                    SECTION 3: READING DATA
@@ -170,6 +217,11 @@ print(
 # 5. Print the values
 # ----------------------------------------------------------------------
 
+print(als_sheet["A1"])
+print(als_sheet[1, 1])
+
+print(als_sheet["B2"])
+print(als_sheet[2, 2])
 
 # ----------------------------------------------------------------------
 # 🟢 10: READ ROWS AND COLUMNS
@@ -184,6 +236,17 @@ print(
 # 5. Print the data from each
 # ----------------------------------------------------------------------
 
+copy_sheet.rowCount = 11
+copy_sheet.columnCount = 4
+
+row_1 = copy_sheet.getRow(1)
+column_a = copy_sheet.getColumn(ezsheets.getColumnNumberOf("a"))
+
+row_5 = copy_sheet.getRow(5)
+
+print(row_1)
+print(column_a)
+print(row_5)
 
 # ----------------------------------------------------------------------
 # 🟡 11: READ ALL DATA
