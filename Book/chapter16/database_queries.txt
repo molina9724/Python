@@ -1,0 +1,11 @@
+BEGIN TRANSACTION;
+CREATE TABLE "cats" (name TEXT NOT NULL, birthdate TEXT, "fur" TEXT, weight_kg REAL) STRICT;
+INSERT INTO "cats" VALUES('Goku','2021-01-24','black',10.0);
+INSERT INTO "cats" VALUES('Ranger','1990-12-12','black',10.0);
+INSERT INTO "cats" VALUES('Socks','2022-04-04','white',10.0);
+INSERT INTO "cats" VALUES('Fluffy','2022-10-30','gray',10.0);
+CREATE TABLE vaccinations (vaccine TEXT, date_administered TEXT, administered_by TEXT, cat_id INTEGER, FOREIGN KEY(cat_id) REFERENCES cats(rowid)) STRICT;
+INSERT INTO "vaccinations" VALUES('rabies','2023-06-06','Dr. Echo',1);
+INSERT INTO "vaccinations" VALUES('Felv','2023-06-06','Dr. Echo',1);
+CREATE INDEX ide_name ON "cats" (name);
+COMMIT;
