@@ -116,9 +116,14 @@ in_memory_database.close()
 #     isolation_level=None,
 # )
 
-# conn_practice.execute(
-#     "CREATE TABLE IF NOT EXISTS students (id INT PRIMARY KEY, name TEXT, age INT) STRICT"
-# )
+conn_practice = sqlite3.connect(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter16/practice.db",
+    isolation_level=None,
+)
+
+conn_practice.execute(
+    "CREATE TABLE IF NOT EXISTS students (id INT PRIMARY KEY, name TEXT, age INT) STRICT"
+)
 
 # ----------------------------------------------------------------------
 # 🟢 6: CREATE TABLE IF NOT EXISTS
@@ -215,6 +220,7 @@ assert "temp_data" not in [table[0] for table in all_tables]
 # 5. Print a confirmation message
 # ----------------------------------------------------------------------
 
+# conn_practice.execute("INSERT INTO students VALUES (1, 'CJ', 26)")
 
 # ----------------------------------------------------------------------
 # 🟢 10: INSERT WITH PLACEHOLDERS (SAFE WAY)
@@ -229,6 +235,11 @@ assert "temp_data" not in [table[0] for table in all_tables]
 # 5. Explain why placeholders prevent SQL injection
 # ----------------------------------------------------------------------
 
+id = 2
+name = "Alice"
+age = 22
+
+# conn_practice.execute("INSERT INTO students VALUES (?, ?, ?)", (id, name, age))
 
 # ----------------------------------------------------------------------
 # 🟡 11: INSERT MULTIPLE ROWS
@@ -244,6 +255,16 @@ assert "temp_data" not in [table[0] for table in all_tables]
 # 5. Print how many rows were inserted using cursor.rowcount
 # ----------------------------------------------------------------------
 
+students = [
+    (3, "Carl", 50),
+    (4, "Tomas", 50),
+    (5, "Pacheco", 23),
+    (6, "Andrea", 21),
+    (7, "Carla", 33),
+]
+
+# conn_practice.executemany("INSERT INTO students VALUES (?, ?, ?)", students)
+# print(conn_practice.execute("SELECT COUNT(*) FROM students").fetchall())
 
 # ----------------------------------------------------------------------
 # 🟡 12: INSERT AND GET THE NEW ROW'S ID
@@ -258,6 +279,16 @@ assert "temp_data" not in [table[0] for table in all_tables]
 # 5. Explain why this is useful (e.g., for related tables)
 # ----------------------------------------------------------------------
 
+# Always use the cursor, not the connection for operations
+cursor = conn_practice.cursor()
+
+# cursor.execute("INSERT INTO students VALUES (8, 'Jay', 6)")
+print(cursor.lastrowid)
+
+# cursor.execute("INSERT INTO students VALUES (9, 'Tea', 44)")
+id = cursor.lastrowid
+
+# print(cursor.execute(f"SELECT * FROM students WHERE id = {id}").fetchall())
 
 # ----------------------------------------------------------------------
 # 🟡 13: INSERT OR REPLACE
@@ -272,6 +303,9 @@ assert "temp_data" not in [table[0] for table in all_tables]
 # 5. Use INSERT OR IGNORE to skip on conflict
 # ----------------------------------------------------------------------
 
+# cursor.execute("INSERT INTO students VALUES (20, 'CJ', 35)")
+# cursor.execute("INSERT OR REPLACE INTO students VALUES (20, 'CJ', 35)")
+cursor.execute("INSERT OR IGNORE INTO students VALUES (20, 'CJ', 35)")
 
 # =====================================================================
 #                    SECTION 4: QUERYING DATA
@@ -291,6 +325,12 @@ assert "temp_data" not in [table[0] for table in all_tables]
 # 5. Note that each row is a tuple
 # ----------------------------------------------------------------------
 
+print(cursor.execute("SELECT * FROM students").fetchall())
+all_results = cursor.execute("SELECT * FROM students").fetchall()
+
+for person in all_results:
+    print(type(person))
+    print(person)
 
 # ----------------------------------------------------------------------
 # 🟢 15: SELECT SPECIFIC COLUMNS
@@ -305,6 +345,9 @@ assert "temp_data" not in [table[0] for table in all_tables]
 # 5. Print formatted output: "Name: X, Age: Y"
 # ----------------------------------------------------------------------
 
+print(cursor.execute("SELECT name,age FROM students").fetchall())
+print(cursor.execute("SELECT age,name FROM students").fetchall())
+print(cursor.execute("SELECT 'Name: '||name||', Age: '|| age FROM students").fetchall())
 
 # ----------------------------------------------------------------------
 # 🟢 16: FETCH ONE ROW AT A TIME
