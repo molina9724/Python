@@ -362,6 +362,17 @@ print(cursor.execute("SELECT 'Name: '||name||', Age: '|| age FROM students").fet
 # 5. Explain when fetchone() is better than fetchall()
 # ----------------------------------------------------------------------
 
+print("Fetching one")
+print(cursor.execute("SELECT * FROM students").fetchone())
+
+row = cursor.fetchone()
+print(row)
+
+row = cursor.fetchone()
+print(row)
+
+row = cursor.fetchone()
+print(row)
 
 # ----------------------------------------------------------------------
 # 🟡 17: FETCH A SPECIFIC NUMBER OF ROWS
@@ -376,6 +387,19 @@ print(cursor.execute("SELECT 'Name: '||name||', Age: '|| age FROM students").fet
 # 5. Explain when this is useful (large datasets)
 # ----------------------------------------------------------------------
 
+print("Fetching many")
+print(cursor.execute("SELECT * FROM students"))
+
+three_rows = cursor.fetchmany(3)
+print(three_rows)
+
+
+three_rows = cursor.fetchmany(3)
+print(three_rows)
+
+
+three_rows = cursor.fetchmany(3)
+print(three_rows)
 
 # ----------------------------------------------------------------------
 # 🟡 18: USE WHERE CLAUSE
@@ -390,6 +414,15 @@ print(cursor.execute("SELECT 'Name: '||name||', Age: '|| age FROM students").fet
 # 5. Print results for each query
 # ----------------------------------------------------------------------
 
+print(cursor.execute("SELECT * FROM students WHERE age>20").fetchall())
+
+name = [
+    "Alice",
+]
+print(cursor.execute("SELECT * FROM students WHERE name LIKE ?", ("Alice",)).fetchall())
+print(cursor.execute("SELECT * FROM students where age BETWEEN 18 and 25").fetchall())
+print(cursor.execute("SELECT * FROM students WHERE name LIKE 'A%'").fetchall())
+print(cursor.execute("SELECT * FROM students WHERE name LIKE 'C%'").fetchall())
 
 # ----------------------------------------------------------------------
 # 🟡 19: USE AND, OR, NOT IN WHERE
