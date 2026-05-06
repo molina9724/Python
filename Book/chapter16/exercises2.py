@@ -305,7 +305,7 @@ id = cursor.lastrowid
 
 # cursor.execute("INSERT INTO students VALUES (20, 'CJ', 35)")
 # cursor.execute("INSERT OR REPLACE INTO students VALUES (20, 'CJ', 35)")
-cursor.execute("INSERT OR IGNORE INTO students VALUES (20, 'CJ', 35)")
+# cursor.execute("INSERT OR IGNORE INTO students VALUES (20, 'CJ', 35)")
 
 # =====================================================================
 #                    SECTION 4: QUERYING DATA
@@ -437,6 +437,13 @@ print(cursor.execute("SELECT * FROM students WHERE name LIKE 'C%'").fetchall())
 # 5. Print results for each query
 # ----------------------------------------------------------------------
 
+print(cursor.execute("SELECT * FROM students WHERE age BETWEEN 18 and 25").fetchall())
+print(
+    cursor.execute(
+        "SELECT * FROM students WHERE name = 'Alice' or name = 'Bob'"
+    ).fetchall()
+)
+print(cursor.execute("SELECT * FROM students WHERE NOT age = 20").fetchall())
 
 # ----------------------------------------------------------------------
 # 🟡 20: ORDER RESULTS
@@ -451,6 +458,10 @@ print(cursor.execute("SELECT * FROM students WHERE name LIKE 'C%'").fetchall())
 # 5. Try ordering by a column that doesn't exist - what happens?
 # ----------------------------------------------------------------------
 
+print(cursor.execute("SELECT * FROM students ORDER BY name ASC").fetchall())
+print(cursor.execute("SELECT * FROM students ORDER BY age DESC").fetchall())
+print(cursor.execute("SELECT * FROM students ORDER BY age DESC, name ASC").fetchall())
+# print(cursor.execute("SELECT * FROM students ORDER BY non_existing_column").fetchall())
 
 # ----------------------------------------------------------------------
 # 🟡 21: LIMIT RESULTS
@@ -465,6 +476,9 @@ print(cursor.execute("SELECT * FROM students WHERE name LIKE 'C%'").fetchall())
 # 5. Implement basic pagination (page 1, page 2, etc.)
 # ----------------------------------------------------------------------
 
+print(cursor.execute("SELECT * FROM students LIMIT 5").fetchall())
+print(cursor.execute("SELECT * FROM students LIMIT 5 OFFSET 5").fetchall())
+print(cursor.execute("SELECT * FROM students ORDER BY age DESC LIMIT 3").fetchall())
 
 # ----------------------------------------------------------------------
 # 🟡 22: USE AGGREGATE FUNCTIONS
@@ -479,6 +493,10 @@ print(cursor.execute("SELECT * FROM students WHERE name LIKE 'C%'").fetchall())
 # 5. Use COUNT with WHERE to count filtered results
 # ----------------------------------------------------------------------
 
+print(cursor.execute("SELECT COUNT(*) FROM students").fetchall())
+print(cursor.execute("SELECT AVG(age) FROM students").fetchall())
+print(cursor.execute("SELECT MIN(age), MAX(age) FROM students").fetchall())
+print(cursor.execute("SELECT COUNT(*) FROM students WHERE name LIKE 'C%'").fetchall())
 
 # ----------------------------------------------------------------------
 # 🟡 23: GROUP BY AND HAVING
@@ -492,6 +510,14 @@ print(cursor.execute("SELECT * FROM students WHERE name LIKE 'C%'").fetchall())
 # 4. Use HAVING to show only grades with more than 2 students
 # 5. Explain difference between WHERE and HAVING
 # ----------------------------------------------------------------------
+
+print(cursor.execute("SELECT COUNT(*) FROM students GROUP BY grade").fetchall())
+print(cursor.execute("SELECT AVG(age) FROM students GROUP BY grade").fetchall())
+print(
+    cursor.execute(
+        "SELECT AVG(age) FROM students GROUP BY grade HAVING COUNT(grade) > 2"
+    ).fetchall()
+)
 
 
 # =====================================================================
