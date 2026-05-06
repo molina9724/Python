@@ -36,3 +36,42 @@ for i, page in enumerate(reader.pages):
             image_num += 1
     except Exception as e:
         print(f"Skipped page {i+1} due to error {e}")
+
+writer = pypdf.PdfWriter()
+writer.append(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/Recursion_Chapter1.pdf",
+    (0, 5),
+)
+
+writer.add_blank_page()
+writer.insert_blank_page(index=2)
+
+with open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/first_five_pages.pdf",
+    "wb",
+) as file:
+    writer.write(file)
+
+writer.append(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/Recursion_Chapter1.pdf"
+)
+
+for index in range(len(writer.pages)):
+    writer.pages[index].rotate(90)
+
+with open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/rotated_pdf.pdf", "wb"
+) as file:
+    writer.write(file)
+
+watermark_page = pypdf.PdfReader(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/watermark.pdf"
+).pages[0]
+for page in writer.pages:
+    page.merge_page(watermark_page, over=False)
+
+with open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/with_watermark.pdf",
+    "wb",
+) as file:
+    writer.write(file)
