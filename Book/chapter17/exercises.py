@@ -70,8 +70,21 @@ watermark_page = pypdf.PdfReader(
 for page in writer.pages:
     page.merge_page(watermark_page, over=False)
 
+writer.encrypt("swordfish", algorithm="AES-256")
+
 with open(
     "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/with_watermark.pdf",
     "wb",
 ) as file:
     writer.write(file)
+
+encrypted = pypdf.PdfReader(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/with_watermark.pdf"
+)
+print(encrypted.is_encrypted)
+# print(encrypted.pages)
+
+print(encrypted.decrypt("wrong_password").name)
+encrypted.decrypt("swordfish")
+encrypted.decrypt("wrong_password").name
+print(encrypted.pages)
