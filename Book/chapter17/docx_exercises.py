@@ -2,6 +2,7 @@
 #                    SECTION 3: WORD DOCUMENTS - BASICS
 # =====================================================================
 
+import docx
 
 # ----------------------------------------------------------------------
 # 🟢 13: CREATE A NEW WORD DOCUMENT
@@ -15,6 +16,12 @@
 # 4. Open it manually to confirm it works
 # ----------------------------------------------------------------------
 
+PATH_FILE = (
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/doc_exercises.docx"
+)
+
+doc = docx.Document()
+doc.save(PATH_FILE)
 
 # ----------------------------------------------------------------------
 # 🟢 14: ADD PARAGRAPHS
@@ -29,6 +36,11 @@
 # 5. Open and verify content
 # ----------------------------------------------------------------------
 
+doc.add_paragraph("Paragraph 1")
+doc.add_paragraph("Paragraph 2")
+doc.add_paragraph("Paragraph 3")
+
+doc.save(PATH_FILE)
 
 # ----------------------------------------------------------------------
 # 🟢 15: ADD HEADINGS
@@ -43,6 +55,13 @@
 # 5. Save and verify the structure
 # ----------------------------------------------------------------------
 
+doc.add_heading("heading lvl0", 0)
+doc.add_paragraph("paragraph under heading lvl10")
+
+doc.add_heading("subheading", 2)
+doc.add_paragraph("paragraph under heading lvl2")
+
+doc.save(PATH_FILE)
 
 # ----------------------------------------------------------------------
 # 🟢 16: READ AN EXISTING DOCUMENT
@@ -57,6 +76,17 @@
 # 5. Find a specific paragraph by content
 # ----------------------------------------------------------------------
 
+word = "under"
+paragraphs_with_word = list()
+
+print(f"The doc has {len(doc.paragraphs)} paragraphs")
+for index, paragraph in enumerate(doc.paragraphs):
+    print(paragraph.text)
+    for run in paragraph.runs:
+        if word in run.text:
+            paragraphs_with_word.append(index + 1)
+
+print(paragraphs_with_word)
 
 # ----------------------------------------------------------------------
 # 🟡 17: ACCESS PARAGRAPH PROPERTIES
@@ -70,6 +100,10 @@
 # 4. Print its style name
 # 5. Check if it's a heading style
 # ----------------------------------------------------------------------
+
+first_paragraph = doc.paragraphs[0]
+print(first_paragraph.text)
+print(first_paragraph.style)
 
 
 # =====================================================================
@@ -90,6 +124,8 @@
 # 5. Count the number of runs
 # ----------------------------------------------------------------------
 
+for run in first_paragraph.runs:
+    print(run.text)
 
 # ----------------------------------------------------------------------
 # 🟡 19: FORMAT TEXT WITH RUNS
@@ -105,6 +141,12 @@
 # 6. Save and verify formatting
 # ----------------------------------------------------------------------
 
+paragraph_with_style = doc.add_paragraph("This paragraph is really hot\n")
+paragraph_with_style.add_run("This is bold\n").bold = True
+paragraph_with_style.add_run("This is italic\n").italic = True
+paragraph_with_style.add_run("And this is underline, my man\n").underline = True
+
+doc.save(PATH_FILE)
 
 # ----------------------------------------------------------------------
 # 🟡 20: ADD FORMATTED PARAGRAPH
@@ -134,6 +176,15 @@
 # 6. Save and verify
 # ----------------------------------------------------------------------
 
+from docx.shared import Pt
+from docx.shared import RGBColor
+
+for run in paragraph_with_style.runs:
+    run.font.name = "Arial"
+    run.font.size = Pt(24)
+    run.font.color.rgb = RGBColor(r=0, g=200, b=50)
+
+doc.save(PATH_FILE)
 
 # ----------------------------------------------------------------------
 # 🟡 22: APPLY PARAGRAPH STYLES
@@ -149,6 +200,13 @@
 # 6. Explore other available styles
 # ----------------------------------------------------------------------
 
+doc.add_paragraph("Title", "Title")
+doc.add_paragraph("Heading 1", "Heading 1")
+doc.add_paragraph("Normal", "Normal")
+doc.add_paragraph("Quote", "Quote")
+doc.add_paragraph("Caption", "Caption")
+
+doc.save(PATH_FILE)
 
 # =====================================================================
 #                    SECTION 5: WORD DOCUMENT STRUCTURE
@@ -169,6 +227,26 @@
 # 6. Save and verify table structure
 # ----------------------------------------------------------------------
 
+table = doc.add_table(rows=4, cols=4)
+
+header = table.rows[0].cells
+
+values = ["Name", "Age", "Phone", "Blood"]
+data = [
+    ["CJ", 25, "123", "A+"],
+    ["Andres", 50, "456", "AB+"],
+    ["Carel", 12, "789", "O-"],
+]
+
+for index, cell in enumerate(header):
+    cell.text = values[index]
+
+for index, row in enumerate(table.rows):
+    if index != 0:
+        for index_2, cell in enumerate(row.cells):
+            cell.text = str(data[index - 1][index_2])
+
+doc.save(PATH_FILE)
 
 # ----------------------------------------------------------------------
 # 🟡 24: MODIFY TABLE CONTENT

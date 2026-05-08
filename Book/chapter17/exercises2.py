@@ -1,5 +1,6 @@
 import docx
 from docx.enum.text import WD_BREAK
+from docx.shared import Cm, Inches
 
 BASE_PATH = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/"
 FILE_PATH = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/demo.docx"
@@ -53,5 +54,11 @@ my_doc.paragraphs[7].runs[0].add_break(WD_BREAK.PAGE)
 my_doc.add_paragraph("This is the second page we don't fuck around")
 
 print(len(my_doc.paragraphs))
+
+my_doc.add_picture(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/zophie.png",
+    width=Inches(1),
+    height=Cm(4),
+)
 
 my_doc.save(BASE_PATH + "my_doc.docx")
