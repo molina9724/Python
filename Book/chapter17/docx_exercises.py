@@ -2,7 +2,13 @@
 #                    SECTION 3: WORD DOCUMENTS - BASICS
 # =====================================================================
 
+import os
+import re
+import sys
+from datetime import datetime
+
 import docx
+import requests
 
 # ----------------------------------------------------------------------
 # 🟢 13: CREATE A NEW WORD DOCUMENT
@@ -176,8 +182,7 @@ doc.save(PATH_FILE)
 # 6. Save and verify
 # ----------------------------------------------------------------------
 
-from docx.shared import Pt
-from docx.shared import RGBColor
+from docx.shared import Pt, RGBColor
 
 for run in paragraph_with_style.runs:
     run.font.name = "Arial"
