@@ -27,6 +27,8 @@ from docx import Document
 # 4. Close the file properly
 # ----------------------------------------------------------------------
 
+BASE_PATH = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/"
+
 PDF_FILE = (
     "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/Recursion_Chapter1.pdf"
 )
@@ -162,6 +164,23 @@ except Exception as e:
 # 5. Verify the new file was created
 # ----------------------------------------------------------------------
 
+writer = pypdf.PdfWriter()
+writer.append(PDF_FILE, [0])
+
+with open(BASE_PATH + "exercise6.pdf", "wb") as file:
+    writer.write(file)
+
+EXERCISE6 = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/exercise6.pdf"
+
+writer = pypdf.PdfWriter()
+writer.append(PDF_FILE, [1])
+with open(BASE_PATH + "exercise6a.pdf", "wb") as file:
+    writer.write(file)
+
+EXERCISE6a = (
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/exercise6a.pdf"
+)
+
 
 # ----------------------------------------------------------------------
 # 🟡 7: MERGE MULTIPLE PDFS
@@ -176,6 +195,12 @@ except Exception as e:
 # 5. Close the merger properly
 # ----------------------------------------------------------------------
 
+writer = pypdf.PdfWriter()
+writer.append(EXERCISE6)
+writer.append(EXERCISE6a)
+
+with open(BASE_PATH + "exercise7.pdf", "wb") as file:
+    writer.write(file)
 
 # ----------------------------------------------------------------------
 # 🟡 8: EXTRACT SPECIFIC PAGES
@@ -190,6 +215,14 @@ except Exception as e:
 # 5. Verify the new PDF has correct number of pages
 # ----------------------------------------------------------------------
 
+writer = pypdf.PdfWriter()
+EXERCISE8 = BASE_PATH + "exercise8.pdf"
+
+writer.append(PDF_FILE, [2, 4])
+with open(EXERCISE8, "wb") as file:
+    writer.write(file)
+
+assert len(pypdf.PdfReader(EXERCISE8).pages) == 2
 
 # ----------------------------------------------------------------------
 # 🟡 9: ROTATE PAGES
@@ -204,6 +237,12 @@ except Exception as e:
 # 5. Save and verify rotation worked
 # ----------------------------------------------------------------------
 
+writer = pypdf.PdfWriter()
+writer.append(PDF_FILE, [10])
+writer.pages[0].rotate(90)
+
+with open(BASE_PATH + "exercise10.pdf", "wb") as file:
+    writer.write(file)
 
 # ----------------------------------------------------------------------
 # 🟡 10: SPLIT A PDF
@@ -218,6 +257,14 @@ except Exception as e:
 # 5. Count total files created
 # ----------------------------------------------------------------------
 
+writer = pypdf.PdfWriter()
+
+total_pages = len(pypdf.PdfReader(PDF_FILE).pages)
+for i in range(total_pages):
+    with open(BASE_PATH + f"/exercise10/page_{i+1}.pdf", "wb") as f:
+        aux_writer = pypdf.PdfWriter()
+        aux_writer.append(PDF_FILE, [i])
+        aux_writer.write(f)
 
 # ----------------------------------------------------------------------
 # 🟡 11: ENCRYPT A PDF
