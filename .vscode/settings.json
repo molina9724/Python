@@ -16,5 +16,6 @@
             "database": "${workspaceFolder:Python}/Book/chapter16/example.db",
             "name": "chapter16-example"
         }
-    ]
+    ],
+    "python.analysis.autoImportCompletions": true
 }

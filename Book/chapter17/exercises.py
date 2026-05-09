@@ -1,5 +1,5 @@
-import pypdf
 import pdfminer.high_level
+import pypdf
 
 reader = pypdf.PdfReader(
     "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/Recursion_Chapter1.pdf"
