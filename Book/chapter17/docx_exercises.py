@@ -9,6 +9,7 @@ from datetime import datetime
 
 import docx
 import requests
+from docx.shared import Cm, Inches
 
 # ----------------------------------------------------------------------
 # 🟢 13: CREATE A NEW WORD DOCUMENT
@@ -266,6 +267,12 @@ doc.save(PATH_FILE)
 # 5. Add a new row to the table
 # ----------------------------------------------------------------------
 
+new_column = table.add_column(width=Inches(2))
+
+for cell in new_column.cells:
+    cell.text = "NEW"
+
+doc.save(PATH_FILE)
 
 # ----------------------------------------------------------------------
 # 🟡 25: ADD IMAGES
@@ -281,6 +288,13 @@ doc.save(PATH_FILE)
 # 6. Save and verify image appears
 # ----------------------------------------------------------------------
 
+doc.add_picture(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/zophie.png",
+    width=Cm(5),
+    height=Cm(10),
+)
+
+doc.save(PATH_FILE)
 
 # ----------------------------------------------------------------------
 # 🟡 26: ADD PAGE BREAKS
@@ -294,4 +308,6 @@ doc.save(PATH_FILE)
 # 4. Add content that should appear on page 2
 # 5. Add another page break and more content
 # 6. Save and verify page breaks work
+# ----------------------------------------------------------------------
+# ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
