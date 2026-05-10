@@ -4,17 +4,15 @@
 # Practice exercises - Write everything from scratch!
 # ======================================================================
 
-import pytest
-from pathlib import Path
 import datetime
-import webbrowser
-
-from playwright.sync_api import Page, expect, sync_playwright, Playwright
-from pathlib import Path
 import re
-import pytest
-import sys
 import shutil
+import sys
+import webbrowser
+from pathlib import Path
+
+import pytest
+from playwright.sync_api import Page, Playwright, expect, sync_playwright
 
 # =====================================================================
 #                    SECTION 1: BASIC FIXTURES
