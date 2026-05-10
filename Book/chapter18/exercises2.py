@@ -7,6 +7,7 @@
 
 import csv
 import json
+import re
 import xml.etree.ElementTree as ET
 
 # =====================================================================
@@ -113,6 +114,14 @@ print(data[1][0])
 # 5. Print the fieldnames attribute
 # ----------------------------------------------------------------------
 
+file = open(NAME_AGE_CITY)
+reader = csv.DictReader(file)
+
+for row in reader:
+    print(row)
+    print(row["Name"])
+    print(list(row.keys()))
+
 
 # ----------------------------------------------------------------------
 # 🟡 5: READ CSV WITH DIFFERENT DELIMITERS
@@ -127,6 +136,36 @@ print(data[1][0])
 # 5. Print results to verify correct parsing
 # ----------------------------------------------------------------------
 
+SEMICOLON_FILE_PATH = open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/semicolon.csv", "w"
+)
+semicolon_writer = csv.writer(SEMICOLON_FILE_PATH, delimiter=";")
+semicolon_writer.writerow([1, 1, 1])
+semicolon_writer.writerow([2, 2, 2])
+SEMICOLON_FILE_PATH.close()
+
+SEMICOLON_FILE_PATH = open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/semicolon.csv", "r"
+)
+semicolon_reader = csv.reader(SEMICOLON_FILE_PATH, delimiter=";")
+for row in semicolon_reader:
+    print(row)
+
+
+TAB_FILE_PATH = open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/tab.csv", "w"
+)
+tab_writer = csv.writer(TAB_FILE_PATH, delimiter="\t")
+tab_writer.writerow([1, 1, 1])
+tab_writer.writerow([2, 2, 2])
+TAB_FILE_PATH.close()
+
+TAB_FILE_PATH = open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/tab.csv", "r"
+)
+tab_reader = csv.reader(TAB_FILE_PATH, delimiter="\t")
+for row in tab_reader:
+    print(row)
 
 # ----------------------------------------------------------------------
 # 🟡 6: HANDLE CSV WITH QUOTES
@@ -142,6 +181,20 @@ print(data[1][0])
 # 5. Print each field separately to verify
 # ----------------------------------------------------------------------
 
+COMMA_FILE_PATH = open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/comma.csv", "w"
+)
+coma_writer = csv.writer(COMMA_FILE_PATH, delimiter=",")
+coma_writer.writerow(["Smith, John", 25, "New York", "NY"])
+coma_writer.writerow(["John, Smith", 20, "Los Angeles", "LA"])
+COMMA_FILE_PATH.close()
+
+COMMA_FILE_PATH = open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/comma.csv", "r"
+)
+comma_reader = csv.reader(COMMA_FILE_PATH, delimiter=",")
+for row in comma_reader:
+    print(row)
 
 # =====================================================================
 #                    SECTION 2: CSV BASICS - WRITING
@@ -162,6 +215,21 @@ print(data[1][0])
 # 6. Close and verify the file contents
 # ----------------------------------------------------------------------
 
+header = ["name", "age", "city"]
+data = [
+    ["Alice", "31", "New York"],
+    ["Bob", "27", "London"],
+    ["Charlie", "22", "Paris"],
+    ["Diana", "29", "Berlin"],
+    ["Ethan", "34", "Toronto"],
+]
+
+with open(FILE_PATH, "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(header)
+    writer.writerows(data)
+    # for row in data:
+    #     writer.writerow(row)
 
 # ----------------------------------------------------------------------
 # 🟢 8: WRITE MULTIPLE ROWS AT ONCE
@@ -191,6 +259,18 @@ print(data[1][0])
 # 6. Verify output file
 # ----------------------------------------------------------------------
 
+list_of_dict = [
+    {"Name": "Al", "Number": 1},
+    {"Name": "Carl", "Number": 2},
+    {"Name": "Sagan", "Number": 3},
+]
+
+with open(FILE_PATH, "w", newline="") as file:
+    dict_writer = csv.DictWriter(file, ["Name", "Number"])
+    dict_writer.writeheader()
+
+    for dict in list_of_dict:
+        dict_writer.writerow(dict)
 
 # ----------------------------------------------------------------------
 # 🟡 10: CONTROL CSV FORMATTING
