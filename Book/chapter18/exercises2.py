@@ -285,6 +285,16 @@ with open(FILE_PATH, "w", newline="") as file:
 # 5. Compare the output files
 # ----------------------------------------------------------------------
 
+with open(FILE_PATH, "w", newline="") as file:
+    dict_writer = csv.DictWriter(file, ["Name", "Number"], quoting=csv.QUOTE_ALL)
+    dict_writer = csv.DictWriter(file, ["Name", "Number"], quoting=csv.QUOTE_MINIMAL)
+    dict_writer = csv.DictWriter(file, ["Name", "Number"], quoting=csv.QUOTE_NONNUMERIC)
+
+    dict_writer.writeheader()
+
+    for dict in list_of_dict:
+        dict_writer.writerow(dict)
+
 
 # ----------------------------------------------------------------------
 # 🟡 11: APPEND TO EXISTING CSV
@@ -299,6 +309,16 @@ with open(FILE_PATH, "w", newline="") as file:
 # 5. Read and print all data to verify
 # ----------------------------------------------------------------------
 
+with open(FILE_PATH, "a", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Append", 4])
+    writer.writerow(["Append", 5])
+    writer.writerow(["Append", 6])
+
+with open(FILE_PATH, "r", newline="") as file:
+    reader = csv.reader(file)
+    for row in file:
+        print(row)
 
 # =====================================================================
 #                    SECTION 3: CSV DATA PROCESSING
@@ -318,6 +338,42 @@ with open(FILE_PATH, "w", newline="") as file:
 # 5. Print count of filtered vs original rows
 # ----------------------------------------------------------------------
 
+PRODUCT_PRICE_QUANTITY = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/product_price_quantity.csv"
+with open(PRODUCT_PRICE_QUANTITY, "w", newline="") as file:
+    data = [
+        ["Product", "Price", "Quantity"],  # Header row
+        ["Apple", "60", "10"],
+        ["Banana", "30", "25"],
+        ["Carrot", "40", "18"],
+        ["Dates", "180", "7"],
+        ["Eggplant", "120", "12"],
+    ]
+
+    writer = csv.writer(file)
+    writer.writerows(data)
+
+over_50 = list()
+with open(PRODUCT_PRICE_QUANTITY, "r", newline="") as file:
+    dict_reader = csv.DictReader(file)
+    for row in dict_reader:
+        try:
+            if float(row["Price"]) >= 50:
+                over_50.append(row)
+        except ValueError:
+            pass
+
+print(over_50)
+
+OVER_50_FILE = (
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/over_50_file.csv"
+)
+with open(OVER_50_FILE, "w", newline="") as file:
+    dict_writer = csv.DictWriter(file, ["Product", "Price", "Quantity"])
+    dict_writer.writeheader()
+
+    dict_writer.writerows(row for row in over_50)
+    # for dict in over_50:
+    #     dict_writer.writerow(dict)
 
 # ----------------------------------------------------------------------
 # 🟡 13: TRANSFORM CSV DATA
@@ -332,6 +388,27 @@ with open(FILE_PATH, "w", newline="") as file:
 # 5. Verify the calculations are correct
 # ----------------------------------------------------------------------
 
+PRODUCT_PRICE_QUANTITY = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/product_price_quantity.csv"
+EXERCISE_13 = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/13.csv"
+
+# Read, compute, and write with headers using DictReader/DictWriter
+with open(PRODUCT_PRICE_QUANTITY, "r", newline="") as infile, open(
+    EXERCISE_13, "w", newline=""
+) as outfile:
+    reader = csv.DictReader(infile)
+    # Define new fieldnames, including "Total"
+    fieldnames = reader.fieldnames + ["Total"]  # type: ignore
+    writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+    writer.writeheader()
+    for row in reader:
+        try:
+            # Calculate total (convert fields from string)
+            total = float(row["Price"]) * int(row["Quantity"])
+        except (ValueError, KeyError):
+            total = ""  # Optionally, handle missing/bad data gracefully
+        row["Total"] = str(total)
+        writer.writerow(row)
+
 
 # ----------------------------------------------------------------------
 # 🟡 14: SORT CSV DATA
@@ -345,7 +422,26 @@ with open(FILE_PATH, "w", newline="") as file:
 # 4. Sort in descending order
 # 5. Write sorted data to a new file
 # ----------------------------------------------------------------------
+fieldnames = list()
 
+with open(EXERCISE_13, "r", newline="") as file:
+    dict_reader = csv.DictReader(file)
+    fieldnames = dict_reader.fieldnames
+
+    data = list(dict_reader)
+
+    data.sort(reverse=True, key=lambda x: float(x["Total"]))
+    sorted_by_total = data
+
+    data.sort(reverse=True, key=lambda x: x["Product"])
+    sorted_by_reverse_alphabet = data
+
+EXERCISE_14 = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/14.csv"
+with open(EXERCISE_14, "w", newline="") as file:
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+    writer.writeheader()
+
+    writer.writerows(data)
 
 # ----------------------------------------------------------------------
 # 🟡 15: MERGE CSV FILES
@@ -359,6 +455,36 @@ with open(FILE_PATH, "w", newline="") as file:
 # 4. Write combined data to a new file
 # 5. Verify row counts: file1 + file2 = merged (minus 1 header)
 # ----------------------------------------------------------------------
+
+EXERCISE_14_COPY = (
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/14_copy.csv"
+)
+MERGE = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/merge.csv"
+
+with open(EXERCISE_14, "r", newline="") as file, open(
+    EXERCISE_14_COPY, "r", newline=""
+) as copy_file, open(MERGE, "w", newline="") as merge:
+    file_reader = csv.reader(file)
+    copy_reader = csv.reader(copy_file)
+
+    file_data = list(file_reader)
+    copy_data = list(copy_reader)
+
+    merge_writer = csv.writer(merge)
+
+    results = list()
+    for file_row, copy_row in zip(file_data, copy_data):
+        row = list()
+        for x, y in zip(file_row, copy_row):
+            try:
+                result = float(x) + float(y)
+            except ValueError:
+                result = x
+            finally:
+                row.append(result)
+        results.append(row)
+
+    merge_writer.writerows(results)
 
 
 # =====================================================================
