@@ -1,0 +1,28 @@
+{
+  "name": "John",
+  "age": 30,
+  "city": "New York",
+  "grades": [85, 90, 92],
+  "isStudent": false,
+  "address": {
+    "street": "123 Main St",
+    "zip": "10001",
+    "country": "USA",
+    "coordinates": {
+      "latitude": 40.7128,
+      "longitude": -74.006
+    },
+    "previous_addresses": [
+      {
+        "street": "456 Elm St",
+        "zip": "10002",
+        "country": "USA"
+      },
+      {
+        "street": "789 Oak St",
+        "zip": "10003",
+        "country": "USA"
+      }
+    ]
+  }
+}
