@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 json_string = '{"name": "Alice Doe", "age": 30, "car": null, "programmer": true, "address": {"street": "100 Larkin St.", "city": "San Francisco", "zip": "94102"}, "phone": [{"type": "mobile", "number": "415-555-7890"}, {"type":  "work", "number": "415-555-1234"}]}'
 python_data = json.loads(json_string)
@@ -124,6 +125,22 @@ with open(
 # 5. Find a specific item in the list
 # ----------------------------------------------------------------------
 
+data = [
+    {"name": "Alice"},
+    {"name": "Bob"},
+]
+
+FILE_19 = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/file_19.json"
+with open(FILE_19, "w") as file:
+    file.write(json.dumps(data))
+
+with open(FILE_19, "r") as file:
+    data = json.load(file)
+    for dict in data:
+        for key, value in dict.items():
+            print(key, value)
+    print(data[0]["name"])
+    print(data[1])
 
 # ----------------------------------------------------------------------
 # 🟡 20: HANDLE JSON ERRORS
@@ -137,6 +154,15 @@ with open(
 # 4. Print a helpful error message
 # 5. Test with several types of invalid JSON
 # ----------------------------------------------------------------------
+
+from json import JSONDecodeError
+
+wrong_string = '{"name":"CJ", "age":}'
+
+try:
+    file = json.loads(wrong_string)
+except JSONDecodeError as e:
+    print(f"There's and error my friend, {e}")
 
 
 # =====================================================================
@@ -157,6 +183,10 @@ with open(
 # 5. Try with a list of dictionaries
 # ----------------------------------------------------------------------
 
+my_dict = {"name": "CJ", "age": None}
+json_string = json.dumps(my_dict)
+
+print(json_string)
 
 # ----------------------------------------------------------------------
 # 🟢 22: WRITE JSON TO FILE
@@ -171,6 +201,20 @@ with open(
 # 5. Open the file in a text editor to verify
 # ----------------------------------------------------------------------
 
+data = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    {
+        "name": "Charles",
+    },
+]
+
+FILE_22 = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/file_22.json"
+with open(FILE_22, "w") as file:
+    file.write(json.dumps(data))
 
 # ----------------------------------------------------------------------
 # 🟡 23: FORMAT JSON OUTPUT
@@ -184,6 +228,29 @@ with open(
 # 4. Convert with indent=4
 # 5. Compare readability of each output
 # ----------------------------------------------------------------------
+
+nested_dict = {
+    "name": "Charles",
+    "grades": [
+        1,
+        2,
+        3,
+        4,
+        5,
+    ],
+    "colors": [
+        "Blue",
+        "Red",
+    ],
+}
+
+default_json = json.dumps(nested_dict)
+json_2 = json.dumps(nested_dict, indent=2)
+json_4 = json.dumps(nested_dict, indent=4)
+
+print(default_json)
+print(json_2)
+print(json_4)
 
 
 # ----------------------------------------------------------------------
@@ -199,6 +266,12 @@ with open(
 # 5. Compare file sizes of formatted vs compact
 # ----------------------------------------------------------------------
 
+ordered_json = json.dumps(nested_dict, sort_keys=True, separators=("Y", "X"))
+print(ordered_json)
+
+ordered_json = json.dumps(nested_dict, sort_keys=True, separators=(",", ":"))
+print(ordered_json)
+
 
 # ----------------------------------------------------------------------
 # 🟡 25: HANDLE NON-SERIALIZABLE DATA
@@ -212,3 +285,9 @@ with open(
 # 4. Use the default parameter to fix serialization
 # 5. Verify the JSON output contains the date as string
 # ----------------------------------------------------------------------
+
+datetime_object = datetime.now()
+my_dict = {"time": datetime_object, "name": "CJ"}
+
+json_string = json.dumps(my_dict, default=str)
+print(json_string)
