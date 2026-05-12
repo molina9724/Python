@@ -1,0 +1,32 @@
+<person>
+  <name>John</name>
+  <age>30</age>
+  <city>New York</city>
+  <grades>
+    <grade>85</grade>
+    <grade>90</grade>
+    <grade>92</grade>
+  </grades>
+  <isStudent>false</isStudent>
+  <address>
+    <street>123 Main St</street>
+    <zip>10001</zip>
+    <country>USA</country>
+    <coordinates>
+      <latitude>40.7128</latitude>
+      <longitude>-74.006</longitude>
+    </coordinates>
+    <previous_addresses>
+      <address>
+        <street>456 Elm St</street>
+        <zip>10002</zip>
+        <country>USA</country>
+      </address>
+      <address>
+        <street>789 Oak St</street>
+        <zip>10003</zip>
+        <country>USA</country>
+      </address>
+    </previous_addresses>
+  </address>
+</person>
