@@ -131,8 +131,9 @@ print(f" With subchildren: {plus_sub_children}")
 
 addresses = root.find("address").find("previous_addresses").findall("address")
 
-for addres in addresses:
-    print(addres.find("street").text)
+if addresses is not None:
+    for address in addresses:
+        print(address.find("street").text)
 
 # ----------------------------------------------------------------------
 # 🟡 28: ACCESS ELEMENT ATTRIBUTES
@@ -149,6 +150,21 @@ for addres in addresses:
 # ----------------------------------------------------------------------
 
 
+xml_string = """<book id="1" category="fiction">
+  <title>The Great Gatsby</title>
+  <author>F. Scott Fitzgerald</author>
+</book>"""
+
+root = ET.fromstring(xml_string)
+print(root.attrib["id"])
+print(root.attrib["category"])
+
+print(root.get("id"))
+print(root.get("category"))
+
+print(root.get("MSO", default="null"))
+
+
 # ----------------------------------------------------------------------
 # 🟡 29: FIND ELEMENTS
 #
@@ -162,6 +178,28 @@ for addres in addresses:
 # 5. Find elements with specific tags at any depth
 # ----------------------------------------------------------------------
 
+tree = ET.parse(FILE_PATH)
+root = tree.getroot()
+
+print("------------------------")
+
+grades = root.find("grades")
+for el in grades:
+    print(el.text)
+
+previous_addresses = root.find("address").find("previous_addresses")
+# Once you have the object you need to look inside of it
+all_addresses = previous_addresses.findall("address")
+
+print(all_addresses)
+
+for address in all_addresses:
+    print(address.find("zip").text)
+
+for element in root.iter():
+    print(element.tag, element.text)
+
+print(root.find("name").text)
 
 # ----------------------------------------------------------------------
 # 🟡 30: ACCESS ELEMENT TEXT
@@ -195,6 +233,22 @@ for addres in addresses:
 # 5. Print the XML structure
 # ----------------------------------------------------------------------
 
+house = ET.Element("house")
+
+color = ET.SubElement(house, "color")
+color.text = "white"
+
+floor = ET.SubElement(house, "floor")
+floor.text = "second"
+
+house.set("id", "1")
+house.set("owner", "CJ")
+
+print(house.attrib)
+print(house.attrib["id"])
+print(house.attrib["owner"])
+
+print(ET.tostring(house))
 
 # ----------------------------------------------------------------------
 # 🟡 32: WRITE XML TO FILE
@@ -209,6 +263,16 @@ for addres in addresses:
 # 5. Add XML declaration with encoding
 # ----------------------------------------------------------------------
 
+my_string = ET.tostring(house)
+
+root = ET.fromstring(my_string)
+
+tree = ET.ElementTree(root)
+tree.write(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/my_xml.xml",
+    encoding="UTF-8",
+    xml_declaration=True,
+)
 
 # ----------------------------------------------------------------------
 # 🟡 33: MODIFY EXISTING XML
@@ -223,6 +287,17 @@ for addres in addresses:
 # 5. Save the modified XML to a new file
 # ----------------------------------------------------------------------
 
+tree = ET.parse(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/my_xml.xml"
+)
+root = tree.getroot()
+
+tree.find("color").text = "black"
+tree.find("floor").text = "first"
+
+tree.write(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/my_modified_xml.xml"
+)
 
 # ----------------------------------------------------------------------
 # 🟡 34: ADD AND REMOVE ELEMENTS
