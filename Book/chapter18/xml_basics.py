@@ -312,3 +312,28 @@ tree.write(
 # 5. Remove an element
 # 6. Save the modified XML
 # ----------------------------------------------------------------------
+
+FILE_PATH = (
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/my_modified_xml.xml"
+)
+
+tree = ET.parse(FILE_PATH)
+root = tree.getroot()
+
+child = ET.Element("NewNode")
+root.append(child)
+
+ceiling = ET.Element("ceiling")
+print(type(ceiling))
+ceiling.text = "blue"
+root.insert(0, ceiling)
+
+floor = root.find("floor")
+print(type(floor))
+if floor is not None:
+    root.remove(floor)
+root.remove(ceiling)
+
+tree.write(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/my_modified2_xml.xml"
+)
