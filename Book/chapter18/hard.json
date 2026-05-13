@@ -1,0 +1,34 @@
+{
+  "Items": [
+    {
+      "Price": "60",
+      "Product": "Apple",
+      "Quantity": "10",
+      "Total": "600.0"
+    },
+    {
+      "Price": "30",
+      "Product": "Banana",
+      "Quantity": "25",
+      "Total": "750.0"
+    },
+    {
+      "Price": "40",
+      "Product": "Carrot",
+      "Quantity": "18",
+      "Total": "720.0"
+    },
+    {
+      "Price": "180",
+      "Product": "Dates",
+      "Quantity": "7",
+      "Total": "1260.0"
+    },
+    {
+      "Price": "120",
+      "Product": "Eggplant",
+      "Quantity": "12",
+      "Total": "1440.0"
+    }
+  ]
+}
