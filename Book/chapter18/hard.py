@@ -38,11 +38,11 @@ with open(CSV_WITH_HEADERS, "r") as csv_file:
         reader = csv.DictReader(csv_file)
         data = [row for row in reader]
 
-my_dict = {"Items": data}
+values = {"Items": data}
 
 JSON_HARD = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/hard.json"
 with open(JSON_HARD, "w", encoding="UTF-8") as json_file:
-    json_file.write(json.dumps(my_dict, default=str, indent=2, sort_keys=True))
+    json_file.write(json.dumps(values, default=str, indent=2, sort_keys=True))
 
 # ----------------------------------------------------------------------
 # 🔴 36: JSON TO CSV CONVERTER
@@ -57,6 +57,21 @@ with open(JSON_HARD, "w", encoding="UTF-8") as json_file:
 # 5. Handle missing keys in some objects
 # 6. Add option to specify column order
 # ----------------------------------------------------------------------
+
+with open(JSON_HARD, "r") as json_file:
+    json_data = json.load(json_file)
+
+clean_data = json_data["Items"]
+header = list(clean_data[0].keys())
+# header = sorted({key for row in clean_data for key in row})
+values = [[row[col] for col in header] for row in clean_data]
+
+with open("json_to_csv.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(header)
+
+    for row in values:
+        writer.writerow(row)
 
 
 # ----------------------------------------------------------------------
@@ -73,6 +88,47 @@ with open(JSON_HARD, "w", encoding="UTF-8") as json_file:
 # 6. Support nested element data
 # ----------------------------------------------------------------------
 
+import xml.etree.ElementTree as ET
+
+XML_FILE = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/xml_test.xml"
+tree = ET.parse(XML_FILE)
+root = tree.getroot()
+
+fields = {
+    "name": "Name",
+    "grades": "Grades",
+}
+
+values = dict()
+
+for key, value in fields.items():
+    element = root.find(key)
+
+    category = list(element)
+    if category:
+        values[element.tag] = []
+        for elements in category:
+            values[element.tag].append(elements.text)
+    else:
+        values[element.tag] = element.text
+
+print(values)
+
+with open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/xml_to_csv.csv",
+    "w",
+    newline="",
+) as file:
+    header = list(values.keys())
+
+    writer = csv.writer(file)
+    writer.writerow(header)
+
+    for key, value in values.items():
+        if isinstance(value, list):
+            for row in value:
+                print(row)
+                writer.writerow([values["name"], row])
 
 # ----------------------------------------------------------------------
 # 🔴 38: CONFIG FILE MANAGER
