@@ -41,7 +41,7 @@ with open(CSV_WITH_HEADERS, "r") as csv_file:
 values = {"Items": data}
 
 JSON_HARD = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/hard.json"
-with open(JSON_HARD, "w", encoding="UTF-8") as json_file:
+with open(JSON_HARD, mode="w", encoding="UTF-8") as json_file:
     json_file.write(json.dumps(values, default=str, indent=2, sort_keys=True))
 
 # ----------------------------------------------------------------------
@@ -144,6 +144,41 @@ with open(
 # 6. Validate config values when loading
 # ----------------------------------------------------------------------
 
+default_config = {
+    "host": "localhost",
+    "port": 5342,
+    "database": "default",
+}
+
+file_path = (
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/exercise_38.json"
+)
+
+
+def save_config_to_json(config: dict, file_path: str):
+    with open(file_path, "w", newline="", encoding="UTF-8") as json_file:
+        json_file.write(json.dumps(config))
+
+
+def load_json_config(file_path: str):
+    with open(file_path, "r", newline="", encoding="UTF-8") as json_file:
+        config = json.load(json_file)
+        return config
+
+
+def modify_json_config(file_path: str, param: str, value: str):
+    with open(file_path, "r", newline="", encoding="UTF-8") as json_file:
+        config = json.load(json_file)
+        config[param] = value
+
+    with open(file_path, "w", newline="", encoding="UTF-8") as json_file:
+        json_file.write(json.dumps(config))
+
+
+# save_config_to_json(default_config, file_path)
+# print(load_json_config(file_path))
+# modify_json_config(file_path, "host", "this_is_a_new_host")
+# print(load_json_config(file_path))
 
 # ----------------------------------------------------------------------
 # 🔴 39: CSV DATA ANALYZER
@@ -159,6 +194,40 @@ with open(
 # 6. Export filtered results to new CSV
 # ----------------------------------------------------------------------
 
+
+file = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/headers.csv"
+
+with open(file, "r", newline="", encoding="UTF-8") as file:
+    dict_reader = csv.DictReader(file)
+
+    total_revenue = 0
+    best_selling_product = None
+    quantity = 0
+
+    sales = dict()
+
+    for row in dict_reader:
+        total_revenue += float(row["Price"]) * float(row["Quantity"])
+
+        if float(row["Quantity"]) > quantity:
+            quantity = float(row["Quantity"])
+            best_selling_product = row["Fruit"]
+
+        if row["Timestamp"] not in sales:
+            sales[row["Timestamp"]] = float(row["Price"]) * float(row["Quantity"])
+        else:
+            sales[row["Timestamp"]] += float(row["Price"]) * float(row["Quantity"])
+
+    print(total_revenue)
+    print(best_selling_product)
+    print(sales)
+
+json_dict = {}
+json_dict["Sales"] = sales
+
+json_file = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter18/sales.json"
+with open(json_file, "w", encoding="UTF-8", newline="") as file:
+    file.write(json.dumps(json_dict, indent=2))
 
 # ----------------------------------------------------------------------
 # 🔴 40: ADDRESS BOOK (JSON)
