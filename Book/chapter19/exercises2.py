@@ -153,6 +153,17 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Create a datetime for your birthday
 # ----------------------------------------------------------------------
 
+import datetime
+
+my_date = datetime.datetime(1997, 1, 24, 6, 6, 6)
+print(my_date.year)
+print(my_date.month)
+print(my_date.day)
+print(my_date.hour)
+print(my_date.minute)
+print(my_date.second)
+
+print(my_date)
 
 # ----------------------------------------------------------------------
 # 🟢 7: GET CURRENT DATE AND TIME
@@ -167,6 +178,16 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Compare now() with today() - what's the difference?
 # ----------------------------------------------------------------------
 
+now = datetime.datetime.now()
+print(now)
+print(now.date())
+print(now.time())
+
+today = datetime.datetime.today()
+print(today)
+
+print(type(now))
+print(type(today))
 
 # ----------------------------------------------------------------------
 # 🟢 8: WORK WITH DATES ONLY
@@ -181,6 +202,14 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Print the day name using strftime('%A')
 # ----------------------------------------------------------------------
 
+today = datetime.date.today()
+print(today)
+print(today.year)
+print(today.month)
+print(today.day)
+
+print(today.weekday())
+print(datetime.date.strftime(today, "%A"))
 
 # ----------------------------------------------------------------------
 # 🟢 9: WORK WITH TIMES ONLY
@@ -195,6 +224,18 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Format the time as "HH:MM AM/PM"
 # ----------------------------------------------------------------------
 
+my_time = datetime.time(14, 30)
+full_time = datetime.time(1, 2, 3, 4)
+
+print(my_time.hour)
+print(my_time.minute)
+print(my_time.second)
+print(my_time.microsecond)
+
+print(my_time >= full_time)
+
+print(my_time.strftime("%I:%M:%S %p"))
+print(full_time.strftime("%I:%M:%S %p"))
 
 # ----------------------------------------------------------------------
 # 🟡 10: FORMAT DATETIME WITH STRFTIME
@@ -209,6 +250,15 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Include day name and month name in your format
 # ----------------------------------------------------------------------
 
+now = datetime.datetime.now()
+print(now.isoformat())
+print(now.strftime("%m/%d/%y %H:%M %p"))
+
+five_hours = datetime.timedelta(hours=10)
+now = now + five_hours
+
+print(now.strftime("%d/%m/%y %H:%M"))
+print(now.strftime("%B %d(%A), %Y"))
 
 # ----------------------------------------------------------------------
 # 🟡 11: PARSE STRINGS TO DATETIME
@@ -223,6 +273,17 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Handle a parsing error with try/except
 # ----------------------------------------------------------------------
 
+string_date = "2024-01-15"
+my_date = datetime.datetime.strptime(string_date, "%Y-%m-%d")
+print(my_date)
+
+string_date2 = "January 15, 2024"
+my_date2 = datetime.datetime.strptime(string_date2, "%B %d, %Y")
+print(my_date2)
+
+string_date3 = "01/15/2024 2:30 PM"
+my_date3 = datetime.datetime.strptime(string_date3, "%m/%d/%Y %I:%M %p")
+print(my_date3)
 
 # =====================================================================
 #                    SECTION 3: TIMEDELTA AND DATE ARITHMETIC
@@ -242,6 +303,15 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Access total_seconds() method
 # ----------------------------------------------------------------------
 
+seven_days = datetime.timedelta(days=7)
+two_hours = datetime.timedelta(hours=2)
+custom = datetime.timedelta(weeks=1, days=3, hours=4)
+
+print(seven_days)
+print(two_hours)
+print(custom)
+
+print(two_hours.total_seconds())
 
 # ----------------------------------------------------------------------
 # 🟢 13: ADD AND SUBTRACT TIME
@@ -256,6 +326,19 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Find what day of the week it will be in 100 days
 # ----------------------------------------------------------------------
 
+now = datetime.datetime.now()
+
+seven_days = datetime.timedelta(days=7)
+print(f"{now-seven_days}")
+
+thirty_days = datetime.timedelta(days=30)
+print(f"{now-thirty_days}")
+
+custom = datetime.timedelta(hours=2, minutes=30)
+print(f"{now-custom}")
+
+hundred_days = datetime.timedelta(days=100)
+print(datetime.datetime.strftime(now - hundred_days, "%A"))
 
 # ----------------------------------------------------------------------
 # 🟡 14: CALCULATE TIME DIFFERENCES
@@ -270,6 +353,17 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Calculate days until your next birthday
 # ----------------------------------------------------------------------
 
+start = datetime.datetime(1997, 1, 24)
+end = datetime.datetime(2012, 12, 26)
+
+delta = end - start
+print(delta.days)
+print(delta.total_seconds())
+
+now = datetime.datetime.now()
+next_birthday = datetime.datetime(2027, 1, 24)
+
+print(next_birthday - now)
 
 # ----------------------------------------------------------------------
 # 🟡 15: COMPARE DATES AND TIMES
@@ -284,6 +378,31 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Sort a list of datetime objects
 # ----------------------------------------------------------------------
 
+custom1 = datetime.datetime(1800, 1, 1)
+custom2 = datetime.datetime(1900, 1, 1)
+
+print(custom1 <= custom2)
+print(custom1 == custom2)
+
+if custom1 < now:
+    print("Forget it, it's the past")
+elif custom1 > now:
+    print("Relax, it's the future")
+else:
+    print("Get you ass to work right now")
+
+dates = list()
+dates.append(custom2)
+dates.append(custom1)
+dates.append(now)
+print(dates)
+
+print(custom1)
+print(custom2)
+print(now)
+
+new_one = sorted(dates, reverse=True)
+print(new_one)
 
 # ----------------------------------------------------------------------
 # 🟡 16: WORK WITH TIME ZONES (BASIC)
@@ -298,6 +417,14 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Print time with timezone information
 # ----------------------------------------------------------------------
 
+from datetime import datetime, timedelta, timezone
+
+dt_utc = datetime.now(tz=timezone.utc)
+tz_plus_2 = timezone(timedelta(hours=2))
+
+dt_plus_2 = dt_utc.astimezone(tz_plus_2)
+print(dt_utc)
+print(dt_plus_2)
 
 # =====================================================================
 #                    SECTION 4: PRACTICAL TIME APPLICATIONS
@@ -317,6 +444,12 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Format as minutes:seconds.milliseconds
 # ----------------------------------------------------------------------
 
+# input("Press ENTER")
+# start = time.time()
+# input("Press ENTER to stop")
+# finish = time.time()
+# print(finish - start)
+
 
 # ----------------------------------------------------------------------
 # 🟡 18: CREATE A COUNTDOWN TIMER
@@ -331,6 +464,16 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Handle keyboard interrupt gracefully
 # ----------------------------------------------------------------------
 
+import subprocess
+
+# count_down = 5
+
+# for index in range(count_down):
+#     print(count_down - index)
+#     time.sleep(1)
+# subprocess.run(
+#     ["open", "/Users/daniel_molina/Downloads/Python/Python/Book/chapter19/alarm.wav"]
+# )
 
 # ----------------------------------------------------------------------
 # 🟡 19: LOG TIMESTAMPS
@@ -379,6 +522,12 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Print whether the command succeeded
 # ----------------------------------------------------------------------
 
+subprocess.run(["echo", "Hello"])
+subprocess.run(["ls", "-l"])
+
+result = subprocess.run(["echo", "Hello"])
+if result.returncode == 0:
+    print("You did it")
 
 # ----------------------------------------------------------------------
 # 🟢 22: CAPTURE COMMAND OUTPUT
@@ -392,6 +541,13 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 4. Decode bytes to string using .decode()
 # 5. Use text=True parameter instead of manual decoding
 # ----------------------------------------------------------------------
+
+result = subprocess.run(["ls", "-l"], capture_output=True, text=False)
+# print(f"The command results are: {result.stdout}")
+# print(f"The command results are: {result.stdout.decode('UTF-8')}")
+
+result = subprocess.run(["ls", "-l"], capture_output=True, text=True)
+print(f"The command results are: {result.stdout}")
 
 
 # ----------------------------------------------------------------------
@@ -407,6 +563,7 @@ print(time.strftime("%A, %B %d, %Y", now))
 # 5. Handle commands that might fail
 # ----------------------------------------------------------------------
 
+subprocess.run(["echo", "Hello", "\n", "\t", "world"])
 
 # ----------------------------------------------------------------------
 # 🟡 24: HANDLE COMMAND ERRORS
