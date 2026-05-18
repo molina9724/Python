@@ -17,3 +17,5 @@ node_modules
 *.jpg
 *.tif
 lcov.info
+credentials.json
+token.json
