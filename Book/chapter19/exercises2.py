@@ -563,7 +563,8 @@ print(f"The command results are: {result.stdout}")
 # 5. Handle commands that might fail
 # ----------------------------------------------------------------------
 
-subprocess.run(["echo", "Hello", "\n", "\t", "world"])
+sub = subprocess.run(["echo", "Hello", "\n", "\t", "world"])
+print(sub.stderr)
 
 # ----------------------------------------------------------------------
 # 🟡 24: HANDLE COMMAND ERRORS
@@ -577,6 +578,18 @@ subprocess.run(["echo", "Hello", "\n", "\t", "world"])
 # 4. Use check=True to raise exception on error
 # 5. Handle CalledProcessError with try/except
 # ----------------------------------------------------------------------
+
+
+# print(sub)
+# print(sub.returncode)
+# print(sub.stderr)
+
+# try:
+#     sub = subprocess.run(
+#         ["ls", "non_existent_file"], capture_output=True, text=True, check=True
+#     )
+# except subprocess.CalledProcessError as e:
+#     print(f"There was an error with you command {e}")
 
 
 # ----------------------------------------------------------------------
@@ -606,6 +619,16 @@ subprocess.run(["echo", "Hello", "\n", "\t", "world"])
 # 5. Terminate a process that's taking too long
 # ----------------------------------------------------------------------
 
+# long_proc = subprocess.Popen(["sleep", "10"])
+# print("Process started")
+
+# while long_proc.poll() is None:
+#     print("Still running")
+#     time.sleep(2)
+
+
+# long_proc.wait()
+# print(f"Return code {long_proc.returncode}")
 
 # ----------------------------------------------------------------------
 # 🟡 27: OPEN FILES WITH DEFAULT APPLICATION
@@ -623,6 +646,26 @@ subprocess.run(["echo", "Hello", "\n", "\t", "world"])
 # 5. Handle the case where the file doesn't exist
 # ----------------------------------------------------------------------
 
+
+import sys
+
+OS = {
+    "win32": "start",
+    "darwin": "open",
+    "linux": "xdg-open",
+}
+
+
+def open_file(file_path: str):
+    platform = sys.platform
+    try:
+        subprocess.run([OS[platform], file_path], check=True)
+    except subprocess.CalledProcessError:
+        pass
+
+
+open_file("/Users/daniel_molina/Downloads/Python/Python/Book/chapter19/alarm.wav")
+open_file("/Users/daniel_molina/Downloads/Python/Python/Book/chapter19/alarm.wa")
 
 # ----------------------------------------------------------------------
 # 🟡 28: OPEN WEBSITES
@@ -806,6 +849,47 @@ subprocess.run(["echo", "Hello", "\n", "\t", "world"])
 # 5. Play a sound or show notification when timer ends
 # 6. Track number of completed pomodoros
 # ----------------------------------------------------------------------
+
+work_time = timedelta(minutes=25)
+break_time = timedelta(minutes=5)
+one_second = timedelta(seconds=1)
+flag = True
+
+test = timedelta(seconds=8)
+
+behavior = {
+    True: {
+        "timer": work_time,
+        "message": "Get to work",
+    },
+    False: {
+        "timer": break_time,
+        "message": "Get a rest",
+    },
+}
+
+pomodoro = 0
+
+print("Pomodoro begins")
+
+while True:
+    print(behavior[flag]["message"])
+    timer = behavior[flag]["timer"]
+
+    while timer > one_second:
+        time.sleep(1)
+        timer -= one_second
+        print(timer)
+    subprocess.run(
+        [
+            "open",
+            "/Users/daniel_molina/Downloads/Python/Python/Book/chapter19/alarm.wav",
+        ]
+    )
+    if flag:
+        pomodoro += 1
+
+    flag = not flag
 
 
 # ----------------------------------------------------------------------
@@ -1195,5 +1279,6 @@ subprocess.run(["echo", "Hello", "\n", "\t", "world"])
 #   - Use threading.Lock() for shared resources
 #   - Avoid race conditions
 #
+# ======================================================================
 # ======================================================================
 # ======================================================================
