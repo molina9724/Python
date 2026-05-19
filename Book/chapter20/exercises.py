@@ -88,5 +88,28 @@ import requests
 #     },
 # )
 
+resp = requests.get("https://ntfy.sh/my_notificatiobs/json?poll=1&since=10m")
 resp = requests.get("https://ntfy.sh/my_notificatiobs/json?poll=1")
 print(resp.text)
+
+import json
+
+notifications = list()
+for json_text in resp.text.splitlines():
+    notifications.append(json.loads(json_text))
+    print("--------------------")
+    print(json_text)
+
+
+print(notifications[0]["id"])
+print(notifications[0]["time"])
+print(notifications[0]["expires"])
+print(notifications[0]["message"])
+print(notifications[0]["title"])
+print(notifications[0]["topic"])
+
+print(resp.text.splitlines())
+print(type(resp.text))
+print(type(resp.text.splitlines()))
+
+print(notifications)
