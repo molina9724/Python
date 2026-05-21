@@ -196,13 +196,13 @@ print(ezgmail.summary(unread_threads))
 first_recent_thread: GmailThread = recent_threads[0]
 print(str(first_recent_thread))
 
-messages: list[GmailMessage] = first_recent_thread.messages
+my_list: list[GmailMessage] = first_recent_thread.messages
 
 print("---------------------------------------------")
 
-print(len(messages))
-print(messages[0].body)
-print(messages[1].body)
+print(len(my_list))
+print(my_list[0].body)
+# print(messages[1].body)
 
 # ----------------------------------------------------------------------
 # 🟡 9: ACCESS MESSAGE PROPERTIES
@@ -217,7 +217,7 @@ print(messages[1].body)
 # 5. Print the timestamp (it's a datetime object)
 # ----------------------------------------------------------------------
 
-first_message = messages[0]
+first_message = my_list[0]
 print(first_message.subject)
 print(first_message.body)
 print(first_message.sender)
@@ -240,8 +240,8 @@ print("-----------------------------------------------------")
 
 total_messages = 0
 for thread in recent_threads:
-    for message in thread.messages:
-        print(message.subject, message.sender)
+    for my_message in thread.messages:
+        print(my_message.subject, my_message.sender)
         total_messages += 1
 
 print(total_messages)
@@ -271,8 +271,8 @@ print(len(free_threads))
 print(ezgmail.summary(free_threads))
 
 for thread in free_threads:
-    for message in thread.messages:
-        print(message.subject, message.timestamp)
+    for my_message in thread.messages:
+        print(my_message.subject, my_message.timestamp)
 
 # ----------------------------------------------------------------------
 # 🟡 12: USE SEARCH OPERATORS
@@ -343,10 +343,10 @@ print(len(last_week))
 
 with_attch = ezgmail.search("has:attachment")
 for thread in with_attch:
-    for message in thread.messages:
-        if message.attachments:
-            print(message.attachments)
-            message.downloadAllAttachments("/Users/daniel_molina/Downloads/test")
+    for my_message in thread.messages:
+        if my_message.attachments:
+            print(my_message.attachments)
+            my_message.downloadAllAttachments("/Users/daniel_molina/Downloads/test")
 
 # =====================================================================
 #                    SECTION 4: SMS EMAIL GATEWAYS
@@ -366,6 +366,13 @@ for thread in with_attch:
 # 5. Understand SMS (160 char limit) vs MMS (no limit) gateways
 # ----------------------------------------------------------------------
 
+# verizon = "0123456789@vtext.com"
+# att = "0123456789@txt.att.net"
+# tmobile = "0123456789@tmomail.net"
+
+# ezgmail.send(verizon, "NoSubject", body="This is your body")
+# ezgmail.send(att, "NoSubject", body="This is your body")
+# ezgmail.send(tmobile, "NoSubject", body="This is your body")
 
 # ----------------------------------------------------------------------
 # 🟡 16: SEND A TEXT MESSAGE VIA EMAIL
@@ -395,6 +402,37 @@ for thread in with_attch:
 # 6. Handle unknown carriers gracefully
 # ----------------------------------------------------------------------
 
+carriers = {
+    "verizon": {
+        "@vtext.com": [
+            "cellhpone1",
+            "cellhpone2",
+            "cellhpone3",
+        ]
+    },
+    "AT&T": {
+        "@txt.att.net": [
+            "cellhpone1",
+            "cellhpone2",
+            "cellhpone3",
+        ]
+    },
+    "T-Mobile": {
+        "@tmomail.net": [
+            "cellhpone1",
+            "cellhpone2",
+            "cellhpone3",
+        ]
+    },
+}
+
+for operator, domain in carriers.items():
+    for phones in domain.values():
+        for phone in phones:
+            my_domain = list(domain.keys())
+            # print(f"{phone}{my_domain[0]}", "NoSubject", "NoBody")
+            # ezgmail.send(f"{phone}{my_domain[0]}", "NoSubject", "NoBody")
+
 
 # =====================================================================
 #                    SECTION 5: PUSH NOTIFICATIONS WITH NTFY
@@ -414,6 +452,10 @@ for thread in with_attch:
 # 5. View the message at https://ntfy.sh/YourTopic
 # ----------------------------------------------------------------------
 
+import requests
+
+notification = requests.post("https://ntfy.sh/python_learning", "I did it")
+print(notification.status_code)
 
 # ----------------------------------------------------------------------
 # 🟢 19: SUBSCRIBE AND RECEIVE NOTIFICATIONS
@@ -442,6 +484,23 @@ for thread in with_attch:
 # 5. Use titles to categorize your notifications
 # ----------------------------------------------------------------------
 
+import time
+
+headers = {
+    "Title": "Title1",
+    "Priority": "5",
+    "Tags": "no_entry,no_entry,no_entry,squid",
+}
+
+titles = [title for title in headers.values()]
+
+# for _ in range(3):
+#     requests.post(
+#         "https://ntfy.sh/python_learning",
+#         "I did it once again",
+#         headers=headers,
+#     )
+#     time.sleep(2)
 
 # ----------------------------------------------------------------------
 # 🟡 21: SET NOTIFICATION PRIORITY
@@ -503,6 +562,10 @@ for thread in with_attch:
 # 5. Understand this retrieves all cached messages
 # ----------------------------------------------------------------------
 
+print("--------------------------------")
+
+resp: requests.Response = requests.get("https://ntfy.sh/python_learning/json?poll=1")
+print(resp.text)
 
 # ----------------------------------------------------------------------
 # 🟡 25: PARSE NOTIFICATION RESPONSES
@@ -517,6 +580,23 @@ for thread in with_attch:
 # 5. Access the 'message' key from each notification
 # ----------------------------------------------------------------------
 
+from datetime import datetime
+
+notifications = list()
+for single_response in resp.text.splitlines():
+    notifications.append(json.loads(single_response))
+
+for notification in notifications:
+    print(
+        notification["message"],
+        print(
+            notification["id"],
+            datetime.fromtimestamp(notification["time"]),
+            notification.get("title", "No title"),
+            notification.get("Priority", "No priorities"),
+            notification.get("Tags", "No tags"),
+        ),
+    )
 
 # ----------------------------------------------------------------------
 # 🟡 26: ACCESS NOTIFICATION PROPERTIES
@@ -545,6 +625,14 @@ for thread in with_attch:
 # 5. Combine poll=1 and since with & in URL
 # ----------------------------------------------------------------------
 
+print("---------------------------------------")
+
+resp = requests.get("https://ntfy.sh/python_learning?poll=1?since=10m")
+print(resp.text)
+
+
+resp = requests.get("https://ntfy.sh/python_learning?poll=1?since=1h")
+print(resp.text)
 
 # ----------------------------------------------------------------------
 # 🟡 28: FILTER BY EVENT TYPE
@@ -559,6 +647,19 @@ for thread in with_attch:
 # 5. Create a function that returns only message notifications
 # ----------------------------------------------------------------------
 
+my_list = list()
+
+print("----------------------------")
+resp = requests.get("https://ntfy.sh/python_learning/json?poll=1")
+print(resp.text)
+
+for json_text in resp.text.splitlines():
+    if json.loads(json_text).get("event") == "message":
+        my_list.append(json.loads(json_text))
+
+print("---------------------------------")
+for x in my_list:
+    print(x["message"])  # type: ignore
 
 # =====================================================================
 #                    SECTION 7: PRACTICAL APPLICATIONS
@@ -591,6 +692,30 @@ for thread in with_attch:
 # 4. Include the elapsed time in the completion message
 # 5. Send an error notification if the task fails
 # ----------------------------------------------------------------------
+
+import time
+
+
+def my_wait():
+    time.sleep(5)
+    # time.sleep(a)
+
+
+requests.post("https://ntfy.sh/python_learning", f"{my_wait.__name__} has begun")
+
+try:
+    start = time.time()
+    finish = time.time()
+    total_time = finish - start
+    requests.post(
+        "https://ntfy.sh/python_learning",
+        f"{my_wait.__name__} has finished, it took {total_time}s to complete",
+    )
+except Exception as e:
+    requests.post(
+        "https://ntfy.sh/python_learning",
+        f"The was an error, {e}",
+    )
 
 
 # ----------------------------------------------------------------------
@@ -1039,4 +1164,5 @@ for thread in with_attch:
 #   - Gmail: Has sending limits, blocks spam-like patterns
 #   - SMS gateways: Unreliable, may block frequent sends
 #
+# ======================================================================
 # ======================================================================
