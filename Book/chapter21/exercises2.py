@@ -582,6 +582,40 @@ image = Image.open(
 # 5. Create a tiled pattern by pasting repeatedly
 # ----------------------------------------------------------------------
 
+cat_image = Image.open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/zophie.png"
+)
+
+a_part = cat_image.crop((485, 419, 525, 459))
+
+eyes = Image.new(
+    "RGBA",
+    (400, 400),
+    color="white",
+)
+
+width, height = a_part.size
+print(width, height)
+
+size = 400
+patch_size = a_part.width  # or .height, whichever is bigger
+# For main diagonal
+for d in range(-patch_size + 1, size):
+    x, y = d, d
+    eyes.paste(
+        a_part,
+        (x, y),
+    )  # mask to respect transparency
+# For anti-diagonal
+for x in range(-patch_size + 1, size):
+    y = 360 - x
+    eyes.paste(
+        a_part,
+        (x, y),
+    )
+
+eyes.save("/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/eyes.png")
+
 
 # ----------------------------------------------------------------------
 # 🟡 33: PASTE WITH TRANSPARENCY
