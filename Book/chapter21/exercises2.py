@@ -630,6 +630,18 @@ eyes.save("/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/eyes.png"
 # 5. Experiment with different positions
 # ----------------------------------------------------------------------
 
+image_1 = Image.open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/zophie.jpg"
+)
+image_2 = Image.open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/catlogo.png"
+)
+
+alpha_channel = image_2.getchannel("A")
+
+image_1.paste(image_2, (0, 0), image_2)
+# image_1.show()
+
 
 # ----------------------------------------------------------------------
 # 🟡 34: COMBINE MULTIPLE IMAGES
@@ -644,6 +656,43 @@ eyes.save("/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/eyes.png"
 # 5. Save the combined image
 # ----------------------------------------------------------------------
 
+image_1 = Image.open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/zophie.jpg"
+)
+image_2 = Image.open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/catlogo.png"
+)
+image_3 = Image.open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/go_crazy.png"
+)
+image_4 = Image.open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/eyes.png"
+)
+
+width, height = image_1.size
+print(width, height)
+
+
+new_image = Image.new("RGBA", (1800, 1800))
+new_image.paste(image_1, (0, 0))
+new_image.paste(image_2, (816, 0))
+new_image.paste(image_3, (0, 1088))
+new_image.paste(image_4, (816, 1088))
+
+# new_image.show()
+
+new_image_2 = Image.new("RGBA", (480, 480))
+image_1 = image_1.resize((240, 240))
+image_2 = image_2.resize((240, 240))
+image_3 = image_3.resize((240, 240))
+image_4 = image_4.resize((240, 240))
+
+new_image_2.paste(image_1, (0, 0))
+new_image_2.paste(image_2, (240, 0))
+new_image_2.paste(image_3, (0, 240))
+new_image_2.paste(image_4, (240, 240))
+
+# new_image_2.show()
 
 # =====================================================================
 #                    SECTION 7: DRAWING ON IMAGES
@@ -664,6 +713,35 @@ eyes.save("/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/eyes.png"
 # 6. Draw an ellipse (circle): draw.ellipse([x1,y1,x2,y2], fill='green')
 # ----------------------------------------------------------------------
 
+image = Image.open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/zophie.png"
+)
+
+print(image.size)
+
+draw = ImageDraw.Draw(image)
+draw.line(
+    [
+        (0, 0),
+        (815, 1087),
+    ],
+    fill="red",
+    width=5,
+)
+
+draw.line(
+    [
+        (815, 0),
+        (0, 1087),
+    ],
+    fill="red",
+    width=5,
+)
+
+draw.rectangle((387, 523, 427, 563), outline="blue", fill="black")
+draw.circle((408, 543), 5, outline="yellow", width=5)
+
+# image.show()
 
 # ----------------------------------------------------------------------
 # 🟡 36: DRAW POLYGONS AND ARCS
@@ -678,6 +756,12 @@ eyes.save("/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/eyes.png"
 # 5. Draw a pie slice: draw.pieslice()
 # ----------------------------------------------------------------------
 
+draw.polygon([(387, 522), (407, 503), (427, 522)], fill="orange", width=5)
+draw.polygon([(387, 564), (407, 584), (427, 564)], fill="orange", width=5)
+
+draw.arc((428, 520, 478, 563), start=0, end=180, fill="white", width=5)
+
+# image.show()
 
 # ----------------------------------------------------------------------
 # 🟡 37: ADD TEXT TO IMAGES
@@ -693,6 +777,21 @@ eyes.save("/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/eyes.png"
 # 6. Note: Font file must exist on your system
 # ----------------------------------------------------------------------
 
+draw.text(
+    (407, 0),
+    "This is the center",
+    fill="Black",
+    align="left",
+    font=ImageFont.truetype("SFNSItalic.ttf", 36),
+)
+draw.text(
+    (407, 500),
+    "Look at me!",
+    fill="green",
+    align="center",
+    font=ImageFont.truetype("SFArmenian.ttf", 38),
+)
+# image.show()
 
 # ----------------------------------------------------------------------
 # 🟡 38: USE DEFAULT FONT WITH SIZE
@@ -726,6 +825,9 @@ eyes.save("/Users/daniel_molina/Downloads/Python/Python/Book/chapter21/eyes.png"
 # 5. Save and compare different blur amounts
 # ----------------------------------------------------------------------
 
+blur = image.filter(ImageFilter.BLUR)
+gauss = image.filter(ImageFilter.UnsharpMask)
+# gauss.show()
 
 # ----------------------------------------------------------------------
 # 🟡 40: APPLY SHARPEN AND DETAIL FILTERS
