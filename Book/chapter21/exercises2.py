@@ -7,258 +7,7 @@
 
 # pip install matplotlib pillow
 
-from PIL import Image, ImageColor, ImageDraw, ImageFilter, ImageFont
-
-# =====================================================================
-#                    SECTION 1: MATPLOTLIB BASICS
-# =====================================================================
-
-
-# ----------------------------------------------------------------------
-# 🟢 1: CREATE A SIMPLE LINE GRAPH
-#
-# Learn: plt.plot(), plt.show()
-#
-# Tasks:
-# 1. Import matplotlib.pyplot as plt
-# 2. Create two lists: x values and y values
-# 3. Call plt.plot(x, y) to create a line graph
-# 4. Call plt.show() to display the graph
-# 5. Observe the graph window that appears
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟢 2: ADD TITLE AND AXIS LABELS
-#
-# Learn: plt.title(), plt.xlabel(), plt.ylabel()
-#
-# Tasks:
-# 1. Create a simple line graph
-# 2. Add a title using plt.title()
-# 3. Add an x-axis label using plt.xlabel()
-# 4. Add a y-axis label using plt.ylabel()
-# 5. Display the graph and verify labels appear
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟢 3: SAVE A GRAPH TO FILE
-#
-# Learn: plt.savefig()
-#
-# Tasks:
-# 1. Create a graph with title and labels
-# 2. Save as PNG using plt.savefig('graph.png')
-# 3. Save as JPG with different filename
-# 4. Save as PDF for high quality
-# 5. Verify the files were created
-# 6. Note: Call savefig() BEFORE show()
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 4: CUSTOMIZE LINE STYLE AND COLOR
-#
-# Learn: color, linestyle, linewidth, marker parameters
-#
-# Tasks:
-# 1. Create a line graph with color='red'
-# 2. Try different colors: 'blue', 'green', '#FF5733' (hex)
-# 3. Change line style: linestyle='--' (dashed), ':' (dotted)
-# 4. Change line width: linewidth=2
-# 5. Add markers: marker='o', marker='s' (square)
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 5: PLOT MULTIPLE LINES
-#
-# Learn: Multiple plt.plot() calls
-#
-# Tasks:
-# 1. Create x values list
-# 2. Create two different y values lists
-# 3. Plot first line with plt.plot(x, y1)
-# 4. Plot second line with plt.plot(x, y2)
-# 5. Add a legend using plt.legend(['Line 1', 'Line 2'])
-# 6. Use different colors for each line
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 6: CREATE A BAR CHART
-#
-# Learn: plt.bar()
-#
-# Tasks:
-# 1. Create a list of categories (e.g., ['A', 'B', 'C', 'D'])
-# 2. Create a list of values for each category
-# 3. Create a bar chart with plt.bar(categories, values)
-# 4. Add title and axis labels
-# 5. Customize bar colors with color parameter
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 7: CREATE A HORIZONTAL BAR CHART
-#
-# Learn: plt.barh()
-#
-# Tasks:
-# 1. Create categories and values lists
-# 2. Create horizontal bar chart with plt.barh()
-# 3. Add title and axis labels
-# 4. Customize colors
-# 5. Compare with vertical bar chart
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 8: CREATE A SCATTER PLOT
-#
-# Learn: plt.scatter()
-#
-# Tasks:
-# 1. Create x and y data points (can be random)
-# 2. Create a scatter plot with plt.scatter(x, y)
-# 3. Customize marker size with s parameter
-# 4. Customize marker color with c parameter
-# 5. Add transparency with alpha parameter
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 9: CREATE A PIE CHART
-#
-# Learn: plt.pie()
-#
-# Tasks:
-# 1. Create a list of values (slices of the pie)
-# 2. Create a list of labels for each slice
-# 3. Create pie chart with plt.pie(values, labels=labels)
-# 4. Add percentage labels with autopct='%1.1f%%'
-# 5. Explode a slice using explode parameter
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 10: CREATE A HISTOGRAM
-#
-# Learn: plt.hist()
-#
-# Tasks:
-# 1. Create a list of data values (many values)
-# 2. Create histogram with plt.hist(data)
-# 3. Customize number of bins with bins parameter
-# 4. Add title and labels
-# 5. Customize color and edge color
-# ----------------------------------------------------------------------
-
-
-# =====================================================================
-#                    SECTION 2: ADVANCED MATPLOTLIB
-# =====================================================================
-
-
-# ----------------------------------------------------------------------
-# 🟡 11: SET AXIS LIMITS
-#
-# Learn: plt.xlim(), plt.ylim()
-#
-# Tasks:
-# 1. Create a line graph
-# 2. Set x-axis limits with plt.xlim(min, max)
-# 3. Set y-axis limits with plt.ylim(min, max)
-# 4. Observe how the graph changes
-# 5. Try plt.axis([xmin, xmax, ymin, ymax]) as alternative
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 12: ADD GRID LINES
-#
-# Learn: plt.grid()
-#
-# Tasks:
-# 1. Create a graph
-# 2. Add grid lines with plt.grid(True)
-# 3. Customize grid with linestyle and color
-# 4. Try grid on only x or y axis
-# 5. Adjust grid transparency with alpha
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 13: ADD TEXT ANNOTATIONS
-#
-# Learn: plt.text(), plt.annotate()
-#
-# Tasks:
-# 1. Create a line graph
-# 2. Add text at specific coordinates with plt.text(x, y, 'text')
-# 3. Customize font size and color
-# 4. Use plt.annotate() to add an arrow pointing to a data point
-# 5. Annotate the maximum or minimum value
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 14: CREATE SUBPLOTS
-#
-# Learn: plt.subplot(), plt.subplots()
-#
-# Tasks:
-# 1. Create a figure with 2 rows and 1 column of subplots
-# 2. Use plt.subplot(2, 1, 1) for first subplot
-# 3. Plot data in the first subplot
-# 4. Use plt.subplot(2, 1, 2) for second subplot
-# 5. Plot different data in the second subplot
-# 6. Use plt.tight_layout() to prevent overlap
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 15: CREATE FIGURE WITH CUSTOM SIZE
-#
-# Learn: plt.figure(figsize=())
-#
-# Tasks:
-# 1. Create a figure with custom size: plt.figure(figsize=(10, 6))
-# 2. Width and height are in inches
-# 3. Create a graph on this figure
-# 4. Save the figure and check the dimensions
-# 5. Try different aspect ratios
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 16: CUSTOMIZE TICKS
-#
-# Learn: plt.xticks(), plt.yticks()
-#
-# Tasks:
-# 1. Create a graph
-# 2. Set custom x-axis tick positions with plt.xticks([0, 2, 4, 6])
-# 3. Set custom tick labels: plt.xticks([0, 1, 2], ['Low', 'Med', 'High'])
-# 4. Rotate tick labels with rotation parameter
-# 5. Customize tick font size
-# ----------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------
-# 🟡 17: USE DIFFERENT STYLES
-#
-# Learn: plt.style.use()
-#
-# Tasks:
-# 1. Print available styles: print(plt.style.available)
-# 2. Try 'seaborn' style: plt.style.use('seaborn-v0_8')
-# 3. Try 'ggplot' style
-# 4. Try 'dark_background' style
-# 5. Create the same graph with different styles and compare
-# ----------------------------------------------------------------------
-
+from PIL import Image, ImageColor, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 
 # =====================================================================
 #                    SECTION 3: PILLOW BASICS - OPENING IMAGES
@@ -826,7 +575,7 @@ draw.text(
 # ----------------------------------------------------------------------
 
 blur = image.filter(ImageFilter.BLUR)
-gauss = image.filter(ImageFilter.UnsharpMask)
+gauss = image.filter(ImageFilter.FIND_EDGES)
 # gauss.show()
 
 # ----------------------------------------------------------------------
@@ -870,6 +619,16 @@ gauss = image.filter(ImageFilter.UnsharpMask)
 # 5. Try ImageEnhance.Contrast(), ImageEnhance.Color()
 # ----------------------------------------------------------------------
 
+enhancer = ImageEnhance.Brightness(image)
+# image = enhancer.enhance(0.5)
+
+enhancer = ImageEnhance.Contrast(image)
+# image = enhancer.enhance(2)
+
+enhancer = ImageEnhance.Color(image)
+# image = enhancer.enhance(2.5)
+
+# image.show()
 
 # =====================================================================
 #                    SECTION 9: REAL-WORLD SCENARIOS
