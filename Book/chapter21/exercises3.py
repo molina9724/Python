@@ -255,8 +255,13 @@ plt.clf()
 # 5. Customize color and edge color
 # ----------------------------------------------------------------------
 
-plt.hist(x, data=y)
-plt.show()
+x = [45, 50, 75, 80, 80, 82, 90, 98, 100, 65, 45, 55, 60] * 10
+
+plt.hist(x, bins=10, edgecolor="k", facecolor="r", log=False)
+plt.xlabel("Score")
+plt.ylabel("# of students")
+# plt.show()
+plt.clf()
 
 # =====================================================================
 #                    SECTION 2: ADVANCED MATPLOTLIB
@@ -276,6 +281,17 @@ plt.show()
 # 5. Try plt.axis([xmin, xmax, ymin, ymax]) as alternative
 # ----------------------------------------------------------------------
 
+x = [_ for _ in range(11)]
+y = x
+
+plt.plot(x, y)
+plt.xlim(2, 8)
+plt.ylim(5, 8)
+plt.clf()
+
+plt.plot(x, y)
+plt.axis((5, 8, 5, 8))
+# plt.show()
 
 # ----------------------------------------------------------------------
 # 🟡 12: ADD GRID LINES
@@ -290,6 +306,10 @@ plt.show()
 # 5. Adjust grid transparency with alpha
 # ----------------------------------------------------------------------
 
+plt.clf()
+plt.plot(x, y, linestyle="--", color="#29C4A5FF")
+plt.axis((0, 10, 0, 10))
+plt.grid(True)
 
 # ----------------------------------------------------------------------
 # 🟡 13: ADD TEXT ANNOTATIONS
@@ -303,6 +323,31 @@ plt.show()
 # 4. Use plt.annotate() to add an arrow pointing to a data point
 # 5. Annotate the maximum or minimum value
 # ----------------------------------------------------------------------
+plt.clf()
+plt.plot(x, y)
+plt.text(
+    0,
+    0,
+    "Origin",
+    color="b",
+    fontsize="x-large",
+)
+plt.annotate(
+    "Have a look at this", (2, 2), (3, 3), arrowprops=dict(facecolor="r", shrink=1)
+)
+
+plt.annotate("Min Value", (0, 0), (0, 2), arrowprops=dict(facecolor="g", shrink=0.1))
+plt.annotate(
+    "Max value",
+    (10, 10),
+    (8, 8),
+    arrowprops=dict(
+        facecolor="y",
+        shrink=0.1,
+    ),
+)
+
+# plt.show()
 
 
 # ----------------------------------------------------------------------
@@ -320,6 +365,26 @@ plt.show()
 # ----------------------------------------------------------------------
 
 
+plt.clf()
+plt.subplots(2, 1)
+
+plt.subplot(
+    2,
+    1,
+    1,
+)
+plt.plot(x, y)
+
+
+a = [-1, -3, -5, -7, -9, -11, -13, -15, -17, -19, -21]
+
+plt.subplot(2, 1, 2)
+plt.plot(y, a)
+plt.tight_layout()
+
+# plt.show()
+
+
 # ----------------------------------------------------------------------
 # 🟡 15: CREATE FIGURE WITH CUSTOM SIZE
 #
@@ -333,6 +398,10 @@ plt.show()
 # 5. Try different aspect ratios
 # ----------------------------------------------------------------------
 
+plt.clf()
+# plt.figure(figsize=(2, 6))
+plt.plot(x, y)
+# plt.show()
 
 # ----------------------------------------------------------------------
 # 🟡 16: CUSTOMIZE TICKS
@@ -347,6 +416,11 @@ plt.show()
 # 5. Customize tick font size
 # ----------------------------------------------------------------------
 
+plt.clf()
+plt.plot(x, y)
+plt.xticks([0, 2, 4, 6], ["Very Low", "Low", "Mid", "High"], rotation=45, fontsize=20)
+plt.yticks([0, 2, 4, 6])
+# plt.show()
 
 # ----------------------------------------------------------------------
 # 🟡 17: USE DIFFERENT STYLES
@@ -360,3 +434,10 @@ plt.show()
 # 4. Try 'dark_background' style
 # 5. Create the same graph with different styles and compare
 # ----------------------------------------------------------------------
+
+plt.clf()
+
+print(plt.style.available)
+plt.style.use("Solarize_Light2")
+plt.plot(x, y)
+plt.show()
