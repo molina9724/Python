@@ -323,7 +323,7 @@ text = tess.image_to_string(rotated)
 print(text)
 
 unrotating = rotated.rotate(-10, expand=True)
-unrotating.show()
+# unrotating.show()
 
 text = tess.image_to_string(unrotating)
 print(text)
@@ -346,6 +346,15 @@ print(text)
 # 5. Try with wrong language to see the difference
 # ----------------------------------------------------------------------
 
+image = Image.open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter22/english_spanish.png"
+)
+
+text = tess.image_to_string(image, lang="spa+eng")
+print(text)
+
+text = tess.image_to_string(image, lang="jpn+afr+fra")
+print(text)
 
 # ----------------------------------------------------------------------
 # 🟡 16: MULTIPLE LANGUAGES
@@ -374,6 +383,26 @@ print(text)
 # 5. Use this data to highlight recognized characters
 # ----------------------------------------------------------------------
 
+text = tess.image_to_boxes(image, "eng+spa")
+print(text)
+print(type(text))
+
+data = text.split("\n")
+print(data)
+
+more_data = []
+
+for row in data:
+    more_data.append(row.split(" "))
+
+print(more_data)
+
+for row in more_data:
+    if len(row) == 6:
+        char, x1, y1, x2, y2, page = row
+        print(char, x1, y1, x2, y2, page)
+    else:
+        print("Skipping row (bad format):", row)
 
 # ----------------------------------------------------------------------
 # 🟡 18: GET DETAILED DATA
@@ -388,6 +417,16 @@ print(text)
 # 5. Filter results by confidence threshold
 # ----------------------------------------------------------------------
 
+text = tess.image_to_data(image, "eng+spa", output_type=tess.Output.DICT)
+print(text)
+
+text_confidence = list()
+
+for index in range(len(text["conf"])):
+    if text["conf"][index] != -1:
+        text_confidence.append((text["text"][index], text["conf"][index]))
+
+print(text_confidence)
 
 # ----------------------------------------------------------------------
 # 🟡 19: CHECK CONFIDENCE LEVELS
@@ -402,6 +441,24 @@ print(text)
 # 5. Create a function that flags uncertain recognitions
 # ----------------------------------------------------------------------
 
+x: str = tess.image_to_data(image)
+print(type(x))
+print(x)
+
+data = x.split("\n")
+print(data)
+
+import csv
+
+reader = csv.DictReader(data, delimiter="\t")
+
+low_conf = list()
+
+for row in reader:
+    if float(row["conf"]) < 95 and float(row["conf"]) != -1:
+        low_conf.append([row["text"], row["conf"]])
+
+print(low_conf)
 
 # ----------------------------------------------------------------------
 # 🟡 20: EXTRACT ONLY DIGITS

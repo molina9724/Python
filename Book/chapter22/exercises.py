@@ -1,5 +1,5 @@
 import pytesseract as tess
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 print("hello")
 
