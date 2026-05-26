@@ -153,7 +153,7 @@ copy = image.convert("RGB")
 
 more_contrast = ImageEnhance.Contrast(copy).enhance(2)
 text = tess.image_to_string(more_contrast)
-more_contrast.show()
+# more_contrast.show()
 print(text)
 
 # ----------------------------------------------------------------------
@@ -170,7 +170,7 @@ print(text)
 # ----------------------------------------------------------------------
 
 resize = copy.crop((91, 89, 986, 664))
-resize.show()
+# resize.show()
 
 width, height = resize.size
 
@@ -198,7 +198,7 @@ black = copy.convert("1")
 # black.show()
 
 autocontrast = ImageOps.autocontrast(copy)
-autocontrast.show()
+# autocontrast.show()
 
 print("After autocontrast")
 text = tess.image_to_string(autocontrast)
@@ -259,6 +259,8 @@ print("------------------------------------")
 text = tess.image_to_string(invert)
 print(text)
 
+invert.save("/Users/daniel_molina/Downloads/Python/Python/Book/chapter22/invert.png")
+
 # ----------------------------------------------------------------------
 # 🟡 12: CROP IMAGE TO TEXT REGION
 #
@@ -272,6 +274,10 @@ print(text)
 # 5. Note how removing non-text areas improves results
 # ----------------------------------------------------------------------
 
+crop_image = invert.crop((478, 398, 600, 414))
+
+text = tess.image_to_string(crop_image)
+print(text)
 
 # ----------------------------------------------------------------------
 # 🟡 13: ADD BORDER/PADDING
@@ -286,6 +292,14 @@ print(text)
 # 5. Borders can help Tesseract recognize edge text
 # ----------------------------------------------------------------------
 
+# invert.show()
+
+border = ImageOps.expand(invert, border=20, fill="red")
+# border.show()
+
+text = tess.image_to_string(border)
+print("----------------------------------------")
+print(text)
 
 # ----------------------------------------------------------------------
 # 🟡 14: ROTATE SKEWED TEXT
@@ -300,6 +314,19 @@ print(text)
 # 5. Note how alignment affects recognition accuracy
 # ----------------------------------------------------------------------
 
+rotated = Image.open(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter22/image.png"
+)
+
+print("----------------------------------------")
+text = tess.image_to_string(rotated)
+print(text)
+
+unrotating = rotated.rotate(-10, expand=True)
+unrotating.show()
+
+text = tess.image_to_string(unrotating)
+print(text)
 
 # =====================================================================
 #                    SECTION 3: ADVANCED OCR OPTIONS
