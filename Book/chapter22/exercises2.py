@@ -179,7 +179,7 @@ text = tess.image_to_string(high)
 print("----------------------------------")
 print(text)
 
-high.show()
+# high.show()
 
 # ----------------------------------------------------------------------
 # 🟡 9: CONVERT TO BLACK AND WHITE
@@ -194,6 +194,15 @@ high.show()
 # 5. Compare with grayscale results
 # ----------------------------------------------------------------------
 
+black = copy.convert("1")
+# black.show()
+
+autocontrast = ImageOps.autocontrast(copy)
+autocontrast.show()
+
+print("After autocontrast")
+text = tess.image_to_string(autocontrast)
+print(text)
 
 # ----------------------------------------------------------------------
 # 🟡 10: REMOVE NOISE WITH FILTERS
@@ -208,6 +217,11 @@ high.show()
 # 5. Find the best filter settings for your image
 # ----------------------------------------------------------------------
 
+median = copy.filter(ImageFilter.MedianFilter(3))
+# median.show()
+
+gaussian = copy.filter(ImageFilter.GaussianBlur(1.5))
+# gaussian.show()
 
 # ----------------------------------------------------------------------
 # 🟡 11: INVERT COLORS
@@ -222,6 +236,28 @@ high.show()
 # 5. Compare the results
 # ----------------------------------------------------------------------
 
+black = Image.new("RGBA", (720, 480), color="black")
+
+draw = ImageDraw.Draw(black)
+draw.text((0, 0), "Hello there")
+draw.text((100, 100), "How are you  today?")
+draw.text((0, 340), "Doing well")
+draw.text((480, 400), "That's my boy right theee")
+
+# black.show()
+
+black_copy = black.convert("RGB")
+
+invert = ImageOps.invert(black_copy)
+# invert.show()
+
+print("------------------------------------")
+text = tess.image_to_string(black)
+print(text)
+print("------------------------------------")
+
+text = tess.image_to_string(invert)
+print(text)
 
 # ----------------------------------------------------------------------
 # 🟡 12: CROP IMAGE TO TEXT REGION
