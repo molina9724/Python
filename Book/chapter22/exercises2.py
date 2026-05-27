@@ -474,6 +474,20 @@ print(low_conf)
 # 5. Useful for reading prices, phone numbers, etc.
 # ----------------------------------------------------------------------
 
+only_digits = Image.new("RGBA", (1920, 1080), color="white")
+
+writer = ImageDraw.Draw(only_digits)
+writer.text((0, 0), "123", fill="black")
+writer.text((0, 500), "456", fill="black")
+writer.text((0, 900), "789", fill="black")
+writer.text((500, 0), "ABC", fill="black")
+writer.text((900, 0), "DEF", fill="black")
+writer.text((1500, 0), "G000H", fill="black")
+
+# only_digits.show()
+
+text = tess.image_to_string(only_digits)
+print(text)
 
 # =====================================================================
 #                    SECTION 4: NAPS2 FOR PDF OCR
@@ -510,6 +524,27 @@ print(low_conf)
 # 5. Verify the PDF was created with searchable text
 # ----------------------------------------------------------------------
 
+import subprocess
+
+NAPS2_PATH = "/Applications/NAPS2.app/Contents/MacOS/NAPS2"
+INPUT = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter22/invert.png"
+OUTPUT = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter22/my_ps2.pdf"
+
+# fmt: off
+
+command = [
+    NAPS2_PATH,
+    "console",
+    "-i", INPUT,
+    "-o", OUTPUT,
+    "-n", "0",
+    "-f",
+    "-v"
+]
+
+# fmt: on
+
+proc = subprocess.run(command, capture_output=False)
 
 # ----------------------------------------------------------------------
 # 🟡 23: INSTALL OCR LANGUAGE PACK VIA NAPS2
@@ -524,6 +559,24 @@ print(low_conf)
 # 5. Note: Only needs to run once per language
 # ----------------------------------------------------------------------
 
+
+# fmt: off
+
+command = [
+    NAPS2_PATH,
+    "console",
+    "-i", INPUT,
+    "-o", OUTPUT,
+    "--install", "ocr-spa",
+    # "--ocrlang", "ocr-spa"
+    "-n", "0",
+    "-f",
+    "-v"
+]
+
+# fmt: on
+
+proc = subprocess.run(command, capture_output=False)
 
 # ----------------------------------------------------------------------
 # 🟡 24: COMBINE MULTIPLE IMAGES INTO PDF
@@ -553,6 +606,28 @@ print(low_conf)
 # 5. Combine selections from multiple PDFs
 # ----------------------------------------------------------------------
 
+INPUT = (
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/first_five_pages.pdf"
+)
+
+OUTPUT = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter22/exercise25.pdf"
+
+# fmt: off
+
+command = [
+    NAPS2_PATH,
+    "console",
+    "-i", "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/first_five_pages.pdf[0];/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/first_five_pages.pdf[1]",
+    "-o", OUTPUT,
+    "-n", "0",
+    "-f",
+    "-v"
+]
+
+# fmt: on
+
+proc = subprocess.run(command, capture_output=False)
+print(command)
 
 # ----------------------------------------------------------------------
 # 🟡 26: CAPTURE NAPS2 OUTPUT
