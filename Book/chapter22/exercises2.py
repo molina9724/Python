@@ -621,12 +621,12 @@ command = [
     "-o", OUTPUT,
     "-n", "0",
     "-f",
-    "-v"
+    "-v",
 ]
 
 # fmt: on
 
-proc = subprocess.run(command, capture_output=False)
+proc = subprocess.run(command, capture_output=True)
 print(command)
 
 # ----------------------------------------------------------------------
@@ -642,6 +642,28 @@ print(command)
 # 5. Parse output to track progress or errors
 # ----------------------------------------------------------------------
 
+wrong_command = [
+    NAPS2_PATH,
+    "console",
+    "-i",
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/first_five_pages.pdf[0];/Users/daniel_molina/Downloads/Python/Python/Book/chapter17/first_five_pages.pdf[1]",
+    "-o",
+    OUTPUT,
+    "-n",
+    "0",
+    "-f",
+    "-v",
+    "-non_existant_flag!!!",
+]
+proc = subprocess.run(wrong_command, capture_output=True)
+
+xxx = proc.stdout.decode(encoding="utf-8")
+yyy = proc.stderr.decode(encoding="utf-8")
+
+print("-----------------------------------")
+
+print(xxx)
+print(yyy)
 
 # =====================================================================
 #                    SECTION 5: ERROR HANDLING AND CLEANUP
@@ -661,6 +683,14 @@ print(command)
 # 5. Return empty string or error message on failure
 # ----------------------------------------------------------------------
 
+non_image = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter22/exercises.py"
+
+try:
+    data = tess.image_to_string(non_image)
+    print(data)
+except tess.pytesseract.TesseractError:
+    print("This shit is going to blow up")
+
 
 # ----------------------------------------------------------------------
 # 🟡 28: VALIDATE IMAGE BEFORE OCR
@@ -674,6 +704,33 @@ print(command)
 # 4. Check minimum size (very small images won't OCR well)
 # 5. Return boolean or raise descriptive error
 # ----------------------------------------------------------------------
+
+from pathlib import Path
+
+valid_formats = [".png", ".jpg"]
+file = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter22/english_spanish.png"
+
+
+def validate_image(file_path: str):
+    path_file = Path(file_path)
+
+    if path_file.exists():
+        if path_file.suffix in valid_formats:
+            image = Image.open(file_path)
+            return image.size
+        else:
+            return f"Wrong format, supported formats: {valid_formats}"
+    else:
+        return "File doesn't exist"
+
+
+print(validate_image(file))
+print(validate_image("non existing file"))
+print(
+    validate_image(
+        "/Users/daniel_molina/Downloads/Python/Python/Book/chapter22/exercises2.py"
+    )
+)
 
 
 # ----------------------------------------------------------------------
@@ -689,6 +746,8 @@ print(command)
 # 5. Create a clean_ocr_text() function
 # ----------------------------------------------------------------------
 
+data = tess.image_to_string(file)
+print(data)
 
 # ----------------------------------------------------------------------
 # 🟡 30: REMOVE HYPHENATION
@@ -1159,4 +1218,4 @@ print(command)
 #    - Download from book resources
 #    - Create with Pillow ImageDraw
 #
-# ======================================================================
+# ===========================Víctor Muñoz===========================================
