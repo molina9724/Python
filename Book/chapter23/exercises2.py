@@ -118,7 +118,12 @@ print(center)
 # ----------------------------------------------------------------------
 
 current_point = pyautogui.position()
+print(current_point)
+print(current_point.x, current_point.y)
 
+# for _ in range(10):
+#     pyautogui.sleep(1)
+#     print(pyautogui.position())
 
 # ----------------------------------------------------------------------
 # 🟢 6: MOVE MOUSE TO ABSOLUTE POSITION
@@ -133,6 +138,10 @@ current_point = pyautogui.position()
 # 5. Try different durations to see the effect
 # ----------------------------------------------------------------------
 
+# pyautogui.moveTo(50, 50, duration=0.2)
+# pyautogui.moveTo(center[0], center[1], duration=0.2)
+# pyautogui.moveTo(500, 500, duration=0.2)
+# pyautogui.moveTo(1000, 1000, duration=10)
 
 # ----------------------------------------------------------------------
 # 🟢 7: MOVE MOUSE RELATIVE TO CURRENT POSITION
@@ -147,6 +156,12 @@ current_point = pyautogui.position()
 # 5. Add duration for smooth movement
 # ----------------------------------------------------------------------
 
+x, y = center
+# pyautogui.moveTo(x, y)
+# pyautogui.move(90, 0, duration=0.2)
+# pyautogui.move(0, 90, duration=0.2)
+# pyautogui.move(-90, 0, duration=0.2)
+# pyautogui.move(0, -90, duration=0.2)
 
 # ----------------------------------------------------------------------
 # 🟡 8: DRAW A SQUARE WITH MOUSE MOVEMENT
@@ -161,6 +176,19 @@ current_point = pyautogui.position()
 # 5. Experiment with different square sizes
 # ----------------------------------------------------------------------
 
+pyautogui.sleep(2)
+pyautogui.moveTo(x, y)
+pyautogui.click()
+
+distance = 500
+change = 20
+
+# for index in range(0, distance, change):
+#     pyautogui.drag(distance, 0, button="left")
+#     pyautogui.drag(0, distance, button="left")
+#     pyautogui.drag(-distance, 0, button="left")
+#     pyautogui.drag(0, -distance, button="left")
+#     distance -= change
 
 # ----------------------------------------------------------------------
 # 🟡 9: CREATE MOUSE MOVEMENT PATTERNS
@@ -175,6 +203,15 @@ current_point = pyautogui.position()
 # 5. Make patterns customizable (size, position, speed)
 # ----------------------------------------------------------------------
 
+
+# pyautogui.drag(-50, 0, button="left")
+# pyautogui.drag(50, -50, button="left")
+# pyautogui.drag(50, 50, button="left")
+# pyautogui.drag(-50, 0, button="left")
+
+# for i in range(50):
+#     pyautogui.drag(20, 0, button="left")
+#     pyautogui.drag(0, 20, button="left")
 
 # =====================================================================
 #                    SECTION 3: MOUSE CLICKING
