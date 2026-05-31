@@ -70,3 +70,12 @@ another_image = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter23/ima
 full_image = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter23/full.png"
 
 all_folders = list(pyautogui.locateAll(another_image, full_image))
+# print(all_folders)
+
+# for box in all_folders:
+#     print(box)
+
+# pyautogui.click(button)
+
+pyautogui.click(100, 100)
+pyautogui.typewrite("Hello there!")
