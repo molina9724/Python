@@ -69,7 +69,7 @@ print(box)
 another_image = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter23/image3.png"
 full_image = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter23/full.png"
 
-all_folders = list(pyautogui.locateAll(another_image, full_image))
+# all_folders = list(pyautogui.locateAll(another_image, full_image))
 # print(all_folders)
 
 # for box in all_folders:
@@ -79,3 +79,5 @@ all_folders = list(pyautogui.locateAll(another_image, full_image))
 
 pyautogui.click(100, 100)
 pyautogui.typewrite("Hello there!")
+
+# pyautogui.confirm("This is an alert")

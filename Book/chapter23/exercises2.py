@@ -231,6 +231,7 @@ change = 20
 # 5. Combine position and button parameters
 # ----------------------------------------------------------------------
 
+# pyautogui.click(x, y, button="right")
 
 # ----------------------------------------------------------------------
 # 🟢 11: DOUBLE CLICK AND RIGHT CLICK
@@ -245,6 +246,8 @@ change = 20
 # 5. Test each click type and observe the effect
 # ----------------------------------------------------------------------
 
+# pyautogui.doubleClick(x, y)
+# pyautogui.middleClick(x, y)
 
 # ----------------------------------------------------------------------
 # 🟢 12: MOUSE DOWN AND MOUSE UP
@@ -259,7 +262,6 @@ change = 20
 # 5. Useful for drag operations or holding buttons
 # ----------------------------------------------------------------------
 
-
 # ----------------------------------------------------------------------
 # 🟡 13: CLICK MULTIPLE TIMES
 #
@@ -273,6 +275,7 @@ change = 20
 # 5. Experiment with different click counts and intervals
 # ----------------------------------------------------------------------
 
+# pyautogui.click(clicks=3, interval=0.5, button="right")
 
 # =====================================================================
 #                    SECTION 4: DRAGGING
@@ -340,6 +343,8 @@ change = 20
 # 5. Experiment to find the right scroll amount
 # ----------------------------------------------------------------------
 
+# pyautogui.scroll(150)
+# pyautogui.scroll(-150)
 
 # ----------------------------------------------------------------------
 # 🟡 18: HORIZONTAL SCROLLING
@@ -354,6 +359,8 @@ change = 20
 # 5. Create a function that scrolls in any direction
 # ----------------------------------------------------------------------
 
+# pyautogui.hscroll(-500)
+# pyautogui.hscroll(800)
 
 # ----------------------------------------------------------------------
 # 🟡 19: SMOOTH SCROLLING
@@ -368,6 +375,9 @@ change = 20
 # 5. Create both smooth_scroll_up() and smooth_scroll_down()
 # ----------------------------------------------------------------------
 
+# for i in range(10):
+#     pyautogui.sleep(0.2)
+#     pyautogui.scroll(-10)
 
 # =====================================================================
 #                    SECTION 6: SCREENSHOTS AND PIXELS
@@ -387,6 +397,11 @@ change = 20
 # 5. View your saved screenshot
 # ----------------------------------------------------------------------
 
+img = pyautogui.screenshot()
+img.save("/Users/daniel_molina/Downloads/Python/Python/Book/chapter23/20.png")
+
+img = pyautogui.screenshot(region=(500, 1000, 800, 800))
+# img.show()
 
 # ----------------------------------------------------------------------
 # 🟢 21: GET PIXEL COLOR
@@ -401,6 +416,15 @@ change = 20
 # 5. Identify colors of UI elements on your screen
 # ----------------------------------------------------------------------
 
+pixel = pyautogui.pixel(2560, 600)
+print(pixel)
+
+pixel = pyautogui.pixel(pyautogui.position().x, pyautogui.position().y)
+print(pixel)
+
+# for index in range(10):
+#     pyautogui.sleep(0.5)
+#     print(pyautogui.pixel(pyautogui.position().x, pyautogui.position().y))
 
 # ----------------------------------------------------------------------
 # 🟡 22: CHECK IF PIXEL MATCHES COLOR
@@ -415,6 +439,8 @@ change = 20
 # 5. Create a function that waits until a pixel changes color
 # ----------------------------------------------------------------------
 
+color = pyautogui.pixel(2520, 600)
+print(pyautogui.pixelMatchesColor(100, 100, color))
 
 # ----------------------------------------------------------------------
 # 🟡 23: USE MOUSEINFO FOR COORDINATES
@@ -429,6 +455,7 @@ change = 20
 # 5. Use this tool to plan your automation scripts
 # ----------------------------------------------------------------------
 
+# pyautogui.mouseInfo()
 
 # =====================================================================
 #                    SECTION 7: IMAGE RECOGNITION
@@ -448,6 +475,10 @@ change = 20
 # 5. Use try/except to handle ImageNotFoundException
 # ----------------------------------------------------------------------
 
+screenshot = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter23/icon.png"
+box = pyautogui.locateAllOnScreen(screenshot)
+print(list(box))
+
 
 # ----------------------------------------------------------------------
 # 🟡 25: CLICK ON LOCATED IMAGE
@@ -462,6 +493,7 @@ change = 20
 # 5. Always use try/except for robustness
 # ----------------------------------------------------------------------
 
+# pyautogui.click(screenshot)
 
 # ----------------------------------------------------------------------
 # 🟡 26: FIND ALL INSTANCES OF AN IMAGE
@@ -476,6 +508,10 @@ change = 20
 # 5. Useful for repetitive UI elements
 # ----------------------------------------------------------------------
 
+all_icons = list(pyautogui.locateAllOnScreen(screenshot))
+
+# for icon in all_icons:
+#     pyautogui.click(icon)
 
 # ----------------------------------------------------------------------
 # 🟡 27: LOCATE WITH CONFIDENCE
@@ -490,6 +526,14 @@ change = 20
 # 5. Useful when images aren't pixel-perfect matches
 # ----------------------------------------------------------------------
 
+import cv2
+
+icon = "/Users/daniel_molina/Downloads/Python/Python/Book/chapter23/icon.png"
+generator = list(pyautogui.locateAllOnScreen(icon, confidence=0.999))
+print(len(list(generator)))
+
+# for i in generator:
+#     pyautogui.doubleClick(i)
 
 # ----------------------------------------------------------------------
 # 🟡 28: LOCATE CENTER OF IMAGE
@@ -504,6 +548,9 @@ change = 20
 # 5. Handle exceptions appropriately
 # ----------------------------------------------------------------------
 
+center = pyautogui.locateCenterOnScreen(icon)
+# pyautogui.click(center)
+print(center)
 
 # =====================================================================
 #                    SECTION 8: KEYBOARD CONTROL
@@ -523,12 +570,20 @@ change = 20
 # 5. For special keys, use different functions
 # ----------------------------------------------------------------------
 
+pyautogui.click(300, 300)
+# pyautogui.write("Heeeeeeello", interval=0.25)
+
+# pyautogui.write(["a", "b", "left", "left", "X", "Y"], interval=0.25)
+# pyautogui.write(["\n", "\n", "\n", "\t"], interval=0.25)
+# pyautogui.write("This is me?", interval=0.25)
+# print(pyautogui.KEYBOARD_KEYS)
 
 # ----------------------------------------------------------------------
 # 🟢 30: PRESS INDIVIDUAL KEYS
 #
 # Learn: pyautogui.press()
 #
+
 # Tasks:
 # 1. Press enter: pyautogui.press('enter')
 # 2. Press escape: pyautogui.press('esc')
@@ -537,6 +592,12 @@ change = 20
 # 5. See pyautogui.KEYBOARD_KEYS for all valid key names
 # ----------------------------------------------------------------------
 
+pyautogui.press("enter")
+pyautogui.press("esc")
+pyautogui.press("up")
+pyautogui.press("down")
+pyautogui.press("left")
+pyautogui.press("right")
 
 # ----------------------------------------------------------------------
 # 🟢 31: TYPE WITH SPECIAL KEYS
@@ -551,6 +612,7 @@ change = 20
 # 5. Understand how arrow keys affect cursor position
 # ----------------------------------------------------------------------
 
+pyautogui.write(["a", "b", "c", "enter", "enter", "\t"], interval=0.25)
 
 # ----------------------------------------------------------------------
 # 🟡 32: KEY DOWN AND KEY UP
@@ -565,6 +627,20 @@ change = 20
 # 5. Example: keyDown('shift'); press('a'); keyUp('shift')  # Types 'A'
 # ----------------------------------------------------------------------
 
+pyautogui.keyDown("shift")
+pyautogui.write("this are big and not small")
+pyautogui.keyUp("shift")
+pyautogui.write("\n")
+pyautogui.write("back to normal")
+
+# copy
+# pyautogui.keyDown("ctrl")
+# pyautogui.keyDown("c")
+# pyautogui.keyUp("c")
+# pyautogui.keyUp("ctrl")
+
+# pyautogui.hotkey("ctrl", "c")
+# pyautogui.hotkey("ctrl", "v")
 
 # ----------------------------------------------------------------------
 # 🟡 33: HOTKEY COMBINATIONS
