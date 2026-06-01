@@ -656,6 +656,12 @@ pyautogui.write("back to normal")
 # 6. Note: On macOS use 'command', not 'ctrl'
 # ----------------------------------------------------------------------
 
+# pyautogui.hotkey("command", "c")
+# pyautogui.hotkey("command", "v")
+# pyautogui.hotkey("command", "a")
+# pyautogui.hotkey("command", "s")
+# pyautogui.hotkey("command", "z")
+
 
 # ----------------------------------------------------------------------
 # 🟡 34: COMMON MACOS HOTKEYS
@@ -672,6 +678,12 @@ pyautogui.write("back to normal")
 # 7. Create a reference dict of common macOS hotkeys
 # ----------------------------------------------------------------------
 
+# pyautogui.hotkey("command", "n")
+# pyautogui.hotkey("command", "w")
+# pyautogui.hotkey("command", "q")
+# pyautogui.hotkey("command", "f")
+# pyautogui.hotkey("command", "tab")
+# pyautogui.hotkey("command", "shift", "3")
 
 # =====================================================================
 #                    SECTION 9: MESSAGE BOXES
