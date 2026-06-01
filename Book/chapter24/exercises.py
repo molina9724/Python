@@ -2,7 +2,7 @@ import pyttsx3
 from pyttsx3 import Engine
 
 engine: Engine = pyttsx3.init()
-# engine.say("Hello!")
+engine.say("Hello!")
 # engine.say("How are you today?")
 # engine.say("Happy birthday to you!")
 
