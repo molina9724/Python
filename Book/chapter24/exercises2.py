@@ -43,6 +43,7 @@ import pyttsx3
 # 5. Verify no errors occur during initialization
 # ----------------------------------------------------------------------
 
+engine = pyttsx3.init()
 
 # ----------------------------------------------------------------------
 # 🟢 3: MAKE THE COMPUTER SPEAK
@@ -57,6 +58,8 @@ import pyttsx3
 # 5. Make sure your speakers aren't muted!
 # ----------------------------------------------------------------------
 
+engine.say("Hello, world!")
+# engine.runAndWait()
 
 # ----------------------------------------------------------------------
 # 🟢 4: SPEAK MULTIPLE SENTENCES
@@ -71,6 +74,10 @@ import pyttsx3
 # 5. Try: say('First.'); say('Second.'); say('Third.'); runAndWait()
 # ----------------------------------------------------------------------
 
+# engine.say("First")
+# engine.say("Second")
+# engine.say("Third")
+# engine.runAndWait()
 
 # ----------------------------------------------------------------------
 # 🟢 5: GET CURRENT ENGINE PROPERTIES
@@ -85,6 +92,9 @@ import pyttsx3
 # 5. Note: Default volume is 1.0 (100%), default rate is ~200 WPM
 # ----------------------------------------------------------------------
 
+print(engine.getProperty("volume"))
+print(engine.getProperty("rate"))
+print(engine.getProperty("voices"))
 
 # ----------------------------------------------------------------------
 # 🟢 6: LIST AVAILABLE VOICES
@@ -98,6 +108,14 @@ import pyttsx3
 # 4. Note which voices are available on your system
 # 5. Different OS have different voices available
 # ----------------------------------------------------------------------
+
+from typing import cast
+
+from pyttsx3.voice import Voice
+
+voices = cast(list[Voice], engine.getProperty("voices"))
+for voice in voices:
+    print(voice.id, voice.name, voice.gender, voice.languages)
 
 
 # =====================================================================
@@ -118,6 +136,23 @@ import pyttsx3
 # 5. Experiment to find a comfortable rate
 # ----------------------------------------------------------------------
 
+# engine.setProperty("rate", 50)
+# engine.say("This is 50")
+
+# engine.setProperty("rate", 75)
+# engine.say("This is 75")
+
+# engine.setProperty("rate", 100)
+# engine.say("This is 100")
+
+# engine.setProperty("rate", 300)
+# engine.say("This is 300")
+
+# engine.setProperty("rate", 500)
+# engine.say("This is a Ferrari doing 500, yahoo!")
+
+engine.setProperty("rate", 200)
+# engine.runAndWait()
 
 # ----------------------------------------------------------------------
 # 🟡 8: CHANGE VOLUME
@@ -132,6 +167,18 @@ import pyttsx3
 # 5. Note: Value must be between 0.0 and 1.0
 # ----------------------------------------------------------------------
 
+print(engine.getProperty("volume"))
+
+# engine.setProperty("volume", 0.5)
+# engine.say("Talking with little volume")
+
+# engine.setProperty("volume", 0.75)
+# engine.say("Speaking louder")
+
+# engine.setProperty("volume", 1)
+# engine.say("Back to the loudest")
+
+# engine.runAndWait()
 
 # ----------------------------------------------------------------------
 # 🟡 9: CHANGE VOICE
@@ -146,6 +193,10 @@ import pyttsx3
 # 5. Note: Use voice.id, not the voice object itself
 # ----------------------------------------------------------------------
 
+# for voice in voices:
+# engine.setProperty("voice", voice.id)
+# engine.say("This is grandma talking, so you'd better listen to me, kid")
+# engine.runAndWait()
 
 # ----------------------------------------------------------------------
 # 🟡 10: CREATE A CONFIGURABLE SPEAKER
@@ -179,6 +230,11 @@ import pyttsx3
 # 5. Play the file to verify it sounds correct
 # ----------------------------------------------------------------------
 
+engine.save_to_file(
+    "I want to make this",
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter24/11_audio.wav",
+)
+engine.runAndWait()
 
 # ----------------------------------------------------------------------
 # 🟡 12: SAVE LONG TEXT TO AUDIO
