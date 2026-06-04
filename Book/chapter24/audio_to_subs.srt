@@ -1,0 +1,80 @@
+1
+00:00:00,000 --> 00:00:04,120
+What time is it in Zurich when it's 7.11 pm in Sao Paulo, asked Dr. Elaine?
+
+2
+00:00:04,120 --> 00:00:07,960
+Well according to her calculations, which involve the workbook named Project Omega V2
+
+3
+00:00:07,960 --> 00:00:13,640
+Final.xlsx and the function dealt at time 1, time zone 1, time zone 2, the difference
+
+4
+00:00:13,640 --> 00:00:15,200
+is precisely 5 hours.
+
+5
+00:00:15,200 --> 00:00:20,680
+Oddly enough, the cafe's Wi-Fi password, Creme Brulé 1492, stumped even the cleverest
+
+6
+00:00:20,680 --> 00:00:22,960
+intern, York, last Wednesday.
+
+7
+00:00:22,960 --> 00:00:24,840
+It's pronounced Yorg, not George.
+
+8
+00:00:24,840 --> 00:00:29,120
+He clarified, later, as the thunder rolled, and the rain intensified, Alexa cheerfully
+
+9
+00:00:29,440 --> 00:00:31,680
+the precipitation is currently 83%.
+
+10
+00:00:31,680 --> 00:00:34,480
+Winds are southeasterly at 4.2 m per second.
+
+11
+00:00:34,480 --> 00:00:37,640
+She then played, furliz comma, but Siri interrupted.
+
+12
+00:00:37,640 --> 00:00:40,600
+Would you like to set a reminder or hear a joke about databases?
+
+13
+00:00:40,600 --> 00:00:45,520
+Despite deciding to order pina coladas with 61% less sugar, they all had to agree.
+
+14
+00:00:45,520 --> 00:00:47,680
+English spelling is notoriously inconsistent.
+
+15
+00:00:47,680 --> 00:00:50,600
+Kernel, Q, Flem though, through, tough.
+
+16
+00:00:50,600 --> 00:00:56,920
+Let's check tomorrow's forecast at HTTPS colon slash slash weather dot example slash cafe.
+
+17
+00:00:56,920 --> 00:00:59,400
+Lang equals D and unit equals degrees C.
+
+18
+00:00:59,400 --> 00:01:04,160
+Elaine suggested, unbeknownst to them, a background process was running Python 3 managed PyMake
+
+19
+00:01:04,160 --> 00:01:08,520
+migrations, dry run on the cafe server, but generated a permission denied.
+
+20
+00:01:08,520 --> 00:01:10,200
+Varlog Django error log error.
+

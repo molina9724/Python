@@ -58,7 +58,7 @@ engine = pyttsx3.init()
 # 5. Make sure your speakers aren't muted!
 # ----------------------------------------------------------------------
 
-engine.say("Hello, world!")
+# engine.say("Hello, world!")
 # engine.runAndWait()
 
 # ----------------------------------------------------------------------
@@ -234,7 +234,7 @@ engine.save_to_file(
     "I want to make this",
     "/Users/daniel_molina/Downloads/Python/Python/Book/chapter24/11_audio.wav",
 )
-engine.runAndWait()
+# engine.runAndWait()
 
 # ----------------------------------------------------------------------
 # 🟡 12: SAVE LONG TEXT TO AUDIO
@@ -296,6 +296,7 @@ engine.runAndWait()
 # 5. Verify import works without errors
 # ----------------------------------------------------------------------
 
+import whisper
 
 # ----------------------------------------------------------------------
 # 🟢 16: LOAD A WHISPER MODEL
@@ -309,6 +310,8 @@ engine.runAndWait()
 # 4. Smaller models = faster but less accurate
 # 5. 'base' is good for most purposes
 # ----------------------------------------------------------------------
+
+model = whisper.load_model("base")
 
 
 # ----------------------------------------------------------------------
@@ -324,6 +327,10 @@ engine.runAndWait()
 # 5. Print the transcribed text
 # ----------------------------------------------------------------------
 
+result = model.transcribe(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter24/11_audio.wav"
+)
+print(result["text"])
 
 # ----------------------------------------------------------------------
 # 🟡 18: TRANSCRIBE WITH LANGUAGE SPECIFIED
@@ -339,6 +346,17 @@ engine.runAndWait()
 # ----------------------------------------------------------------------
 
 
+result = model.transcribe(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter24/11_audio.wav",
+    language="Spanish",
+)
+print(result["text"])
+result = model.transcribe(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter24/11_audio.wav",
+    language="Chinese",
+)
+print(result["text"])
+
 # ----------------------------------------------------------------------
 # 🟡 19: COMPARE MODEL ACCURACY AND SPEED
 #
@@ -353,6 +371,24 @@ engine.runAndWait()
 # 6. Note the tradeoff between speed and accuracy
 # ----------------------------------------------------------------------
 
+long_string = """“What time is it in Zürich, when it’s 7:11 p.m. in São Paulo?” asked Dr. Elaine.  
+“Well, according to her calculations—which involved a workbook named ‘project_Ω_v2-final.xlsx’ and the function deltaT(time1, timeZone1, timeZone2)—the difference is precisely five hours.”  
+Oddly enough, the café’s Wi-Fi password, “«Crème-Brûlée_1492»,” stumped even the cleverest intern, Jörg, last Wednesday.  
+“It’s pronounced ‘yohrg’, not ‘George!’” he clarified.  
+Later, as the thunder rolled and the rain intensified, Alexa cheerfully announced, “The precipitation is currently 83%, winds are southeasterly at 4.2 meters per second.”  
+She then played ‘Für Elise’, but Siri interrupted: “Would you like to set a reminder or hear a joke about databases?”  
+Despite deciding to order piña coladas (with ~61% less sugar), they all had to agree: “English spelling is notoriously inconsistent—colonel, queue, phlegm, though, through, tough.”  
+“Let’s check tomorrow’s forecast at https://weather.example/café?lang=de&unit=°C,” Elaine suggested.  
+Unbeknownst to them, a background process was running `python3 manage.py makemigrations --dry-run` on the café’s server, but generated a “Permission denied: /var/log/django/error.log” error."""
+
+engine.save_to_file(long_string, "long_string.wav")
+# engine.runAndWait()
+
+model = whisper.load_model("small")
+result = model.transcribe(
+    "/Users/daniel_molina/Downloads/Python/Python/Book/chapter24/long_string.wav"
+)
+# print(result["text"])
 
 # ----------------------------------------------------------------------
 # 🟡 20: EXAMINE TRANSCRIPTION RESULTS
@@ -368,6 +404,8 @@ engine.runAndWait()
 # 6. Explore other available keys
 # ----------------------------------------------------------------------
 
+print(result.keys())
+print(result["segments"])
 
 # =====================================================================
 #                    SECTION 5: SUBTITLE FILES
@@ -387,6 +425,10 @@ engine.runAndWait()
 # 5. Open the file to see the SRT format
 # ----------------------------------------------------------------------
 
+write_func = whisper.utils.get_writer(
+    "srt", "/Users/daniel_molina/Downloads/Python/Python/Book/chapter24/"
+)
+write_func(result, "audio_to_subs")
 
 # ----------------------------------------------------------------------
 # 🟡 22: CREATE VTT SUBTITLE FILE
@@ -401,6 +443,10 @@ engine.runAndWait()
 # 5. Compare VTT format to SRT format
 # ----------------------------------------------------------------------
 
+write_func = whisper.utils.get_writer(
+    "vtt", "/Users/daniel_molina/Downloads/Python/Python/Book/chapter24/"
+)
+write_func(result, "audio_to_subs2")
 
 # ----------------------------------------------------------------------
 # 🟡 23: CREATE TSV AND JSON OUTPUT
@@ -415,6 +461,15 @@ engine.runAndWait()
 # 5. TSV is useful for spreadsheets, JSON for programs
 # ----------------------------------------------------------------------
 
+write_func = whisper.utils.get_writer(
+    "tsv", "/Users/daniel_molina/Downloads/Python/Python/Book/chapter24/"
+)
+write_func(result, "audio_to_subs3")
+
+write_func = whisper.utils.get_writer(
+    "json", "/Users/daniel_molina/Downloads/Python/Python/Book/chapter24/"
+)
+write_func(result, "audio_to_subs4")
 
 # ----------------------------------------------------------------------
 # 🟡 24: CREATE ALL SUBTITLE FORMATS
