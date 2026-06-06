@@ -213,6 +213,9 @@ print(response.json())
 # 5. Try searching posts for keywords
 # ----------------------------------------------------------------------
 
+params = {"q": "lie"}
+response = requests.get(USERS, params=params)
+print(response.json())
 
 # ----------------------------------------------------------------------
 # 🟡 10: PAGINATION
@@ -227,6 +230,15 @@ print(response.json())
 # 5. Calculate total pages from count and limit
 # ----------------------------------------------------------------------
 
+params = {"_page": 1, "_limit": 2}
+response = requests.get(USERS, params)
+print(response.json())
+
+params = {"_page": 2, "_limit": 2}
+response = requests.get(USERS, params)
+print(response.json())
+
+print(response.headers.get("X-Total-Count"))
 
 # ----------------------------------------------------------------------
 # 🟡 11: SORTING RESULTS
@@ -241,6 +253,17 @@ print(response.json())
 # 5. Combine sorting with pagination
 # ----------------------------------------------------------------------
 
+params = {"_sort": "age", "_order": "desc"}
+response = requests.get(USERS, params)
+print(response.json())
+
+params = {"_sort": "age", "_order": "asc"}
+response = requests.get(USERS, params)
+print(response.json())
+
+params = {"_sort": "name,age", "_order": "desc,asc"}
+response = requests.get(USERS, params)
+print(response.json())
 
 # ----------------------------------------------------------------------
 # 🟡 12: SLICE RESULTS
@@ -255,6 +278,9 @@ print(response.json())
 # 5. Useful for custom pagination
 # ----------------------------------------------------------------------
 
+params = {"_start": 0, "_limit": 2}
+response = requests.get(USERS, params)
+print(response.json())
 
 # ----------------------------------------------------------------------
 # 🟡 13: GET NESTED RESOURCES
