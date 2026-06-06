@@ -1,0 +1,5 @@
+$kind: http-request
+name: New Request
+url: https://jsonplaceholder.typicode.com/users/3
+method: GET
+order: 1780759330770

@@ -1,0 +1,50 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Alice",
+            "email": "alice@example.com",
+            "age": 28
+        },
+        {
+            "id": 2,
+            "name": "Bob",
+            "email": "bob@example.com",
+            "age": 34
+        },
+        {
+            "id": 3,
+            "name": "Charlie",
+            "email": "charlie@example.com",
+            "age": 22
+        }
+    ],
+    "posts": [
+        {
+            "id": 1,
+            "title": "Hello World",
+            "content": "My first post",
+            "userId": 1
+        },
+        {
+            "id": 2,
+            "title": "Learning Python",
+            "content": "Python is great",
+            "userId": 2
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "text": "Great post!",
+            "postId": 1,
+            "userId": 2
+        },
+        {
+            "id": 2,
+            "text": "Thanks for sharing",
+            "postId": 1,
+            "userId": 3
+        }
+    ]
+}
