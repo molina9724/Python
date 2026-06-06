@@ -261,7 +261,7 @@ params = {"_sort": "age", "_order": "asc"}
 response = requests.get(USERS, params)
 print(response.json())
 
-params = {"_sort": "name,age", "_order": "desc,asc"}
+params = {"_sort": "age,name", "_order": "desc,desc"}
 response = requests.get(USERS, params)
 print(response.json())
 
@@ -278,7 +278,15 @@ print(response.json())
 # 5. Useful for custom pagination
 # ----------------------------------------------------------------------
 
-params = {"_start": 0, "_limit": 2}
+params = {"_start": 0, "_end": 2}
+response = requests.get(USERS, params)
+print(response.json())
+
+params = {"_start": 2, "_end": 4}
+response = requests.get(USERS, params)
+print(response.json())
+
+params = {"_start": 0, "_limit": 5}
 response = requests.get(USERS, params)
 print(response.json())
 
@@ -295,6 +303,11 @@ print(response.json())
 # 5. Examine the nested structure in response
 # ----------------------------------------------------------------------
 
+# response = requests.get(BASE_URL + "/posts?_embed=comments")
+# print(response.json())
+
+# response = requests.get(BASE_URL + "/posts?_expand=post")
+# print(response.json())
 
 # ----------------------------------------------------------------------
 # 🟡 14: OPERATORS FOR FILTERING
@@ -309,6 +322,21 @@ print(response.json())
 # 5. Combine multiple operators
 # ----------------------------------------------------------------------
 
+params = {"age_gte": 25}
+response = requests.get(USERS, params)
+print(response.json())
+
+params = {"age_lte": 25}
+response = requests.get(USERS, params)
+print(response.json())
+
+params = {"name_ne": "Alice"}
+response = requests.get(USERS, params)
+print(response.json())
+
+params = {"name_like": "^N"}
+response = requests.get(USERS, params)
+print(response.json())
 
 # =====================================================================
 #                    SECTION 3: POST REQUESTS (CREATE DATA)
