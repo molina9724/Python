@@ -231,11 +231,11 @@ print(response.json())
 # ----------------------------------------------------------------------
 
 params = {"_page": 1, "_limit": 2}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 params = {"_page": 2, "_limit": 2}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 print(response.headers.get("X-Total-Count"))
@@ -254,15 +254,15 @@ print(response.headers.get("X-Total-Count"))
 # ----------------------------------------------------------------------
 
 params = {"_sort": "age", "_order": "desc"}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 params = {"_sort": "age", "_order": "asc"}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 params = {"_sort": "age,name", "_order": "desc,desc"}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 # ----------------------------------------------------------------------
@@ -279,15 +279,15 @@ print(response.json())
 # ----------------------------------------------------------------------
 
 params = {"_start": 0, "_end": 2}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 params = {"_start": 2, "_end": 4}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 params = {"_start": 0, "_limit": 5}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 # ----------------------------------------------------------------------
@@ -323,19 +323,19 @@ print(response.json())
 # ----------------------------------------------------------------------
 
 params = {"age_gte": 25}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 params = {"age_lte": 25}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 params = {"name_ne": "Alice"}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 params = {"name_like": "^N"}
-response = requests.get(USERS, params)
+response = requests.get(USERS, params=params)
 print(response.json())
 
 # =====================================================================
@@ -357,6 +357,18 @@ print(response.json())
 # ----------------------------------------------------------------------
 
 
+new_user = {
+    "id": 13,
+    "name": "Paul",
+    "role": "user",
+    "age": 29,
+    "active": True,
+    "city": "Envigado",
+}
+
+# response = requests.post(USERS, json=new_user)
+# print(response.status_code)
+
 # ----------------------------------------------------------------------
 # 🟢 16: VERIFY CREATED ITEM
 #
@@ -369,6 +381,14 @@ print(response.json())
 # 4. Verify the data matches what you sent
 # 5. Also check db.json file - it's updated automatically!
 # ----------------------------------------------------------------------
+
+# id = response.json()["id"]
+# print(id)
+
+# params = {"id": 13}
+
+# response = requests.get(USERS, params)
+# print(response.json())
 
 
 # ----------------------------------------------------------------------
@@ -384,6 +404,97 @@ print(response.json())
 # 5. Verify all were created with a GET request
 # ----------------------------------------------------------------------
 
+users = [
+    {
+        "id": 13,
+        "name": "Oscar",
+        "role": "admin",
+        "age": 45,
+        "active": True,
+        "city": "Stockholm",
+    },
+    {
+        "id": 14,
+        "name": "Peggy",
+        "role": "user",
+        "age": 32,
+        "active": False,
+        "city": "Zurich",
+    },
+    {
+        "id": 15,
+        "name": "Quentin",
+        "role": "moderator",
+        "age": 29,
+        "active": True,
+        "city": "Vienna",
+    },
+    {
+        "id": 16,
+        "name": "Rita",
+        "role": "user",
+        "age": 21,
+        "active": False,
+        "city": "Prague",
+    },
+    {
+        "id": 17,
+        "name": "Sybil",
+        "role": "user",
+        "age": 36,
+        "active": True,
+        "city": "Dublin",
+    },
+    {
+        "id": 18,
+        "name": "Trent",
+        "role": "admin",
+        "age": 39,
+        "active": False,
+        "city": "Budapest",
+    },
+    {
+        "id": 19,
+        "name": "Uma",
+        "role": "moderator",
+        "age": 25,
+        "active": True,
+        "city": "Rome",
+    },
+    {
+        "id": 20,
+        "name": "Victor",
+        "role": "user",
+        "age": 34,
+        "active": True,
+        "city": "Oslo",
+    },
+    {
+        "id": 21,
+        "name": "Wendy",
+        "role": "user",
+        "age": 28,
+        "active": False,
+        "city": "Madrid",
+    },
+    {
+        "id": 22,
+        "name": "Xavier",
+        "role": "admin",
+        "age": 50,
+        "active": True,
+        "city": "Berlin",
+    },
+]
+
+# users_id = list()
+# for user in users:
+#     response = requests.post(USERS, json=user)
+#     users_id.append(response.json()["id"])
+
+# for id in users_id:
+#     response = requests.get(USERS, json={"id": id})
+#     print(response.status_code)
 
 # ----------------------------------------------------------------------
 # 🟡 18: CREATE WITH RELATIONSHIPS
@@ -398,6 +509,19 @@ print(response.json())
 # 5. Verify with GET /posts?_expand=user
 # ----------------------------------------------------------------------
 
+new_post = {
+    "id": 10,
+    "text": "This is crazy",
+    "postId": 2,
+    "userId": 4,
+}
+
+response = requests.post(POSTS, json=new_post)
+print(response.status_code)
+
+params = "?_expand=user"
+response = requests.get(POSTS + params)
+print(response.json())
 
 # ----------------------------------------------------------------------
 # 🟡 19: HANDLE POST ERRORS
@@ -445,6 +569,16 @@ print(response.json())
 # 5. PUT replaces the ENTIRE resource
 # ----------------------------------------------------------------------
 
+before_update = requests.get(USERS + "/1")
+
+updated_user = {
+    "name": "Alice Smith",
+    "email": "alice@new.com",
+    "age": 29,
+}
+
+response = requests.put(USERS + "/1", json=updated_user)
+print(response.status_code)
 
 # ----------------------------------------------------------------------
 # 🟢 22: VERIFY UPDATE
@@ -459,6 +593,9 @@ print(response.json())
 # 5. Note: ID is preserved automatically
 # ----------------------------------------------------------------------
 
+after_update = requests.get(USERS + "/1")
+
+# assert before_update.json() != after_update.json()
 
 # ----------------------------------------------------------------------
 # 🟡 23: PARTIAL UPDATE WITH PATCH
@@ -472,6 +609,10 @@ print(response.json())
 # 4. Other fields remain unchanged
 # 5. Compare PUT (full replace) vs PATCH (partial update)
 # ----------------------------------------------------------------------
+
+partial_update = {"age": 30}
+response = requests.patch(USERS + "/2", json=partial_update)
+print(response.status_code)
 
 
 # ----------------------------------------------------------------------

@@ -1,197 +1,281 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "name": "Alice",
-            "role": "admin",
-            "age": 30,
-            "active": true,
-            "city": "Berlin"
-        },
-        {
-            "id": 2,
-            "name": "Bob",
-            "role": "user",
-            "age": 24,
-            "active": false,
-            "city": "Paris"
-        },
-        {
-            "id": 3,
-            "name": "Charlie",
-            "role": "moderator",
-            "age": 28,
-            "active": true,
-            "city": "Madrid"
-        },
-        {
-            "id": 4,
-            "name": "Diana",
-            "role": "user",
-            "age": 22,
-            "active": false,
-            "city": "Madrid"
-        },
-        {
-            "id": 5,
-            "name": "Eve",
-            "role": "admin",
-            "age": 41,
-            "active": true,
-            "city": "Berlin"
-        },
-        {
-            "id": 6,
-            "name": "Frank",
-            "role": "user",
-            "age": 35,
-            "active": true,
-            "city": "London"
-        },
-        {
-            "id": 7,
-            "name": "Grace",
-            "role": "moderator",
-            "age": 27,
-            "active": false,
-            "city": "London"
-        },
-        {
-            "id": 8,
-            "name": "Heidi",
-            "role": "user",
-            "age": 31,
-            "active": true,
-            "city": "Paris"
-        },
-        {
-            "id": 9,
-            "name": "Ivan",
-            "role": "admin",
-            "age": 38,
-            "active": true,
-            "city": "Rome"
-        },
-        {
-            "id": 10,
-            "name": "Judy",
-            "role": "moderator",
-            "age": 26,
-            "active": true,
-            "city": "Berlin"
-        },
-        {
-            "id": 11,
-            "name": "Mallory",
-            "role": "user",
-            "age": 28,
-            "active": false,
-            "city": "Lisbon"
-        },
-        {
-            "id": 12,
-            "name": "Niaj",
-            "role": "user",
-            "age": 23,
-            "active": true,
-            "city": "Lisbon"
-        }
-    ],
-    "posts": [
-        {
-            "id": 1,
-            "userId": 1,
-            "title": "Welcome",
-            "content": "Welcome Alice!",
-            "published": true,
-            "tag": "intro",
-            "likes": 5
-        },
-        {
-            "id": 2,
-            "userId": 2,
-            "title": "Paris Tips",
-            "content": "Things to do...",
-            "published": false,
-            "tag": "travel",
-            "likes": 10
-        },
-        {
-            "id": 3,
-            "userId": 3,
-            "title": "Madrid Life",
-            "content": "Sunny Madrid...",
-            "published": true,
-            "tag": "city",
-            "likes": 8
-        },
-        {
-            "id": 4,
-            "userId": 1,
-            "title": "Berlin Wall",
-            "content": "History matters.",
-            "published": true,
-            "tag": "history",
-            "likes": 3
-        },
-        {
-            "id": 5,
-            "userId": 4,
-            "title": "Madrid Eats",
-            "content": "Food review.",
-            "published": false,
-            "tag": "food",
-            "likes": 6
-        },
-        {
-            "id": 6,
-            "userId": 7,
-            "title": "London Fog",
-            "content": "Weather update.",
-            "published": true,
-            "tag": "weather",
-            "likes": 2
-        },
-        {
-            "id": 7,
-            "userId": 10,
-            "title": "Berlin Now",
-            "content": "Modern city.",
-            "published": true,
-            "tag": "city",
-            "likes": 11
-        },
-        {
-            "id": 8,
-            "userId": 9,
-            "title": "Rome Ruins",
-            "content": "Ancient sights.",
-            "published": false,
-            "tag": "travel",
-            "likes": 7
-        },
-        {
-            "id": 9,
-            "userId": 5,
-            "title": "Eve's Tips",
-            "content": "Security best.",
-            "published": true,
-            "tag": "security",
-            "likes": 14
-        }
-    ],
-    "comments": [
-        {
-            "id": 1,
-            "text": "Great post!",
-            "postId": 1,
-            "userId": 2
-        },
-        {
-            "id": 2,
-            "text": "Thanks for sharing",
-            "postId": 1,
-            "userId": 3
-        }
-    ]
+  "users": [
+    {
+      "name": "Alice Smith",
+      "email": "alice@new.com",
+      "age": 29,
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "Bob",
+      "role": "user",
+      "age": 30,
+      "active": false,
+      "city": "Paris"
+    },
+    {
+      "id": 3,
+      "name": "Charlie",
+      "role": "moderator",
+      "age": 28,
+      "active": true,
+      "city": "Madrid"
+    },
+    {
+      "id": 4,
+      "name": "Diana",
+      "role": "user",
+      "age": 22,
+      "active": false,
+      "city": "Madrid"
+    },
+    {
+      "id": 5,
+      "name": "Eve",
+      "role": "admin",
+      "age": 41,
+      "active": true,
+      "city": "Berlin"
+    },
+    {
+      "id": 6,
+      "name": "Frank",
+      "role": "user",
+      "age": 35,
+      "active": true,
+      "city": "London"
+    },
+    {
+      "id": 7,
+      "name": "Grace",
+      "role": "moderator",
+      "age": 27,
+      "active": false,
+      "city": "London"
+    },
+    {
+      "id": 8,
+      "name": "Heidi",
+      "role": "user",
+      "age": 31,
+      "active": true,
+      "city": "Paris"
+    },
+    {
+      "id": 9,
+      "name": "Ivan",
+      "role": "admin",
+      "age": 38,
+      "active": true,
+      "city": "Rome"
+    },
+    {
+      "id": 10,
+      "name": "Judy",
+      "role": "moderator",
+      "age": 26,
+      "active": true,
+      "city": "Berlin"
+    },
+    {
+      "id": 11,
+      "name": "Mallory",
+      "role": "user",
+      "age": 28,
+      "active": false,
+      "city": "Lisbon"
+    },
+    {
+      "id": 12,
+      "name": "Niaj",
+      "role": "user",
+      "age": 23,
+      "active": true,
+      "city": "Lisbon"
+    },
+    {
+      "id": "13",
+      "name": "Oscar",
+      "role": "admin",
+      "age": "45",
+      "active": "True",
+      "city": "Stockholm"
+    },
+    {
+      "id": "14",
+      "name": "Peggy",
+      "role": "user",
+      "age": "32",
+      "active": "False",
+      "city": "Zurich"
+    },
+    {
+      "id": "15",
+      "name": "Quentin",
+      "role": "moderator",
+      "age": "29",
+      "active": "True",
+      "city": "Vienna"
+    },
+    {
+      "id": "16",
+      "name": "Rita",
+      "role": "user",
+      "age": "21",
+      "active": "False",
+      "city": "Prague"
+    },
+    {
+      "id": "17",
+      "name": "Sybil",
+      "role": "user",
+      "age": "36",
+      "active": "True",
+      "city": "Dublin"
+    },
+    {
+      "id": "18",
+      "name": "Trent",
+      "role": "admin",
+      "age": "39",
+      "active": "False",
+      "city": "Budapest"
+    },
+    {
+      "id": "19",
+      "name": "Uma",
+      "role": "moderator",
+      "age": "25",
+      "active": "True",
+      "city": "Rome"
+    },
+    {
+      "id": "20",
+      "name": "Victor",
+      "role": "user",
+      "age": "34",
+      "active": "True",
+      "city": "Oslo"
+    },
+    {
+      "id": "21",
+      "name": "Wendy",
+      "role": "user",
+      "age": "28",
+      "active": "False",
+      "city": "Madrid"
+    },
+    {
+      "id": "22",
+      "name": "Xavier",
+      "role": "admin",
+      "age": "50",
+      "active": "True",
+      "city": "Berlin"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Welcome",
+      "content": "Welcome Alice!",
+      "published": true,
+      "tag": "intro",
+      "likes": 5
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "title": "Paris Tips",
+      "content": "Things to do...",
+      "published": false,
+      "tag": "travel",
+      "likes": 10
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "title": "Madrid Life",
+      "content": "Sunny Madrid...",
+      "published": true,
+      "tag": "city",
+      "likes": 8
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "title": "Berlin Wall",
+      "content": "History matters.",
+      "published": true,
+      "tag": "history",
+      "likes": 3
+    },
+    {
+      "id": 5,
+      "userId": 4,
+      "title": "Madrid Eats",
+      "content": "Food review.",
+      "published": false,
+      "tag": "food",
+      "likes": 6
+    },
+    {
+      "id": 6,
+      "userId": 7,
+      "title": "London Fog",
+      "content": "Weather update.",
+      "published": true,
+      "tag": "weather",
+      "likes": 2
+    },
+    {
+      "id": 7,
+      "userId": 10,
+      "title": "Berlin Now",
+      "content": "Modern city.",
+      "published": true,
+      "tag": "city",
+      "likes": 11
+    },
+    {
+      "id": 8,
+      "userId": 9,
+      "title": "Rome Ruins",
+      "content": "Ancient sights.",
+      "published": false,
+      "tag": "travel",
+      "likes": 7
+    },
+    {
+      "id": 9,
+      "userId": 5,
+      "title": "Eve's Tips",
+      "content": "Security best.",
+      "published": true,
+      "tag": "security",
+      "likes": 14
+    },
+    {
+      "id": "10",
+      "text": "This is crazy",
+      "postId": "2",
+      "userId": "4"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "text": "Great post!",
+      "postId": 1,
+      "userId": 2
+    },
+    {
+      "id": 2,
+      "text": "Thanks for sharing",
+      "postId": 1,
+      "userId": 3
+    }
+  ]
 }
