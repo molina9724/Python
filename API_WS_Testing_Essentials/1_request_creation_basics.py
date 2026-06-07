@@ -628,6 +628,16 @@ print(response.status_code)
 # 5. Handle the error gracefully
 # ----------------------------------------------------------------------
 
+updated_user = {
+    "name": "Alice Smith",
+    "email": "alice@new.com",
+    "age": 29,
+}
+wrong_id = "/wrong_id"
+
+response = requests.put(USERS + wrong_id, json=updated_user)
+print(response.status_code)
+
 
 # ----------------------------------------------------------------------
 # 🟡 25: UPDATE WITH VALIDATION
@@ -661,6 +671,8 @@ print(response.status_code)
 # 5. Check db.json - item is removed
 # ----------------------------------------------------------------------
 
+# response = requests.delete(USERS + "/3")
+# print(response.status_code)
 
 # ----------------------------------------------------------------------
 # 🟢 27: CONFIRM BEFORE DELETE
@@ -689,6 +701,8 @@ print(response.status_code)
 # 5. Return meaningful feedback
 # ----------------------------------------------------------------------
 
+response = requests.delete(USERS + "/doesnt_exist")
+print(response.status_code)
 
 # ----------------------------------------------------------------------
 # 🟡 29: DELETE MULTIPLE ITEMS
@@ -703,6 +717,10 @@ print(response.status_code)
 # 5. Consider: what if some fail?
 # ----------------------------------------------------------------------
 
+ids = [1, 2, 4, 5]
+
+# for id in ids:
+#     requests.delete(USERS + f"/{id}")
 
 # ----------------------------------------------------------------------
 # 🟡 30: DELETE WITH CASCADE CONSIDERATION
@@ -717,6 +735,8 @@ print(response.status_code)
 # 5. Create a function that handles this cascade
 # ----------------------------------------------------------------------
 
+# response = requests.delete(POSTS + "/?userId=7")
+# response = requests.delete(USERS + "/7")
 
 # =====================================================================
 #                    SECTION 6: COMBINING OPERATIONS
@@ -736,6 +756,53 @@ print(response.status_code)
 # 5. Each function should handle errors and return useful info
 # ----------------------------------------------------------------------
 
+
+def create_user(name: str, email: str, age: int):
+    response = requests.get(USERS)
+    last_one = len(response.json())
+    last_one_id = response.json()[last_one - 1]["id"]
+
+    response = requests.get(USERS + f"/{last_one_id}")
+    id = int(response.json()["id"]) + 1
+
+    params = {
+        "id": id,
+        "name": name,
+        "role": "user",
+        "email": email,
+        "age": age,
+    }
+    response = requests.post(USERS, json=params)
+    return response.status_code
+
+
+# print(create_user("CJ", "cj@mailinator.com", 40))
+
+
+def get_user(id: int):
+    return requests.get(USERS + f"/{id}").json()
+
+
+# print(get_user(9))
+
+
+def update_user(id: int, data: dict):
+    response = requests.get(USERS + f"/{id}")
+    user = response.json()
+
+    for key, value in data.items():
+        user[key] = value
+
+    requests.patch(USERS + f"/{id}", json=user)
+    return requests.get(USERS + f"/{id}").json()
+
+
+update = {
+    "name": "UPDATED",
+    "role": "UPDATED",
+    "new_field": "XXX",
+}
+print(update_user(9, update))
 
 # ----------------------------------------------------------------------
 # 🟡 32: BUILD A USER CLASS
