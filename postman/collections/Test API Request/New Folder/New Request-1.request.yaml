@@ -1,0 +1,16 @@
+$kind: http-request
+name: New Request
+url: "{{baseUrl}}/users"
+method: POST
+body:
+  type: json
+  content: |2-
+        {
+          "id": "{{$randomInt}}",
+          "name": "{{$randomFirstName}}",
+          "role": "{{$randomFirstName}}",
+          "age": {{$randomInt}},
+          "active": {{$randomBoolean}},
+          "city": "{{$randomCity}}"
+        }
+order: 321080657827800

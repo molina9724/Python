@@ -1,0 +1,16 @@
+name: Development
+values:
+  - key: baseUrl
+    value: ''
+  - key: name
+    value: ''
+  - key: role
+    value: ''
+  - key: age
+    value: ''
+  - key: active
+    value: ''
+  - key: city
+    value: ''
+  - key: id
+    value: ''

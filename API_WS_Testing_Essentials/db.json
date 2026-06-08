@@ -143,6 +143,22 @@
       "role": "user",
       "email": "cj@mailinator.com",
       "age": 40
+    },
+    {
+      "id": 101,
+      "name": "John Doe",
+      "role": "test",
+      "age": 50,
+      "active": true,
+      "city": "test"
+    },
+    {
+      "id": "115",
+      "name": "Shane",
+      "role": "Ubaldo",
+      "age": 921,
+      "active": true,
+      "city": "Port Elseside"
     }
   ],
   "posts": [
