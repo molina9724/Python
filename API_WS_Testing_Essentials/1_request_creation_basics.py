@@ -892,6 +892,8 @@ print(update_user(9, update))
 # 5. Combine with specific error handling
 # ----------------------------------------------------------------------
 
+response = requests.get(USERS + "/500")
+response.raise_for_status()
 
 # ----------------------------------------------------------------------
 # 🟡 38: HANDLE CONNECTION ERRORS
