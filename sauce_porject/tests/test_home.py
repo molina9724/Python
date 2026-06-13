@@ -5,6 +5,24 @@ BASE_URL = "https://www.saucedemo.com/"
 PASSWORD = "secret_sauce"
 INVENTORY_URL = "https://www.saucedemo.com/inventory.html"
 
+UNLOCKED_USERS = (
+    "standard_user",
+    "problem_user",
+    "performance_glitch_user",
+    "error_user",
+    "visual_user",
+)
+TESTDATA = [(user, PASSWORD, INVENTORY_URL) for user in UNLOCKED_USERS]
+
+LOCKED_USERS = ("locked_out_user",)
+"""place the locked user after the first unlocked user to match the
+order shown on the demo page (was previously inserted at index 1
+when using a mutable list)"""
+ALL_USERS = (UNLOCKED_USERS[0],) + LOCKED_USERS + UNLOCKED_USERS[1:]
+
+# explicit expected order for the login credentials block on the page
+EXPECTED_LOGIN_USERNAMES = list(ALL_USERS)
+
 
 @pytest.fixture(scope="function", autouse=True)
 def go_home(page: Page):
@@ -53,14 +71,7 @@ def test_07_usernames(page: Page):
     else:
         usernames = lines
 
-    assert usernames == [
-        "standard_user",
-        "locked_out_user",
-        "problem_user",
-        "performance_glitch_user",
-        "error_user",
-        "visual_user",
-    ]
+    assert usernames == EXPECTED_LOGIN_USERNAMES
 
 
 def test_08_password_heading(page: Page):
@@ -82,20 +93,9 @@ def test_09_password(page: Page):
     assert password == ["secret_sauce"]
 
 
-unlocked_users = [
-    "standard_user",
-    "problem_user",
-    "performance_glitch_user",
-    "error_user",
-    "visual_user",
-]
-
-testdata = []
-for user in unlocked_users:
-    testdata.append((user, PASSWORD, INVENTORY_URL))
-
-
-@pytest.mark.parametrize("user, password, expected", testdata, ids=unlocked_users)
+@pytest.mark.parametrize(
+    "user, password, expected", argvalues=TESTDATA, ids=UNLOCKED_USERS
+)
 def test_10_successful_login_and_logout(page: Page, user, password, expected):
     page.get_by_role("textbox", name="Username").fill(user)
     page.get_by_role("textbox", name="Password").fill(password)
@@ -104,4 +104,5 @@ def test_10_successful_login_and_logout(page: Page, user, password, expected):
 
     page.get_by_role("button", name="Open Menu").click()
     page.get_by_role("link", name="Logout").click()
+    expect(page).to_have_url(BASE_URL)
     expect(page).to_have_url(BASE_URL)
