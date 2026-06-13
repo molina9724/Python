@@ -1,0 +1,188 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/users"
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    x-powered-by: Express
+    vary: Origin, Accept-Encoding
+    access-control-allow-credentials: "true"
+    cache-control: no-cache
+    pragma: no-cache
+    expires: "-1"
+    x-content-type-options: nosniff
+    content-type: application/json; charset=utf-8
+    etag: W/"99b-I6dDfy8R0zD6Hl/njkzWzPCBQkI"
+    content-encoding: br
+    date: Mon, 08 Jun 2026 15:06:54 GMT
+    connection: keep-alive
+    keep-alive: timeout=5
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": 6,
+          "name": "Frank",
+          "role": "user",
+          "age": 35,
+          "active": true,
+          "city": "London"
+        },
+        {
+          "id": 7,
+          "name": "Grace",
+          "role": "moderator",
+          "age": 27,
+          "active": false,
+          "city": "London"
+        },
+        {
+          "id": 8,
+          "name": "Heidi",
+          "role": "user",
+          "age": 31,
+          "active": true,
+          "city": "Paris"
+        },
+        {
+          "id": 9,
+          "name": "UPDATED",
+          "role": "UPDATED",
+          "age": 38,
+          "active": true,
+          "city": "Rome",
+          "new_field": "XXX"
+        },
+        {
+          "id": 10,
+          "name": "Judy",
+          "role": "moderator",
+          "age": 26,
+          "active": true,
+          "city": "Berlin"
+        },
+        {
+          "id": 11,
+          "name": "Mallory",
+          "role": "user",
+          "age": 28,
+          "active": false,
+          "city": "Lisbon"
+        },
+        {
+          "id": 12,
+          "name": "Niaj",
+          "role": "user",
+          "age": 23,
+          "active": true,
+          "city": "Lisbon"
+        },
+        {
+          "id": 13,
+          "name": "Oscar",
+          "role": "admin",
+          "age": 45,
+          "active": true,
+          "city": "Stockholm"
+        },
+        {
+          "id": 14,
+          "name": "Peggy",
+          "role": "user",
+          "age": 32,
+          "active": false,
+          "city": "Zurich"
+        },
+        {
+          "id": 15,
+          "name": "Quentin",
+          "role": "moderator",
+          "age": 29,
+          "active": true,
+          "city": "Vienna"
+        },
+        {
+          "id": 16,
+          "name": "Rita",
+          "role": "user",
+          "age": 21,
+          "active": false,
+          "city": "Prague"
+        },
+        {
+          "id": 17,
+          "name": "Sybil",
+          "role": "user",
+          "age": 36,
+          "active": true,
+          "city": "Dublin"
+        },
+        {
+          "id": 18,
+          "name": "Trent",
+          "role": "admin",
+          "age": 39,
+          "active": false,
+          "city": "Budapest"
+        },
+        {
+          "id": 19,
+          "name": "Uma",
+          "role": "moderator",
+          "age": 25,
+          "active": true,
+          "city": "Rome"
+        },
+        {
+          "id": 20,
+          "name": "Victor",
+          "role": "user",
+          "age": 34,
+          "active": true,
+          "city": "Oslo"
+        },
+        {
+          "id": 21,
+          "name": "Wendy",
+          "role": "user",
+          "age": 28,
+          "active": false,
+          "city": "Madrid"
+        },
+        {
+          "id": 22,
+          "name": "Xavier",
+          "role": "admin",
+          "age": 50,
+          "active": true,
+          "city": "Berlin"
+        },
+        {
+          "id": 23,
+          "name": "CJ",
+          "role": "user",
+          "email": "cj@mailinator.com",
+          "age": 40
+        },
+        {
+          "id": 101,
+          "name": "John Doe",
+          "role": "test",
+          "age": 50,
+          "active": true,
+          "city": "test"
+        },
+        {
+          "id": "115",
+          "name": "Shane",
+          "role": "Ubaldo",
+          "age": 921,
+          "active": true,
+          "city": "Port Elseside"
+        }
+      ]
+order: 1780931220179

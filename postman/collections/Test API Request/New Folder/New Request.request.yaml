@@ -1,5 +1,5 @@
 $kind: http-request
-name: New Request
 url: https://jsonplaceholder.typicode.com/users/3
 method: GET
+examples: .resources/New Request.resources/examples
 order: 1780759330770
