@@ -12,12 +12,12 @@ UNLOCKED_USERS = (
     "error_user",
     "visual_user",
 )
-TESTDATA = [(user, PASSWORD, INVENTORY_URL) for user in UNLOCKED_USERS]
+SUCCESS_LOGIN_DATA = [(user, PASSWORD, INVENTORY_URL) for user in UNLOCKED_USERS]
 
 LOCKED_USERS = ("locked_out_user",)
-"""place the locked user after the first unlocked user to match the
-order shown on the demo page (was previously inserted at index 1
-when using a mutable list)"""
+# place the locked user after the first unlocked user to match the
+# order shown on the demo page (was previously inserted at index 1
+# when using a mutable list)
 ALL_USERS = (UNLOCKED_USERS[0],) + LOCKED_USERS + UNLOCKED_USERS[1:]
 
 # explicit expected order for the login credentials block on the page
@@ -94,7 +94,7 @@ def test_09_password(page: Page):
 
 
 @pytest.mark.parametrize(
-    "user, password, expected", argvalues=TESTDATA, ids=UNLOCKED_USERS
+    "user, password, expected", argvalues=SUCCESS_LOGIN_DATA, ids=UNLOCKED_USERS
 )
 def test_10_successful_login_and_logout(page: Page, user, password, expected):
     page.get_by_role("textbox", name="Username").fill(user)
@@ -104,5 +104,4 @@ def test_10_successful_login_and_logout(page: Page, user, password, expected):
 
     page.get_by_role("button", name="Open Menu").click()
     page.get_by_role("link", name="Logout").click()
-    expect(page).to_have_url(BASE_URL)
     expect(page).to_have_url(BASE_URL)
