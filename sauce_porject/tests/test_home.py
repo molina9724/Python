@@ -1,9 +1,13 @@
+import random
+
 import pytest
 from playwright.sync_api import Page, expect
 
 BASE_URL = "https://www.saucedemo.com/"
-PASSWORD = "secret_sauce"
 INVENTORY_URL = "https://www.saucedemo.com/inventory.html"
+
+PASSWORD = "secret_sauce"
+WRONG_PASSWORD = "wrong_password"
 
 UNLOCKED_USERS = (
     "standard_user",
@@ -22,6 +26,8 @@ ALL_USERS = (UNLOCKED_USERS[0],) + LOCKED_USERS + UNLOCKED_USERS[1:]
 
 # explicit expected order for the login credentials block on the page
 EXPECTED_LOGIN_USERNAMES = list(ALL_USERS)
+RANDOM_UNBLOCKED_USER = random.choice(ALL_USERS)
+RANDOM_LOCKED_USER = random.choice(LOCKED_USERS)
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -105,3 +111,73 @@ def test_10_successful_login_and_logout(page: Page, user, password, expected):
     page.get_by_role("button", name="Open Menu").click()
     page.get_by_role("link", name="Logout").click()
     expect(page).to_have_url(BASE_URL)
+
+
+def test_11_unsuccessful_login_empty_username_and_empty_password(page: Page):
+    page.get_by_role("button", name="Login").click()
+    error = page.locator('[data-test="error"]')
+    expect(error).to_be_visible()
+    expect(error).to_have_text("Epic sadface: Username is required")
+
+
+def test_12_unsuccessful_login_username_and_empty_password(page: Page):
+    page.get_by_role("textbox", name="Username").fill(RANDOM_UNBLOCKED_USER)
+    page.get_by_role("button", name="Login").click()
+    error = page.locator('[data-test="error"]')
+    expect(error).to_be_visible()
+    expect(error).to_have_text("Epic sadface: Password is required")
+
+
+def test_13_unsuccessful_login_empty_username_and_non_empty_password(page: Page):
+    page.get_by_role("textbox", name="Password").fill(PASSWORD)
+    page.get_by_role("button", name="Login").click()
+    error = page.locator('[data-test="error"]')
+    expect(error).to_be_visible()
+    expect(error).to_have_text("Epic sadface: Username is required")
+
+
+def test_14_unsuccessful_login_right_username_but_wrong_password(page: Page):
+    page.get_by_role("textbox", name="Username").fill(RANDOM_UNBLOCKED_USER)
+    page.get_by_role("textbox", name="Password").fill(WRONG_PASSWORD)
+    page.get_by_role("button", name="Login").click()
+    error = page.locator('[data-test="error"]')
+    expect(error).to_be_visible()
+    expect(error).to_have_text(
+        "Epic sadface: Username and password do not match any user in this service"
+    )
+
+
+def test_15_unsuccessful_login_with_locked_account(page: Page):
+    page.get_by_role("textbox", name="Username").fill(RANDOM_LOCKED_USER)
+    page.get_by_role("textbox", name="Password").fill(PASSWORD)
+    page.get_by_role("button", name="Login").click()
+    error = page.locator('[data-test="error"]')
+    expect(error).to_be_visible()
+    expect(error).to_have_text("Epic sadface: Sorry, this user has been locked out.")
+
+
+def test_16_error_dismissal_after_unsuccessful_login_with_locked_account(page: Page):
+    page.get_by_role("button", name="Login").click()
+    error = page.locator('[data-test="error"]')
+    expect(error).to_be_visible()
+
+    close_error_button = page.locator('[data-test="error-button"]')
+    expect(close_error_button).to_be_visible()
+    close_error_button.click()
+    expect(close_error_button).to_be_hidden()
+
+
+def test_17_error_clears_after_unsuccessful_login_with_locked_account(page: Page):
+    page.get_by_role("button", name="Login").click()
+    error = page.locator('[data-test="error"]')
+    expect(error).to_be_visible()
+
+    close_error_button = page.locator('[data-test="error-button"]')
+    expect(close_error_button).to_be_visible()
+    close_error_button.click()
+    expect(close_error_button).to_be_hidden()
+
+
+def test_18_password_field_masking(page: Page):
+    password_input = page.get_by_role("textbox", name="Password")
+    expect(password_input).to_have_attribute("type", "password")
