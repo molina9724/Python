@@ -1,6 +1,7 @@
-from typing import Union
+from typing import Optional, Union
 
 from playwright.sync_api import Locator, Page
+from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 
 
 class BasePage:
@@ -44,3 +45,55 @@ class BasePage:
             return self._page.locator(selector_or_locator)
         else:
             return selector_or_locator
+
+    def goto(
+        self,
+        url: str,
+        ready_selector: Optional[Union[Locator, str]] = None,
+        timeout: Optional[int] = None,
+    ) -> None:
+        """
+        Navigates to the specified URL and waits for a specific element to become visible.
+
+        This method loads the given URL, waits for the network to be idle, and then waits for
+        a specified selector or locator to be visible on the page. If no selector is provided,
+        it defaults to waiting for an input field with the name 'user-name'.
+
+        Args:
+            url (str): The URL to navigate to.
+            ready_selector (Optional[Union[Locator, str]], optional): The selector or Locator to wait for visibility.
+                If not provided, defaults to 'input[name="user-name"]'.
+            timeout (Optional[int], optional): Maximum time to wait for navigation and element visibility, in milliseconds.
+                If not provided, uses the instance's default timeout.
+
+        Raises:
+            RuntimeError: If the specified element does not become visible within the timeout period.
+        """
+        timeout_ms = timeout if timeout is not None else self._timeout
+        if ready_selector is not None:
+            selector = self.locator(ready_selector)
+        else:
+            selector: Locator = self.locator('input[name="user-name"]')
+
+        label: str = ""
+        if isinstance(ready_selector, str):
+            label = ready_selector
+        elif isinstance(ready_selector, Locator):
+            label = "<Locator>"
+        else:
+            label = 'input[name="user-name"]'
+
+        try:
+            self._page.goto(url, timeout=timeout_ms)
+        except PlaywrightTimeoutError as e:
+            raise RuntimeError(
+                f"Navigation to {url} timed out after {timeout_ms} ms"
+            ) from e
+
+        try:
+            self._page.wait_for_load_state("networkidle", timeout=timeout_ms)
+            selector.wait_for(state="visible", timeout=timeout_ms)
+        except PlaywrightTimeoutError as e:
+            raise RuntimeError(
+                f"Timed out waiting for '{label}' to be visible after navigating to {url} (after {timeout_ms} ms)"
+            ) from e
