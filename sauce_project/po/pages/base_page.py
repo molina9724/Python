@@ -28,8 +28,8 @@ class BasePage:
             page (Page): The Playwright Page object to interact with.
             timeout (int, optional): Default timeout for actions, in milliseconds. Defaults to 10000.
         """
-        self._page = page
-        self._timeout = timeout
+        self._page: Page = page
+        self._timeout: int = timeout
 
     def locator(self, selector_or_locator: Union[str, Locator]) -> Locator:
         """

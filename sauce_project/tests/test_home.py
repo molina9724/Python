@@ -3,6 +3,8 @@ import random
 import pytest
 from playwright.sync_api import Page, expect
 
+from sauce_project.po.pages.login_page import LoginPage
+
 BASE_URL = "https://www.saucedemo.com/"
 INVENTORY_URL = "https://www.saucedemo.com/inventory.html"
 
@@ -31,9 +33,10 @@ RANDOM_LOCKED_USER = random.choice(LOCKED_USERS)
 
 
 @pytest.fixture(scope="function", autouse=True)
-def go_home(page: Page):
-    page.goto(BASE_URL)
-    return page
+def login_page(page: Page) -> Page:
+    login_page_instance = LoginPage(page)
+    login_page_instance.goto(BASE_URL)
+    return login_page_instance._page
 
 
 def test_01_document_title(page: Page):
