@@ -22,3 +22,6 @@ token.json
 # Added by ggshield
 .cache_ggshield
 test-results
+
+# Ignore the snippet testing file
+file_to_test_snippets_not_production.py
