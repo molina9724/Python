@@ -17,5 +17,5 @@
             "name": "chapter16-example"
         }
     ],
-    "python.analysis.autoImportCompletions": false
+    "python.analysis.autoImportCompletions": true
 }
