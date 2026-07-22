@@ -17,5 +17,16 @@
             "name": "chapter16-example"
         }
     ],
-    "python.analysis.autoImportCompletions": true
+    "python.analysis.autoImportCompletions": true,
+    "simpleCodingTimeTracker.inactivityTimeout": 2,
+    "simpleCodingTimeTracker.focusTimeout": 2,
+    "simpleCodingTimeTracker.statusBar.showSeconds": true,
+    "simpleCodingTimeTracker.statusBar.icon": "$(code)",
+    "simpleCodingTimeTracker.statusBar.backgroundStyle": "warning",
+    "simpleCodingTimeTracker.statusBar.color": "",
+    "simpleCodingTimeTracker.health.enableNotifications": false,
+    "simpleCodingTimeTracker.health.modalNotifications": true,
+    "simpleCodingTimeTracker.health.eyeRestInterval": 20,
+    "simpleCodingTimeTracker.health.stretchInterval": 30,
+    "simpleCodingTimeTracker.health.breakThreshold": 90
 }
